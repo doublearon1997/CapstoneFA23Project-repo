@@ -14,12 +14,15 @@ public class Skill
 
     private double iniMod { get; set; } 
 
+    private bool offensive {get;}
+
     //add effects list/hash
 
-    public Skill(string name, string targetType, double iniMod) 
+    public Skill(string name, string targetType, double iniMod, bool isOffensive) 
     {
         this.name = name;
         this.targetType = targetType;
         this.iniMod = iniMod;
+        this.offensive = isOffensive;
     }  
 }
