@@ -82,7 +82,7 @@ public class MenuController : MonoBehaviour
 
     public void BeginGame()
     {
-        SceneManager.LoadScene("TestLevel");
+        SceneManager.LoadScene("sceneTest");
     }
 
     public void ExitGame()
