@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 41362368788e68042897ea64e573fffe
   - enabled: 1
     path: Assets/Scenes/sceneLoading.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: e07e26fa3ee23464caca925ec66411d3
   - enabled: 1
     path: Assets/Scenes/sceneTest.unity
     guid: 2e3256dbaad60e546915051c73c71c35
