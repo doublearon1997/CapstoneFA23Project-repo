@@ -25,15 +25,13 @@ public class OffensiveSkill : Skill
         }
     }
 
-    private void UseSkill(Battler user, Battler target)
+    private void UseSkill(Battler user, Battler target, BattleSystem battle)
     {
 
-        
         // Current damage formula: (user's str * skill's dmgMod * (1- target's defense)) * random 0.9-1.1
 
         int damage = (int)(((user.str * this.dmgMod)* (1-target.def))  * UnityEngine.Random.Range(0.9f, 1.1f));
-        target.hp = target.hp - damage;
-
+        target.TakeDamage(damage, battle);
     }
 
     //Event handler that selects the target of the skill based on what battler was clicked.
@@ -47,7 +45,7 @@ public class OffensiveSkill : Skill
 
         void OnMouseDown()
         {
-            skill.UseSkill(battle.currentlyActingBattler, target);
+            skill.UseSkill(battle.currentlyActingBattler, target, battle);
         }
 
         public void initialize(OffensiveSkill skill, Battler user, Battler target, BattleSystem battle)

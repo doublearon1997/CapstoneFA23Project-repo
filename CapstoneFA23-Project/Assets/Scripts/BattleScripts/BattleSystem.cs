@@ -46,6 +46,10 @@ public class BattleSystem : MonoBehaviour
     public Battler currentlyActingBattler;
 
 
+    //Player Action Buttons
+    public Button buttonAttack;
+
+
     public void Start()
     {
         state = BattleState.Start;
@@ -172,7 +176,9 @@ public class BattleSystem : MonoBehaviour
 
     public void PlayerSelectTarget()
     {
+        buttonAttack.interactable = false;
         ((PlayerBattler)currentlyActingBattler).standardAttack.ChooseTarget((PlayerBattler)currentlyActingBattler, this);
+        
     }
 
 

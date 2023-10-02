@@ -26,5 +26,32 @@ public class Battler: MonoBehaviour
 
     public bool isPlayer;
 
+    // This method deals damage to a battler and checks if the damage is enough to kill them.
+    public void TakeDamage(int damage, BattleSystem battle)
+    {
+        int currHp = this.hp; 
+        currHp = currHp - damage;
+
+        if (currHp < 0)
+            currHp = 0;
+
+        this.hp = currHp;
+
+        if (this.hp == 0)
+            KillBattler(battle);
+    }
+
+    // This method removes a battler from the battle.
+    public void KillBattler(BattleSystem battle)
+    {
+        this.gameObject.SetActive(false);
+        if(isPlayer)
+            battle.playerBattlers.Remove((PlayerBattler)this);
+        else
+            battle.enemyBattlers.Remove((EnemyBattler)this);
+    }
+
 
 }
+
+

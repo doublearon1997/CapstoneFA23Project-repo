@@ -145,7 +145,7 @@ MonoBehaviour:
   battlerName: testEnemy
   ap: 0
   level: 1
-  isPlayer: 1
+  isPlayer: 0
 --- !u!61 &-933485833814597257
 BoxCollider2D:
   m_ObjectHideFlags: 0
