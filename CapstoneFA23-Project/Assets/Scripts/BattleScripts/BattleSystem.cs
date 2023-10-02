@@ -5,21 +5,24 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 using TMPro;
 using System.Linq;
 
-public enum BattleState { START, PLAYERINPUTTURN, ENEMYTURN,  PLAYERNOINPUTTURN, DETERMINENEXT, WIN, LOSE}
+public enum BattleState { Start, PlayerInputTurn, EnemyTurn,  PlayerNoInputTurn, DetermineNext, Win, Lose}
 
 public class BattleSystem : MonoBehaviour
 {
     public BattleState state;
 
-    public GameObject[] playerBattlerGOs;
-    public GameObject[] enemyBattlerGOs;
+    public List<GameObject> startingPlayerBattlerGOs = new List<GameObject>();
+    public List<GameObject> startingEnemyBattlerGOs = new List<GameObject>();
+
+    public List<PlayerBattler> playerBattlers;
+    public List<EnemyBattler> enemyBattlers;
 
     public Transform[] playerSpawns;
     public Transform[] enemySpawns;
-
 
     public GameObject panelPlayerActions;
 
@@ -39,16 +42,13 @@ public class BattleSystem : MonoBehaviour
     public TMP_Text textPlayer4Name, textPlayer4ClassAndLevel, textPlayer4HP;
 
 
-    List<PlayerBattler> playerBattlers;
-    List<EnemyBattler> enemyBattlers;
-
     SortedSet<Battler> currentlyActingBattlers;
-    Battler currentlyActingBattler;
+    public Battler currentlyActingBattler;
 
 
     public void Start()
     {
-        state = BattleState.START;
+        state = BattleState.Start;
 
         currentlyActingBattlers = new SortedSet<Battler>(new BattlerAPComparator());
 
@@ -56,24 +56,31 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(DetermineNextBattler());
     }
 
+
+
     IEnumerator SetupBattle()
     {
         this.playerBattlers = new List<PlayerBattler>();
         this.enemyBattlers = new List<EnemyBattler>();
 
-        GameObject playerGO  = Instantiate(playerBattlerGOs[0], playerSpawns[0]);
-        playerBattlers.Add(playerGO.GetComponent<PlayerBattler>());   
+        for(int i = 0; i < startingPlayerBattlerGOs.Count; i++)
+        {
+            GameObject playerGO = Instantiate(startingPlayerBattlerGOs[i], playerSpawns[i]);
+            playerBattlers.Add(playerGO.GetComponent<PlayerBattler>());
 
-        GameObject enemyGO = Instantiate(enemyBattlerGOs[0], enemySpawns[0]);
+        }
+
+        GameObject enemyGO = Instantiate(startingEnemyBattlerGOs[0], enemySpawns[0]);
         enemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
 
         SetupPartyOverviewPanel();
 
         yield return new WaitForSeconds(2f);
 
-        state = BattleState.DETERMINENEXT;
+        state = BattleState.DetermineNext;
     }
 
+    //This method profilerates the overview panel with information about the party's battlers. 
     public void SetupPartyOverviewPanel()
     {
         for(int i = 0; i < playerBattlers.Count; i++)
@@ -127,9 +134,10 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    //This coroutine is played when determining which battler acts next.
     IEnumerator DetermineNextBattler()
     {
-        while(currentlyActingBattlers.Count < 1)
+        while(currentlyActingBattlers.Count < 1) //runs this loop until a battler has atleast 100000 AP
         {
             foreach (PlayerBattler battler in playerBattlers)
             {
@@ -149,7 +157,7 @@ public class BattleSystem : MonoBehaviour
 
         if(currentlyActingBattler.isPlayer)
         {
-            state = BattleState.PLAYERINPUTTURN;
+            state = BattleState.PlayerInputTurn;
             StartCoroutine(PlayerTurn());
         }
        
@@ -161,6 +169,11 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
     } 
+
+    public void PlayerSelectTarget()
+    {
+        ((PlayerBattler)currentlyActingBattler).standardAttack.ChooseTarget((PlayerBattler)currentlyActingBattler, this);
+    }
 
 
     internal class BattlerAPComparator : IComparer<Battler>

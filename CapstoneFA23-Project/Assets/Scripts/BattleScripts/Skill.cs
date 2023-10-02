@@ -5,24 +5,23 @@ using UnityEngine;
 /// <summary>
 /// This Class defines Skills, which are actions that Battlers can perform in Battle when it is their turn.
 /// </summary>
+/// 
 
-public class Skill
+public enum TargetType { Single, All }
+public enum PowerType { Physical, Will }
+
+public class Skill: ScriptableObject
 {
-    private string name { get; set; }
+    public string skillName;
 
-    private string targetType { get; set; }
+    public TargetType targetType;
 
-    private double iniMod { get; set; } 
+    public PowerType powerType;
 
-    private bool offensive {get;}
+    public double iniMod;
+
+    public bool offensive;
 
     //add effects list/hash
-
-    public Skill(string name, string targetType, double iniMod, bool isOffensive) 
-    {
-        this.name = name;
-        this.targetType = targetType;
-        this.iniMod = iniMod;
-        this.offensive = isOffensive;
-    }  
+ 
 }
