@@ -27,6 +27,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject panelPlayerActions;
 
 
+
+
     //Player Overview Panel Objects
 
     public GameObject containerPlayer1;
@@ -139,14 +141,24 @@ public class BattleSystem : MonoBehaviour
     }
 
     //This coroutine is played when determining which battler acts next.
-    IEnumerator DetermineNextBattler()
+    public IEnumerator DetermineNextBattler()
     {
+
         while(currentlyActingBattlers.Count < 1) //runs this loop until a battler has atleast 100000 AP
         {
             foreach (PlayerBattler battler in playerBattlers)
             {
-                battler.ap += battler.ini;
-                if(battler.ap > 100000) 
+                battler.ap += (int)(battler.ini * battler.apMod);
+                if(battler.ap >= 100000) 
+                {
+                    currentlyActingBattlers.Add(battler);
+                }
+            }
+
+            foreach (EnemyBattler battler in enemyBattlers)
+            {
+                battler.ap += (int)(battler.ini * battler.apMod);
+                if(battler.ap >= 100000) 
                 {
                     currentlyActingBattlers.Add(battler);
                 }
@@ -156,7 +168,6 @@ public class BattleSystem : MonoBehaviour
         currentlyActingBattler = currentlyActingBattlers.First();
         currentlyActingBattlers.Remove(currentlyActingBattler); 
 
-
         yield return new WaitForSeconds(1f);
 
         if(currentlyActingBattler.isPlayer)
@@ -164,7 +175,11 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.PlayerInputTurn;
             StartCoroutine(PlayerTurn());
         }
-       
+        else 
+        {
+            state = BattleState.EnemyTurn;
+            StartCoroutine(EnemyTurn());
+        }
     }
 
     IEnumerator PlayerTurn()
@@ -177,10 +192,57 @@ public class BattleSystem : MonoBehaviour
     public void PlayerSelectTarget()
     {
         buttonAttack.interactable = false;
-        ((PlayerBattler)currentlyActingBattler).standardAttack.ChooseTarget((PlayerBattler)currentlyActingBattler, this);
-        
+        ((PlayerBattler)currentlyActingBattler).standardAttack.ChooseTarget((PlayerBattler)currentlyActingBattler, this);  
     }
 
+    public void PlayerActionSelected()
+    {
+        panelPlayerActions.SetActive(false);
+        RemovePlayerTargetingHandlers();
+    }
+
+    public void FinishPlayerTurn()
+    {
+        currentlyActingBattlers.Remove(currentlyActingBattler);
+        currentlyActingBattler = null;
+
+        buttonAttack.interactable = true;
+        
+        state = BattleState.DetermineNext;
+        StartCoroutine(DetermineNextBattler());
+    }
+
+    //Removes all possible targeting handlers from enemybattler game objects. Called after the player chooses the target.
+    public void RemovePlayerTargetingHandlers()
+    {
+        foreach (EnemyBattler battler in enemyBattlers)
+        {
+            Destroy(battler.gameObject.GetComponent<OffensiveSkill.HandlerTargetSelected>());
+        }
+    }
+
+    IEnumerator EnemyTurn()
+    {
+        Skill chosenSkill = ((EnemyBattler)currentlyActingBattler).ChooseSkill();
+        Battler chosenTarget = ((OffensiveSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this); 
+  
+        StartCoroutine(((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, chosenTarget, this));
+   
+        yield return new WaitForSeconds(1f);
+ 
+        FinishEnemyTurn();
+        
+    } 
+
+    public void FinishEnemyTurn()
+    {
+        currentlyActingBattlers.Remove(currentlyActingBattler);
+        currentlyActingBattler = null;
+        
+        state = BattleState.DetermineNext;
+        StartCoroutine(DetermineNextBattler());
+
+    }
 
     internal class BattlerAPComparator : IComparer<Battler>
     {

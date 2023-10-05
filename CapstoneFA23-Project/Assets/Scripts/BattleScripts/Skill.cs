@@ -18,7 +18,7 @@ public class Skill: ScriptableObject
 
     public PowerType powerType;
 
-    public double iniMod;
+    public double apMod;
 
     public bool offensive;
 

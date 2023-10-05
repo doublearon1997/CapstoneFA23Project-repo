@@ -22,9 +22,12 @@ public class Battler: MonoBehaviour
     public string battlerName;
 
     public int ap;
+    public double apMod = 1;
     public int level;
 
     public bool isPlayer;
+
+  
 
     // This method deals damage to a battler and checks if the damage is enough to kill them.
     public void TakeDamage(int damage, BattleSystem battle)

@@ -12,6 +12,7 @@ public class OffensiveSkill : Skill
 {
     public double dmgMod; 
 
+    // After a player has selected an offensive skill to use, this sets up the screen for the player to click on a target to use the skill.
     public void ChooseTarget(PlayerBattler user, BattleSystem battle)
     {
         if (this.targetType == TargetType.Single)
@@ -19,23 +20,60 @@ public class OffensiveSkill : Skill
             foreach (EnemyBattler battler in battle.enemyBattlers)
             {
                 battler.gameObject.AddComponent<HandlerTargetSelected>().initialize(this, user, battler, battle);
-               // battler.gameObject.GetComponent<Sprite>().
             }
-       
         }
     }
 
-    private void UseSkill(Battler user, Battler target, BattleSystem battle)
+    // When an enemy battler has chosen an offensive skill, this method calculates which player it will attack it with. 
+    public PlayerBattler ChooseTarget(EnemyBattler user, BattleSystem battle)
     {
+        if(this.targetType == TargetType.Single)
+        {
+            double cumulativeChance = 0;
+            PlayerBattler target = null;
+            List<double> chances = new List<double>();
 
+            foreach(PlayerBattler battler in battle.playerBattlers)
+            {
+                cumulativeChance += battler.targetRatio;
+                chances.Add(cumulativeChance);
+            }
+
+            double roll = (double)UnityEngine.Random.Range(0.0f, (float)cumulativeChance);
+     
+            
+            for(int i = 0; i < battle.playerBattlers.Count && target == null; i++)
+            {
+                if(chances[i] > roll)
+                    target = battle.playerBattlers[i];
+            }
+            
+            if(target == null)
+                target = battle.playerBattlers[0];
+
+            return target;
+
+        }
+
+        return null;
+    }
+
+    public IEnumerator UseSkill(Battler user, Battler target, BattleSystem battle)
+    {
         // Current damage formula: (user's str * skill's dmgMod * (1- target's defense)) * random 0.9-1.1
 
         int damage = (int)(((user.str * this.dmgMod)* (1-target.def))  * UnityEngine.Random.Range(0.9f, 1.1f));
         target.TakeDamage(damage, battle);
+
+        user.ap -= 100000;
+        user.apMod = this.apMod; 
+
+        yield return new WaitForSeconds(2f);
+
+        
     }
 
     //Event handler that selects the target of the skill based on what battler was clicked.
-
     internal class HandlerTargetSelected: MonoBehaviour
     {
         public Battler user;
@@ -45,7 +83,10 @@ public class OffensiveSkill : Skill
 
         void OnMouseDown()
         {
-            skill.UseSkill(battle.currentlyActingBattler, target, battle);
+            battle.PlayerActionSelected();
+            StartCoroutine(skill.UseSkill(battle.currentlyActingBattler, target, battle));
+
+            battle.FinishPlayerTurn();
         }
 
         public void initialize(OffensiveSkill skill, Battler user, Battler target, BattleSystem battle)
@@ -56,9 +97,10 @@ public class OffensiveSkill : Skill
             this.battle = battle;
                   
         }
+
     }
 
-   
+    
 
    
 

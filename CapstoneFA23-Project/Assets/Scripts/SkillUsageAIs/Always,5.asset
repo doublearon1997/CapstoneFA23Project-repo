@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
-  m_Name: Attack
+  m_Script: {fileID: 11500000, guid: 45c6bf57523758fbca2327a105422fe1, type: 3}
+  m_Name: Always,5
   m_EditorClassIdentifier: 
-  skillName: Attack
-  targetType: 0
-  powerType: 0
-  apMod: 1
-  offensive: 1
-  dmgMod: 1
+  usageCondition: 0
+  weight: 5

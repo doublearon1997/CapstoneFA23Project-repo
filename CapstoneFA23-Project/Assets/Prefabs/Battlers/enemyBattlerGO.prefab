@@ -141,11 +141,16 @@ MonoBehaviour:
   will: 100
   def: 0.1
   res: 0.1
-  ini: 95
+  ini: 105
   battlerName: testEnemy
   ap: 0
+  apMod: 1
   level: 1
   isPlayer: 0
+  skillList:
+  - {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
+  skillUsageAIList:
+  - {fileID: 11400000, guid: ae999acf49f5a750bae54743eb8facaa, type: 2}
 --- !u!61 &-933485833814597257
 BoxCollider2D:
   m_ObjectHideFlags: 0
