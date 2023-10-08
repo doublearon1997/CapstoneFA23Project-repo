@@ -51,6 +51,7 @@ public class EnemyBattler : Battler
         return chosenSkill;
     }
 
+    // Checks SkillUsageConditions to see if the battler's state permits using the skill.
     private bool canUseSkill(SkillUsageCondition condition)
     {
         if(condition == SkillUsageCondition.Always)
@@ -58,7 +59,7 @@ public class EnemyBattler : Battler
 
         else if(condition == SkillUsageCondition.HPLower50)
         {
-            if(this.hp < 50)
+            if((double)this.hp / (double)this.mhp < 0.5)
                 return true;
             else
                 return false;

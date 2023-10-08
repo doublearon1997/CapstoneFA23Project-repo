@@ -9,13 +9,17 @@ public class SkillUsageAI : ScriptableObject
 {
     public Dictionary<SkillUsageCondition, int> skillUsages;
 
-    public SkillUsageCondition usageCondition;
-    public int weight; 
+    public SkillUsageCondition[] usageConditions;
+    public int[] weights; 
 
     public void Initialize()
     {
-        skillUsages = new Dictionary<SkillUsageCondition, int>();
-        skillUsages.Add(usageCondition, weight);
+        for(int i = 0; i < usageConditions.Length; i++)
+        {
+            skillUsages = new Dictionary<SkillUsageCondition, int>();
+            skillUsages.Add(usageConditions[i], weights[i]);
+        }
+        
     }
 
   

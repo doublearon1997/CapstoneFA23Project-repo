@@ -5,12 +5,13 @@ using System.Diagnostics;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
+using System.Security.Cryptography;
 
 [CreateAssetMenu(fileName = "NewOffensiveSkill", menuName = "OffensiveSkill")]
 public class OffensiveSkill : Skill
 {
-    public double dmgMod; 
+    public double dmgMod;
 
     // After a player has selected an offensive skill to use, this sets up the screen for the player to click on a target to use the skill.
     public void ChooseTarget(PlayerBattler user, BattleSystem battle)
@@ -24,31 +25,32 @@ public class OffensiveSkill : Skill
         }
     }
 
-    // When an enemy battler has chosen an offensive skill, this method calculates which player it will attack it with. 
+    // When an enemy battler has chosen an offensive skill, this method calculates which player it will attack it with. Currently this will only work with single target attacks.
     public PlayerBattler ChooseTarget(EnemyBattler user, BattleSystem battle)
     {
-        if(this.targetType == TargetType.Single)
+        if (this.targetType == TargetType.Single)
         {
             double cumulativeChance = 0;
             PlayerBattler target = null;
             List<double> chances = new List<double>();
 
-            foreach(PlayerBattler battler in battle.playerBattlers)
+            foreach (PlayerBattler battler in battle.playerBattlers)
             {
                 cumulativeChance += battler.targetRatio;
                 chances.Add(cumulativeChance);
             }
 
             double roll = (double)UnityEngine.Random.Range(0.0f, (float)cumulativeChance);
-     
-            
-            for(int i = 0; i < battle.playerBattlers.Count && target == null; i++)
+
+            for (int i = 0; i < battle.playerBattlers.Count && target == null; i++)
             {
-                if(chances[i] > roll)
+                if (chances[i] > roll)
                     target = battle.playerBattlers[i];
+                
+                    
             }
-            
-            if(target == null)
+
+            if (target == null)
                 target = battle.playerBattlers[0];
 
             return target;
@@ -58,19 +60,31 @@ public class OffensiveSkill : Skill
         return null;
     }
 
-    public IEnumerator UseSkill(Battler user, Battler target, BattleSystem battle)
+    // currently just deals damage. More may be added later, like hit or crit chance. 
+    public void UseSkill(Battler user, Battler target, BattleSystem battle)
     {
         // Current damage formula: (user's str * skill's dmgMod * (1- target's defense)) * random 0.9-1.1
 
-        int damage = (int)(((user.str * this.dmgMod)* (1-target.def))  * UnityEngine.Random.Range(0.9f, 1.1f));
+        int damage = (int)(((user.str * this.dmgMod) * (1 - target.def)) * UnityEngine.Random.Range(0.9f, 1.1f));
         target.TakeDamage(damage, battle);
 
         user.ap -= 100000;
-        user.apMod = this.apMod; 
+        user.apMod = this.apMod;
 
-        yield return new WaitForSeconds(2f);
+        DisplayDamageText(damage, target, battle);
 
-        
+
+        if(user.isPlayer)
+            battle.StartCoroutine(battle.FinishPlayerTurn());
+
+    }
+
+    public void DisplayDamageText(int damage, Battler target, BattleSystem battle)
+    {
+        string displayString = "" + damage;
+
+        GameObject damageTextContainer = Instantiate(battle.damageTextPopup, target.gameObject.transform);
+        damageTextContainer.transform.GetChild(0).GetComponent<TMP_Text>().text = displayString;
     }
 
     //Event handler that selects the target of the skill based on what battler was clicked.
@@ -84,9 +98,7 @@ public class OffensiveSkill : Skill
         void OnMouseDown()
         {
             battle.PlayerActionSelected();
-            StartCoroutine(skill.UseSkill(battle.currentlyActingBattler, target, battle));
-
-            battle.FinishPlayerTurn();
+            skill.UseSkill(battle.currentlyActingBattler, target, battle);
         }
 
         public void initialize(OffensiveSkill skill, Battler user, Battler target, BattleSystem battle)
@@ -97,8 +109,9 @@ public class OffensiveSkill : Skill
             this.battle = battle;
                   
         }
-
     }
+
+  
 
     
 

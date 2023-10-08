@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c6bf57523758fbca2327a105422fe1, type: 3}
   m_Name: Always,5
   m_EditorClassIdentifier: 
-  usageCondition: 0
-  weight: 5
+  usageConditions: 00000000
+  weights: 05000000
