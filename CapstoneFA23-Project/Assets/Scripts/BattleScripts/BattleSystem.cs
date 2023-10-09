@@ -294,8 +294,6 @@ public class BattleSystem : MonoBehaviour
 
         List<Battler> turnOrder = DetermineCurrentTurnOrder();
 
-        UnityEngine.Debug.Log(turnOrder.Count);
-
         int bigPortraitCushion = 0;
 
         for (int i=0; i<turnOrder.Count; i++)
@@ -306,18 +304,14 @@ public class BattleSystem : MonoBehaviour
             if(battler.isPlayer)
             {
                 if(battler == currentlyActingBattler)
-                {
                     portrait = Instantiate(portraitTurnOrderCurrentPlayer, panelTurnOrder.transform) as GameObject;
-                }
                 else
                     portrait = Instantiate(portraitTurnOrderPlayer, panelTurnOrder.transform) as GameObject;
             }
             else
             {
                 if(battler == currentlyActingBattler)
-                { 
                     portrait = Instantiate(portraitTurnOrderCurrentEnemy, panelTurnOrder.transform) as GameObject;
-                }
                 else
                     portrait = Instantiate(portraitTurnOrderEnemy, panelTurnOrder.transform) as GameObject;
             }

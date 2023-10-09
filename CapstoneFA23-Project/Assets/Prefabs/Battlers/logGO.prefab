@@ -141,7 +141,7 @@ MonoBehaviour:
   will: 100
   def: 0.13
   res: 0.1
-  ini: 94
+  ini: 90
   battlerName: Log
   ap: 0
   apMod: 1
