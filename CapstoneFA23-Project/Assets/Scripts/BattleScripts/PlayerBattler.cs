@@ -5,4 +5,10 @@ using UnityEngine;
 public class PlayerBattler : Battler
 {
     public string playerClass;
+
+    public double targetRatio = 1.0;
+
+    public HashSet<Skill> skills = new HashSet<Skill>();
+
+    public OffensiveSkill standardAttack;
 }
