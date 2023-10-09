@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyPatrolAI : MonoBehaviour
 {
@@ -10,9 +11,15 @@ public class EnemyPatrolAI : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Transform currentPoint;
+
+    public LayerMask whatIsPlayer;
+
     public float speed;
+    public float attackRadius;
+
+    private bool isInAttackRange;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -21,7 +28,7 @@ public class EnemyPatrolAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Vector2 point = currentPoint.position - transform.position;
         if (currentPoint == pointB.transform)
@@ -43,6 +50,7 @@ public class EnemyPatrolAI : MonoBehaviour
             flip();
             currentPoint = pointB.transform;
         }
+        isInAttackRange = Physics2D.OverlapCircle(transform.position, attackRadius, whatIsPlayer);
     }
     private void flip()
     {
@@ -55,5 +63,22 @@ public class EnemyPatrolAI : MonoBehaviour
         Gizmos.DrawWireSphere(pointA.transform.position, 0.5f);
         Gizmos.DrawWireSphere(pointB.transform.position, 0.5f);
         Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("sceneBattle");
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isInAttackRange)
+        {
+            //rb.velocity = Vector2.zero;
+            SceneManager.LoadScene("sceneBattle");
+        }
     }
 }
