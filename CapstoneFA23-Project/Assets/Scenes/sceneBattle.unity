@@ -4147,30 +4147,36 @@ MonoBehaviour:
   - {fileID: 853930176}
   panelPlayerActions: {fileID: 2025833277}
   damageTextPopup: {fileID: 516322223363286725, guid: 3eb3aafa75883e4438f0be6d79433bd0, type: 3}
-  containerPlayer1: {fileID: 1082411828}
-  textPlayer1Name: {fileID: 1792534252}
-  textPlayer1ClassAndLevel: {fileID: 1845390446}
-  textPlayer1HP: {fileID: 1045476860}
-  portraitPlayer1: {fileID: 1205996829}
-  sliderPlayer1HP: {fileID: 1867952043}
-  containerPlayer2: {fileID: 442320430}
-  textPlayer2Name: {fileID: 605016428}
-  textPlayer2ClassAndLevel: {fileID: 1591216589}
-  textPlayer2HP: {fileID: 1416938752}
-  portraitPlayer2: {fileID: 1943154213}
-  sliderPlayer2HP: {fileID: 32721363}
-  containerPlayer3: {fileID: 338734615}
-  textPlayer3Name: {fileID: 1322936396}
-  textPlayer3ClassAndLevel: {fileID: 1980849539}
-  textPlayer3HP: {fileID: 555961285}
-  portraitPlayer3: {fileID: 798749215}
-  sliderPlayer3HP: {fileID: 350080534}
-  containerPlayer4: {fileID: 976076909}
-  textPlayer4Name: {fileID: 2038860687}
-  textPlayer4ClassAndLevel: {fileID: 1029229387}
-  textPlayer4HP: {fileID: 104508718}
-  portraitPlayer4: {fileID: 1106631806}
-  sliderPlayer4HP: {fileID: 309678291}
+  playerContainers:
+  - {fileID: 1082411828}
+  - {fileID: 442320430}
+  - {fileID: 338734615}
+  - {fileID: 976076909}
+  playerOverviewPortraits:
+  - {fileID: 1205996829}
+  - {fileID: 1943154213}
+  - {fileID: 798749215}
+  - {fileID: 1106631806}
+  playerNameTexts:
+  - {fileID: 1792534252}
+  - {fileID: 605016428}
+  - {fileID: 1322936396}
+  - {fileID: 2038860687}
+  playerClassLevelTexts:
+  - {fileID: 1845390446}
+  - {fileID: 1591216589}
+  - {fileID: 1980849539}
+  - {fileID: 1029229387}
+  playerHPTexts:
+  - {fileID: 1045476860}
+  - {fileID: 1416938752}
+  - {fileID: 555961285}
+  - {fileID: 104508718}
+  playerHPSliders:
+  - {fileID: 1867952043}
+  - {fileID: 32721363}
+  - {fileID: 350080534}
+  - {fileID: 309678291}
   containerEnemy1: {fileID: 980666277}
   textEnemy1Name: {fileID: 1060468116}
   textEnemy1HP: {fileID: 359512799}

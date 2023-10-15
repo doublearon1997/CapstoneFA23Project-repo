@@ -37,50 +37,16 @@ public class BattleSystem : MonoBehaviour
 
     //Player Overview Panel Objects
 
-    public GameObject containerPlayer1;
-    public TMP_Text textPlayer1Name, textPlayer1ClassAndLevel, textPlayer1HP;
-    public GameObject portraitPlayer1;
-    public Slider sliderPlayer1HP;
-
-    public GameObject containerPlayer2;
-    public TMP_Text textPlayer2Name, textPlayer2ClassAndLevel, textPlayer2HP;
-    public GameObject portraitPlayer2;
-    public Slider sliderPlayer2HP;
-
-    public GameObject containerPlayer3;
-    public TMP_Text textPlayer3Name, textPlayer3ClassAndLevel, textPlayer3HP;
-    public GameObject portraitPlayer3;
-    public Slider sliderPlayer3HP;
-
-    public GameObject containerPlayer4;
-    public TMP_Text textPlayer4Name, textPlayer4ClassAndLevel, textPlayer4HP;
-    public GameObject portraitPlayer4;
-    public Slider sliderPlayer4HP;
+    public GameObject[] playerContainers, playerOverviewPortraits;
+    public TMP_Text[] playerNameTexts, playerClassLevelTexts, playerHPTexts;
+    public Slider[] playerHPSliders;
 
     //Enemy Overview Panel Objects;
-    public GameObject containerEnemy1;
-    public TMP_Text textEnemy1Name, textEnemy1HP;
-    public Slider sliderEnemy1HP;
-
-    public GameObject containerEnemy2;
-    public TMP_Text textEnemy2Name, textEnemy2HP;
-    public Slider sliderEnemy2HP;
-
-    public GameObject containerEnemy3;
-    public TMP_Text textEnemy3Name, textEnemy3HP;
-    public Slider sliderEnemy3HP;
-
-    public GameObject containerEnemy4;
-    public TMP_Text textEnemy4Name, textEnemy4HP;
-    public Slider sliderEnemy4HP;
-
-    public GameObject containerEnemy5;
-    public TMP_Text textEnemy5Name, textEnemy5HP;
-    public Slider sliderEnemy5HP;
-
+    public GameObject[] enemyContainers;
+    public TMP_Text[] enemyNameTexts, enemyHPTexts;
+    public Slider[] enemyHPSliders;
 
     //Turn Order Stuff
-
     public GameObject panelTurnOrder;
     public GameObject portraitTurnOrderCurrentEnemy;
     public GameObject portraitTurnOrderCurrentPlayer;
@@ -144,80 +110,19 @@ public class BattleSystem : MonoBehaviour
     {
         for(int i = 0; i < playerBattlers.Count; i++)
         {
-            PlayerBattler battler;
+            PlayerBattler battler = playerBattlers[i];
+            battler.SetPartyPosition(i);
+            
+            playerNameTexts[i].text = battler.battlerName;
+            playerClassLevelTexts[i].text = " Lvl " + battler.level + " " + battler.playerClass;
+            playerHPTexts[i].text = "" + battler.hp +"/" + battler.mhp;
 
-            if(i == 0)
-            {
-                battler = playerBattlers[0];
+            playerHPSliders[i].maxValue = battler.mhp;
+            playerHPSliders[i].minValue = battler.hp;
 
-                textPlayer1Name.text = battler.battlerName;
-                textPlayer1ClassAndLevel.text = " Lvl " + battler.level + " " + battler.playerClass;
-                textPlayer1HP.text = "" + battler.hp +"/" + battler.mhp;
+            playerOverviewPortraits[i].GetComponent<Image>().sprite = battler.portrait60;
 
-                sliderPlayer1HP.maxValue = battler.mhp;
-                sliderPlayer1HP.value = battler.hp;
-
-                portraitPlayer1.GetComponent<Image>().sprite = battler.portrait60;
-
-                battler.setPartyPosition(0);
-
-                containerPlayer1.SetActive(true);
-            }  
-            else if (i == 1)
-            {
-                battler = playerBattlers[1];
-
-                textPlayer2Name.text = battler.battlerName;
-                textPlayer2ClassAndLevel.text = " Lvl " + battler.level + " " + battler.playerClass;
-                textPlayer2HP.text = "" + battler.hp +"/" + battler.mhp;
-
-                sliderPlayer2HP.maxValue = battler.mhp;
-                sliderPlayer2HP.value = battler.hp;
-
-                portraitPlayer2.GetComponent<Image>().sprite = battler.portrait60;
-
-                battler.setPartyPosition(1);
-
-                containerPlayer2.SetActive(true);
-            }
-            else if (i == 2)
-            {
-                battler = playerBattlers[2];
-
-                textPlayer3Name.text = battler.battlerName;
-                textPlayer3ClassAndLevel.text = " Lvl " + battler.level + " " + battler.playerClass;
-                textPlayer3HP.text = "" + battler.hp +"/" + battler.mhp;
-
-                sliderPlayer3HP.maxValue = battler.mhp;
-                sliderPlayer3HP.value = battler.hp;
-
-                portraitPlayer3.GetComponent<Image>().sprite = battler.portrait60;
-
-                battler.setPartyPosition(2);
-
-                containerPlayer3.SetActive(true);
-            }
-            else if (i == 3)
-            {
-                battler = playerBattlers[3];
-
-                textPlayer4Name.text = battler.battlerName;
-                textPlayer4ClassAndLevel.text = " Lvl " + battler.level + " " + battler.playerClass;
-                textPlayer4HP.text = "" + battler.hp +"/" + battler.mhp;
-
-                sliderPlayer4HP.maxValue = battler.mhp;
-                sliderPlayer4HP.value = battler.hp;
-
-                portraitPlayer4.GetComponent<Image>().sprite = battler.portrait60;
-
-                battler.setPartyPosition(3);
-
-                containerPlayer4.SetActive(true);
-            }
-            else
-            {
-                UnityEngine.Debug.Log("Why is there more than 4 player battlers?");
-            }
+            playerContainers[i].SetActive(true);
         }
     }
 
@@ -227,63 +132,15 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < enemyBattlers.Count; i++)
         {
             EnemyBattler battler = enemyBattlers[i];
-            battler.setPartyPosition(i);
+            battler.SetPartyPosition(i);
 
-            if (i == 0)
-            {
-                textEnemy1Name.text = battler.battlerName;
-                textEnemy1HP.text = "" + battler.hp + "/" + battler.mhp;
+            enemyNameTexts[i].text = battler.battlerName;
+            enemyHPTexts[i].text = "" + battler.hp +"/" + battler.mhp;
 
-                sliderEnemy1HP.maxValue = battler.mhp;
-                sliderEnemy1HP.value = battler.hp;
+            enemyHPSliders[i].maxValue = battler.mhp;
+            enemyHPSliders[i].minValue = battler.hp;
 
-                containerEnemy1.SetActive(true);
-            }
-            else if (i == 1)
-            {
-                textEnemy2Name.text = battler.battlerName;
-                textEnemy2HP.text = "" + battler.hp + "/" + battler.mhp;
-
-                sliderEnemy2HP.maxValue = battler.mhp;
-                sliderEnemy2HP.value = battler.hp;
-
-                containerEnemy2.SetActive(true);
-            }
-            else if (i == 2)
-            {
-                textEnemy3Name.text = battler.battlerName;
-                textEnemy3HP.text = "" + battler.hp + "/" + battler.mhp;
-
-                sliderEnemy3HP.maxValue = battler.mhp;
-                sliderEnemy3HP.value = battler.hp;
-
-                containerEnemy3.SetActive(true);
-            }
-            else if (i == 3)
-            {
-                textEnemy4Name.text = battler.battlerName;
-                textEnemy4HP.text = "" + battler.hp + "/" + battler.mhp;
-
-                sliderEnemy4HP.maxValue = battler.mhp;
-                sliderEnemy4HP.value = battler.hp;
-
-                containerEnemy4.SetActive(true);
-            }
-            else if (i == 4)
-            {
-                textEnemy5Name.text = battler.battlerName;
-                textEnemy5HP.text = "" + battler.hp + "/" + battler.mhp;
-
-                sliderEnemy5HP.maxValue = battler.mhp;
-                sliderEnemy5HP.value = battler.hp;
-
-                containerEnemy5.SetActive(true);
-            }
-            else
-            {
-                UnityEngine.Debug.Log("Why is there more than 5 enemy battlers?");
-            }
-
+            enemyContainers[i].SetActive(true);
         }
     }
 
@@ -395,69 +252,28 @@ public class BattleSystem : MonoBehaviour
         return battlerTurnOrder;
     }
 
-    //Adjusts a battler's HP slider value on the party overview panel based on their current hp. Maybe it could be animated in the future.
-    public void SetPartyHPSliderValue(PlayerBattler battler)
+    //Adjusts a battler's HP slider value on the party overview panel based on their current hp.
+    //TODO: Animate?
+    public void SetPlayerHPSliderValue(PlayerBattler battler)
     {
         const int sliderWidth = 408;
 
         double hpSliderPosition = sliderWidth - ((double)battler.hp / (double)battler.mhp) * sliderWidth;
 
-        if(battler.getPartyPosition() == 0)
-        {
-            sliderPlayer1HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textPlayer1HP.text = "" + battler.hp + "/" + battler.mhp;
-
-        }
-        else if (battler.getPartyPosition() == 1)
-        {
-            sliderPlayer2HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textPlayer2HP.text = "" + battler.hp + "/" + battler.mhp;
-        }
-        else if (battler.getPartyPosition() == 2)
-        {
-            sliderPlayer3HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textPlayer3HP.text = "" + battler.hp + "/" + battler.mhp;
-        }
-        else if (battler.getPartyPosition() == 3)
-        {
-            sliderPlayer4HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textPlayer4HP.text = "" + battler.hp + "/" + battler.mhp;
-        }
-        
+        playerHPSliders[battler.GetPartyPosition()].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+        playerHPTexts[battler.GetPartyPosition()].text = "" + battler.hp + "/" + battler.mhp; 
     }
 
-    //Adjusts a battler's HP slider value on the enemy overview panel based on their current hp. Maybe it could be animated in the future.
+    //Adjusts a battler's HP slider value on the enemy overview panel based on their current hp.
+    //TODO: Animate?
     public void SetEnemyHPSliderValue(EnemyBattler battler)
     {
         const int sliderWidth = 250;
 
         double hpSliderPosition = sliderWidth - ((double)battler.hp / (double)battler.mhp) * sliderWidth;
 
-        if (battler.getPartyPosition() == 0)
-        {
-            sliderEnemy1HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textEnemy1HP.text = "" + battler.hp + "/" + battler.mhp;
-        }
-        else if (battler.getPartyPosition() == 1)
-        {
-            sliderEnemy2HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textEnemy2HP.text = "" + battler.hp + "/" + battler.mhp;
-        }
-        else if (battler.getPartyPosition() == 2)
-        {
-            sliderEnemy3HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textEnemy3HP.text = "" + battler.hp + "/" + battler.mhp;
-        }
-        else if (battler.getPartyPosition() == 3)
-        {
-            sliderEnemy4HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textEnemy4HP.text = "" + battler.hp + "/" + battler.mhp;
-        }
-        else if (battler.getPartyPosition() == 4)
-        {
-            sliderEnemy5HP.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-            textEnemy5HP.text = "" + battler.hp + "/" + battler.mhp;
-        }
+        enemyHPSliders[battler.GetPartyPosition()].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+        enemyHPTexts[battler.GetPartyPosition()].text = "" + battler.hp + "/" + battler.mhp;
     }
 
     //This coroutine is played when determining which battler acts next.
@@ -503,14 +319,11 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerTurn()
     {
         SetTurnOrderPanel();
-
         seManager.PlaySE("playerTurnStart", 1);
 
         yield return new WaitForSeconds(0.4f);
 
         panelPlayerActions.SetActive(true);
-
-       
     } 
 
     public void PlayerSelectTarget()

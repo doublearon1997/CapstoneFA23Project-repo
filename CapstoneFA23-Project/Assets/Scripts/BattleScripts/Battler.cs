@@ -48,7 +48,7 @@ public class Battler: MonoBehaviour
         this.hp = currHp;
 
         if (this.isPlayer)
-            battle.SetPartyHPSliderValue((PlayerBattler)this);
+            battle.SetPlayerHPSliderValue((PlayerBattler)this);
         else
             battle.SetEnemyHPSliderValue((EnemyBattler)this);
 
@@ -71,37 +71,17 @@ public class Battler: MonoBehaviour
     private void RemoveOverviewContainer(BattleSystem battle)
     {
         if(this.isPlayer)
-        {
-            if(partyPosition == 0)
-                battle.containerPlayer1.SetActive(false);
-            if (partyPosition == 1)
-                battle.containerPlayer2.SetActive(false);
-            if (partyPosition == 2)
-                battle.containerPlayer3.SetActive(false);
-            if (partyPosition == 3)
-                battle.containerPlayer4.SetActive(false);
-        }
+            battle.playerContainers[this.partyPosition].SetActive(false);
         else
-        {
-            if (partyPosition == 0)
-                battle.containerEnemy1.SetActive(false);
-            if (partyPosition == 1)
-                battle.containerEnemy2.SetActive(false);
-            if (partyPosition == 2)
-                battle.containerEnemy3.SetActive(false);
-            if (partyPosition == 3)
-                battle.containerEnemy4.SetActive(false);
-            if (partyPosition == 4)
-                battle.containerEnemy5.SetActive(false);
-        }
+            battle.enemyContainers[this.partyPosition].SetActive(false);
     }
 
-    public int getPartyPosition()
+    public int GetPartyPosition()
     {
         return partyPosition;
     }
 
-    public void setPartyPosition(int partyPosition)
+    public void SetPartyPosition(int partyPosition)
     {
         this.partyPosition = partyPosition; 
     }
