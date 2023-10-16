@@ -10,7 +10,7 @@ using UnityEngine;
 public enum TargetType { Single, All }
 public enum PowerType { Physical, Will }
 
-public class Skill: ScriptableObject
+public abstract class Skill: ScriptableObject
 {
     public string skillName;
 
@@ -21,6 +21,10 @@ public class Skill: ScriptableObject
     public double apMod;
 
     public bool offensive;
+
+    public Sprite portrait100, portrait60;
+
+    public bool isOffensive;
 
     //add effects list/hash
  

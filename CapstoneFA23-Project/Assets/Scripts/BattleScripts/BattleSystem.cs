@@ -58,7 +58,11 @@ public class BattleSystem : MonoBehaviour
 
 
     //Player Action Buttons
-    public Button buttonAttack;
+    public Button buttonAttack, buttonSkills, buttonTactics, buttonItems;
+
+    //Skill Selection Panel
+    public GameObject panelSkillSelection;
+    public GameObject buttonSkill;
 
     public SEManager seManager;
 
@@ -314,6 +318,11 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.EnemyTurn;
             StartCoroutine(EnemyTurn());
         }
+    }
+
+    private void SetSkillSelectionPanel()
+    {
+        
     }
 
     IEnumerator PlayerTurn()

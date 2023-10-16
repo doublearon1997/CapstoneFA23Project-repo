@@ -14,6 +14,7 @@ public class OffensiveSkill : Skill
     public double dmgMod;
 
     // After a player has selected an offensive skill to use, this sets up the screen for the player to click on a target to use the skill.
+    // TODO: Add ability for AOE.
     public void ChooseTarget(PlayerBattler user, BattleSystem battle)
     {
         if (this.targetType == TargetType.Single)
@@ -26,6 +27,7 @@ public class OffensiveSkill : Skill
     }
 
     // When an enemy battler has chosen an offensive skill, this method calculates which player it will attack it with. Currently this will only work with single target attacks.
+    // TODO: For AOE, need to change the return to a list of playerbattler targets.
     public PlayerBattler ChooseTarget(EnemyBattler user, BattleSystem battle)
     {
         if (this.targetType == TargetType.Single)
