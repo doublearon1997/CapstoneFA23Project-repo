@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Security.Cryptography;
 
 [CreateAssetMenu(fileName = "NewOffensiveSkill", menuName = "OffensiveSkill")]
 public class OffensiveSkill : Skill
@@ -21,7 +20,9 @@ public class OffensiveSkill : Skill
         {
             foreach (EnemyBattler battler in battle.enemyBattlers)
             {
-                battler.gameObject.AddComponent<HandlerTargetSelected>().initialize(this, user, battler, battle);
+                GameObject targetButton = Instantiate(battle.offensiveTarget100, battler.gameObject.transform.parent.transform) as GameObject;
+                targetButton.GetComponent<TargetButton>().Initialize(this, user, battler, battle);
+                battle.currentTargetingObjects.Add(targetButton);
             }
         }
     }
@@ -47,9 +48,7 @@ public class OffensiveSkill : Skill
             for (int i = 0; i < battle.playerBattlers.Count && target == null; i++)
             {
                 if (chances[i] > roll)
-                    target = battle.playerBattlers[i];
-                
-                    
+                    target = battle.playerBattlers[i];    
             }
 
             if (target == null)
@@ -88,35 +87,5 @@ public class OffensiveSkill : Skill
         GameObject damageTextContainer = Instantiate(battle.damageTextPopup, target.gameObject.transform);
         damageTextContainer.transform.GetChild(0).GetComponent<TMP_Text>().text = displayString;
     }
-
-    //Event handler that selects the target of the skill based on what battler was clicked.
-    internal class HandlerTargetSelected: MonoBehaviour
-    {
-        public Battler user;
-        public Battler target;
-        public OffensiveSkill skill;
-        public BattleSystem battle;
-
-        void OnMouseDown()
-        {
-            battle.PlayerActionSelected();
-            skill.UseSkill(battle.currentlyActingBattler, target, battle);
-        }
-
-        public void initialize(OffensiveSkill skill, Battler user, Battler target, BattleSystem battle)
-        {
-            this.skill = skill;
-            this.user = user;
-            this.target = target;
-            this.battle = battle;
-                  
-        }
-    }
-
-  
-
-    
-
-   
 
 }

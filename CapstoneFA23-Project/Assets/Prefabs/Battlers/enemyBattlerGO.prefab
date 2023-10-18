@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3598616411705159024}
   - component: {fileID: 6549670419622497946}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1340625049628734740}
   - component: {fileID: -933485833814597257}
   - component: {fileID: -570244062735316062}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: enemyBattlerGO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,6 +147,8 @@ MonoBehaviour:
   apMod: 1
   level: 1
   isPlayer: 0
+  portrait70: {fileID: 0}
+  portrait60: {fileID: 0}
   skillList:
   - {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
   skillUsageAIList:

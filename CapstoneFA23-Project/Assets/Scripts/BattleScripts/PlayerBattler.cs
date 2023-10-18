@@ -8,7 +8,7 @@ public class PlayerBattler : Battler
 
     public double targetRatio = 1.0;
 
-    public HashSet<Skill> skills = new HashSet<Skill>();
+    public List<Skill> skills;
 
     public OffensiveSkill standardAttack;
 }

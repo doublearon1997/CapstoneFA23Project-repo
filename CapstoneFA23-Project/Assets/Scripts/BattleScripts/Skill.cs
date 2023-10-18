@@ -20,9 +20,11 @@ public abstract class Skill: ScriptableObject
 
     public double apMod;
 
+    public int cooldown;
+
     public bool offensive;
 
-    public Sprite portrait100, portrait60;
+    public Sprite portrait65, portrait50, portrait100;
 
     public bool isOffensive;
 
