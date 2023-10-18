@@ -74,10 +74,18 @@ public class OffensiveSkill : Skill
 
         DisplayDamageText(damage, target, battle);
 
-
         if(user.isPlayer)
-            battle.StartCoroutine(battle.FinishPlayerTurn());
+        {
+            foreach(KeyValuePair<Skill, int> entry in ((PlayerBattler)user).skillCooldownDict)
+            {
+                if(entry.Value > 0)
+                    ((PlayerBattler)user).skillCooldownDict[entry.Key] -= 0;
+            }              
 
+            ((PlayerBattler)user).skillCooldownDict[this] = this.cooldown;
+
+            battle.StartCoroutine(battle.FinishPlayerTurn());
+        }
     }
 
     public void DisplayDamageText(int damage, Battler target, BattleSystem battle)

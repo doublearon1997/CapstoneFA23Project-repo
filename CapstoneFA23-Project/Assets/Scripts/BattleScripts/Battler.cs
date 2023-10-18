@@ -68,6 +68,23 @@ public class Battler: MonoBehaviour
         RemoveOverviewContainer(battle);
     }
 
+    public void HealBattler(int hpHealed, BattleSystem battle)
+    {
+        int currHp = this.hp;
+        currHp = currHp+hpHealed;
+
+        if(currHp > this.mhp)
+            currHp = this.mhp;
+
+        this.hp = currHp;
+
+        if (this.isPlayer)
+            battle.SetPlayerHPSliderValue((PlayerBattler)this);
+        else
+            battle.SetEnemyHPSliderValue((EnemyBattler)this);
+    }
+
+
     private void RemoveOverviewContainer(BattleSystem battle)
     {
         if(this.isPlayer)

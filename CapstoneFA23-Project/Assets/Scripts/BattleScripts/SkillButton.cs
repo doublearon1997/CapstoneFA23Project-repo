@@ -23,6 +23,10 @@ public class SkillButton : MonoBehaviour
     // When button is pressed, go into choose target mode for the button's skill.
     public void SkillButtonPress()
     {
+        if(battle.skillSelected)
+            battle.SkillTargetReturn();
+        battle.skillSelected = true;
+        battle.hotkeyManager.AddComponent<SkillTargetHotkeys>().Initialize(battle);
         if(skill.isOffensive)  
             ((OffensiveSkill)skill).ChooseTarget(user, battle);
     }

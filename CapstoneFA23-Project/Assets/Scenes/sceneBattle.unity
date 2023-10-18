@@ -2586,6 +2586,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555961283}
   m_CullTransparentMesh: 1
+--- !u!1 &591655687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591655688}
+  m_Layer: 0
+  m_Name: HotkeyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &591655688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591655687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 787.8183, y: 694.0176, z: 3109.7222}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &605016426
 GameObject:
   m_ObjectHideFlags: 0
@@ -4376,12 +4407,15 @@ MonoBehaviour:
   buttonSkills: {fileID: 377991958}
   buttonTactics: {fileID: 655929546}
   buttonItems: {fileID: 1765635899}
+  skillSelected: 0
   panelSkillSelection: {fileID: 1190981342}
   buttonSkill: {fileID: 2890845498663235192, guid: 15e095ea1f9fb63f2a4e001628825e76, type: 3}
+  imageSkillCooldown: {fileID: 2065484467312542600, guid: 77647d9668b2c9ef58951622b739f430, type: 3}
   seManager: {fileID: 847102858}
   panelSkillStatBox: {fileID: 7636250632107018000, guid: d7cba87379851304b824ac218d5fa8c4, type: 3}
   offensiveTarget100: {fileID: 1831003876122148580, guid: 6aae79d3f34c20144b6f4de3951d1337, type: 3}
   currentTargetingObjects: []
+  hotkeyManager: {fileID: 591655687}
 --- !u!4 &922487164
 Transform:
   m_ObjectHideFlags: 0
@@ -9392,3 +9426,4 @@ SceneRoots:
   - {fileID: 869548961}
   - {fileID: 1221270351}
   - {fileID: 847102859}
+  - {fileID: 591655688}

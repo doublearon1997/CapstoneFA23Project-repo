@@ -10,5 +10,15 @@ public class PlayerBattler : Battler
 
     public List<Skill> skills;
 
+    public Dictionary<Skill, int> skillCooldownDict = new Dictionary<Skill, int>();
+
     public OffensiveSkill standardAttack;
+
+    public void Initialize()
+    {
+        foreach(Skill skill in skills)
+        {
+            skillCooldownDict.Add(skill, 0);
+        }
+    }
 }

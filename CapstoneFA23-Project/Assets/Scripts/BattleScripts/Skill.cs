@@ -29,5 +29,6 @@ public abstract class Skill: ScriptableObject
     public bool isOffensive;
 
     //add effects list/hash
+    public List<Effect> effects;
  
 }
