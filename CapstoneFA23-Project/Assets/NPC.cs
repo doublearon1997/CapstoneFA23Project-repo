@@ -8,6 +8,8 @@ public class NPC : MonoBehaviour
 
     public GameObject dialoguePanel;
     public Text dialogueText;
+    public Text npcNameText;
+    public string npcName;
     public string[] dialogue;
     private int index;
 
@@ -28,6 +30,7 @@ public class NPC : MonoBehaviour
             else
             {
                 dialoguePanel.SetActive(true);
+                npcNameText.text = npcName;
                 StartCoroutine(Typing());
             }
         }
@@ -43,6 +46,7 @@ public class NPC : MonoBehaviour
     {
 
         dialogueText.text = "";
+        npcNameText.text = npcName;
 
     }
 
