@@ -7,10 +7,10 @@ using UnityEngine;
 /// </summary>
 /// 
 
-public enum TargetType { Single, All }
+public enum TargetType { Single, All, Self }
 public enum PowerType { Physical, Will }
 
-public class Skill: ScriptableObject
+public abstract class Skill: ScriptableObject
 {
     public string skillName;
 
@@ -20,8 +20,21 @@ public class Skill: ScriptableObject
 
     public double apMod;
 
-    public bool offensive;
+    public int cooldown;
+
+    public Sprite portrait65, portrait50, portrait100;
+
+    public bool isOffensive;
 
     //add effects list/hash
+    public List<Effect> effects;
+
+    public void ApplyEffects(Battler user, Battler target, BattleSystem battle)
+    {
+        foreach(Effect effect in effects)
+        {
+            effect.ApplyEffect(user, target, battle);
+        }
+    }
  
 }

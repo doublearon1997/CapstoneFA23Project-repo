@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1163208271381705045}
   - component: {fileID: 8780127599797470049}
   - component: {fileID: 1645847790919177809}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: playerBattlerGO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,6 +66,9 @@ MonoBehaviour:
   portrait60: {fileID: 21300000, guid: 816373d1ffa715841b9ca2ddccf1ab0c, type: 3}
   playerClass: Swashbuckler
   targetRatio: 1
+  skills:
+  - {fileID: 11400000, guid: c5262c093747759469b7cd80ce97f1f3, type: 2}
+  - {fileID: 11400000, guid: 2b80773c2a2c7f140b1d2179951444ef, type: 2}
   standardAttack: {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
 --- !u!61 &1645847790919177809
 BoxCollider2D:
@@ -122,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7572818421157960562}
   - component: {fileID: 3058805925858993380}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

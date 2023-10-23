@@ -19,9 +19,8 @@ public class SkillUsageAI : ScriptableObject
             skillUsages = new Dictionary<SkillUsageCondition, int>();
             skillUsages.Add(usageConditions[i], weights[i]);
         }
-        
     }
 
-  
+    
 
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3598616411705159024}
   - component: {fileID: 6549670419622497946}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1340625049628734740}
   - component: {fileID: -933485833814597257}
   - component: {fileID: -570244062735316062}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: logGO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   mhp: 325
   str: 100
   will: 100
-  def: 0.13
+  def: 0.3
   res: 0.1
   ini: 90
   battlerName: Log

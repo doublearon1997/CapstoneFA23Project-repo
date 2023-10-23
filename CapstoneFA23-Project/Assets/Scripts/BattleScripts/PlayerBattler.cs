@@ -8,7 +8,17 @@ public class PlayerBattler : Battler
 
     public double targetRatio = 1.0;
 
-    public HashSet<Skill> skills = new HashSet<Skill>();
+    public List<Skill> skills;
+
+    public Dictionary<Skill, int> skillCooldownDict = new Dictionary<Skill, int>();
 
     public OffensiveSkill standardAttack;
+
+    public void Initialize()
+    {
+        foreach(Skill skill in skills)
+        {
+            skillCooldownDict.Add(skill, 0);
+        }
+    }
 }

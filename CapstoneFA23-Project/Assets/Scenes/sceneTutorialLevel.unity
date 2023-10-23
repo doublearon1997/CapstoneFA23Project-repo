@@ -81281,6 +81281,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   dir: {x: 0, y: 0, z: 0}
+  encounter: {fileID: 11400000, guid: 620fab7813e67224bbce823d2867b026, type: 2}
 --- !u!61 &1277953938
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -81996,7 +81997,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ea012817e71f01b478859ce5f6a36a04, type: 3}
+  m_audioClip: {fileID: 8300000, guid: edb5a51da3fbc9846a38c4c2ea68bb96, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -85198,6 +85199,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   dir: {x: 0, y: 0, z: 0}
+  encounter: {fileID: 11400000, guid: 8ca98b0e77de86f4d9cfe7706ecb987c, type: 2}
 --- !u!50 &2104046401
 Rigidbody2D:
   serializedVersion: 4
