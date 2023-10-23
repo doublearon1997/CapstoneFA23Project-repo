@@ -16,8 +16,10 @@ MonoBehaviour:
   targetType: 0
   powerType: 0
   apMod: 1
-  offensive: 1
-  portrait100: {fileID: 0}
+  cooldown: 0
   portrait65: {fileID: 0}
+  portrait50: {fileID: 0}
+  portrait100: {fileID: 0}
   isOffensive: 1
+  effects: []
   dmgMod: 1

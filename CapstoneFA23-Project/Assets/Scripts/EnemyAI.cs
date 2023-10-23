@@ -22,6 +22,8 @@ public class EnemyAI : MonoBehaviour
     private bool isInChaseRange;
     private bool isInAttackRange;
 
+    public Encounter encounter;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,6 +56,7 @@ public class EnemyAI : MonoBehaviour
         if (isInAttackRange)
         {
             //rb.velocity = Vector2.zero;
+            BattleSystem.currentEncounter = encounter;
             SceneManager.LoadScene("sceneBattle");
         }
     }

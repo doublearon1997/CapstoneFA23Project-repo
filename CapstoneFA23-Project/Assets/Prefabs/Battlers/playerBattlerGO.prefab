@@ -68,10 +68,7 @@ MonoBehaviour:
   targetRatio: 1
   skills:
   - {fileID: 11400000, guid: c5262c093747759469b7cd80ce97f1f3, type: 2}
-  - {fileID: 11400000, guid: c5262c093747759469b7cd80ce97f1f3, type: 2}
-  - {fileID: 11400000, guid: c5262c093747759469b7cd80ce97f1f3, type: 2}
-  - {fileID: 11400000, guid: c5262c093747759469b7cd80ce97f1f3, type: 2}
-  - {fileID: 11400000, guid: c5262c093747759469b7cd80ce97f1f3, type: 2}
+  - {fileID: 11400000, guid: 2b80773c2a2c7f140b1d2179951444ef, type: 2}
   standardAttack: {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
 --- !u!61 &1645847790919177809
 BoxCollider2D:

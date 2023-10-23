@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +20,7 @@ public class OffensiveSkill : Skill
             foreach (EnemyBattler battler in battle.enemyBattlers)
             {
                 GameObject targetButton = Instantiate(battle.offensiveTarget100, battler.gameObject.transform.parent.transform) as GameObject;
-                targetButton.GetComponent<TargetButton>().Initialize(this, user, battler, battle);
+                targetButton.GetComponent<OffensiveTargetButton>().Initialize(this, user, battler, battle);
                 battle.currentTargetingObjects.Add(targetButton);
             }
         }
@@ -48,7 +47,7 @@ public class OffensiveSkill : Skill
             for (int i = 0; i < battle.playerBattlers.Count && target == null; i++)
             {
                 if (chances[i] > roll)
-                    target = battle.playerBattlers[i];    
+                    target = battle.playerBattlers[i];
             }
 
             if (target == null)
@@ -61,13 +60,20 @@ public class OffensiveSkill : Skill
         return null;
     }
 
-    // currently just deals damage. More may be added later, like hit or crit chance. 
+    // currently just deals damage. More may be added later, like hit or crit chance. Also need to turn the target into an array for aoe.
     public void UseSkill(Battler user, Battler target, BattleSystem battle)
     {
         // Current damage formula: (user's str * skill's dmgMod * (1- target's defense)) * random 0.9-1.1
+        int damage;
 
-        int damage = (int)(((user.str * this.dmgMod) * (1 - target.def)) * UnityEngine.Random.Range(0.9f, 1.1f));
+        if(this.powerType == PowerType.Physical)
+            damage = (int)((user.GetCurrStr() * this.dmgMod) * (1 - target.GetCurrDef()) * UnityEngine.Random.Range(0.9f, 1.1f));
+        else
+            damage = (int)((user.GetCurrWill() * this.dmgMod) * (1 - target.GetCurrRes()) * UnityEngine.Random.Range(0.9f, 1.1f));
+            
         target.TakeDamage(damage, battle);
+
+        ApplyEffects(user, target, battle);
 
         user.ap -= 100000;
         user.apMod = this.apMod;
@@ -76,16 +82,15 @@ public class OffensiveSkill : Skill
 
         if(user.isPlayer)
         {
-            foreach(KeyValuePair<Skill, int> entry in ((PlayerBattler)user).skillCooldownDict)
+            Dictionary<Skill, int> skillCooldowns = ((PlayerBattler)user).skillCooldownDict;
+            foreach (Skill key in new List<Skill>(skillCooldowns.Keys))
             {
-                if(entry.Value > 0)
-                    ((PlayerBattler)user).skillCooldownDict[entry.Key] -= 0;
-            }              
-
-            ((PlayerBattler)user).skillCooldownDict[this] = this.cooldown;
-
+                if (skillCooldowns[key] > 0)
+                        skillCooldowns[key] -= 1;
+            }
+            skillCooldowns[this] = this.cooldown;
             battle.StartCoroutine(battle.FinishPlayerTurn());
-        }
+        }   
     }
 
     public void DisplayDamageText(int damage, Battler target, BattleSystem battle)

@@ -1,20 +1,15 @@
 using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using TMPro;
 using System.Linq;
-using System.Reflection;
-
-public enum BattleState { Start, PlayerInputTurn, EnemyTurn,  PlayerNoInputTurn, DetermineNext, Win, Lose}
+using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
-    public BattleState state;
-
     public List<GameObject> startingPlayerBattlerGOs = new List<GameObject>();
     public List<GameObject> startingEnemyBattlerGOs = new List<GameObject>();
 
@@ -25,8 +20,10 @@ public class BattleSystem : MonoBehaviour
     public Transform[] enemySpawns;
 
     public GameObject panelPlayerActions;
-    public GameObject damageTextPopup;
+    public GameObject damageTextPopup, healTextPopup;
 
+    //Current Encounter: Set when battle is loaded in.
+    public static Encounter currentEncounter = null;
 
     //Player Overview Panel Objects
 
@@ -49,9 +46,8 @@ public class BattleSystem : MonoBehaviour
     SortedSet<Battler> currentlyActingBattlers;
     public Battler currentlyActingBattler;
 
-
     //Player Action Buttons
-    public Button buttonAttack, buttonSkills, buttonTactics, buttonItems;
+    public Button buttonAttack, buttonSkills;
     private bool buttonAttackPressed = false, buttonSkillsPressed = false, buttonTacticsPressed = false, buttonItemsPressed = false;
     public bool skillSelected = false;
 
@@ -60,27 +56,31 @@ public class BattleSystem : MonoBehaviour
     public GameObject buttonSkill;
 
     public GameObject imageSkillCooldown;
-
     public SEManager seManager;
 
     //Skill Stat Box
-    public GameObject panelSkillStatBox;
+    public GameObject panelOffensiveSkillStatBox;
+    public GameObject panelSupportSkillStatBox;
 
     //Skill Targeting Objects
     public GameObject offensiveTarget100;
+    public GameObject supportTarget100;
     public List<GameObject> currentTargetingObjects;
 
     public GameObject hotkeyManager;
 
+    public void Awake()
+    {
+
+    }
 
     public void Start()
     {
-        state = BattleState.Start;
-
         currentlyActingBattlers = new SortedSet<Battler>(new BattlerAPComparator());
 
         StartCoroutine(SetupBattle());
         StartCoroutine(DetermineNextBattler());
+
         SetTurnOrderPanel();
     }
 
@@ -89,7 +89,7 @@ public class BattleSystem : MonoBehaviour
         this.playerBattlers = new List<PlayerBattler>();
         this.enemyBattlers = new List<EnemyBattler>();
 
-        for(int i = 0; i < startingPlayerBattlerGOs.Count; i++)
+        for (int i = 0; i < startingPlayerBattlerGOs.Count; i++)
         {
             GameObject playerGO = Instantiate(startingPlayerBattlerGOs[i], playerSpawns[i]);
             playerBattlers.Add(playerGO.GetComponent<PlayerBattler>());
@@ -98,35 +98,48 @@ public class BattleSystem : MonoBehaviour
 
         }
 
-        for (int i = 0; i < startingEnemyBattlerGOs.Count; i++)
+        if (currentEncounter != null)
         {
-            GameObject enemyGO = Instantiate(startingEnemyBattlerGOs[i], enemySpawns[i]);
-            enemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
+            for (int i = 0; i < currentEncounter.enemies.Count; i++)
+            {
+                GameObject enemyGO = Instantiate(currentEncounter.enemies[i], enemySpawns[i]);
+                enemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
 
-            enemyGO.GetComponent<EnemyBattler>().ap = UnityEngine.Random.Range(0, 20000);
+                enemyGO.GetComponent<EnemyBattler>().ap = UnityEngine.Random.Range(0, 20000);
 
+            }
         }
+        else // this is just for testing purposes when not entering from an encounter.
+        {
+            for (int i = 0; i < startingEnemyBattlerGOs.Count; i++)
+            {
+                GameObject enemyGO = Instantiate(startingEnemyBattlerGOs[i], enemySpawns[i]);
+                enemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
+
+                enemyGO.GetComponent<EnemyBattler>().ap = UnityEngine.Random.Range(0, 20000);
+
+            }
+        }
+
 
         SetupPartyOverviewPanel();
         SetupEnemyOverviewPanel();
 
         yield return new WaitForSeconds(2f);
-
-        state = BattleState.DetermineNext;
     }
 
     //This method profilerates the overview panel with information about the party's battlers. 
     public void SetupPartyOverviewPanel()
     {
-        for(int i = 0; i < playerBattlers.Count; i++)
+        for (int i = 0; i < playerBattlers.Count; i++)
         {
             PlayerBattler battler = playerBattlers[i];
             battler.SetPartyPosition(i);
             battler.Initialize();
-            
+
             playerNameTexts[i].text = battler.battlerName;
             playerClassLevelTexts[i].text = " Lvl " + battler.level + " " + battler.playerClass;
-            playerHPTexts[i].text = "" + battler.hp +"/" + battler.mhp;
+            playerHPTexts[i].text = "" + battler.hp + "/" + battler.mhp;
 
             playerHPSliders[i].maxValue = battler.mhp;
             playerHPSliders[i].minValue = battler.hp;
@@ -146,7 +159,7 @@ public class BattleSystem : MonoBehaviour
             battler.SetPartyPosition(i);
 
             enemyNameTexts[i].text = battler.battlerName;
-            enemyHPTexts[i].text = "" + battler.hp +"/" + battler.mhp;
+            enemyHPTexts[i].text = "" + battler.hp + "/" + battler.mhp;
 
             enemyHPSliders[i].maxValue = battler.mhp;
             enemyHPSliders[i].minValue = battler.hp;
@@ -164,21 +177,21 @@ public class BattleSystem : MonoBehaviour
 
         int bigPortraitCushion = 0;
 
-        for (int i=0; i<turnOrder.Count; i++)
+        for (int i = 0; i < turnOrder.Count; i++)
         {
             GameObject portrait;
             Battler battler = turnOrder[i];
-            
-            if(battler.isPlayer)
+
+            if (battler.isPlayer)
             {
-                if(battler == currentlyActingBattler)
+                if (battler == currentlyActingBattler)
                     portrait = Instantiate(portraitTurnOrderCurrentPlayer, panelTurnOrder.transform) as GameObject;
                 else
                     portrait = Instantiate(portraitTurnOrderPlayer, panelTurnOrder.transform) as GameObject;
             }
             else
             {
-                if(battler == currentlyActingBattler)
+                if (battler == currentlyActingBattler)
                     portrait = Instantiate(portraitTurnOrderCurrentEnemy, panelTurnOrder.transform) as GameObject;
                 else
                     portrait = Instantiate(portraitTurnOrderEnemy, panelTurnOrder.transform) as GameObject;
@@ -190,7 +203,7 @@ public class BattleSystem : MonoBehaviour
 
             if (battler == currentlyActingBattler)
                 bigPortraitCushion = 7;
-            
+
         }
     }
 
@@ -202,7 +215,7 @@ public class BattleSystem : MonoBehaviour
         List<Battler> turnOrder = DetermineCurrentTurnOrder(skill);
         GameObject emptyPortrait;
 
-        if(currentlyActingBattler.isPlayer)
+        if (currentlyActingBattler.isPlayer)
             emptyPortrait = Instantiate(portraitTurnOrderCurrentPlayer, panelTurnOrder.transform) as GameObject;
         else
             emptyPortrait = Instantiate(portraitTurnOrderCurrentEnemy, panelTurnOrder.transform) as GameObject;
@@ -214,19 +227,19 @@ public class BattleSystem : MonoBehaviour
             GameObject portrait;
             Battler battler = turnOrder[i];
 
-            if(battler.isPlayer)
+            if (battler.isPlayer)
                 portrait = Instantiate(portraitTurnOrderPlayer, panelTurnOrder.transform) as GameObject;
-            
+
             else
                 portrait = Instantiate(portraitTurnOrderEnemy, panelTurnOrder.transform) as GameObject;
-            
+
             portrait.GetComponent<Image>().sprite = battler.portrait60;
             portrait.GetComponent<Image>().enabled = true;
 
             if (battler == currentlyActingBattler)
-                portrait.GetComponent<RectTransform>().anchoredPosition = new Vector2(12.0f, (i+1) * -75.0f - 53);
-            else 
-                portrait.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, (i+1) * -75.0f - 53);
+                portrait.GetComponent<RectTransform>().anchoredPosition = new Vector2(12.0f, (i + 1) * -75.0f - 53);
+            else
+                portrait.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, (i + 1) * -75.0f - 53);
 
         }
     }
@@ -250,15 +263,15 @@ public class BattleSystem : MonoBehaviour
         SortedSet<Battler> futureCurrentlyActingBattlers = new SortedSet<Battler>(new BattlerAPComparator());
 
         //Add battlers to calculate to a dictionary to prevent actually adding ap to the real battlers.
-        foreach(PlayerBattler battler in playerBattlers)
+        foreach (PlayerBattler battler in playerBattlers)
         {
-            if(!currentlyActingBattlers.Contains(battler))
+            if (!currentlyActingBattlers.Contains(battler))
                 needToCalculate.Add(battler, battler.ap);
             else if (currentBattlerSkill != null && currentlyActingBattler == battler)
                 needToCalculate.Add(battler, battler.ap - 100000);
         }
 
-        foreach(EnemyBattler battler in enemyBattlers)
+        foreach (EnemyBattler battler in enemyBattlers)
         {
             if (!currentlyActingBattlers.Contains(battler))
                 needToCalculate.Add(battler, battler.ap);
@@ -270,7 +283,7 @@ public class BattleSystem : MonoBehaviour
         foreach (Battler battler in currentlyActingBattlers)
         {
             if (currentBattlerSkill == null || battler != currentlyActingBattler)
-                battlerTurnOrder.Add(battler); 
+                battlerTurnOrder.Add(battler);
         }
 
         while (doneCalculated.Count != needToCalculate.Count)
@@ -279,7 +292,7 @@ public class BattleSystem : MonoBehaviour
 
             var keys = new List<Battler>(needToCalculate.Keys);
 
-            for(int i = 0; i<keys.Count; i++)
+            for (int i = 0; i < keys.Count; i++)
             {
                 Battler battler = keys[i];
 
@@ -292,7 +305,7 @@ public class BattleSystem : MonoBehaviour
 
                     if (needToCalculate[battler] >= 100000)
                         futureCurrentlyActingBattlers.Add(battler);
-                }    
+                }
 
             }
 
@@ -301,7 +314,7 @@ public class BattleSystem : MonoBehaviour
                 battlerTurnOrder.Add(battler);
                 doneCalculated.Add(battler);
             }
-               
+
         }
 
         return battlerTurnOrder;
@@ -316,7 +329,7 @@ public class BattleSystem : MonoBehaviour
         double hpSliderPosition = sliderWidth - ((double)battler.hp / (double)battler.mhp) * sliderWidth;
 
         playerHPSliders[battler.GetPartyPosition()].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-        playerHPTexts[battler.GetPartyPosition()].text = "" + battler.hp + "/" + battler.mhp; 
+        playerHPTexts[battler.GetPartyPosition()].text = "" + battler.hp + "/" + battler.mhp;
     }
 
     //Adjusts a battler's HP slider value on the enemy overview panel based on their current hp.
@@ -334,12 +347,12 @@ public class BattleSystem : MonoBehaviour
     //This coroutine is played when determining which battler acts next.
     public IEnumerator DetermineNextBattler()
     {
-        while(currentlyActingBattlers.Count < 1) //runs this loop until a battler has atleast 100000 AP
+        while (currentlyActingBattlers.Count < 1) //runs this loop until a battler has atleast 100000 AP
         {
             foreach (PlayerBattler battler in playerBattlers)
             {
                 battler.ap += (int)(battler.ini * battler.apMod);
-                if(battler.ap >= 100000) 
+                if (battler.ap >= 100000)
                 {
                     currentlyActingBattlers.Add(battler);
                 }
@@ -348,7 +361,7 @@ public class BattleSystem : MonoBehaviour
             foreach (EnemyBattler battler in enemyBattlers)
             {
                 battler.ap += (int)(battler.ini * battler.apMod);
-                if(battler.ap >= 100000) 
+                if (battler.ap >= 100000)
                 {
                     currentlyActingBattlers.Add(battler);
                 }
@@ -359,14 +372,12 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        if(currentlyActingBattler.isPlayer)
+        if (currentlyActingBattler.isPlayer)
         {
-            state = BattleState.PlayerInputTurn;
             StartCoroutine(PlayerTurn());
         }
-        else 
+        else
         {
-            state = BattleState.EnemyTurn;
             StartCoroutine(EnemyTurn());
         }
     }
@@ -380,6 +391,8 @@ public class BattleSystem : MonoBehaviour
         hotkeyManager.AddComponent<AttackButtonSelectedHotkeys>().Initialize(this);
         ((PlayerBattler)currentlyActingBattler).standardAttack.ChooseTarget((PlayerBattler)currentlyActingBattler, this);
         SetTemporaryTurnOrderPanel(((PlayerBattler)currentlyActingBattler).standardAttack);
+
+        //seManager.PlaySE("buttonClick", 1);
     }
 
     public void AttackButtonReturn()
@@ -389,6 +402,8 @@ public class BattleSystem : MonoBehaviour
         Destroy(hotkeyManager.GetComponent<AttackButtonSelectedHotkeys>());
         ClearTargetingButtons();
         SetTurnOrderPanel();
+
+        //seManager.PlaySE("buttonReturn", 1);
     }
 
     //Skills Button Methods
@@ -399,6 +414,8 @@ public class BattleSystem : MonoBehaviour
         buttonSkillsPressed = true;
         hotkeyManager.AddComponent<SkillsButtonSelectedHotkeys>().Initialize(this);
         panelSkillSelection.SetActive(true);
+
+        //seManager.PlaySE("buttonClick", 1);
     }
 
     public void SkillsButtonReturn()
@@ -407,6 +424,8 @@ public class BattleSystem : MonoBehaviour
         Destroy(hotkeyManager.GetComponent<AttackButtonSelectedHotkeys>());
         panelSkillSelection.SetActive(false);
         ClearSkillSelectionPanel();
+
+        //seManager.PlaySE("buttonReturn", 1);
     }
 
     private void SetSkillSelectionPanel(PlayerBattler battler)
@@ -418,14 +437,14 @@ public class BattleSystem : MonoBehaviour
         int numSkills = battler.skills.Count;
         int currentSkillCount = 0;
 
-        foreach(Skill skill in battler.skills)
+        foreach (Skill skill in battler.skills)
         {
             currentSkillCount += 1;
             CreateSkillButton(skill, battler, xPos, yPos);
 
-            
 
-            if(currentSkillCount % 3 == 0)
+
+            if (currentSkillCount % 3 == 0)
             {
                 xPos = 80.0f;
                 yPos -= 119.0f;
@@ -451,32 +470,32 @@ public class BattleSystem : MonoBehaviour
         skillButton.GetComponent<SkillButton>().Initialize(skill, battler, this);
         skillButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
 
-        if(battler.skillCooldownDict[skill] > 0)
+        if (battler.skillCooldownDict[skill] > 0)
         {
             GameObject cooldownImage = Instantiate(imageSkillCooldown, skillButton.transform) as GameObject;
-            cooldownImage.transform.GetChild(0).GetComponent<TMP_Text>().text = "" +  battler.skillCooldownDict[skill];
+            cooldownImage.transform.GetChild(0).GetComponent<TMP_Text>().text = "" + battler.skillCooldownDict[skill];
         }
-            
-
     }
 
-    public void SkillTargetReturn()
+    public void SkillTargetReturn(bool skillSelected)
     {
         Destroy(hotkeyManager.GetComponent<SkillTargetHotkeys>());
+        if(!skillSelected)
+            hotkeyManager.AddComponent<SkillTargetHotkeys>().Initialize(this);
         ClearTargetingButtons();
     }
 
     private void ClearTargetingButtons()
     {
-        foreach(GameObject obj in currentTargetingObjects)
+        foreach (GameObject obj in currentTargetingObjects)
             DestroyImmediate(obj);
     }
 
     private void ReturnAnyMainButtons()
     {
-        if(buttonAttackPressed)
+        if (buttonAttackPressed)
             AttackButtonReturn();
-        else if(buttonSkillsPressed)
+        else if (buttonSkillsPressed)
             SkillsButtonReturn();
     }
 
@@ -488,31 +507,36 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         panelPlayerActions.SetActive(true);
-    } 
-
-    
+    }
 
     public void PlayerActionSelected()
     {
         panelPlayerActions.SetActive(false);
         panelSkillSelection.SetActive(false);
 
+        ClearAllHotkeys();
+
         ClearTargetingButtons();
     }
 
     public IEnumerator FinishPlayerTurn()
     {
+        currentlyActingBattler.CountDownEffects();
+
         currentlyActingBattlers.Remove(currentlyActingBattler);
         currentlyActingBattler = null;
 
         buttonAttack.interactable = true;
 
-        state = BattleState.DetermineNext;
+        if (IsPlayerVictory())
+            PlayerVictory();
+
+        if (IsPlayerDefeat())
+            PlayerDefeat();
 
         yield return new WaitForSeconds(1.0f);
 
         StartCoroutine(DetermineNextBattler());
-
     }
 
     IEnumerator EnemyTurn()
@@ -520,27 +544,59 @@ public class BattleSystem : MonoBehaviour
         SetTurnOrderPanel();
 
         Skill chosenSkill = ((EnemyBattler)currentlyActingBattler).ChooseSkill();
-        Battler chosenTarget = ((OffensiveSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this); 
-  
+        Battler chosenTarget = ((OffensiveSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
+
         ((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, chosenTarget, this);
-   
+
         yield return new WaitForSeconds(1.0f);
- 
+
         FinishEnemyTurn();
-        
-    } 
+
+    }
 
     public void FinishEnemyTurn()
     {
+        currentlyActingBattler.CountDownEffects();
+        
         currentlyActingBattlers.Remove(currentlyActingBattler);
         currentlyActingBattler = null;
-        
-        state = BattleState.DetermineNext;
+
+        if(IsPlayerVictory())
+            PlayerVictory();
+
+        if(IsPlayerDefeat())
+            PlayerDefeat();
+
         StartCoroutine(DetermineNextBattler());
 
     }
 
-  
+    private void ClearAllHotkeys()
+    {
+        Destroy(hotkeyManager.GetComponent<SkillTargetHotkeys>());
+        Destroy(hotkeyManager.GetComponent<SkillsButtonSelectedHotkeys>());
+        Destroy(hotkeyManager.GetComponent<AttackButtonSelectedHotkeys>());
+    }
+
+    private bool IsPlayerVictory()
+    {
+        return enemyBattlers.Count <= 0;
+    }
+
+    private bool IsPlayerDefeat()
+    {
+        return playerBattlers.Count <= 0;
+    }
+
+    private void PlayerVictory()
+    {
+        SceneManager.LoadScene("sceneTutorialLevel");
+    }
+
+    private void PlayerDefeat()
+    {
+        SceneManager.LoadScene("sceneMain");
+    }
 
     internal class BattlerAPComparator : IComparer<Battler>
     {
@@ -549,6 +605,7 @@ public class BattleSystem : MonoBehaviour
             return a.ap.CompareTo(b.ap);
         }
     }
+
 
 
 }

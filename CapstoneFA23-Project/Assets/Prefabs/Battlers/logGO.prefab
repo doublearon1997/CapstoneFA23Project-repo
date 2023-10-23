@@ -139,7 +139,7 @@ MonoBehaviour:
   mhp: 325
   str: 100
   will: 100
-  def: 0.13
+  def: 0.3
   res: 0.1
   ini: 90
   battlerName: Log

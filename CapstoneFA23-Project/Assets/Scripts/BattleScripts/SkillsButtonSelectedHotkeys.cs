@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class SkillsButtonSelectedHotkeys : MonoBehaviour
 {
     private BattleSystem battle;
+    private bool stop = false;
 
     public void Initialize(BattleSystem battle)
     {
@@ -13,7 +15,11 @@ public class SkillsButtonSelectedHotkeys : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Mouse1))
+        if(Input.GetKey(KeyCode.Mouse1) && !stop)
+        {
             battle.SkillsButtonReturn();
+            stop = true;
+        }
+            
     }
 }

@@ -322,8 +322,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 145.22998, y: 0}
-  m_SizeDelta: {x: 289.46, y: 64}
+  m_AnchoredPosition: {x: 146, y: 0}
+  m_SizeDelta: {x: 290, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &48560336
 MonoBehaviour:
@@ -1127,7 +1127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 159.46472, y: -260}
+  m_AnchoredPosition: {x: 159.46472, y: -255}
   m_SizeDelta: {x: 289.96, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &286642509
@@ -3031,7 +3031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 159.46472, y: -190}
+  m_AnchoredPosition: {x: 159.46472, y: -185}
   m_SizeDelta: {x: 289.96, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &655929544
@@ -3834,6 +3834,9 @@ MonoBehaviour:
   soundEffectsList:
   - {fileID: 8300000, guid: edb5a51da3fbc9846a38c4c2ea68bb96, type: 3}
   - {fileID: 8300000, guid: 1c2060b9f59ccfc4398e68cde6cb07e9, type: 3}
+  - {fileID: 8300000, guid: facfd8ef83c9f8748b15009c34bf95a4, type: 3}
+  - {fileID: 8300000, guid: 439a400bafa1cae4eabe4050afbfdd8d, type: 3}
+  - {fileID: 8300000, guid: f505f7ae8c4f2e143bf21d3c1e03cca1, type: 3}
 --- !u!4 &847102859
 Transform:
   m_ObjectHideFlags: 0
@@ -4211,8 +4214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 145.22998, y: 0}
-  m_SizeDelta: {x: 289.46, y: 64}
+  m_AnchoredPosition: {x: 146, y: 0}
+  m_SizeDelta: {x: 290, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &896669042
 MonoBehaviour:
@@ -4316,7 +4319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1dbc080f11ed6144bff1203efe5cf71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
   startingPlayerBattlerGOs:
   - {fileID: 4262835083943016269, guid: 08634ebfde0b6b143b552f5c96e6ebf0, type: 3}
   - {fileID: 4262835083943016269, guid: 08634ebfde0b6b143b552f5c96e6ebf0, type: 3}
@@ -4343,6 +4345,7 @@ MonoBehaviour:
   - {fileID: 853930176}
   panelPlayerActions: {fileID: 2025833277}
   damageTextPopup: {fileID: 516322223363286725, guid: 3eb3aafa75883e4438f0be6d79433bd0, type: 3}
+  healTextPopup: {fileID: 516322223363286725, guid: cd77983d181f2ad4bbdcfc591b0b5097, type: 3}
   playerContainers:
   - {fileID: 1082411828}
   - {fileID: 442320430}
@@ -4405,15 +4408,15 @@ MonoBehaviour:
   currentlyActingBattler: {fileID: 0}
   buttonAttack: {fileID: 762353623}
   buttonSkills: {fileID: 377991958}
-  buttonTactics: {fileID: 655929546}
-  buttonItems: {fileID: 1765635899}
   skillSelected: 0
   panelSkillSelection: {fileID: 1190981342}
   buttonSkill: {fileID: 2890845498663235192, guid: 15e095ea1f9fb63f2a4e001628825e76, type: 3}
   imageSkillCooldown: {fileID: 2065484467312542600, guid: 77647d9668b2c9ef58951622b739f430, type: 3}
   seManager: {fileID: 847102858}
-  panelSkillStatBox: {fileID: 7636250632107018000, guid: d7cba87379851304b824ac218d5fa8c4, type: 3}
+  panelOffensiveSkillStatBox: {fileID: 7636250632107018000, guid: d7cba87379851304b824ac218d5fa8c4, type: 3}
+  panelSupportSkillStatBox: {fileID: 7636250632107018000, guid: 851d949213ec96b4e8581d036cf1f586, type: 3}
   offensiveTarget100: {fileID: 1831003876122148580, guid: 6aae79d3f34c20144b6f4de3951d1337, type: 3}
+  supportTarget100: {fileID: 1831003876122148580, guid: 5888c34e95b290b408f053ff32e4933e, type: 3}
   currentTargetingObjects: []
   hotkeyManager: {fileID: 591655687}
 --- !u!4 &922487164
@@ -6106,7 +6109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 159.482, y: -120}
+  m_AnchoredPosition: {x: 159.4647, y: -115}
   m_SizeDelta: {x: 289.96, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1280414241

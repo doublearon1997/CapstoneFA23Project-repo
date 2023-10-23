@@ -1653,7 +1653,7 @@ GameObject:
   - component: {fileID: 2900991145860749427}
   - component: {fileID: 3370310732145882147}
   m_Layer: 6
-  m_Name: panelSkillStatBox
+  m_Name: panelOffensiveSkillStatBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

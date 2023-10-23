@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetButton : MonoBehaviour
+public class SupportTargetButton : MonoBehaviour
 {
     public Battler user;
     public Battler target;
-    public OffensiveSkill skill;
+    public SupportSkill skill;
     public BattleSystem battle;
 
-    public void Initialize(OffensiveSkill skill, Battler user, Battler target, BattleSystem battle)
+    public void Initialize(SupportSkill skill, Battler user, Battler target, BattleSystem battle)
     {
         this.skill = skill;
         this.user = user;

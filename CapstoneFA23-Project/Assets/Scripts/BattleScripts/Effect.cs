@@ -6,6 +6,10 @@ public abstract class Effect : ScriptableObject
 {
     public string effectName;
 
-    public abstract void ApplyEffects(Battler user, Battler target, BattleSystem battle);
+    public abstract string GetEffectStatsString();
+
+    public abstract void ApplyEffect(Battler user, Battler target, BattleSystem battle);
+
+
 
 }
