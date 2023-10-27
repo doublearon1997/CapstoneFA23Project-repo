@@ -50,7 +50,6 @@ public class HealEffect : Effect
             returnString += percentString + ", +";
         }
             
-
         if(healAmount > 0)
         {
             amountString = "" + healAmount;

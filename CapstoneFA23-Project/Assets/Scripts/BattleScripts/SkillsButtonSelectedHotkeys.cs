@@ -15,9 +15,11 @@ public class SkillsButtonSelectedHotkeys : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Mouse1) && !stop)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !stop)
         {
+            battle.seManager.PlaySE("buttonReturn");
             battle.SkillsButtonReturn();
+            battle.DisplayMessage("" + battle.currentlyActingBattler.battlerName + "'s turn.");
             stop = true;
         }
             
