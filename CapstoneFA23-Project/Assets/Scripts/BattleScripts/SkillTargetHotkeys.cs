@@ -14,9 +14,13 @@ public class SkillTargetHotkeys : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Mouse1) && !stop)
+        if(Input.GetKeyDown(KeyCode.Mouse1) && !stop)
         {
-            battle.SkillTargetReturn(true);
+            battle.seManager.PlaySE("buttonReturn");
+            battle.SkillTargetReturn();
+            battle.DisplayMessage("Select a skill.");
+
+            battle.hotkeyManager.AddComponent<SkillsButtonSelectedHotkeys>().Initialize(battle);
             stop = true;
         }
             
