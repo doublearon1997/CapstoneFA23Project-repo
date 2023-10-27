@@ -49,7 +49,7 @@ public class UIBehavior : MonoBehaviour
     //load level data
     public void loadLevelData()
     {
-        string readFromFilePath = Application.dataPath + "/Scripts/" + "Overworld/" + "leveldata" + ".txt";
+        string readFromFilePath = Application.dataPath + "/Data/" + "leveldata" + ".txt";
         List<string> fileLines = File.ReadAllLines(readFromFilePath).ToList();
         foreach (string line in fileLines)
         {

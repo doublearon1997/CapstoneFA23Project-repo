@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8e27c64d7f26ef941b92961a571a0f25
+guid: 616134fc89560144e855a58c637d98f9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LogoAnim_SSheet_0
+      name: LogoAnim_Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf3a5c678374d42429c0df6c339d65b4
-      internalID: -177834931
+      spriteID: e400f46fa75dc194ca228a0331a3ada7
+      internalID: -88921373
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LogoAnim_SSheet_1
+      name: LogoAnim_Sheet_1
       rect:
         serializedVersion: 2
         x: 768
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fcd3ee54df01ba4482048ed8b234412
-      internalID: 517741660
+      spriteID: 3ae0e0b35a16c07489ca56074a007829
+      internalID: 269848926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LogoAnim_SSheet_2
+      name: LogoAnim_Sheet_2
       rect:
         serializedVersion: 2
         x: 1536
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e38ac2ac91be1d4cab20beb6843bcd9
-      internalID: 687133549
+      spriteID: f92b6085800d6f34086219b930c92523
+      internalID: 986799056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LogoAnim_SSheet_3
+      name: LogoAnim_Sheet_3
       rect:
         serializedVersion: 2
         x: 2304
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a06b9265e36e51b4196497ea03c7b03d
-      internalID: -521450295
+      spriteID: daeedbe108a505b46a759043aabb9605
+      internalID: 800452317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LogoAnim_SSheet_4
+      name: LogoAnim_Sheet_4
       rect:
         serializedVersion: 2
         x: 3072
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f0be7d2c3a3e934a9a5f774012707f1
-      internalID: -1685035709
+      spriteID: d335f6280d53fb741b28256d00e1dae1
+      internalID: -882451020
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LogoAnim_SSheet_5
+      name: LogoAnim_Sheet_5
       rect:
         serializedVersion: 2
         x: 0
@@ -242,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 946c66752e9d4ed4c9014a99d7537a12
-      internalID: 534944630
+      spriteID: 1fbfeae8ecdc2904ab632dc3afcdecda
+      internalID: 1496907891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LogoAnim_SSheet_6
+      name: LogoAnim_Sheet_6
       rect:
         serializedVersion: 2
         x: 768
@@ -263,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72f76a6b7717b454aaebc5b3dcab986a
-      internalID: 436616051
+      spriteID: 4802e9af1f72aeb44862c533106bd4ba
+      internalID: 251726912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LogoAnim_SSheet_7
+      name: LogoAnim_Sheet_7
       rect:
         serializedVersion: 2
         x: 1536
@@ -284,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edab3a6ab78ff054f8d7ee5819bea32a
-      internalID: -1506813809
+      spriteID: 5726866d2a48d7b4483b702da949d0a6
+      internalID: 1231454733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LogoAnim_SSheet_8
+      name: LogoAnim_Sheet_8
       rect:
         serializedVersion: 2
         x: 2304
@@ -305,8 +305,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 579eca205bdef0846b5ba5a4350f50c6
-      internalID: -2100442871
+      spriteID: 208d4c0185bd174469b0f1f24de20243
+      internalID: 1280527240
       vertices: []
       indices: 
       edges: []
@@ -322,16 +322,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LogoAnim_SSheet_0: -177834931
-      LogoAnim_SSheet_1: 517741660
-      LogoAnim_SSheet_2: 687133549
-      LogoAnim_SSheet_3: -521450295
-      LogoAnim_SSheet_4: -1685035709
-      LogoAnim_SSheet_5: 534944630
-      LogoAnim_SSheet_6: 436616051
-      LogoAnim_SSheet_7: -1506813809
-      LogoAnim_SSheet_8: -2100442871
-      LogoAnim_SSheet_9: -2037852452
+      LogoAnim_Sheet_0: -88921373
+      LogoAnim_Sheet_1: 269848926
+      LogoAnim_Sheet_2: 986799056
+      LogoAnim_Sheet_3: 800452317
+      LogoAnim_Sheet_4: -882451020
+      LogoAnim_Sheet_5: 1496907891
+      LogoAnim_Sheet_6: 251726912
+      LogoAnim_Sheet_7: 1231454733
+      LogoAnim_Sheet_8: 1280527240
+      LogoAnim_Sheet_9: 1377519757
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
