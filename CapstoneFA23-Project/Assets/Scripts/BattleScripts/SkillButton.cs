@@ -23,12 +23,18 @@ public class SkillButton : MonoBehaviour
     // When button is pressed, go into choose target mode for the button's skill.
     public void SkillButtonPress()
     {
-        //battle.seManager.PlaySE("buttonClick", 1);
+        battle.seManager.PlaySE("buttonClick", 1);
+
         if (battle.skillSelected)
-            battle.SkillTargetReturn(true);
+            battle.SkillTargetReturn();
         battle.skillSelected = true;
+
         battle.hotkeyManager.AddComponent<SkillTargetHotkeys>().Initialize(battle);
         Destroy(battle.hotkeyManager.GetComponent<SkillsButtonSelectedHotkeys>());
+
+        battle.SetTemporaryTurnOrderPanel(this.skill);
+
+        battle.DisplayMessage("Select a target.");
 
         if (skill.isOffensive)
             ((OffensiveSkill)skill).ChooseTarget(user, battle);
@@ -39,11 +45,12 @@ public class SkillButton : MonoBehaviour
     // When button is hovered, display a skill stat box for the button's skill.
     public void SkillButtonHover()
     {
+        battle.seManager.PlaySE("buttonHover", 1);
+
         if (skill.isOffensive)
             CreateOffensiveSkillStatBox();
         else
             CreateSupportSkillStatBox();
-        battle.seManager.PlaySE("buttonHover", 1);
     }
 
     public void SkillButtonHoverExit()

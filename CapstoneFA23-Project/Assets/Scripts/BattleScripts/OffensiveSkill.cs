@@ -79,9 +79,10 @@ public class OffensiveSkill : Skill
         user.apMod = this.apMod;
 
         DisplayDamageText(damage, target, battle);
-
-        if(user.isPlayer)
+       
+        if (user.isPlayer)
         {
+            battle.DisplaySkillMessage(this);
             Dictionary<Skill, int> skillCooldowns = ((PlayerBattler)user).skillCooldownDict;
             foreach (Skill key in new List<Skill>(skillCooldowns.Keys))
             {
