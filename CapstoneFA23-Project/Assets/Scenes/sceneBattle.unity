@@ -123,6 +123,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &16226770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 16226771}
+  - component: {fileID: 16226773}
+  - component: {fileID: 16226772}
+  m_Layer: 0
+  m_Name: imageBackground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &16226771
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16226770}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 242399775}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 550, y: 78}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &16226772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16226770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9528302, g: 0.8830464, b: 0.7775454, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c2e86387fa51b24479c757147cf713e4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &16226773
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16226770}
+  m_CullTransparentMesh: 1
 --- !u!1 &32721361
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,6 +1205,38 @@ RectTransform:
   m_AnchoredPosition: {x: 159.46472, y: -255}
   m_SizeDelta: {x: 289.96, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &242399774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 242399775}
+  m_Layer: 0
+  m_Name: BattleMessageBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &242399775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242399774}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 502, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 16226771}
+  m_Father: {fileID: 1430051081}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &286642509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,6 +1997,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 847102858}
+        m_TargetAssemblyTypeName: SEManager, Assembly-CSharp
+        m_MethodName: PlaySE
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: facfd8ef83c9f8748b15009c34bf95a4, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3659,6 +3778,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 847102858}
+        m_TargetAssemblyTypeName: SEManager, Assembly-CSharp
+        m_MethodName: PlaySE
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: facfd8ef83c9f8748b15009c34bf95a4, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &762353624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3836,7 +3967,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1c2060b9f59ccfc4398e68cde6cb07e9, type: 3}
   - {fileID: 8300000, guid: facfd8ef83c9f8748b15009c34bf95a4, type: 3}
   - {fileID: 8300000, guid: 439a400bafa1cae4eabe4050afbfdd8d, type: 3}
-  - {fileID: 8300000, guid: f505f7ae8c4f2e143bf21d3c1e03cca1, type: 3}
+  - {fileID: 8300000, guid: 596e5b0843f932547aa3ddd2a0d91819, type: 3}
+  defaultVolumeList:
+  - 0.65
+  - 0.8
+  - 0.7
+  - 0.7
+  - 1
 --- !u!4 &847102859
 Transform:
   m_ObjectHideFlags: 0
@@ -4096,7 +4233,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 6300970116489875982, guid: 9886f3282fb9d0743a7e8e75f4ad7af4, type: 2}
   m_audioClip: {fileID: 8300000, guid: c6204eaebe6df1540921e2a360ea8a29, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.505
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4408,6 +4545,8 @@ MonoBehaviour:
   currentlyActingBattler: {fileID: 0}
   buttonAttack: {fileID: 762353623}
   buttonSkills: {fileID: 377991958}
+  buttonTactics: {fileID: 655929546}
+  buttonItems: {fileID: 1765635899}
   skillSelected: 0
   panelSkillSelection: {fileID: 1190981342}
   buttonSkill: {fileID: 2890845498663235192, guid: 15e095ea1f9fb63f2a4e001628825e76, type: 3}
@@ -4417,7 +4556,12 @@ MonoBehaviour:
   panelSupportSkillStatBox: {fileID: 7636250632107018000, guid: 851d949213ec96b4e8581d036cf1f586, type: 3}
   offensiveTarget100: {fileID: 1831003876122148580, guid: 6aae79d3f34c20144b6f4de3951d1337, type: 3}
   supportTarget100: {fileID: 1831003876122148580, guid: 5888c34e95b290b408f053ff32e4933e, type: 3}
+  offensiveTargetEnemy100: {fileID: 1831003876122148580, guid: a689fc7e3372f8a42b27cf63f84c9e0f, type: 3}
+  supportTargetEnemy100: {fileID: 1831003876122148580, guid: 4b7337d6238ed9c44bf0a4fce780bef3, type: 3}
   currentTargetingObjects: []
+  battleMessageBox: {fileID: 242399774}
+  skillMessageDisplay: {fileID: 3650307415027971455, guid: 7e2f9a1110b453e42b5021742c5a666e, type: 3}
+  messageBoxText: {fileID: 1118068381927284121, guid: 53c0c2b96abe8d1429bad1ce5ea01d47, type: 3}
   hotkeyManager: {fileID: 591655687}
 --- !u!4 &922487164
 Transform:
@@ -6833,6 +6977,7 @@ RectTransform:
   - {fileID: 695786201}
   - {fileID: 2025833278}
   - {fileID: 1190981343}
+  - {fileID: 242399775}
   - {fileID: 667870723}
   - {fileID: 345276487}
   - {fileID: 1452303447}

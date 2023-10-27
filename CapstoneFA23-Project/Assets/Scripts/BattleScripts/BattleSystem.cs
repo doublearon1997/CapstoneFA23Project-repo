@@ -47,7 +47,7 @@ public class BattleSystem : MonoBehaviour
     public Battler currentlyActingBattler;
 
     //Player Action Buttons
-    public Button buttonAttack, buttonSkills;
+    public Button buttonAttack, buttonSkills, buttonTactics, buttonItems;
     private bool buttonAttackPressed = false, buttonSkillsPressed = false, buttonTacticsPressed = false, buttonItemsPressed = false;
     public bool skillSelected = false;
 
@@ -65,14 +65,18 @@ public class BattleSystem : MonoBehaviour
     //Skill Targeting Objects
     public GameObject offensiveTarget100;
     public GameObject supportTarget100;
+
+    public GameObject offensiveTargetEnemy100;
+    public GameObject supportTargetEnemy100;
+
     public List<GameObject> currentTargetingObjects;
 
+    //Message Box
+    public GameObject battleMessageBox = null;
+    public GameObject skillMessageDisplay = null;
+    public GameObject messageBoxText = null;
+
     public GameObject hotkeyManager;
-
-    public void Awake()
-    {
-
-    }
 
     public void Start()
     {
@@ -208,7 +212,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Displays the temporary turn order on the turn order panel, when a player has a skill selected or a battler is using a skill, but not before the end of the turn.
-    private void SetTemporaryTurnOrderPanel(Skill skill)
+    public void SetTemporaryTurnOrderPanel(Skill skill)
     {
         clearTurnOrderPanel();
 
@@ -370,7 +374,7 @@ public class BattleSystem : MonoBehaviour
 
         currentlyActingBattler = currentlyActingBattlers.First();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (currentlyActingBattler.isPlayer)
         {
@@ -385,14 +389,15 @@ public class BattleSystem : MonoBehaviour
     //Attack Button Methods
     public void AttackButtonPress()
     {
-        ReturnAnyMainButtons();
-        buttonAttack.interactable = true;
+        buttonAttack.interactable = false;
+        ReturnAnyPlayerActionHandlers();
+
         buttonAttackPressed = true;
         hotkeyManager.AddComponent<AttackButtonSelectedHotkeys>().Initialize(this);
         ((PlayerBattler)currentlyActingBattler).standardAttack.ChooseTarget((PlayerBattler)currentlyActingBattler, this);
         SetTemporaryTurnOrderPanel(((PlayerBattler)currentlyActingBattler).standardAttack);
 
-        //seManager.PlaySE("buttonClick", 1);
+        DisplayMessage("Select a target.");
     }
 
     public void AttackButtonReturn()
@@ -403,29 +408,31 @@ public class BattleSystem : MonoBehaviour
         ClearTargetingButtons();
         SetTurnOrderPanel();
 
-        //seManager.PlaySE("buttonReturn", 1);
     }
 
     //Skills Button Methods
     public void SkillsButtonPress()
     {
-        ReturnAnyMainButtons();
+        buttonSkills.interactable = false;
+        ReturnAnyPlayerActionHandlers();
+
         SetSkillSelectionPanel((PlayerBattler)currentlyActingBattler);
         buttonSkillsPressed = true;
         hotkeyManager.AddComponent<SkillsButtonSelectedHotkeys>().Initialize(this);
         panelSkillSelection.SetActive(true);
 
-        //seManager.PlaySE("buttonClick", 1);
+        DisplayMessage("Select a skill.");
     }
 
     public void SkillsButtonReturn()
     {
+        buttonSkills.interactable = true;
         buttonSkillsPressed = false;
-        Destroy(hotkeyManager.GetComponent<AttackButtonSelectedHotkeys>());
+        Destroy(hotkeyManager.GetComponent<SkillsButtonSelectedHotkeys>());
+
         panelSkillSelection.SetActive(false);
         ClearSkillSelectionPanel();
-
-        //seManager.PlaySE("buttonReturn", 1);
+  
     }
 
     private void SetSkillSelectionPanel(PlayerBattler battler)
@@ -441,8 +448,6 @@ public class BattleSystem : MonoBehaviour
         {
             currentSkillCount += 1;
             CreateSkillButton(skill, battler, xPos, yPos);
-
-
 
             if (currentSkillCount % 3 == 0)
             {
@@ -477,12 +482,12 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    public void SkillTargetReturn(bool skillSelected)
+    public void SkillTargetReturn()
     {
         Destroy(hotkeyManager.GetComponent<SkillTargetHotkeys>());
-        if(!skillSelected)
-            hotkeyManager.AddComponent<SkillTargetHotkeys>().Initialize(this);
         ClearTargetingButtons();
+        skillSelected = false;
+        SetTurnOrderPanel();
     }
 
     private void ClearTargetingButtons()
@@ -491,22 +496,36 @@ public class BattleSystem : MonoBehaviour
             DestroyImmediate(obj);
     }
 
-    private void ReturnAnyMainButtons()
+    private void ReturnAnyPlayerActionHandlers()
     {
-        if (buttonAttackPressed)
+        if(skillSelected)
+            SkillTargetReturn();
+
+        if(buttonAttackPressed)
             AttackButtonReturn();
-        else if (buttonSkillsPressed)
+        else if(buttonSkillsPressed)
             SkillsButtonReturn();
+
     }
 
     IEnumerator PlayerTurn()
     {
         SetTurnOrderPanel();
-        seManager.PlaySE("playerTurnStart", 1);
+        seManager.PlaySE("playerTurnStart");
 
         yield return new WaitForSeconds(0.4f);
 
+        DisplayMessage("" + currentlyActingBattler.battlerName + "'s turn.");
+        ResetPlayerActionsPanel();
         panelPlayerActions.SetActive(true);
+    }
+
+    private void ResetPlayerActionsPanel()
+    {
+        buttonAttack.interactable = true;
+        buttonSkills.interactable = true;
+        buttonTactics.interactable = true;
+        buttonItems.interactable = true;
     }
 
     public void PlayerActionSelected()
@@ -534,7 +553,9 @@ public class BattleSystem : MonoBehaviour
         if (IsPlayerDefeat())
             PlayerDefeat();
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
+
+        ClearMessageBox();
 
         StartCoroutine(DetermineNextBattler());
     }
@@ -544,11 +565,35 @@ public class BattleSystem : MonoBehaviour
         SetTurnOrderPanel();
 
         Skill chosenSkill = ((EnemyBattler)currentlyActingBattler).ChooseSkill();
-        Battler chosenTarget = ((OffensiveSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
+        List<GameObject> targetObjects = new List<GameObject>();
 
-        ((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, chosenTarget, this);
+        if(chosenSkill.isOffensive)
+        {
+            Battler chosenTarget = ((OffensiveSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
+            targetObjects.Add(Instantiate(offensiveTargetEnemy100, chosenTarget.gameObject.transform) as GameObject);
 
-        yield return new WaitForSeconds(1.0f);
+            seManager.PlaySE("enemyTurn");
+            DisplaySkillMessage(chosenSkill);
+            yield return new WaitForSeconds(1.5f);
+
+            ((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, chosenTarget, this);
+        }
+        else
+        {
+            Battler chosenTarget = ((SupportSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
+            Instantiate(supportTargetEnemy100, chosenTarget.gameObject.transform);
+
+            seManager.PlaySE("enemyTurn");
+            DisplaySkillMessage(chosenSkill);
+            yield return new WaitForSeconds(1.5f);
+
+            ((SupportSkill)chosenSkill).UseSkill(currentlyActingBattler, chosenTarget, this);
+        }
+
+        foreach (GameObject o in targetObjects)
+            DestroyImmediate(o);
+        
+        yield return new WaitForSeconds(1.5f);
 
         FinishEnemyTurn();
 
@@ -567,6 +612,8 @@ public class BattleSystem : MonoBehaviour
         if(IsPlayerDefeat())
             PlayerDefeat();
 
+        ClearMessageBox();
+
         StartCoroutine(DetermineNextBattler());
 
     }
@@ -576,6 +623,36 @@ public class BattleSystem : MonoBehaviour
         Destroy(hotkeyManager.GetComponent<SkillTargetHotkeys>());
         Destroy(hotkeyManager.GetComponent<SkillsButtonSelectedHotkeys>());
         Destroy(hotkeyManager.GetComponent<AttackButtonSelectedHotkeys>());
+    }
+
+    public void DisplayMessage(string message)
+    {
+        ClearMessageBox();
+
+        GameObject textMessage = Instantiate(messageBoxText, battleMessageBox.transform) as GameObject;
+        textMessage.GetComponent<TMP_Text>().text = message;     
+    }
+
+    public void DisplaySkillMessage(Skill skill)
+    {
+        ClearMessageBox();
+
+        GameObject textMessage = Instantiate(skillMessageDisplay, battleMessageBox.transform) as GameObject;
+
+        TMP_Text textObject = textMessage.transform.GetChild(0).GetComponent<TMP_Text>();
+        textObject.text = skill.skillName;
+
+        textObject.ForceMeshUpdate();
+
+        textObject.GetComponent<RectTransform>().sizeDelta = new Vector2(textObject.textBounds.max.x - textObject.textBounds.min.x, 50);
+        textMessage.transform.GetChild(0).transform.GetChild(0).GetComponent<Image>().sprite = skill.portrait65;
+        
+    }
+
+    public void ClearMessageBox()
+    {
+        if(battleMessageBox.transform.childCount > 1)
+            DestroyImmediate(battleMessageBox.transform.GetChild(1).gameObject);
     }
 
     private bool IsPlayerVictory()
