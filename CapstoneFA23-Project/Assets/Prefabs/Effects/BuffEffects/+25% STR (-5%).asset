@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: +25% STR (-5%)
   duration: -1
+  portrait_65: {fileID: 21300000, guid: 2521611776f016646b5c7c355250cb64, type: 3}
   buffStat: 0
   value: 0.25
   decayValue: -0.05
+  isDebuff: 0
