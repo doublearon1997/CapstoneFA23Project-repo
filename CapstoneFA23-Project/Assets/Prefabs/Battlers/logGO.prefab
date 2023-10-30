@@ -135,14 +135,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c927745c628b4698905129e5fad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 190
-  mhp: 190
-  str: 75
-  wil: 75
-  def: 0.2
+  hp: 325
+  mhp: 325
+  str: 100
+  will: 100
+  def: 0.3
   res: 0.1
-  ini: 80
-  crt: 0.03
+  ini: 90
   battlerName: Log
   ap: 0
   apMod: 1

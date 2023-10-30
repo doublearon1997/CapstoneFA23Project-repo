@@ -7,8 +7,6 @@ public class Encounter : ScriptableObject
 {
     public List<GameObject> enemies = new List<GameObject>();
 
-    public AudioClip battleBGM;
-
     //We can include more information in these, maybe background, bgm, etc.
 
 

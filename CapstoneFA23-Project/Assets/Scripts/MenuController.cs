@@ -35,9 +35,6 @@ public class MenuController : MonoBehaviour
     public TMP_Dropdown resolutionDropdown;
     private List<Resolution> resolutions;
 
-    public SEManager seManager;
-    public BGMManager bgmManager;
-
     public void Start()
     {
         Resolution[] unprunedResolutions = Screen.resolutions;
@@ -75,9 +72,6 @@ public class MenuController : MonoBehaviour
             SetFullscreen(false);
 
         SetBrightness(brightnessSlider.value);
-
-        BGMManager.instance.PlayBGM("At the End of My Beloved Time Limit");
-
     }
 
     public void SetResolution(int resolutionIndex, FullScreenMode fullScreenMode)

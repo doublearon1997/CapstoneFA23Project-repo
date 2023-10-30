@@ -23,7 +23,7 @@ public class SkillButton : MonoBehaviour
     // When button is pressed, go into choose target mode for the button's skill.
     public void SkillButtonPress()
     {
-        SEManager.instance.PlaySE("buttonClick", 1);
+        battle.seManager.PlaySE("buttonClick", 1);
 
         if (battle.skillSelected)
             battle.SkillTargetReturn();
@@ -45,7 +45,7 @@ public class SkillButton : MonoBehaviour
     // When button is hovered, display a skill stat box for the button's skill.
     public void SkillButtonHover()
     {
-        SEManager.instance.PlaySE("buttonHover", 1);
+        battle.seManager.PlaySE("buttonHover", 1);
 
         if (skill.isOffensive)
             CreateOffensiveSkillStatBox();
