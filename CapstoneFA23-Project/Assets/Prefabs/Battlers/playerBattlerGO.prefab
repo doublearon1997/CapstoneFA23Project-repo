@@ -53,11 +53,10 @@ MonoBehaviour:
   hp: 400
   mhp: 400
   str: 100
-  wil: 100
+  will: 100
   def: 0.15
   res: 0.15
   ini: 100
-  crt: 0.06
   battlerName: Beter Ban
   ap: 0
   apMod: 1

@@ -5,48 +5,28 @@ using System;
 
 public class SEManager : MonoBehaviour
 {
-    private static AudioSource audioSource;
+    public AudioSource audioSource;
 
-    public static SEManager instance = null;
-
-    public AudioClip[] seList;
+    public AudioClip[] soundEffectsList;
     public float[] defaultVolumeList;
 
-    private static Dictionary<string, AudioClip> soundEffects = new Dictionary<string, AudioClip>();
-    private static Dictionary<AudioClip, float> soundEffectVolumes = new Dictionary<AudioClip, float>();
+    private Dictionary<string, AudioClip> soundEffects = new Dictionary<string, AudioClip>();
+    private Dictionary<AudioClip, float> soundEffectVolume = new Dictionary<AudioClip, float>();
 
     public void Awake()
     {
-        if (instance == null)
+        for(int i = 0; i< soundEffectsList.Length; i++)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            audioSource = gameObject.GetComponent<AudioSource>();
-
-            for (int i = 0; i < seList.Length; i++)
-            {
-                soundEffects.TryAdd(seList[i].name, seList[i]);
-                soundEffectVolumes.TryAdd(seList[i], defaultVolumeList[i]);
-            }
-            return;
+            soundEffects.Add(soundEffectsList[i].name, soundEffectsList[i]);
+            soundEffectVolume.Add(soundEffectsList[i], defaultVolumeList[i]);
         }
-        if (instance == this)
-            return;
-
-        Destroy(gameObject);
-    }
-
-    public void OnLevelWasLoaded()
-    {
-        GameObject.Find("SEManagerInstance").GetComponent<SEManagerInstance>().managerInstance = instance;
     }
 
     public void PlaySE(string fileName, float volume)
     {
         if (soundEffects[fileName] != null)
         {
-            audioSource.PlayOneShot(soundEffects[fileName], volume * PlayerPrefs.GetFloat("SEVolume"));
+            audioSource.PlayOneShot(soundEffects[fileName], volume);
         }
     }
 
@@ -55,20 +35,20 @@ public class SEManager : MonoBehaviour
         if (!soundEffects.ContainsKey(fileName))
             throw new ArgumentException("Invalid filename or file not included in SEManager");
 
-        if(soundEffectVolumes.ContainsKey(soundEffects[fileName]))
-            audioSource.PlayOneShot(soundEffects[fileName], soundEffectVolumes[soundEffects[fileName]] * PlayerPrefs.GetFloat("SEVolume"));
+        if(soundEffectVolume.ContainsKey(soundEffects[fileName]))
+            audioSource.PlayOneShot(soundEffects[fileName], soundEffectVolume[soundEffects[fileName]]);
         else
-            audioSource.PlayOneShot(soundEffects[fileName], PlayerPrefs.GetFloat("SEVolume"));
+            audioSource.PlayOneShot(soundEffects[fileName], 1.0f);
     }
 
     public void PlaySE(AudioClip clip)
     {
         if (clip != null)
         {
-            if (soundEffectVolumes.ContainsKey(clip)) 
-                audioSource.PlayOneShot(clip, soundEffectVolumes[clip] * PlayerPrefs.GetFloat("SEVolume"));
+            if (soundEffectVolume.ContainsKey(clip))
+                audioSource.PlayOneShot(clip, soundEffectVolume[clip]);
             else
-                audioSource.PlayOneShot(clip, PlayerPrefs.GetFloat("SEVolume"));
+                audioSource.PlayOneShot(clip, 1.0f);
         }
     }
 
