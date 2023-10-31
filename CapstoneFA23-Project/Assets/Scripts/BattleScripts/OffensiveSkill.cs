@@ -11,6 +11,8 @@ public class OffensiveSkill : Skill
 {
     public double dmgMod;
 
+    public enum AttackResult {Normal, Crit}
+
     // After a player has selected an offensive skill to use, this sets up the screen for the player to click on a target to use the skill.
     // TODO: Add ability for AOE.
     public void ChooseTarget(PlayerBattler user, BattleSystem battle)
@@ -64,21 +66,31 @@ public class OffensiveSkill : Skill
     public void UseSkill(Battler user, Battler target, BattleSystem battle)
     {
         // Current damage formula: (user's str * skill's dmgMod * (1- target's defense)) * random 0.9-1.1
-        int damage;
+        double damage;
+        AttackResult result = AttackResult.Normal;
 
         if(this.powerType == PowerType.Physical)
-            damage = (int)((user.GetCurrStr() * this.dmgMod) * (1 - target.GetCurrDef()) * UnityEngine.Random.Range(0.9f, 1.1f));
+            damage = (user.GetCurrStr() * this.dmgMod) * (1 - target.GetCurrDef()) * UnityEngine.Random.Range(0.9f, 1.1f);
         else
-            damage = (int)((user.GetCurrWill() * this.dmgMod) * (1 - target.GetCurrRes()) * UnityEngine.Random.Range(0.9f, 1.1f));
+            damage = (user.GetCurrWil() * this.dmgMod) * (1 - target.GetCurrRes()) * UnityEngine.Random.Range(0.9f, 1.1f);
+
+        //Critical Hit
+        if (UnityEngine.Random.Range(0.0f, 1.0f) < user.GetCurrCrt())
+        {
+            damage *= 1.5;
+            result = AttackResult.Crit;
+        }
+
+        int finalDamage = (int)damage;
             
-        target.TakeDamage(damage, battle);
+        target.TakeDamage(finalDamage, battle);
 
         ApplyEffects(user, target, battle);
 
         user.ap -= 100000;
         user.apMod = this.apMod;
 
-        DisplayDamageText(damage, target, battle);
+        DisplayDamageText(finalDamage, target, battle, result);
        
         if (user.isPlayer)
         {
@@ -94,9 +106,14 @@ public class OffensiveSkill : Skill
         }   
     }
 
-    public void DisplayDamageText(int damage, Battler target, BattleSystem battle)
+    public void DisplayDamageText(int damage, Battler target, BattleSystem battle, AttackResult result)
     {
-        string displayString = "" + damage;
+        string displayString;
+
+        if(result == AttackResult.Crit)
+            displayString = "Crit!\n" + damage;
+        else
+            displayString = "" + damage;
 
         GameObject damageTextContainer = Instantiate(battle.damageTextPopup, target.gameObject.transform);
         damageTextContainer.transform.GetChild(0).GetComponent<TMP_Text>().text = displayString;

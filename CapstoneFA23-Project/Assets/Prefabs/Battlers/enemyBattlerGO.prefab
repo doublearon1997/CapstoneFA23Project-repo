@@ -138,10 +138,11 @@ MonoBehaviour:
   hp: 350
   mhp: 350
   str: 100
-  will: 100
+  wil: 100
   def: 0.1
   res: 0.1
   ini: 98
+  crt: 0.05
   battlerName: testEnemy
   ap: 0
   apMod: 1

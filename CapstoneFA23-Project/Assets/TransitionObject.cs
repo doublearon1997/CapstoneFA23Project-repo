@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TransitionObject : MonoBehaviour
 {
-
-    public LoadingScene sceneManager;
-
     public float wordSpeed;
     public bool playerIsClose;
 
@@ -15,7 +13,7 @@ public class TransitionObject : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            sceneManager.LoadScene(1);
+            SceneManager.LoadScene(1);
         }
     }
 
