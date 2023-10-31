@@ -22,9 +22,9 @@ public class HealEffect : Effect
         if(healPower > 0)
         {
             if(powerType == PowerType.Will)
-                hpHealed += healPower * (double)user.will;
+                hpHealed += healPower * (double)user.GetCurrWil();
             else 
-                hpHealed += healPower * (double)user.str;
+                hpHealed += healPower * (double)user.GetCurrStr();
         }
 
         target.HealBattler((int)hpHealed, battle);

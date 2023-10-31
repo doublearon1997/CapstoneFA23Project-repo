@@ -14,15 +14,17 @@ public class Battler: MonoBehaviour
     public int mhp; //battler's max health points
 
     public int str; //battler's str
-    public int will; //battler's will
+    public int wil; //battler's will
 
     public double def;  //battler's defense 
     public double res; //battler's resistance    
 
     public int ini; //battler's initiative
 
-    private double strBuff = 1.0, willBuff = 1.0, defBuff = 0, resBuff = 0, iniBuff = 1.0;
-    private double strDebuff = 1.0, willDebuff = 1.0, defDebuff = 0, resDebuff = 0, iniDebuff = 1.0;
+    public double crt; //battler's critical chance
+
+    private double strBuff = 1.0, wilBuff = 1.0, defBuff = 0, resBuff = 0, iniBuff = 1.0, crtBuff = 0;
+    private double strDebuff = 1.0, wilDebuff = 1.0, defDebuff = 0, resDebuff = 0, iniDebuff = 1.0, crtDebuff = 0;
 
     public string battlerName;
 
@@ -108,24 +110,26 @@ public class Battler: MonoBehaviour
     }
 
     public double GetStrBuff(){return this.strBuff;}
-    public double GetWillBuff(){return this.willBuff;}
+    public double GetWilBuff(){return this.wilBuff;}
     public double GetDefBuff(){return this.defBuff;}
     public double GetResBuff(){return this.resBuff;}
     public double GetIniBuff(){return this.iniBuff;}
+    public double GetCrtBuff(){return this.crtBuff;}
     public double GetStrDebuff(){return this.strDebuff;}
-    public double GetWillDebuff(){return this.willDebuff;}
+    public double GetWilDebuff(){return this.wilDebuff;}
     public double GetDefDebuff(){return this.defDebuff;}
     public double GetResDebuff(){return this.resDebuff;}
     public double GetIniDebuff(){return this.iniDebuff;}
+    public double GetCrtDebuff(){return this.crtDebuff;}
 
     //These methods get the corresponding with its current modifier 
     public int GetCurrStr()
     {
         return (int)(this.str * this.strBuff * this.strDebuff);
     }
-    public int GetCurrWill()
+    public int GetCurrWil()
     {
-        return (int)(this.will * this.willBuff * this.willDebuff);
+        return (int)(this.wil * this.wilBuff * this.wilDebuff);
     }
     public double GetCurrDef()
     {
@@ -139,6 +143,56 @@ public class Battler: MonoBehaviour
     {
         return (int)(this.ini * this.iniBuff * this.iniDebuff);
     }
+    public double GetCurrCrt()
+    {
+        return this.crt + this.crtBuff + this.crtDebuff;
+    }
+
+    public double GetBuffValue(BuffEffect.BuffStat buffStat)
+    {
+        double returnValue = -1;
+
+        switch (buffStat)
+        {
+            case (BuffEffect.BuffStat.StrBuff):
+                returnValue = strBuff - 1.0;
+                break;
+            case (BuffEffect.BuffStat.WilBuff):
+                returnValue = wilBuff - 1.0;
+                break;
+            case (BuffEffect.BuffStat.DefBuff):
+                returnValue = defBuff;
+                break;
+            case (BuffEffect.BuffStat.ResBuff):
+                returnValue = resBuff;
+                break;
+            case (BuffEffect.BuffStat.IniBuff):
+                returnValue = iniBuff - 1.0;
+                break;
+            case (BuffEffect.BuffStat.CrtBuff):
+                returnValue = crtBuff;
+                break;
+            case (BuffEffect.BuffStat.StrDebuff):
+                returnValue = strDebuff - 1.0;
+                break;
+            case (BuffEffect.BuffStat.WilDebuff):
+                returnValue = wilDebuff - 1.0;
+                break;
+            case (BuffEffect.BuffStat.DefDebuff):
+                returnValue = defDebuff;
+                break;
+            case (BuffEffect.BuffStat.ResDebuff):
+                returnValue = resDebuff;
+                break;
+            case (BuffEffect.BuffStat.IniDebuff):
+                returnValue = iniDebuff - 1.0;
+                break;
+            case (BuffEffect.BuffStat.CrtDebuff):
+                returnValue = crtDebuff;
+                break;
+        }
+        return returnValue;
+    }
 
     // Converts a buffStat to a buff attribute of this battler's, then changes the value.
     public void SetBuffStat(BuffEffect.BuffStat buffStat, double value)
@@ -149,7 +203,7 @@ public class Battler: MonoBehaviour
                 this.strBuff = 1.0 + value;
                 break;
             case (BuffEffect.BuffStat.WilBuff):
-                this.willBuff = 1.0 + value;
+                this.wilBuff = 1.0 + value;
                 break;
             case (BuffEffect.BuffStat.DefBuff):
                 this.defBuff = value;
@@ -160,11 +214,14 @@ public class Battler: MonoBehaviour
             case (BuffEffect.BuffStat.IniBuff):
                 this.iniBuff = 1.0 + value;
                 break;
+            case (BuffEffect.BuffStat.CrtBuff):
+                this.crtBuff = value;
+                break;
             case (BuffEffect.BuffStat.StrDebuff):
                 this.strDebuff = 1.0 + value;
                 break;
             case (BuffEffect.BuffStat.WilDebuff):
-                this.willDebuff = 1.0 + value;
+                this.wilDebuff = 1.0 + value;
                 break;
             case (BuffEffect.BuffStat.DefDebuff):
                 this.defDebuff = value;
@@ -174,7 +231,10 @@ public class Battler: MonoBehaviour
                 break;
             case (BuffEffect.BuffStat.IniDebuff):
                 this.iniDebuff = 1.0 + value;
-                break;    
+                break;
+            case (BuffEffect.BuffStat.CrtDebuff):
+                this.crtDebuff = value;
+                break;
         }
     }
 
@@ -189,8 +249,8 @@ public class Battler: MonoBehaviour
                     return true;
                 break;
             case (BuffEffect.BuffStat.WilBuff):
-                this.willBuff += value;
-                if(this.willBuff <= 1.00)
+                this.wilBuff += value;
+                if(this.wilBuff <= 1.00)
                     return true;
                 break;
             case (BuffEffect.BuffStat.DefBuff):
@@ -214,8 +274,8 @@ public class Battler: MonoBehaviour
                     return true;
                 break;
             case (BuffEffect.BuffStat.WilDebuff):
-                this.willDebuff += value;
-                if(this.willDebuff >= 1.00)
+                this.wilDebuff += value;
+                if(this.wilDebuff >= 1.00)
                     return true;
                 break;
             case (BuffEffect.BuffStat.DefDebuff):

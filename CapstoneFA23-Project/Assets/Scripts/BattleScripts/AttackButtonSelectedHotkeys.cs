@@ -16,7 +16,7 @@ public class AttackButtonSelectedHotkeys : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Mouse1) && !stop)
         {
-            battle.seManager.PlaySE("buttonReturn");
+            SEManager.instance.PlaySE("buttonReturn");
             battle.AttackButtonReturn();
             battle.DisplayMessage("" + battle.currentlyActingBattler.battlerName + "'s turn.");
             stop = true;

@@ -22,11 +22,12 @@ public class BattleSystem : MonoBehaviour
     public GameObject panelPlayerActions;
     public GameObject damageTextPopup, healTextPopup;
 
+    private bool inPinch = false;
+
     //Current Encounter: Set when battle is loaded in.
     public static Encounter currentEncounter = null;
 
     //Player Overview Panel Objects
-
     public GameObject[] playerContainers, playerOverviewPortraits;
     public TMP_Text[] playerNameTexts, playerClassLevelTexts, playerHPTexts;
     public Slider[] playerHPSliders;
@@ -56,11 +57,15 @@ public class BattleSystem : MonoBehaviour
     public GameObject buttonSkill;
 
     public GameObject imageSkillCooldown;
-    public SEManager seManager;
 
     //Skill Stat Box
     public GameObject panelOffensiveSkillStatBox;
     public GameObject panelSupportSkillStatBox;
+
+    //Battler Info Hover Stuff
+    public GameObject infoHoverObject;
+    public GameObject portraitBuffEffect;
+    private List<GameObject> currentInfoHoverObjects = new List<GameObject>();
 
     //Skill Targeting Objects
     public GameObject offensiveTarget100;
@@ -82,10 +87,7 @@ public class BattleSystem : MonoBehaviour
     {
         currentlyActingBattlers = new SortedSet<Battler>(new BattlerAPComparator());
 
-        StartCoroutine(SetupBattle());
-        StartCoroutine(DetermineNextBattler());
-
-        SetTurnOrderPanel();
+        StartCoroutine(SetupBattle()); 
     }
 
     IEnumerator SetupBattle()
@@ -110,7 +112,7 @@ public class BattleSystem : MonoBehaviour
                 enemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
 
                 enemyGO.GetComponent<EnemyBattler>().ap = UnityEngine.Random.Range(0, 20000);
-
+                BGMManager.instance.PlayBGM(currentEncounter.battleBGM);
             }
         }
         else // this is just for testing purposes when not entering from an encounter.
@@ -122,14 +124,18 @@ public class BattleSystem : MonoBehaviour
 
                 enemyGO.GetComponent<EnemyBattler>().ap = UnityEngine.Random.Range(0, 20000);
 
+                BGMManager.instance.PlayBGM("windUpYesterday");
+
             }
         }
-
 
         SetupPartyOverviewPanel();
         SetupEnemyOverviewPanel();
 
         yield return new WaitForSeconds(2f);
+
+        StartCoroutine(DetermineNextBattler());
+        SetTurnOrderPanel();
     }
 
     //This method profilerates the overview panel with information about the party's battlers. 
@@ -386,6 +392,34 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public void SetInfoHovers()
+    {
+        foreach(PlayerBattler battler in playerBattlers)
+        {
+            GameObject infoObject = Instantiate(infoHoverObject, battler.gameObject.transform) as GameObject;
+            currentInfoHoverObjects.Add(infoObject);
+
+            infoObject.GetComponent<BattlerStatHover>().Initialize((Battler)battler, this);
+        }
+
+        foreach (EnemyBattler battler in enemyBattlers)
+        {
+            GameObject infoObject = Instantiate(infoHoverObject, battler.gameObject.transform) as GameObject;
+            currentInfoHoverObjects.Add(infoObject);
+
+            infoObject.GetComponent<BattlerStatHover>().Initialize((Battler)battler, this);
+        }
+    }
+
+    public void RemoveInfoHovers()
+    {
+        foreach (GameObject obj in currentInfoHoverObjects)
+        {
+            DestroyImmediate(obj);
+
+        }
+    }
+
     //Attack Button Methods
     public void AttackButtonPress()
     {
@@ -511,13 +545,15 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerTurn()
     {
         SetTurnOrderPanel();
-        seManager.PlaySE("playerTurnStart");
+        SEManager.instance.PlaySE("playerTurnStart");
 
         yield return new WaitForSeconds(0.4f);
 
+        SetInfoHovers();
         DisplayMessage("" + currentlyActingBattler.battlerName + "'s turn.");
         ResetPlayerActionsPanel();
         panelPlayerActions.SetActive(true);
+
     }
 
     private void ResetPlayerActionsPanel()
@@ -533,6 +569,8 @@ public class BattleSystem : MonoBehaviour
         panelPlayerActions.SetActive(false);
         panelSkillSelection.SetActive(false);
 
+        RemoveInfoHovers();
+
         ClearAllHotkeys();
 
         ClearTargetingButtons();
@@ -547,15 +585,26 @@ public class BattleSystem : MonoBehaviour
 
         buttonAttack.interactable = true;
 
+        if (IsInPinch() && !inPinch)
+        {
+            inPinch = true;
+            StartCoroutine(GoIntoPinch());
+        }
+        else if (!IsInPinch() && inPinch)
+        {
+            inPinch = false;
+            StartCoroutine(LeavePinch());
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        ClearMessageBox();
+
         if (IsPlayerVictory())
             PlayerVictory();
 
         if (IsPlayerDefeat())
             PlayerDefeat();
-
-        yield return new WaitForSeconds(1.5f);
-
-        ClearMessageBox();
 
         StartCoroutine(DetermineNextBattler());
     }
@@ -572,7 +621,7 @@ public class BattleSystem : MonoBehaviour
             Battler chosenTarget = ((OffensiveSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
             targetObjects.Add(Instantiate(offensiveTargetEnemy100, chosenTarget.gameObject.transform) as GameObject);
 
-            seManager.PlaySE("enemyTurn");
+            SEManager.instance.PlaySE("enemyTurn");
             DisplaySkillMessage(chosenSkill);
             yield return new WaitForSeconds(1.5f);
 
@@ -583,39 +632,85 @@ public class BattleSystem : MonoBehaviour
             Battler chosenTarget = ((SupportSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
             Instantiate(supportTargetEnemy100, chosenTarget.gameObject.transform);
 
-            seManager.PlaySE("enemyTurn");
+            SEManager.instance.PlaySE("enemyTurn");
             DisplaySkillMessage(chosenSkill);
             yield return new WaitForSeconds(1.5f);
 
             ((SupportSkill)chosenSkill).UseSkill(currentlyActingBattler, chosenTarget, this);
         }
 
-        foreach (GameObject o in targetObjects)
-            DestroyImmediate(o);
-        
-        yield return new WaitForSeconds(1.5f);
-
-        FinishEnemyTurn();
+        foreach (GameObject target in targetObjects)
+            DestroyImmediate(target);
+       
+        StartCoroutine(FinishEnemyTurn());
 
     }
 
-    public void FinishEnemyTurn()
+    IEnumerator FinishEnemyTurn()
     {
         currentlyActingBattler.CountDownEffects();
         
         currentlyActingBattlers.Remove(currentlyActingBattler);
         currentlyActingBattler = null;
 
-        if(IsPlayerVictory())
+        if (IsInPinch() && !inPinch)
+        {
+            inPinch = true;
+            StartCoroutine(GoIntoPinch());
+        }
+        else if (!IsInPinch() && inPinch)
+        {
+            inPinch = false;
+            StartCoroutine(LeavePinch());
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        ClearMessageBox();
+
+        if (IsPlayerVictory())
             PlayerVictory();
 
         if(IsPlayerDefeat())
             PlayerDefeat();
 
-        ClearMessageBox();
-
         StartCoroutine(DetermineNextBattler());
+    }
 
+    IEnumerator GoIntoPinch()
+    {
+        StartCoroutine(BGMManager.instance.FadeOutBGM(1.4f));
+
+        yield return new WaitForSeconds(1.5f);
+        BGMManager.instance.PlayBGM("demonicDrive");
+    }
+
+    IEnumerator LeavePinch()
+    {
+        StartCoroutine(BGMManager.instance.FadeOutBGM(1.4f));
+
+        yield return new WaitForSeconds(1.5f);
+        BGMManager.instance.PlayBGM(currentEncounter.battleBGM);
+
+    }
+
+    public bool IsInPinch()
+    {
+        if (playerBattlers.Count < startingPlayerBattlerGOs.Count)
+            return true;
+
+        double partyMaxHP = 0, partyHP = 0;
+
+        foreach(PlayerBattler battler in playerBattlers)
+        {
+            partyMaxHP += battler.mhp;
+            partyHP += battler.hp;
+        }
+
+        if (partyHP / partyMaxHP < 0.3)
+            return true;
+        else
+            return false;
     }
 
     private void ClearAllHotkeys()

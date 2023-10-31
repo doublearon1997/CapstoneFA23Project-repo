@@ -17,7 +17,7 @@ public class SkillsButtonSelectedHotkeys : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse1) && !stop)
         {
-            battle.seManager.PlaySE("buttonReturn");
+            SEManager.instance.PlaySE("buttonReturn");
             battle.SkillsButtonReturn();
             battle.DisplayMessage("" + battle.currentlyActingBattler.battlerName + "'s turn.");
             stop = true;

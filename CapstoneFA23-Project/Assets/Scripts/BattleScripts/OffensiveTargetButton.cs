@@ -19,7 +19,7 @@ public class OffensiveTargetButton : MonoBehaviour
 
     public void TargetButtonHover()
     {
-        battle.seManager.PlaySE("buttonHover", 1);
+        SEManager.instance.PlaySE("buttonHover", 1);
     }
 
     public void TargetButtonPress()

@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 4955245641497402410, guid: d23545d1a36199448adbe9009d261f2b, type: 3}
   - {fileID: 4955245641497402410, guid: d23545d1a36199448adbe9009d261f2b, type: 3}
   - {fileID: 4955245641497402410, guid: d23545d1a36199448adbe9009d261f2b, type: 3}
+  battleBGM: {fileID: 8300000, guid: 5a046ed826331bf4b896594d6a39bb75, type: 3}
