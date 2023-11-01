@@ -13,7 +13,7 @@ public class EnemyBattler : Battler
     {
         for(int i = 0; i<skillList.Length; i++)
         {
-            skillUsageAIList[0].Initialize();
+            skillUsageAIList[i].Initialize();
             skills.Add(skillList[i], skillUsageAIList[i]);
         }
     }
@@ -28,7 +28,10 @@ public class EnemyBattler : Battler
             int maxWeight = 0;
             bool canUse = false;
 
-            foreach(KeyValuePair<SkillUsageCondition, int> conditionEntry in skillEntry.Value.skillUsages)
+            Debug.Log(skillEntry.Value == null);
+            Debug.Log(skillEntry.Value.skillUsages == null);
+
+            foreach (KeyValuePair<SkillUsageCondition, int> conditionEntry in skillEntry.Value.skillUsages)
             {
                 if(canUseSkill(conditionEntry.Key))
                 {

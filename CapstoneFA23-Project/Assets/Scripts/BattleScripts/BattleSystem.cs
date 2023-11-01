@@ -19,6 +19,9 @@ public class BattleSystem : MonoBehaviour
     public Transform[] playerSpawns;
     public Transform[] enemySpawns;
 
+    public Transform enemyAOELoc;
+    public Transform playerAOELoc;
+
     public GameObject panelPlayerActions;
     public GameObject damageTextPopup, healTextPopup;
 
@@ -43,6 +46,13 @@ public class BattleSystem : MonoBehaviour
     public GameObject portraitTurnOrderCurrentPlayer;
     public GameObject portraitTurnOrderEnemy;
     public GameObject portraitTurnOrderPlayer;
+
+    public bool tempTurnOrder = false;
+
+    public GameObject turnOrderHighlightAnimation;
+    public GameObject turnOrderCurrentHighlightAnimation;
+
+    public Dictionary<Battler, GameObject> battlerTurnOrderObjects = new Dictionary<Battler, GameObject>();
 
     SortedSet<Battler> currentlyActingBattlers;
     public Battler currentlyActingBattler;
@@ -71,8 +81,14 @@ public class BattleSystem : MonoBehaviour
     public GameObject offensiveTarget100;
     public GameObject supportTarget100;
 
+    public GameObject offensiveTarget550;
+    public GameObject supportTarget500;
+
     public GameObject offensiveTargetEnemy100;
     public GameObject supportTargetEnemy100;
+
+    public GameObject offensiveTargetEnemy500;
+    public GameObject supportTargetEnemy550;
 
     public List<GameObject> currentTargetingObjects;
 
@@ -132,7 +148,7 @@ public class BattleSystem : MonoBehaviour
         SetupPartyOverviewPanel();
         SetupEnemyOverviewPanel();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         StartCoroutine(DetermineNextBattler());
         SetTurnOrderPanel();
@@ -182,6 +198,7 @@ public class BattleSystem : MonoBehaviour
     private void SetTurnOrderPanel()
     {
         clearTurnOrderPanel();
+        battlerTurnOrderObjects.Clear();
 
         List<Battler> turnOrder = DetermineCurrentTurnOrder();
 
@@ -191,6 +208,8 @@ public class BattleSystem : MonoBehaviour
         {
             GameObject portrait;
             Battler battler = turnOrder[i];
+
+            
 
             if (battler.isPlayer)
             {
@@ -211,16 +230,20 @@ public class BattleSystem : MonoBehaviour
             portrait.GetComponent<Image>().enabled = true;
             portrait.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, i * -75.0f - 46 - bigPortraitCushion);
 
+            battlerTurnOrderObjects.Add(battler, portrait);
+
             if (battler == currentlyActingBattler)
                 bigPortraitCushion = 7;
 
         }
+        tempTurnOrder = false;
     }
 
     // Displays the temporary turn order on the turn order panel, when a player has a skill selected or a battler is using a skill, but not before the end of the turn.
     public void SetTemporaryTurnOrderPanel(Skill skill)
     {
         clearTurnOrderPanel();
+        battlerTurnOrderObjects.Clear();
 
         List<Battler> turnOrder = DetermineCurrentTurnOrder(skill);
         GameObject emptyPortrait;
@@ -251,7 +274,11 @@ public class BattleSystem : MonoBehaviour
             else
                 portrait.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, (i + 1) * -75.0f - 53);
 
+
+            battlerTurnOrderObjects.Add(battler, portrait);
         }
+
+        tempTurnOrder = true;
     }
 
     //Clears the turn order panel of turn order portraits.
@@ -261,6 +288,8 @@ public class BattleSystem : MonoBehaviour
         {
             DestroyImmediate(panelTurnOrder.transform.GetChild(0).gameObject);
         }
+
+        tempTurnOrder = false;
     }
 
     // This method basically "looks into the future" to see the order in which battlers will act, so that a turn order can be displayed for the player.
@@ -383,13 +412,9 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         if (currentlyActingBattler.isPlayer)
-        {
             StartCoroutine(PlayerTurn());
-        }
         else
-        {
             StartCoroutine(EnemyTurn());
-        }
     }
 
     public void SetInfoHovers()
@@ -414,10 +439,7 @@ public class BattleSystem : MonoBehaviour
     public void RemoveInfoHovers()
     {
         foreach (GameObject obj in currentInfoHoverObjects)
-        {
             DestroyImmediate(obj);
-
-        }
     }
 
     //Attack Button Methods
@@ -466,7 +488,6 @@ public class BattleSystem : MonoBehaviour
 
         panelSkillSelection.SetActive(false);
         ClearSkillSelectionPanel();
-  
     }
 
     private void SetSkillSelectionPanel(PlayerBattler battler)
@@ -539,7 +560,6 @@ public class BattleSystem : MonoBehaviour
             AttackButtonReturn();
         else if(buttonSkillsPressed)
             SkillsButtonReturn();
-
     }
 
     IEnumerator PlayerTurn()
@@ -618,14 +638,25 @@ public class BattleSystem : MonoBehaviour
 
         if(chosenSkill.isOffensive)
         {
-            Battler chosenTarget = ((OffensiveSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
-            targetObjects.Add(Instantiate(offensiveTargetEnemy100, chosenTarget.gameObject.transform) as GameObject);
+            List<PlayerBattler> chosenTargets = ((OffensiveSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
+
+            if (chosenSkill.targetType == TargetType.All)
+                targetObjects.Add(Instantiate(offensiveTargetEnemy500, playerAOELoc) as GameObject);
+            else
+            {
+                foreach (PlayerBattler battler in chosenTargets)
+                    targetObjects.Add(Instantiate(offensiveTargetEnemy100, battler.gameObject.transform) as GameObject);
+            }
 
             SEManager.instance.PlaySE("enemyTurn");
             DisplaySkillMessage(chosenSkill);
             yield return new WaitForSeconds(1.5f);
 
-            ((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, chosenTarget, this);
+            List<Battler> targets = new List<Battler>();
+            foreach (PlayerBattler battler in chosenTargets)
+                targets.Add((Battler)battler);
+            
+            ((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, targets, this);
         }
         else
         {
