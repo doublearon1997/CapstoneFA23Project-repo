@@ -152,8 +152,10 @@ MonoBehaviour:
   portrait60: {fileID: 21300000, guid: 4035668c3d327b2448826985e1aea883, type: 3}
   skillList:
   - {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
+  - {fileID: 11400000, guid: 2b80773c2a2c7f140b1d2179951444ef, type: 2}
   - {fileID: 11400000, guid: 385a0abbb624c0d43823bacf98f4a5be, type: 2}
   skillUsageAIList:
+  - {fileID: 11400000, guid: ae999acf49f5a750bae54743eb8facaa, type: 2}
   - {fileID: 11400000, guid: ae999acf49f5a750bae54743eb8facaa, type: 2}
   - {fileID: 11400000, guid: 62c3ad39cf018cd46a467cb8e326990e, type: 2}
 --- !u!61 &-933485833814597257

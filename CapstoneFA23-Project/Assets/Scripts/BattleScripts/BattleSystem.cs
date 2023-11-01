@@ -10,8 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
-    public List<GameObject> startingPlayerBattlerGOs = new List<GameObject>();
-    public List<GameObject> startingEnemyBattlerGOs = new List<GameObject>();
+    public List<GameObject> startingPlayerBattlerGOs;
+    public List<PlayerBattler> startingPlayerBattlers;
+    public List<EnemyBattler> startingEnemyBattlers;
 
     public List<PlayerBattler> playerBattlers;
     public List<EnemyBattler> enemyBattlers;
@@ -66,6 +67,10 @@ public class BattleSystem : MonoBehaviour
     public GameObject panelSkillSelection;
     public GameObject buttonSkill;
 
+    //Tactic Selection Panel
+    public GameObject panelTacticSelection;
+    public SupportSkill fleeSkill;
+
     public GameObject imageSkillCooldown;
 
     //Skill Stat Box
@@ -99,6 +104,8 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject hotkeyManager;
 
+    public Encounter defaultEncounter; //Just used for testing.
+
     public void Start()
     {
         currentlyActingBattlers = new SortedSet<Battler>(new BattlerAPComparator());
@@ -111,38 +118,30 @@ public class BattleSystem : MonoBehaviour
         this.playerBattlers = new List<PlayerBattler>();
         this.enemyBattlers = new List<EnemyBattler>();
 
+        this.startingPlayerBattlers = new List<PlayerBattler>();
+        this.startingEnemyBattlers = new List<EnemyBattler>();
+
         for (int i = 0; i < startingPlayerBattlerGOs.Count; i++)
         {
             GameObject playerGO = Instantiate(startingPlayerBattlerGOs[i], playerSpawns[i]);
+            startingPlayerBattlers.Add(playerGO.GetComponent<PlayerBattler>());
             playerBattlers.Add(playerGO.GetComponent<PlayerBattler>());
 
             playerGO.GetComponent<PlayerBattler>().ap = UnityEngine.Random.Range(0, 20000);
 
         }
 
-        if (currentEncounter != null)
+        if(currentEncounter == null)
+            currentEncounter = defaultEncounter;
+
+        for (int i = 0; i < currentEncounter.enemies.Count; i++)
         {
-            for (int i = 0; i < currentEncounter.enemies.Count; i++)
-            {
-                GameObject enemyGO = Instantiate(currentEncounter.enemies[i], enemySpawns[i]);
-                enemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
+            GameObject enemyGO = Instantiate(currentEncounter.enemies[i], enemySpawns[i]);
+            startingEnemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
+            enemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
 
-                enemyGO.GetComponent<EnemyBattler>().ap = UnityEngine.Random.Range(0, 20000);
-                BGMManager.instance.PlayBGM(currentEncounter.battleBGM);
-            }
-        }
-        else // this is just for testing purposes when not entering from an encounter.
-        {
-            for (int i = 0; i < startingEnemyBattlerGOs.Count; i++)
-            {
-                GameObject enemyGO = Instantiate(startingEnemyBattlerGOs[i], enemySpawns[i]);
-                enemyBattlers.Add(enemyGO.GetComponent<EnemyBattler>());
-
-                enemyGO.GetComponent<EnemyBattler>().ap = UnityEngine.Random.Range(0, 20000);
-
-                BGMManager.instance.PlayBGM("windUpYesterday");
-
-            }
+            enemyGO.GetComponent<EnemyBattler>().ap = UnityEngine.Random.Range(0, 20000);
+            BGMManager.instance.PlayBGM(currentEncounter.battleBGM);
         }
 
         SetupPartyOverviewPanel();
@@ -523,6 +522,58 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public void TacticsButtonPress()
+    {
+        buttonTactics.interactable = false;
+        ReturnAnyPlayerActionHandlers();
+
+        SetTacticSelectionPanel((PlayerBattler)currentlyActingBattler);
+        buttonTacticsPressed = true;
+        hotkeyManager.AddComponent<TacticsButtonSelectedHotkeys>().Initialize(this);
+        panelTacticSelection.SetActive(true);
+
+        DisplayMessage("Select a tactic.");
+    }
+
+    public void TacticsButtonReturn()
+    {
+        buttonTactics.interactable = true;
+        buttonTacticsPressed = false;
+        Destroy(hotkeyManager.GetComponent<TacticsButtonSelectedHotkeys>());
+
+        panelTacticSelection.SetActive(false);
+        ClearTacticSelectionPanel();
+    }
+
+    private void SetTacticSelectionPanel(PlayerBattler battler)
+    {
+        ClearTacticSelectionPanel();
+
+        float xPos = 80.0f;
+        float yPos = -60.0f;
+
+        CreateTacticButton((Skill)fleeSkill, battler, xPos, yPos);
+        xPos += 119.0f;
+
+    }
+
+    private void CreateTacticButton(Skill skill, PlayerBattler battler, float xPos, float yPos)
+    {
+        GameObject skillButton = Instantiate(buttonSkill, panelTacticSelection.transform) as GameObject;
+
+        skillButton.GetComponent<SkillButton>().Initialize(skill, battler, this);
+        skillButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
+    }
+
+    private void ClearTacticSelectionPanel()
+    {
+        while (panelTacticSelection.transform.childCount > 1)
+        {
+            DestroyImmediate(panelTacticSelection.transform.GetChild(1).gameObject);
+        }
+    }
+
+
     private void CreateSkillButton(Skill skill, PlayerBattler battler, float xPos, float yPos)
     {
         GameObject skillButton = Instantiate(buttonSkill, panelSkillSelection.transform) as GameObject;
@@ -588,6 +639,7 @@ public class BattleSystem : MonoBehaviour
     {
         panelPlayerActions.SetActive(false);
         panelSkillSelection.SetActive(false);
+        panelTacticSelection.SetActive(false);
 
         RemoveInfoHovers();
 
@@ -620,10 +672,11 @@ public class BattleSystem : MonoBehaviour
 
         ClearMessageBox();
 
-        if (IsPlayerVictory())
+        if(IsPlayerVictory())
             PlayerVictory();
-
-        if (IsPlayerDefeat())
+        else if(IsPlayerPartyFled())
+            PlayerFlee();
+        else if(IsPlayerDefeat())
             PlayerDefeat();
 
         StartCoroutine(DetermineNextBattler());
@@ -648,26 +701,37 @@ public class BattleSystem : MonoBehaviour
                     targetObjects.Add(Instantiate(offensiveTargetEnemy100, battler.gameObject.transform) as GameObject);
             }
 
-            SEManager.instance.PlaySE("enemyTurn");
-            DisplaySkillMessage(chosenSkill);
-            yield return new WaitForSeconds(1.5f);
-
             List<Battler> targets = new List<Battler>();
             foreach (PlayerBattler battler in chosenTargets)
                 targets.Add((Battler)battler);
+
+            SEManager.instance.PlaySE("enemyTurn");
+            DisplaySkillMessage(chosenSkill);
+            yield return new WaitForSeconds(1.5f);
             
             ((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, targets, this);
         }
         else
         {
-            Battler chosenTarget = ((SupportSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
-            Instantiate(supportTargetEnemy100, chosenTarget.gameObject.transform);
+            List<EnemyBattler> chosenTargets = ((SupportSkill)chosenSkill).ChooseTarget((EnemyBattler)currentlyActingBattler, this);
+
+            if(chosenSkill.targetType == TargetType.All)
+                targetObjects.Add(Instantiate(supportTargetEnemy550, enemyAOELoc) as GameObject);
+            else
+            {
+                foreach(EnemyBattler battler in chosenTargets)
+                    targetObjects.Add(Instantiate(supportTargetEnemy100, battler.gameObject.transform) as GameObject);
+            }
+
+            List<Battler> targets = new List<Battler>();
+            foreach (EnemyBattler battler in chosenTargets)
+                targets.Add((Battler)battler);
 
             SEManager.instance.PlaySE("enemyTurn");
             DisplaySkillMessage(chosenSkill);
             yield return new WaitForSeconds(1.5f);
 
-            ((SupportSkill)chosenSkill).UseSkill(currentlyActingBattler, chosenTarget, this);
+            ((SupportSkill)chosenSkill).UseSkill(currentlyActingBattler, targets, this);
         }
 
         foreach (GameObject target in targetObjects)
@@ -699,10 +763,11 @@ public class BattleSystem : MonoBehaviour
 
         ClearMessageBox();
 
-        if (IsPlayerVictory())
+        if(IsPlayerVictory())
             PlayerVictory();
-
-        if(IsPlayerDefeat())
+        else if(IsPlayerPartyFled())
+            PlayerFlee();
+        else if(IsPlayerDefeat())
             PlayerDefeat();
 
         StartCoroutine(DetermineNextBattler());
@@ -727,7 +792,7 @@ public class BattleSystem : MonoBehaviour
 
     public bool IsInPinch()
     {
-        if (playerBattlers.Count < startingPlayerBattlerGOs.Count)
+        if (playerBattlers.Count < startingPlayerBattlers.Count)
             return true;
 
         double partyMaxHP = 0, partyHP = 0;
@@ -749,6 +814,7 @@ public class BattleSystem : MonoBehaviour
         Destroy(hotkeyManager.GetComponent<SkillTargetHotkeys>());
         Destroy(hotkeyManager.GetComponent<SkillsButtonSelectedHotkeys>());
         Destroy(hotkeyManager.GetComponent<AttackButtonSelectedHotkeys>());
+        Destroy(hotkeyManager.GetComponent<TacticsButtonSelectedHotkeys>());
     }
 
     public void DisplayMessage(string message)
@@ -791,6 +857,37 @@ public class BattleSystem : MonoBehaviour
         return playerBattlers.Count <= 0;
     }
 
+    private bool IsPlayerPartyFled()
+    {
+        bool fled = true;
+
+        foreach(PlayerBattler battler in startingPlayerBattlers)
+        {
+            if(!battler.HasFled())
+            {
+                fled = false;
+                break;
+            }
+           
+        }
+        return fled;
+    }
+
+    private bool IsEnemyPartyFled()
+    {
+        bool fled = true;
+
+        foreach(EnemyBattler battler in startingEnemyBattlers)
+        {
+            if(!battler.HasFled())
+            {
+                fled = false;
+                break;
+            }
+        }
+        return fled;
+    }
+
     private void PlayerVictory()
     {
         SceneManager.LoadScene("sceneTutorialLevel");
@@ -801,6 +898,11 @@ public class BattleSystem : MonoBehaviour
         SceneManager.LoadScene("sceneMain");
     }
 
+    private void PlayerFlee()
+    {
+        SceneManager.LoadScene("sceneTutorialLevel");
+    }
+
     internal class BattlerAPComparator : IComparer<Battler>
     {
         public int Compare(Battler a, Battler b)
@@ -809,6 +911,20 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public bool IsButtonSkillsPressed()
+    {
+        return buttonSkillsPressed;
+    }
+
+    public bool IsButtonTacticsPressed()
+    {
+        return buttonTacticsPressed;
+    }
+
+       public bool IsButtonItemsPressed()
+    {
+        return buttonItemsPressed;
+    }
 
 
 }

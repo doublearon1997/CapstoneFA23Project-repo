@@ -25,12 +25,13 @@ public class SkillButton : MonoBehaviour
     {
         SEManager.instance.PlaySE("buttonClick", 1);
 
-        if (battle.skillSelected)
+        if(battle.skillSelected)
             battle.SkillTargetReturn();
         battle.skillSelected = true;
 
         battle.hotkeyManager.AddComponent<SkillTargetHotkeys>().Initialize(battle);
         Destroy(battle.hotkeyManager.GetComponent<SkillsButtonSelectedHotkeys>());
+        Destroy(battle.hotkeyManager.GetComponent<TacticsButtonSelectedHotkeys>());
 
         battle.SetTemporaryTurnOrderPanel(this.skill);
 
@@ -39,7 +40,7 @@ public class SkillButton : MonoBehaviour
         else if (skill.targetType == TargetType.All)
             battle.DisplayMessage("Select the target group.");
         else if (skill.targetType == TargetType.Self)
-            battle.DisplayMessage("Select " + user.name + ".");
+            battle.DisplayMessage("Select " + user.battlerName + ".");
 
         if (skill.isOffensive)
             ((OffensiveSkill)skill).ChooseTarget(user, battle);

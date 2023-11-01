@@ -6,24 +6,48 @@ using UnityEngine;
 public class SupportSkill : Skill
 { 
     // After a player has selected a support skill to use, this sets up the screen for the player to click on a target to use the skill.
-    // TODO: Add ability for AOE.
     public void ChooseTarget(PlayerBattler user, BattleSystem battle)
     {
         if (this.targetType == TargetType.Single)
         {
             foreach (PlayerBattler battler in battle.playerBattlers)
             {
+                List<Battler> target = new List<Battler>();
+                target.Add(battler);
+
                 GameObject targetButton = Instantiate(battle.supportTarget100, battler.gameObject.transform.parent.transform) as GameObject;
-                targetButton.GetComponent<SupportTargetButton>().Initialize(this, user, battler, battle);
+                targetButton.GetComponent<SupportTargetButton>().Initialize(this, user, target, battle);
                 battle.currentTargetingObjects.Add(targetButton);
             }
+        }
+        else if (this.targetType == TargetType.Self)
+        {
+            List<Battler> target = new List<Battler>();
+                target.Add(user);
+
+            GameObject targetButton = Instantiate(battle.supportTarget100, user.gameObject.transform.parent.transform) as GameObject;
+            targetButton.GetComponent<SupportTargetButton>().Initialize(this, user, target, battle);
+            battle.currentTargetingObjects.Add(targetButton);
+        }
+        else if (targetType == TargetType.All)
+        {
+            List<Battler> targets = new List<Battler>();
+
+            foreach (PlayerBattler battler in battle.playerBattlers)
+                targets.Add(battler);
+
+            GameObject targetAllButton = Instantiate(battle.supportTarget500, battle.playerAOELoc) as GameObject;
+            targetAllButton.GetComponent<SupportTargetButton>().Initialize(this, user, targets, battle);
+            battle.currentTargetingObjects.Add(targetAllButton);
         }
     }
 
     // When an enemy battler has chosen an offensive skill, this method calculates which player it will attack it with. Currently this will only work with single target attacks.
     // TODO: For AOE, need to change the return to a list of enemybattler targets.
-    public EnemyBattler ChooseTarget(EnemyBattler user, BattleSystem battle)
+    public List<EnemyBattler> ChooseTarget(EnemyBattler user, BattleSystem battle)
     {
+        List<EnemyBattler> targets = new List<EnemyBattler>();
+
         if (this.targetType == TargetType.Single)
         {
             double cumulativeChance = 0;
@@ -47,19 +71,30 @@ public class SupportSkill : Skill
             if (target == null)
                 target = battle.enemyBattlers[0];
 
-            return target;
-
+            targets.Add(target);
+        }
+        else if(targetType == TargetType.Self)
+        {
+            targets.Add(user);
+        }
+        else if(targetType == TargetType.All)
+        {
+            foreach(EnemyBattler battler in battle.enemyBattlers)
+                targets.Add(battler);
         }
 
-        return null;
+        return targets;
     }
 
-    public void UseSkill(Battler user, Battler target, BattleSystem battle)
+    public void UseSkill(Battler user, List<Battler> targets, BattleSystem battle)
     {
+        foreach(Battler target in targets)
+        {
+            ApplyEffects(user, target, battle);
+        }
+
         user.ap -= 100000;
         user.apMod = this.apMod;
-
-        ApplyEffects(user, target, battle);
 
         if (user.isPlayer)
         {

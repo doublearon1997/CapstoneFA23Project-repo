@@ -26,6 +26,8 @@ public class Battler: MonoBehaviour
     private double strBuff = 1.0, wilBuff = 1.0, defBuff = 0, resBuff = 0, iniBuff = 1.0, crtBuff = 0;
     private double strDebuff = 1.0, wilDebuff = 1.0, defDebuff = 0, resDebuff = 0, iniDebuff = 1.0, crtDebuff = 0;
 
+    private bool fled = false;
+
     public string battlerName;
 
     public Dictionary<BuffEffect, int> buffEffects = new Dictionary<BuffEffect, int>(); // effects and their current duration.
@@ -320,6 +322,24 @@ public class Battler: MonoBehaviour
         foreach(BuffEffect effect in removeEffects)
             this.buffEffects.Remove(effect);
     }
+
+    public void Flee(BattleSystem battle)
+    {
+        this.fled = true;
+        Destroy(this.gameObject);
+        RemoveOverviewContainer(battle);
+    }
+
+    public bool HasFled()
+    {
+        return fled;
+    }
+
+    public void SetHasFled(bool hasFled)
+    {
+        this.fled = hasFled;
+    }
+
 }
 
 
