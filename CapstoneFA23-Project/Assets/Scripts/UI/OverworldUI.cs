@@ -8,7 +8,7 @@ using System.Linq;
 using System;
 
 public class UIBehavior : MonoBehaviour
-{   //Island IDs: TutorialIsland - 3; CoveIsland - 4; GhostShipIsland - 5; FortressIsland - 6
+{   //Island IDs: TutorialIsland - 4; CoveIsland - 5; GhostShipIsland - 6; TowerIsland - 7
     //game objects
     public GameObject LoadingScreen;
     public GameObject Crosshair;
@@ -35,7 +35,7 @@ public class UIBehavior : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        selectedIsland = 3;
+        selectedIsland = 4;
         levelUnlockValues = new List<int>();
         loadLevelData();
     }
@@ -96,16 +96,16 @@ public class UIBehavior : MonoBehaviour
     {
         switch(selectedIsland)
         {
-            case 3:
+            case 4:
                 Crosshair.transform.localPosition = new Vector3(-416, -282, 0);
                 break;
-            case 4:
+            case 5:
                 Crosshair.transform.localPosition = new Vector3(117, -142, 0);
                 break;
-            case 5:
+            case 6:
                 Crosshair.transform.localPosition = new Vector3(-375, 179, 0);
                 break;
-            case 6:
+            case 7:
                 Crosshair.transform.localPosition = new Vector3(499, 250, 0);
                 break;
             default:

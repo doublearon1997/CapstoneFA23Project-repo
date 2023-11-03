@@ -4,21 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LoadingScene : MonoBehaviour
+public class LoadingSceneManager : MonoBehaviour
 {
-    public GameObject LoadingScreen;
     public Image LoadingBarFill;
+    public static int sceneToLoad;
 
-    public void LoadScene(int sceneID)
+    public void Start()
     {
-        StartCoroutine(LoadSceneAsync(sceneID));
+        StartCoroutine(LoadSceneAsync(sceneToLoad));
     }
 
     IEnumerator LoadSceneAsync(int sceneID)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneID);
-
-        LoadingScreen.SetActive(true);
 
         while (!operation.isDone)
         {
