@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Healing Wave
   m_EditorClassIdentifier: 
   skillName: Healing Wave
-  targetType: 1
+  targetType: 0
   powerType: 1
   apMod: 0.6
   cooldown: 1

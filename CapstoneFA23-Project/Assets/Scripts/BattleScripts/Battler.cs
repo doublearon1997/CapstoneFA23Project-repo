@@ -44,6 +44,8 @@ public class Battler: MonoBehaviour
 
     private int partyPosition;
 
+    private HashSet<Effect> currentTurnAppliedEffects = new HashSet<Effect>();
+
 
     // This method deals damage to a battler and checks if the damage is enough to kill them.
     public void TakeDamage(int damage, BattleSystem battle)
@@ -248,53 +250,99 @@ public class Battler: MonoBehaviour
             case (BuffEffect.BuffStat.StrBuff):
                 this.strBuff += value;
                 if(this.strBuff <= 1.00)
+                {
+                    this.strBuff = 1.0;
                     return true;
+                }
                 break;
             case (BuffEffect.BuffStat.WilBuff):
                 this.wilBuff += value;
                 if(this.wilBuff <= 1.00)
+                {
+                    this.wilBuff = 1.0;
                     return true;
+                }
                 break;
             case (BuffEffect.BuffStat.DefBuff):
                 this.defBuff += value;
                 if(this.defBuff <= 0)
+                {
+                    this.defBuff = 0.0;
                     return true;
+                }
                 break;
             case (BuffEffect.BuffStat.ResBuff):
                 this.resBuff += value;
                 if(this.resBuff <= 0)
+                {
+                    this.resBuff = 0.0;
                     return true;
+                }
                 break;
             case (BuffEffect.BuffStat.IniBuff):
                 this.iniBuff += value;
                 if(this.iniBuff <= 1.00)
+                {
+                    this.iniBuff = 1.0;
                     return true;
+                }
+                break;
+            case (BuffEffect.BuffStat.CrtBuff):
+                this.crtBuff += value;
+                if(this.crtBuff <= 0.0)
+                {
+                    this.crtBuff = 0.0;
+                    return true;
+                }
                 break;
             case (BuffEffect.BuffStat.StrDebuff):
                 this.strDebuff += value;
                 if(this.strDebuff >= 1.00)
+                {
+                    this.strDebuff = 1.0;
                     return true;
+                }
                 break;
             case (BuffEffect.BuffStat.WilDebuff):
                 this.wilDebuff += value;
                 if(this.wilDebuff >= 1.00)
+                {
+                    this.wilDebuff = 1.0;
                     return true;
+                }
                 break;
             case (BuffEffect.BuffStat.DefDebuff):
                 this.defDebuff += value;
                 if(this.defDebuff >= 0)
+                {
+                    this.defDebuff = 0.0;
                     return true;
+                }
                 break;
             case (BuffEffect.BuffStat.ResDebuff):
                 this.resDebuff += value;
                 if(this.resDebuff >= 0)
+                {
+                    this.resDebuff = 0.0;
                     return true;
+                }
                 break;
             case (BuffEffect.BuffStat.IniDebuff):
                 this.iniDebuff += value;
                 if(this.iniDebuff >= 1.00)
+                {
+                    this.iniDebuff = 1.0;
                     return true;
-                break;    
+                }
+                break;  
+            case (BuffEffect.BuffStat.CrtDebuff):
+                this.crtDebuff += value;
+                if(this.crtDebuff <= 0.0)
+                {
+                    this.crtDebuff = 0.0;
+                    return true;
+                }
+                break;  
         }
         return false;
     }
@@ -307,15 +355,22 @@ public class Battler: MonoBehaviour
 
         foreach(BuffEffect effect in effectKeys)
         {
-            buffEffects[effect] -= 1;
-
-            if(buffEffects[effect] == 0)
-                removeEffects.Add(effect);
-
-            if(effect.decayValue != 0)
+            if(!currentTurnAppliedEffects.Contains(effect))
             {
-                if(DecayBuffStat(effect.buffStat, effect.decayValue))
+                buffEffects[effect] -= 1;
+
+                if(buffEffects[effect] == 0)
                     removeEffects.Add(effect);
+
+                if(effect.decayValue != 0)
+                {
+                    if(DecayBuffStat(effect.buffStat, effect.decayValue))
+                        removeEffects.Add(effect);
+                }
+            }
+            else
+            {
+                currentTurnAppliedEffects.Remove(effect);
             }
         }
 
@@ -338,6 +393,11 @@ public class Battler: MonoBehaviour
     public void SetHasFled(bool hasFled)
     {
         this.fled = hasFled;
+    }
+
+    public void AddCurrentTurnEffect(Effect effect)
+    {
+        this.currentTurnAppliedEffects.Add(effect);
     }
 
 }

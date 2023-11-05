@@ -19,10 +19,7 @@ public class SkillsButtonSelectedHotkeys : MonoBehaviour
         {
             SEManager.instance.PlaySE("buttonReturn");
 
-            if(battle.IsButtonTacticsPressed())
-                battle.SkillsButtonReturn();
-            else if (battle.IsButtonTacticsPressed())
-                battle.TacticsButtonReturn();
+            battle.SkillsButtonReturn();
 
             battle.DisplayMessage("" + battle.currentlyActingBattler.battlerName + "'s turn.");
             stop = true;

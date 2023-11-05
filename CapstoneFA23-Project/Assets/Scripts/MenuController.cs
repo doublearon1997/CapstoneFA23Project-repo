@@ -76,7 +76,7 @@ public class MenuController : MonoBehaviour
 
         SetBrightness(brightnessSlider.value);
 
-        BGMManager.instance.PlayBGM("At the End of My Beloved Time Limit");
+        BGMManager.instance.PlayBGM("atTheEnd");
 
     }
 

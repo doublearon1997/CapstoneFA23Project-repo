@@ -40,7 +40,7 @@ public class SkillButton : MonoBehaviour
         else if (skill.targetType == TargetType.All)
             battle.DisplayMessage("Select the target group.");
         else if (skill.targetType == TargetType.Self)
-            battle.DisplayMessage("Select " + user.battlerName + ".");
+            battle.DisplayMessage("Select yourself.");
 
         if (skill.isOffensive)
             ((OffensiveSkill)skill).ChooseTarget(user, battle);

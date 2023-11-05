@@ -88,15 +88,35 @@ public class SupportSkill : Skill
 
     public void UseSkill(Battler user, List<Battler> targets, BattleSystem battle)
     {
+        int maxAdditionalAnimations = 0;
+
         foreach(Battler target in targets)
         {
-            ApplyEffects(user, target, battle);
+            bool[] displayFlags = ApplyEffects(user, target, battle);
+            List<GameObject> effectNotificationQueue = new List<GameObject>();
+            List<string> effectSoundEffectQueue = new List<string>();
+
+            if(displayFlags[0])
+            {
+                effectNotificationQueue.Add(battle.buffPopup);
+                effectSoundEffectQueue.Add("buff");
+            }
+            if(displayFlags[1])
+            {
+                effectNotificationQueue.Add(battle.debuffPopup);
+                effectSoundEffectQueue.Add("debuff");
+            }
+
+            if(effectNotificationQueue.Count > maxAdditionalAnimations)
+                maxAdditionalAnimations = effectNotificationQueue.Count;
+
+            battle.StartCoroutine(DisplayAnimations(target, battle, effectNotificationQueue, effectSoundEffectQueue));
         }
 
         user.ap -= 100000;
         user.apMod = this.apMod;
 
-        if (user.isPlayer)
+        if(user.isPlayer)
         {
             battle.DisplaySkillMessage(this);
             Dictionary<Skill, int> skillCooldowns = ((PlayerBattler)user).skillCooldownDict;
@@ -106,8 +126,27 @@ public class SupportSkill : Skill
                     skillCooldowns[key] -= 1;
             }
             skillCooldowns[this] = this.cooldown;
-            battle.StartCoroutine(battle.FinishPlayerTurn());
+            battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations));
+        }
+        else 
+        {
+            battle.StartCoroutine(battle.FinishEnemyTurn(maxAdditionalAnimations));
         }
 
+    }
+
+    IEnumerator DisplayAnimations(Battler target, BattleSystem battle, List<GameObject> effectNotificationQueue, List<string> effectSoundEffectQueue)
+    {
+        yield return new WaitForSeconds(1.7f);
+
+        for(int i = 0; i< effectNotificationQueue.Count; i++)
+        {
+            GameObject obj = Instantiate(effectNotificationQueue[i], target.gameObject.transform) as GameObject;
+            SEManager.instance.StartCoroutine(SEManager.instance.PlaySEOnlyOnce(effectSoundEffectQueue[i]));
+
+            yield return new WaitForSeconds(1.6f);
+
+            Destroy(obj);
+        }
     }
 }

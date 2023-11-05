@@ -8,7 +8,7 @@ using TMPro;
 public class Fleeffect : Effect
 {
     
-    public override void ApplyEffect(Battler user, Battler target, BattleSystem battle)
+    public override bool ApplyEffect(Battler user, Battler target, BattleSystem battle)
     {
         user.Flee(battle);
         
@@ -22,6 +22,8 @@ public class Fleeffect : Effect
         }
             
         battle.DisplayMessage("" + target.battlerName + " fled.");
+
+        return true;
     }
 
     public override string GetEffectStatsString()

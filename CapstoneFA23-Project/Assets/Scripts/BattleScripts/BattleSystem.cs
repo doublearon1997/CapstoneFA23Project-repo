@@ -24,7 +24,10 @@ public class BattleSystem : MonoBehaviour
     public Transform playerAOELoc;
 
     public GameObject panelPlayerActions;
+
+    //Skill Popups
     public GameObject damageTextPopup, healTextPopup;
+    public GameObject buffPopup, debuffPopup;
 
     private bool inPinch = false;
 
@@ -40,6 +43,11 @@ public class BattleSystem : MonoBehaviour
     public GameObject[] enemyContainers;
     public TMP_Text[] enemyNameTexts, enemyHPTexts;
     public Slider[] enemyHPSliders;
+
+    //Current Actor Pointers
+    public GameObject playerPointer;
+    public GameObject enemyPointer;
+    private GameObject currentPointer = null;
 
     //Turn Order Stuff
     public GameObject panelTurnOrder;
@@ -208,8 +216,6 @@ public class BattleSystem : MonoBehaviour
             GameObject portrait;
             Battler battler = turnOrder[i];
 
-            
-
             if (battler.isPlayer)
             {
                 if (battler == currentlyActingBattler)
@@ -336,7 +342,7 @@ public class BattleSystem : MonoBehaviour
 
                 if (needToCalculate[battler] < 100000)
                 {
-                    if (currentBattlerSkill == null && battler == currentlyActingBattler)
+                    if(currentBattlerSkill != null && battler == currentlyActingBattler)
                         needToCalculate[battler] = needToCalculate[battler] + ((int)(battler.ini * currentBattlerSkill.apMod));
                     else
                         needToCalculate[battler] = needToCalculate[battler] + ((int)(battler.ini * battler.apMod));
@@ -611,6 +617,8 @@ public class BattleSystem : MonoBehaviour
             AttackButtonReturn();
         else if(buttonSkillsPressed)
             SkillsButtonReturn();
+        else if(buttonTacticsPressed)
+            TacticsButtonReturn();
     }
 
     IEnumerator PlayerTurn()
@@ -619,6 +627,8 @@ public class BattleSystem : MonoBehaviour
         SEManager.instance.PlaySE("playerTurnStart");
 
         yield return new WaitForSeconds(0.4f);
+
+        currentPointer = (Instantiate(playerPointer, currentlyActingBattler.transform) as GameObject);
 
         SetInfoHovers();
         DisplayMessage("" + currentlyActingBattler.battlerName + "'s turn.");
@@ -648,7 +658,7 @@ public class BattleSystem : MonoBehaviour
         ClearTargetingButtons();
     }
 
-    public IEnumerator FinishPlayerTurn()
+    public IEnumerator FinishPlayerTurn(int additionalAnimations)
     {
         currentlyActingBattler.CountDownEffects();
 
@@ -668,8 +678,11 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(LeavePinch());
         }
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.7f);
 
+        yield return new WaitForSeconds((1.6f * additionalAnimations));
+
+        DestroyImmediate(currentPointer);
         ClearMessageBox();
 
         if(IsPlayerVictory())
@@ -685,6 +698,8 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         SetTurnOrderPanel();
+
+        currentPointer = (Instantiate(enemyPointer, currentlyActingBattler.transform) as GameObject);
 
         Skill chosenSkill = ((EnemyBattler)currentlyActingBattler).ChooseSkill();
         List<GameObject> targetObjects = new List<GameObject>();
@@ -710,6 +725,10 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             
             ((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, targets, this);
+
+            foreach (GameObject target in targetObjects)
+                DestroyImmediate(target);
+       
         }
         else
         {
@@ -729,19 +748,17 @@ public class BattleSystem : MonoBehaviour
 
             SEManager.instance.PlaySE("enemyTurn");
             DisplaySkillMessage(chosenSkill);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.7f);
 
             ((SupportSkill)chosenSkill).UseSkill(currentlyActingBattler, targets, this);
-        }
 
-        foreach (GameObject target in targetObjects)
-            DestroyImmediate(target);
+            foreach (GameObject target in targetObjects)
+                DestroyImmediate(target);
        
-        StartCoroutine(FinishEnemyTurn());
-
+        }
     }
 
-    IEnumerator FinishEnemyTurn()
+    public IEnumerator FinishEnemyTurn(int maxAdditionalAnimations)
     {
         currentlyActingBattler.CountDownEffects();
         
@@ -759,8 +776,11 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(LeavePinch());
         }
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.7f);
 
+        yield return new WaitForSeconds(1.6f * maxAdditionalAnimations);
+
+        DestroyImmediate(currentPointer);
         ClearMessageBox();
 
         if(IsPlayerVictory())

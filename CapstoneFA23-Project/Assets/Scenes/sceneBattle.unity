@@ -602,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
       propertyPath: defaultVolumeList.Array.data[2]
-      value: 0.65
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
       propertyPath: defaultVolumeList.Array.data[3]
@@ -4414,6 +4414,8 @@ MonoBehaviour:
   panelPlayerActions: {fileID: 2025833277}
   damageTextPopup: {fileID: 516322223363286725, guid: 3eb3aafa75883e4438f0be6d79433bd0, type: 3}
   healTextPopup: {fileID: 516322223363286725, guid: cd77983d181f2ad4bbdcfc591b0b5097, type: 3}
+  buffPopup: {fileID: 7834622618306877915, guid: e4cf2183599d73945943df296ac318d2, type: 3}
+  debuffPopup: {fileID: 7834622618306877915, guid: abb3244c15698ae43b77b40c7cac2a67, type: 3}
   playerContainers:
   - {fileID: 1082411828}
   - {fileID: 442320430}
@@ -4468,6 +4470,8 @@ MonoBehaviour:
   - {fileID: 1721401097}
   - {fileID: 98447172}
   - {fileID: 657919559}
+  playerPointer: {fileID: 7985218471826905033, guid: 5004782923da6f745bc90daa8d748078, type: 3}
+  enemyPointer: {fileID: 1733519486990804138, guid: b3beaf6376729bf4ea259f7483b6d2b8, type: 3}
   panelTurnOrder: {fileID: 165183166}
   portraitTurnOrderCurrentEnemy: {fileID: 3484518777144667171, guid: d009d743427b1ae46907d6833dcbba57, type: 3}
   portraitTurnOrderCurrentPlayer: {fileID: 719445384799697409, guid: 6c9c4bb63d2286e428e95459846215bb, type: 3}
@@ -6084,6 +6088,18 @@ PrefabInstance:
     - target: {fileID: 1468859782781131536, guid: 1b378d6ed78db2e4a83b6e042a992d2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216606941838560050, guid: 1b378d6ed78db2e4a83b6e042a992d2f, type: 3}
+      propertyPath: seList.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d8d80774303b7043a9cb6e6f8b6738a, type: 3}
+    - target: {fileID: 8216606941838560050, guid: 1b378d6ed78db2e4a83b6e042a992d2f, type: 3}
+      propertyPath: seList.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f2a37caf68b0584e9672405e8b5dc1e, type: 3}
+    - target: {fileID: 8216606941838560050, guid: 1b378d6ed78db2e4a83b6e042a992d2f, type: 3}
+      propertyPath: defaultVolumeList.Array.data[8]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

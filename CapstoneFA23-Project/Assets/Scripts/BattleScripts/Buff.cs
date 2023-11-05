@@ -17,13 +17,19 @@ public class Buff : BuffEffect
         return returnString;
     }
 
-    public override void ApplyEffect(Battler user, Battler target, BattleSystem battle)
+    public override bool ApplyEffect(Battler user, Battler target, BattleSystem battle)
     {
         if(!target.buffEffects.ContainsKey(this)) //don't reapply buff. change later.
         {
             target.buffEffects.Add(this, this.duration);
             target.SetBuffStat(this.buffStat, this.value);
+
+            if(user == target)
+                user.AddCurrentTurnEffect(this);
+
+            return true;
         }
+        return false;
     }
 
     public override void ApplyDecay(Battler target, BattleSystem battle)
