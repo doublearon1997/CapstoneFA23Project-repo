@@ -15,5 +15,5 @@ MonoBehaviour:
   effectName: Basic Heal
   healPercentage: 0
   healAmount: 15
-  healPower: 1.1
+  healPower: 1.2
   powerType: 1

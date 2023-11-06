@@ -104,6 +104,24 @@ public class PartyController : MonoBehaviour
         updatePartyUI();
     }
 
+    public List<Character> getPartyList()
+    {
+        List<Character> tempListCharacters = new List<Character>();
+        //
+        for (int i = 0; i<partyArray.GetLength(0); i++)
+        {
+            if (partyArray[i, 1] != 0)
+            {
+                foreach(Character tCharacter in listCharacters)
+                {
+                    if(tCharacter.characterID==partyArray[i,1])
+                        tempListCharacters.Add(tCharacter);
+                }
+            }
+        }
+        return tempListCharacters;
+    }
+
     //party UI
     public void updatePartyUI()
     {

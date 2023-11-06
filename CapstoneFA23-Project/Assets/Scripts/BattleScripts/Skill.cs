@@ -26,15 +26,24 @@ public abstract class Skill: ScriptableObject
 
     public bool isOffensive;
 
-    //add effects list/hash
     public List<Effect> effects;
 
-    public void ApplyEffects(Battler user, Battler target, BattleSystem battle)
+    //Applies all of the effects on the skill to the target battler. Returns a list of flags to determine if a Buff or Debuff animation should be displayed.
+    public bool[] ApplyEffects(Battler user, Battler target, BattleSystem battle)
     {
+        bool[] displayFlags = {false, false};
+
         foreach(Effect effect in effects)
         {
-            effect.ApplyEffect(user, target, battle);
+            if(effect.ApplyEffect(user, target, battle))
+            {
+                if(effect is Buff)
+                    displayFlags[0] = true;
+                else if(effect is Debuff)
+                    displayFlags[1] = true;
+            }
         }
+        return displayFlags;
     }
  
 }

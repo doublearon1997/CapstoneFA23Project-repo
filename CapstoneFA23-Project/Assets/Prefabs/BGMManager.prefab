@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmList:
-  - {fileID: 8300000, guid: ceea6f98f624e5741b67ad6730b95b9e, type: 3}
-  - {fileID: 8300000, guid: 5a046ed826331bf4b896594d6a39bb75, type: 3}
-  - {fileID: 8300000, guid: 212f6a5873666e047bffb48d51533abc, type: 3}
+  - {fileID: 8300000, guid: f54064e0b9991cb4b8ef5ad4805a4dd5, type: 3}
+  - {fileID: 8300000, guid: 843b921a2debc9d4685a114ba5dacfc1, type: 3}
+  - {fileID: 8300000, guid: 6f53ba9fb998434428f672e79db31797, type: 3}
   - {fileID: 8300000, guid: 8c6631a0c7f633e4fa89d52cbc5966c2, type: 3}
   - {fileID: 8300000, guid: 6e39cbc07de81d44eb402b6cce9a7e85, type: 3}
   defaultVolumeList:

@@ -6,24 +6,48 @@ using UnityEngine;
 public class SupportSkill : Skill
 { 
     // After a player has selected a support skill to use, this sets up the screen for the player to click on a target to use the skill.
-    // TODO: Add ability for AOE.
     public void ChooseTarget(PlayerBattler user, BattleSystem battle)
     {
         if (this.targetType == TargetType.Single)
         {
             foreach (PlayerBattler battler in battle.playerBattlers)
             {
+                List<Battler> target = new List<Battler>();
+                target.Add(battler);
+
                 GameObject targetButton = Instantiate(battle.supportTarget100, battler.gameObject.transform.parent.transform) as GameObject;
-                targetButton.GetComponent<SupportTargetButton>().Initialize(this, user, battler, battle);
+                targetButton.GetComponent<SupportTargetButton>().Initialize(this, user, target, battle);
                 battle.currentTargetingObjects.Add(targetButton);
             }
+        }
+        else if (this.targetType == TargetType.Self)
+        {
+            List<Battler> target = new List<Battler>();
+                target.Add(user);
+
+            GameObject targetButton = Instantiate(battle.supportTarget100, user.gameObject.transform.parent.transform) as GameObject;
+            targetButton.GetComponent<SupportTargetButton>().Initialize(this, user, target, battle);
+            battle.currentTargetingObjects.Add(targetButton);
+        }
+        else if (targetType == TargetType.All)
+        {
+            List<Battler> targets = new List<Battler>();
+
+            foreach (PlayerBattler battler in battle.playerBattlers)
+                targets.Add(battler);
+
+            GameObject targetAllButton = Instantiate(battle.supportTarget500, battle.playerAOELoc) as GameObject;
+            targetAllButton.GetComponent<SupportTargetButton>().Initialize(this, user, targets, battle);
+            battle.currentTargetingObjects.Add(targetAllButton);
         }
     }
 
     // When an enemy battler has chosen an offensive skill, this method calculates which player it will attack it with. Currently this will only work with single target attacks.
     // TODO: For AOE, need to change the return to a list of enemybattler targets.
-    public EnemyBattler ChooseTarget(EnemyBattler user, BattleSystem battle)
+    public List<EnemyBattler> ChooseTarget(EnemyBattler user, BattleSystem battle)
     {
+        List<EnemyBattler> targets = new List<EnemyBattler>();
+
         if (this.targetType == TargetType.Single)
         {
             double cumulativeChance = 0;
@@ -47,21 +71,52 @@ public class SupportSkill : Skill
             if (target == null)
                 target = battle.enemyBattlers[0];
 
-            return target;
-
+            targets.Add(target);
+        }
+        else if(targetType == TargetType.Self)
+        {
+            targets.Add(user);
+        }
+        else if(targetType == TargetType.All)
+        {
+            foreach(EnemyBattler battler in battle.enemyBattlers)
+                targets.Add(battler);
         }
 
-        return null;
+        return targets;
     }
 
-    public void UseSkill(Battler user, Battler target, BattleSystem battle)
+    public void UseSkill(Battler user, List<Battler> targets, BattleSystem battle)
     {
+        int maxAdditionalAnimations = 0;
+
+        foreach(Battler target in targets)
+        {
+            bool[] displayFlags = ApplyEffects(user, target, battle);
+            List<GameObject> effectNotificationQueue = new List<GameObject>();
+            List<string> effectSoundEffectQueue = new List<string>();
+
+            if(displayFlags[0])
+            {
+                effectNotificationQueue.Add(battle.buffPopup);
+                effectSoundEffectQueue.Add("buff");
+            }
+            if(displayFlags[1])
+            {
+                effectNotificationQueue.Add(battle.debuffPopup);
+                effectSoundEffectQueue.Add("debuff");
+            }
+
+            if(effectNotificationQueue.Count > maxAdditionalAnimations)
+                maxAdditionalAnimations = effectNotificationQueue.Count;
+
+            battle.StartCoroutine(DisplayAnimations(target, battle, effectNotificationQueue, effectSoundEffectQueue));
+        }
+
         user.ap -= 100000;
         user.apMod = this.apMod;
 
-        ApplyEffects(user, target, battle);
-
-        if (user.isPlayer)
+        if(user.isPlayer)
         {
             battle.DisplaySkillMessage(this);
             Dictionary<Skill, int> skillCooldowns = ((PlayerBattler)user).skillCooldownDict;
@@ -71,8 +126,27 @@ public class SupportSkill : Skill
                     skillCooldowns[key] -= 1;
             }
             skillCooldowns[this] = this.cooldown;
-            battle.StartCoroutine(battle.FinishPlayerTurn());
+            battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations));
+        }
+        else 
+        {
+            battle.StartCoroutine(battle.FinishEnemyTurn(maxAdditionalAnimations));
         }
 
+    }
+
+    IEnumerator DisplayAnimations(Battler target, BattleSystem battle, List<GameObject> effectNotificationQueue, List<string> effectSoundEffectQueue)
+    {
+        yield return new WaitForSeconds(1.7f);
+
+        for(int i = 0; i< effectNotificationQueue.Count; i++)
+        {
+            GameObject obj = Instantiate(effectNotificationQueue[i], target.gameObject.transform) as GameObject;
+            SEManager.instance.StartCoroutine(SEManager.instance.PlaySEOnlyOnce(effectSoundEffectQueue[i]));
+
+            yield return new WaitForSeconds(1.6f);
+
+            Destroy(obj);
+        }
     }
 }

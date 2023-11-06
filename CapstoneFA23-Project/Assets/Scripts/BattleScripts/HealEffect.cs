@@ -12,7 +12,7 @@ public class HealEffect : Effect
     public double healPower = 0;
     public PowerType powerType = PowerType.Will;
 
-    public override void ApplyEffect(Battler user, Battler target, BattleSystem battle)
+    public override bool ApplyEffect(Battler user, Battler target, BattleSystem battle)
     {
         double hpHealed = 0;
         if(healPercentage > 0)
@@ -29,6 +29,8 @@ public class HealEffect : Effect
 
         target.HealBattler((int)hpHealed, battle);
         DisplayHealText((int)hpHealed, target, battle);
+
+        return true;
     }
 
     public override string GetEffectStatsString()

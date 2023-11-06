@@ -15,6 +15,8 @@ public class SEManager : MonoBehaviour
     private static Dictionary<string, AudioClip> soundEffects = new Dictionary<string, AudioClip>();
     private static Dictionary<AudioClip, float> soundEffectVolumes = new Dictionary<AudioClip, float>();
 
+    private static HashSet<AudioClip> currentlyPlayingSEs = new HashSet<AudioClip>();
+
     public void Awake()
     {
         if (instance == null)
@@ -71,6 +73,49 @@ public class SEManager : MonoBehaviour
             else
                 audioSource.PlayOneShot(clip, PlayerPrefs.GetFloat("SEVolume"));
         }
+    }
+
+    //Plays a Soundeffect only if the same clip is not currently playing.
+    public IEnumerator PlaySEOnlyOnce(string fileName)
+    {
+        if (!soundEffects.ContainsKey(fileName))
+            throw new ArgumentException("Invalid filename or file not included in SEManager");
+
+        AudioClip clip = soundEffects[fileName];
+
+        if(!(currentlyPlayingSEs.Contains(clip)))
+        {   
+            currentlyPlayingSEs.Add(clip);
+
+            if(soundEffectVolumes.ContainsKey(clip))
+                audioSource.PlayOneShot(clip, soundEffectVolumes[clip] * PlayerPrefs.GetFloat("SEVolume"));
+            else
+                audioSource.PlayOneShot(clip, PlayerPrefs.GetFloat("SEVolume"));
+
+            
+            yield return new WaitForSeconds(clip.length);
+
+            currentlyPlayingSEs.Remove(clip);
+        }
+
+    }
+
+    public IEnumerator PlaySEOnlyOnce(AudioClip clip)
+    {
+        if(!(currentlyPlayingSEs.Contains(clip)))
+        {   
+            currentlyPlayingSEs.Add(clip);
+
+            if(soundEffectVolumes.ContainsKey(clip))
+                audioSource.PlayOneShot(clip, soundEffectVolumes[clip] * PlayerPrefs.GetFloat("SEVolume"));
+            else
+                audioSource.PlayOneShot(clip, PlayerPrefs.GetFloat("SEVolume"));
+
+            yield return new WaitForSeconds(clip.length);
+
+            currentlyPlayingSEs.Remove(clip);
+        }
+
     }
 
 }

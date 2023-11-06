@@ -122,7 +122,23 @@ public class InventoryController : MonoBehaviour
         }
         updateInventoryUI();
     }
-
+    
+    public Dictionary<Item,int> GetItemList()
+    {
+        Dictionary<Item, int> tempListItems = new Dictionary<Item, int>();
+        for (int i = 0; i < inventoryArray.GetLength(0); i++)
+        {
+            if (inventoryArray[i, 1] != 0)
+            {
+                foreach (Item tItem in listItems)
+                {
+                    if (tItem.itemID == inventoryArray[i, 1])
+                        tempListItems.Add(tItem, inventoryArray[i,2]);
+                }
+            }
+        }
+        return tempListItems;
+    }
     //inventory UI
     public void updateInventoryUI()
     {
