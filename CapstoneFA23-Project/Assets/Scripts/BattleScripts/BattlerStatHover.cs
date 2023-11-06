@@ -12,6 +12,8 @@ public class BattlerStatHover : MonoBehaviour
     private BattleSystem battle;
     private GameObject infoPanel;
 
+    private GameObject highlightAnimation;
+
     public void Initialize(Battler battler, BattleSystem battle)
     {
         this.battler = battler;
@@ -24,7 +26,22 @@ public class BattlerStatHover : MonoBehaviour
         SEManager.instance.PlaySE("buttonHover");
         infoPanel = Instantiate(statBox, battler.gameObject.transform) as GameObject;
 
-        if(battler.isPlayer)
+        SetupInfoObjectHover();
+        if(battler == battle.currentlyActingBattler && !battle.tempTurnOrder)
+            highlightAnimation = Instantiate(battle.turnOrderCurrentHighlightAnimation, battle.battlerTurnOrderObjects[battler].transform) as GameObject;
+        else
+            highlightAnimation = Instantiate(battle.turnOrderHighlightAnimation, battle.battlerTurnOrderObjects[battler].transform) as GameObject;
+    }
+
+    public void InfoObjectHoverExit()
+    {
+        DestroyImmediate(infoPanel);
+        DestroyImmediate(highlightAnimation);
+    }
+
+    private void SetupInfoObjectHover()
+    {
+        if (battler.isPlayer)
             infoPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(280, -115);
         else
             infoPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-170, -115);
@@ -43,7 +60,7 @@ public class BattlerStatHover : MonoBehaviour
             (infoPanel.transform.GetChild(7).gameObject.GetComponent<TMP_Text>()).color = new Color32(60, 125, 255, 255);
 
         (infoPanel.transform.GetChild(8).gameObject.GetComponent<TMP_Text>()).text = "" + battler.GetCurrWil();
-        if (battler.GetCurrWil () > battler.wil)
+        if (battler.GetCurrWil() > battler.wil)
             (infoPanel.transform.GetChild(8).gameObject.GetComponent<TMP_Text>()).color = new Color32(255, 145, 0, 255);
         else if (battler.GetCurrWil() < battler.wil)
             (infoPanel.transform.GetChild(8).gameObject.GetComponent<TMP_Text>()).color = new Color32(60, 125, 255, 255);
@@ -73,20 +90,20 @@ public class BattlerStatHover : MonoBehaviour
             (infoPanel.transform.GetChild(12).gameObject.GetComponent<TMP_Text>()).color = new Color32(60, 125, 255, 255);
 
         int currX = 0, currY = 0, i = 0;
-       
-        foreach(BuffEffect effect in battler.buffEffects.Keys)
+
+        foreach (BuffEffect effect in battler.buffEffects.Keys)
         {
-            if(battler.buffEffects[effect] < 0)
+            if (battler.buffEffects[effect] < 0)
             {
                 GameObject portraitBuffEffect = Instantiate(battle.portraitBuffEffect, infoPanel.transform.GetChild(13).gameObject.transform) as GameObject;
 
                 portraitBuffEffect.GetComponent<Image>().sprite = effect.portrait_65;
 
-                if(effect.isDebuff)
-                    (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "" + battler.GetBuffValue(effect.buffStat)*100 + "%"; 
+                if (effect.isDebuff)
+                    (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "" + battler.GetBuffValue(effect.buffStat) * 100 + "%";
                 else
-                    (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "+" + battler.GetBuffValue(effect.buffStat)*100 + "%";
-                
+                    (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "+" + battler.GetBuffValue(effect.buffStat) * 100 + "%";
+
                 portraitBuffEffect.GetComponent<RectTransform>().anchoredPosition = new Vector2(currX, currY);
 
             }
@@ -106,8 +123,5 @@ public class BattlerStatHover : MonoBehaviour
 
     }
 
-    public void InfoObjectHoverExit()
-    {
-        DestroyImmediate(infoPanel);
-    }
+    
 }

@@ -58,18 +58,18 @@ MonoBehaviour:
   res: 0.15
   ini: 100
   crt: 0.06
-  battlerName: Beter Ban
+  battlerName: MC
   ap: 0
   apMod: 1
   level: 1
   isPlayer: 1
-  portrait70: {fileID: 21300000, guid: a9319dff60d21f74daa0016f9d6a6091, type: 3}
-  portrait60: {fileID: 21300000, guid: 816373d1ffa715841b9ca2ddccf1ab0c, type: 3}
-  playerClass: Swashbuckler
+  portrait70: {fileID: 21300000, guid: c3c8e2032c4801143b3bce9999939c61, type: 3}
+  portrait60: {fileID: 21300000, guid: a42d4a96fab591d4389f17bc5afba49f, type: 3}
+  playerClass: Gunner
   targetRatio: 1
   skills:
-  - {fileID: 11400000, guid: c5262c093747759469b7cd80ce97f1f3, type: 2}
-  - {fileID: 11400000, guid: 2b80773c2a2c7f140b1d2179951444ef, type: 2}
+  - {fileID: 11400000, guid: 804ec6cd55797d1428c9a6e098f7c5d1, type: 2}
+  - {fileID: 11400000, guid: 5607369064bcee3439295a4c83566f87, type: 2}
   standardAttack: {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
 --- !u!61 &1645847790919177809
 BoxCollider2D:
@@ -189,7 +189,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 2521b6229a37c4a56b4fd4e12227c2fb, type: 3}
+  m_Sprite: {fileID: -1090615479, guid: ea7079a8f76488b4cb7f17a26590a02e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

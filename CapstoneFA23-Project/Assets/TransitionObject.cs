@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class TransitionObject : MonoBehaviour
 {
-    public float wordSpeed;
+    public GameObject LoadingSceneManagerInstance;
     public bool playerIsClose;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
+            LoadingSceneManager.sceneToLoad = 2;
             SceneManager.LoadScene(1);
         }
     }

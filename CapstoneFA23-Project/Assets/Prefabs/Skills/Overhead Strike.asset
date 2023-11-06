@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
   m_Name: Overhead Strike
   m_EditorClassIdentifier: 
-  skillName: Overhead Strike
+  skillName: Armor-Piercing Shot
   targetType: 0
   powerType: 0
-  apMod: 0.85
+  apMod: 0.9
   cooldown: 1
-  portrait65: {fileID: 21300000, guid: 4da87a585b9607a4ea455a66cdfd604b, type: 3}
-  portrait50: {fileID: 21300000, guid: a1a5cd3933bf5a24b92022dd996e0e81, type: 3}
-  portrait100: {fileID: 21300000, guid: 86269d1d2cab3e44a8ef600001a1e349, type: 3}
+  portrait65: {fileID: 21300000, guid: 6b618e6611aa58740b7b8374005e003d, type: 3}
+  portrait50: {fileID: 21300000, guid: 6869f971ded353640a17bd1aba04b529, type: 3}
+  portrait100: {fileID: 21300000, guid: bfd2560471b3c054f9abd12b70d11a67, type: 3}
   isOffensive: 1
   effects:
   - {fileID: 11400000, guid: efb4bbde03972394f91448310428d15e, type: 2}
-  dmgMod: 1.25
+  dmgMod: 1.2

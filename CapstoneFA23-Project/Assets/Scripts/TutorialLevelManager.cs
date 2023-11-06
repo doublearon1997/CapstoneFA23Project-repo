@@ -6,7 +6,7 @@ public class OnTutorialIslandLoad : MonoBehaviour
 {
     void Start()
     {
-        BGMManager.instance.PlayBGM("Looking Up at the Sky");
+        BGMManager.instance.PlayBGM("lookingUpAtTheSky");
 
     }
 }

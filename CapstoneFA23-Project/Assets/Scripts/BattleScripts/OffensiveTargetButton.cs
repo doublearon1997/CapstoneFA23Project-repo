@@ -5,15 +5,15 @@ using UnityEngine;
 public class OffensiveTargetButton : MonoBehaviour
 {
     public Battler user;
-    public Battler target;
+    public List<Battler> targets;
     public OffensiveSkill skill;
     public BattleSystem battle;
 
-    public void Initialize(OffensiveSkill skill, Battler user, Battler target, BattleSystem battle)
+    public void Initialize(OffensiveSkill skill, Battler user, List<Battler> targets, BattleSystem battle)
     {
         this.skill = skill;
         this.user = user;
-        this.target = target;
+        this.targets = targets;
         this.battle = battle;
     }
 
@@ -25,7 +25,7 @@ public class OffensiveTargetButton : MonoBehaviour
     public void TargetButtonPress()
     {
         battle.PlayerActionSelected();
-        skill.UseSkill(battle.currentlyActingBattler, target, battle);
+        skill.UseSkill(battle.currentlyActingBattler, targets, battle);
     }
 
 }
