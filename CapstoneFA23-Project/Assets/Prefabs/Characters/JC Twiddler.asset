@@ -16,3 +16,15 @@ MonoBehaviour:
   characterImage: {fileID: 21300000, guid: 0e030b29011b229448e8cdd132161311, type: 3}
   characterName: JC Twiddler
   description: 
+  charClass: {fileID: 11400000, guid: c3075c313996de8a29fbaf739e7b0c9f, type: 2}
+  level: 0
+  exp: 0
+  hp: 0
+  mhp: 0
+  str: 0
+  wil: 0
+  ini: 0
+  def: 0
+  res: 0
+  crt: 0
+  skills: []

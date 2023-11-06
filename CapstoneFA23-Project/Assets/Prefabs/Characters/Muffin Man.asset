@@ -16,3 +16,15 @@ MonoBehaviour:
   characterImage: {fileID: 21300000, guid: 28c952a93fcb4cb47a70aafb38eb2edd, type: 3}
   characterName: Muffin Man
   description: 
+  charClass: {fileID: 11400000, guid: b6f1dfce09d98d6bb8c93f31b51a914d, type: 2}
+  level: 0
+  exp: 0
+  hp: 0
+  mhp: 0
+  str: 0
+  wil: 0
+  ini: 0
+  def: 0
+  res: 0
+  crt: 0
+  skills: []

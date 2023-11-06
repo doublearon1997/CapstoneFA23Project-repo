@@ -10,7 +10,7 @@ public class Character : ScriptableObject
     public Sprite characterImage;
     public string characterName, description;
 
-    public CharacterClass charClass;
+    public CharacterClass charClass = null;
 
     public int level;
     public int exp;
@@ -29,13 +29,12 @@ public class Character : ScriptableObject
     {
         mhp = (int)(charClass.sMhp * Math.Pow(1.1, level-1));
         hp = mhp;
-        str = charClass.sStr;
-        wil = charClass.sWil;
-        ini = charClass.sIni;
+        str = (int)(charClass.sStr * Math.Pow(1.1, level-1));
+        wil = (int)(charClass.sWil * Math.Pow(1.1, level-1));
+        ini = (int)(charClass.sIni * Math.Pow(1.1, level-1));
         def = charClass.sDef;
         res = charClass.sRes;
         crt = charClass.sCrt;
     }
-
 }
 
