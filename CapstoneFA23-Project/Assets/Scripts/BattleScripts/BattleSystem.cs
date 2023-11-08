@@ -365,27 +365,50 @@ public class BattleSystem : MonoBehaviour
     }
 
     //Adjusts a battler's HP slider value on the party overview panel based on their current hp.
-    //TODO: Animate?
     public void SetPlayerHPSliderValue(PlayerBattler battler)
     {
         const int sliderWidth = 408;
-
         double hpSliderPosition = sliderWidth - ((double)battler.hp / (double)battler.mhp) * sliderWidth;
 
-        playerHPSliders[battler.GetPartyPosition()].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-        playerHPTexts[battler.GetPartyPosition()].text = "" + battler.hp + "/" + battler.mhp;
+        TMP_Text hpText = playerHPTexts[battler.GetPartyPosition()];
+        int startingHP = int.Parse(hpText.text.Split('/')[0]);
+        Slider hpSlider = playerHPSliders[battler.GetPartyPosition()];
+
+        hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+
+        StartCoroutine(AnimateHPSlider(hpSlider.transform.GetChild(1).GetComponent<RectTransform>(), hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin, hpText, startingHP, battler.hp, battler.mhp));
     }
 
     //Adjusts a battler's HP slider value on the enemy overview panel based on their current hp.
-    //TODO: Animate?
     public void SetEnemyHPSliderValue(EnemyBattler battler)
     {
         const int sliderWidth = 250;
-
         double hpSliderPosition = sliderWidth - ((double)battler.hp / (double)battler.mhp) * sliderWidth;
 
-        enemyHPSliders[battler.GetPartyPosition()].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-        enemyHPTexts[battler.GetPartyPosition()].text = "" + battler.hp + "/" + battler.mhp;
+        TMP_Text hpText = enemyHPTexts[battler.GetPartyPosition()];
+        int startingHP = int.Parse(hpText.text.Split('/')[0]);
+        Slider hpSlider = enemyHPSliders[battler.GetPartyPosition()];
+
+        hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+    
+        StartCoroutine(AnimateHPSlider(hpSlider.transform.GetChild(1).GetComponent<RectTransform>(), hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin, hpText, startingHP, battler.hp, battler.mhp));
+    }
+
+    private IEnumerator AnimateHPSlider(RectTransform bar, Vector2 newPos, TMP_Text hpText, int startHP, int newHP, int mhp)
+    {
+        float t = 0;
+        Vector2 startPos = bar.offsetMin;
+    
+        while (t < 2f)
+        {
+            bar.offsetMin = Vector2.Lerp(startPos, newPos, t);
+            int hp = (int)(Mathf.Lerp(startHP, newHP, t));
+            
+            hpText.text = "" + hp + "/" + mhp;
+            t+=Time.deltaTime;
+
+            yield return null;
+        }
     }
 
     //This coroutine is played when determining which battler acts next.

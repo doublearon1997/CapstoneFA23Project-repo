@@ -27,7 +27,6 @@ public class HealEffect : Effect
                 hpHealed += healPower * (double)user.GetCurrStr();
         }
 
-        target.HealBattler((int)hpHealed, battle);
         battle.StartCoroutine(DisplayHealText((int)hpHealed, target, skill, battle));
 
         return true;
@@ -35,9 +34,7 @@ public class HealEffect : Effect
 
     public override string GetEffectStatsString()
     {
-        string powerString = "";
-        string percentString = "";
-        string amountString = "";
+        string powerString = "", percentString = "", amountString = "";
         string returnString = "Heal (";
 
         if(healPower > 0)
@@ -67,6 +64,8 @@ public class HealEffect : Effect
         string displayString = "" + hpHealed;
 
         yield return new WaitForSeconds(skill.soundEffectHitDelay);
+
+        target.HealBattler((int)hpHealed, battle);
 
         GameObject damageTextContainer = Instantiate(battle.healTextPopup, target.gameObject.transform);
         damageTextContainer.transform.GetChild(0).GetComponent<TMP_Text>().text = displayString;
