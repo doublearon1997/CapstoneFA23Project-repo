@@ -118,7 +118,7 @@ public class BattleSystem : MonoBehaviour
     {
         currentlyActingBattlers = new SortedSet<Battler>(new BattlerAPComparator());
 
-        StartCoroutine(SetupBattle()); 
+        StartCoroutine(SetupBattle());
     }
 
     IEnumerator SetupBattle()
@@ -658,7 +658,7 @@ public class BattleSystem : MonoBehaviour
         ClearTargetingButtons();
     }
 
-    public IEnumerator FinishPlayerTurn(int additionalAnimations)
+    public IEnumerator FinishPlayerTurn(int additionalAnimations, float soundEffectHitDelay)
     {
         currentlyActingBattler.CountDownEffects();
 
@@ -666,6 +666,8 @@ public class BattleSystem : MonoBehaviour
         currentlyActingBattler = null;
 
         buttonAttack.interactable = true;
+
+        yield return new WaitForSeconds(1.7f + soundEffectHitDelay);
 
         if (IsInPinch() && !inPinch)
         {
@@ -677,8 +679,6 @@ public class BattleSystem : MonoBehaviour
             inPinch = false;
             StartCoroutine(LeavePinch());
         }
-
-        yield return new WaitForSeconds(1.7f);
 
         yield return new WaitForSeconds((1.6f * additionalAnimations));
 
@@ -758,12 +758,14 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    public IEnumerator FinishEnemyTurn(int maxAdditionalAnimations)
+    public IEnumerator FinishEnemyTurn(int maxAdditionalAnimations, float soundEffectHitDelay)
     {
         currentlyActingBattler.CountDownEffects();
         
         currentlyActingBattlers.Remove(currentlyActingBattler);
         currentlyActingBattler = null;
+
+        yield return new WaitForSeconds(1.7f + soundEffectHitDelay);
 
         if (IsInPinch() && !inPinch)
         {
@@ -775,8 +777,6 @@ public class BattleSystem : MonoBehaviour
             inPinch = false;
             StartCoroutine(LeavePinch());
         }
-
-        yield return new WaitForSeconds(1.7f);
 
         yield return new WaitForSeconds(1.6f * maxAdditionalAnimations);
 

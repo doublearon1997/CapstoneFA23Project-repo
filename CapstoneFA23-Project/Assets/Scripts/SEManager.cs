@@ -92,7 +92,6 @@ public class SEManager : MonoBehaviour
             else
                 audioSource.PlayOneShot(clip, PlayerPrefs.GetFloat("SEVolume"));
 
-            
             yield return new WaitForSeconds(clip.length);
 
             currentlyPlayingSEs.Remove(clip);

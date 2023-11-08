@@ -8,7 +8,7 @@ public abstract class Effect : ScriptableObject
 
     public abstract string GetEffectStatsString();
 
-    public abstract bool ApplyEffect(Battler user, Battler target, BattleSystem battle);
+    public abstract bool ApplyEffect(Battler user, Battler target, Skill skill, BattleSystem battle);
 
 
 

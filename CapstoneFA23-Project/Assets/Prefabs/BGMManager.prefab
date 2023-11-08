@@ -53,7 +53,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6e39cbc07de81d44eb402b6cce9a7e85, type: 3}
   defaultVolumeList:
   - 0.65
-  - 0.75
+  - 0.7
   - 0.5
   - 0.7
   - 0.7

@@ -126,17 +126,23 @@ public class SupportSkill : Skill
                     skillCooldowns[key] -= 1;
             }
             skillCooldowns[this] = this.cooldown;
-            battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations));
+            battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations, soundEffectHitDelay));
         }
         else 
         {
-            battle.StartCoroutine(battle.FinishEnemyTurn(maxAdditionalAnimations));
+            battle.StartCoroutine(battle.FinishEnemyTurn(maxAdditionalAnimations, soundEffectHitDelay));
         }
 
     }
 
     IEnumerator DisplayAnimations(Battler target, BattleSystem battle, List<GameObject> effectNotificationQueue, List<string> effectSoundEffectQueue)
     {
+        SEManager.instance.PlaySE(soundEffect);
+        yield return new WaitForSeconds(soundEffectHitDelay);
+
+        if(hitSoundEffect != null)
+            SEManager.instance.PlaySE(hitSoundEffect);
+
         yield return new WaitForSeconds(1.7f);
 
         for(int i = 0; i< effectNotificationQueue.Count; i++)

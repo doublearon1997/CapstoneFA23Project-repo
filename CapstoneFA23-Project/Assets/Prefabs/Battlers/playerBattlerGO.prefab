@@ -70,7 +70,7 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: 804ec6cd55797d1428c9a6e098f7c5d1, type: 2}
   - {fileID: 11400000, guid: 5607369064bcee3439295a4c83566f87, type: 2}
-  standardAttack: {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
+  standardAttack: {fileID: 11400000, guid: 44ac8334e7e5efd4799794fd89278bb5, type: 2}
 --- !u!61 &1645847790919177809
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -74,8 +74,11 @@ public class Battler: MonoBehaviour
         if (isPlayer)
             battle.playerBattlers.Remove((PlayerBattler)this);
         else
+        {
             battle.enemyBattlers.Remove((EnemyBattler)this);
-
+            battle.StartCoroutine(SEManager.instance.PlaySEOnlyOnce("enemyDeath"));
+        }
+            
         RemoveOverviewContainer(battle);
     }
 

@@ -55,6 +55,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 596e5b0843f932547aa3ddd2a0d91819, type: 3}
   - {fileID: 8300000, guid: 6d8d80774303b7043a9cb6e6f8b6738a, type: 3}
   - {fileID: 8300000, guid: 2f2a37caf68b0584e9672405e8b5dc1e, type: 3}
+  - {fileID: 8300000, guid: 3c384c3c1175e7d4bb4601d211d4a497, type: 3}
+  - {fileID: 8300000, guid: 61400415d18eb8847bf54421357b8da5, type: 3}
+  - {fileID: 8300000, guid: 256c0aab68f543c4fae2dd817c59a36a, type: 3}
+  - {fileID: 8300000, guid: 5baa475d58442d44db7850e7d3b13d1d, type: 3}
+  - {fileID: 8300000, guid: 43f57964af7467d449fef0739a189af4, type: 3}
+  - {fileID: 8300000, guid: cab51c7bd2a3873449439fc6d399953f, type: 3}
+  - {fileID: 8300000, guid: 3bf7af546178ad34d85e384d958e67ce, type: 3}
+  - {fileID: 8300000, guid: 55d5fb02f04a6d746a78f3d2839b4757, type: 3}
+  - {fileID: 8300000, guid: aba48eae6f9a9764f92d8b0e06ffe288, type: 3}
+  - {fileID: 8300000, guid: 64683743a4207e248b77d4ffcc9bf29d, type: 3}
   defaultVolumeList:
   - 0.75
   - 0.75
@@ -65,6 +75,16 @@ MonoBehaviour:
   - 1
   - 0.8
   - 0.8
+  - 1
+  - 0.8
+  - 0.8
+  - 1
+  - 0.8
+  - 0.9
+  - 0.9
+  - 0.9
+  - 1
+  - 0.9
 --- !u!82 &7831695548467830085
 AudioSource:
   m_ObjectHideFlags: 0

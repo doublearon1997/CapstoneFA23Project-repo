@@ -28,6 +28,10 @@ public abstract class Skill: ScriptableObject
 
     public List<Effect> effects;
 
+    public AudioClip soundEffect;
+    public AudioClip hitSoundEffect;
+    public float soundEffectHitDelay;
+
     //Applies all of the effects on the skill to the target battler. Returns a list of flags to determine if a Buff or Debuff animation should be displayed.
     public bool[] ApplyEffects(Battler user, Battler target, BattleSystem battle)
     {
@@ -35,7 +39,7 @@ public abstract class Skill: ScriptableObject
 
         foreach(Effect effect in effects)
         {
-            if(effect.ApplyEffect(user, target, battle))
+            if(effect.ApplyEffect(user, target, this, battle))
             {
                 if(effect is Buff)
                     displayFlags[0] = true;
