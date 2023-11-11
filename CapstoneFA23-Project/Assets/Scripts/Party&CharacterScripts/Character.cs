@@ -25,17 +25,16 @@ public class Character : ScriptableObject
     //Skills
     public List<Skill> skills;
 
-    /*public void Awake()
+    public void Awake()
     {
         mhp = (int)(charClass.sMhp * Math.Pow(1.1, level-1));
         hp = mhp;
-        str = charClass.sStr;
-        wil = charClass.sWil;
-        ini = charClass.sIni;
+        str = (int)(charClass.sStr * Math.Pow(1.1, level-1));
+        wil = (int)(charClass.sWil * Math.Pow(1.1, level-1));
+        ini = (int)(charClass.sIni * Math.Pow(1.1, level-1));
         def = charClass.sDef;
         res = charClass.sRes;
         crt = charClass.sCrt;
-    }*/
-
+    }
 }
 
