@@ -140,11 +140,17 @@ public class Battler: MonoBehaviour
     }
     public double GetCurrDef()
     {
-        return this.def + this.defBuff + this.defDebuff;
+        if (def + defBuff + defDebuff < 0)
+            return 0;
+        else
+            return this.def + this.defBuff + this.defDebuff;
     }
     public double GetCurrRes()
     {
-        return this.res + this.resBuff + this.resDebuff;
+        if (res + resBuff + resDebuff < 0)
+            return 0;
+        else 
+            return this.res + this.resBuff + this.resDebuff;
     }
     public int GetCurrIni()
     {

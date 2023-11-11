@@ -17,6 +17,8 @@ public class BattleSystem : MonoBehaviour
     public List<PlayerBattler> playerBattlers;
     public List<EnemyBattler> enemyBattlers;
 
+    public GameObject fadeOutToBlack;
+
     public Transform[] playerSpawns;
     public Transform[] enemySpawns;
 
@@ -374,9 +376,16 @@ public class BattleSystem : MonoBehaviour
         int startingHP = int.Parse(hpText.text.Split('/')[0]);
         Slider hpSlider = playerHPSliders[battler.GetPartyPosition()];
 
-        hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-
-        StartCoroutine(AnimateHPSlider(hpSlider.transform.GetChild(1).GetComponent<RectTransform>(), hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin, hpText, startingHP, battler.hp, battler.mhp));
+        if(startingHP > battler.hp)
+        {
+            hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+            StartCoroutine(AnimateHPSlider(hpSlider.transform.GetChild(1).GetComponent<RectTransform>(), hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin, hpText, startingHP, battler.hp, battler.mhp));
+        }
+        else
+        {
+            hpSlider.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+            StartCoroutine(AnimateHPSlider(hpSlider.transform.GetChild(2).GetComponent<RectTransform>(), hpSlider.transform.GetChild(1).GetComponent<RectTransform>().offsetMin, hpText, startingHP, battler.hp, battler.mhp));
+        }
     }
 
     //Adjusts a battler's HP slider value on the enemy overview panel based on their current hp.
@@ -389,9 +398,16 @@ public class BattleSystem : MonoBehaviour
         int startingHP = int.Parse(hpText.text.Split('/')[0]);
         Slider hpSlider = enemyHPSliders[battler.GetPartyPosition()];
 
-        hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
-    
-        StartCoroutine(AnimateHPSlider(hpSlider.transform.GetChild(1).GetComponent<RectTransform>(), hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin, hpText, startingHP, battler.hp, battler.mhp));
+        if (startingHP > battler.hp)
+        {
+            hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+            StartCoroutine(AnimateHPSlider(hpSlider.transform.GetChild(1).GetComponent<RectTransform>(), hpSlider.transform.GetChild(2).GetComponent<RectTransform>().offsetMin, hpText, startingHP, battler.hp, battler.mhp));
+        }
+        else
+        {
+            hpSlider.transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+            StartCoroutine(AnimateHPSlider(hpSlider.transform.GetChild(2).GetComponent<RectTransform>(), hpSlider.transform.GetChild(1).GetComponent<RectTransform>().offsetMin, hpText, startingHP, battler.hp, battler.mhp));
+        }
     }
 
     private IEnumerator AnimateHPSlider(RectTransform bar, Vector2 newPos, TMP_Text hpText, int startHP, int newHP, int mhp)
@@ -708,14 +724,14 @@ public class BattleSystem : MonoBehaviour
         DestroyImmediate(currentPointer);
         ClearMessageBox();
 
-        if(IsPlayerVictory())
+        if (IsPlayerVictory())
             PlayerVictory();
-        else if(IsPlayerPartyFled())
+        else if (IsPlayerPartyFled())
             PlayerFlee();
-        else if(IsPlayerDefeat())
-            PlayerDefeat();
-
-        StartCoroutine(DetermineNextBattler());
+        else if (IsPlayerDefeat())
+            StartCoroutine(PlayerDefeat());
+        else
+            StartCoroutine(DetermineNextBattler());
     }
 
     IEnumerator EnemyTurn()
@@ -811,9 +827,9 @@ public class BattleSystem : MonoBehaviour
         else if(IsPlayerPartyFled())
             PlayerFlee();
         else if(IsPlayerDefeat())
-            PlayerDefeat();
-
-        StartCoroutine(DetermineNextBattler());
+            StartCoroutine(PlayerDefeat());
+        else
+            StartCoroutine(DetermineNextBattler());
     }
 
     IEnumerator GoIntoPinch()
@@ -936,9 +952,13 @@ public class BattleSystem : MonoBehaviour
         SceneManager.LoadScene("sceneTutorialLevel");
     }
 
-    private void PlayerDefeat()
+    private IEnumerator PlayerDefeat()
     {
-        SceneManager.LoadScene("sceneMain");
+        StartCoroutine(BGMManager.instance.FadeOutBGM(2f));
+        fadeOutToBlack.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("sceneDefeat");
     }
 
     private void PlayerFlee()
