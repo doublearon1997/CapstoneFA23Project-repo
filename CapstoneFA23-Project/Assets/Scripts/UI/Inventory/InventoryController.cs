@@ -123,6 +123,16 @@ public class InventoryController : MonoBehaviour
         updateInventory();
     }
 
+    public void removeItemSelectedAll()
+    {
+        if (selectedPanel != null && activeDrag==1)
+        {
+            int tID = inventoryArray[selectedPanel, 1];
+            int tQuantity = inventoryArray[selectedPanel, 2];
+            removeItem(tID, tQuantity);
+        }
+    }
+
     public bool searchInventory(int inID, int inQuantity)
     {
         bool foundItem = false;

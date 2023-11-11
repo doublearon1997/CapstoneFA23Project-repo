@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674c2de3d9c1d824eb005fb543b11777, type: 3}
+  m_Name: OM Jenkins
+  m_EditorClassIdentifier: 
+  characterID: 5
+  characterImage: {fileID: 21300000, guid: 1f15a15275eae2e4c8a330b18ec55988, type: 3}
+  characterName: OM Jenkins
+  description: 
+  charClass: {fileID: 11400000, guid: b6f1dfce09d98d6bb8c93f31b51a914d, type: 2}
+  level: 0
+  exp: 0
+  hp: 120
+  mhp: 120
+  str: 30
+  wil: 70
+  ini: 45
+  def: 0.1
+  res: 0.1
+  crt: 0.01
+  skills: []
