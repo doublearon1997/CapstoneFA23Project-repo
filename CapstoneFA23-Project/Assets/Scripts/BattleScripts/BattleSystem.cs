@@ -36,6 +36,8 @@ public class BattleSystem : MonoBehaviour
     //Current Encounter: Set when battle is loaded in.
     public static Encounter currentEncounter = null;
 
+    //public static Party currentParty = null;
+
     //Player Overview Panel Objects
     public GameObject[] playerContainers, playerOverviewPortraits;
     public TMP_Text[] playerNameTexts, playerClassLevelTexts, playerHPTexts;
