@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BlunderBuss
   m_EditorClassIdentifier: 
   itemID: 2
-  category: 0
   value: 150
+  category: 2
   itemImage: {fileID: 21300000, guid: 43f6bb4e3603fc349bf478c95a6ee81c, type: 3}
-  itemName: BlunderBuss
+  itemName: Blunderbuss
   description: 
