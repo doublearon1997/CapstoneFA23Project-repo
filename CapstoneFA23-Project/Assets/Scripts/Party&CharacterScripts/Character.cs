@@ -27,6 +27,8 @@ public class Character : ScriptableObject
 
     public void Awake()
     {
+        //Load exp and maybe other data from savefile here. 
+
         mhp = (int)(charClass.sMhp * Math.Pow(1.1, level-1));
         hp = mhp;
         str = (int)(charClass.sStr * Math.Pow(1.1, level-1));
@@ -35,6 +37,9 @@ public class Character : ScriptableObject
         def = charClass.sDef;
         res = charClass.sRes;
         crt = charClass.sCrt;
+
+        level = LevelingData.DetermineLevel(exp);
+
     }
 }
 

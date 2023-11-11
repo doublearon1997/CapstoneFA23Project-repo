@@ -102,7 +102,7 @@ public class InventoryController : MonoBehaviour
                 }
             }
         }
-        updateInventoryUI();
+        updateInventory();
     }
 
     public void removeItem(int inID, int inQuantity)
@@ -120,7 +120,24 @@ public class InventoryController : MonoBehaviour
                 break;
             }
         }
-        updateInventoryUI();
+        updateInventory();
+    }
+
+    public bool searchInventory(int inID, int inQuantity)
+    {
+        bool foundItem = false;
+        for (int i = 0; i < inventoryArray.GetLength(0); i++)
+        {
+            if (inventoryArray[i, 1] == inID)
+            {
+                if(inventoryArray[i, 2] >= inQuantity)
+                {
+                    foundItem = true;
+                    break;
+                }
+            }
+        }
+        return foundItem;
     }
     
     public Dictionary<Item,int> GetItemList()
@@ -140,7 +157,7 @@ public class InventoryController : MonoBehaviour
         return tempListItems;
     }
     //inventory UI
-    public void updateInventoryUI()
+    public void updateInventory()
     {
         //update inventory UI: slot number with corresponding image and quantity
         for (int panelID = 0; panelID < panelArray.GetLength(0); panelID++)
@@ -170,6 +187,7 @@ public class InventoryController : MonoBehaviour
                 panelArray[panelID].transform.GetChild(0).gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             }
         }
+        writeInventoryData();
     }
     
     public void swapPanelData()
