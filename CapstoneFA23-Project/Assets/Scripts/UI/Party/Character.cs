@@ -10,7 +10,7 @@ public class Character : ScriptableObject
     public Sprite characterImage;
     public string characterName, description;
 
-    public CharacterClass charClass;
+    public CharacterClass charClass = null;
 
     public int level;
     public int exp;
@@ -25,7 +25,7 @@ public class Character : ScriptableObject
     //Skills
     public List<Skill> skills;
 
-    public void Awake()
+    /*public void Awake()
     {
         mhp = (int)(charClass.sMhp * Math.Pow(1.1, level-1));
         hp = mhp;
@@ -35,7 +35,7 @@ public class Character : ScriptableObject
         def = charClass.sDef;
         res = charClass.sRes;
         crt = charClass.sCrt;
-    }
+    }*/
 
 }
 
