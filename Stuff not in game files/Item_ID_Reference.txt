@@ -1,0 +1,56 @@
+Categories
+0 = Other; 1 = Consumable; 2 = Equipable
+------------------------------------------
+------------------------------------------
+ItemID, Name
+------------------------------------------
+------------------------------------------
+0|Other
+------------------------------------------
+0, 
+1, Coins
+2, Blunderbuss
+3, Statue of Gorgon
+4, Love Letter
+5, 
+6, 
+7, 
+8, 
+9, 
+------------------------------------------
+1|Consumable
+------------------------------------------
+10, Apple
+11, Potato
+12, Banana
+13, Mushroom
+14, Pickle
+15, Cheese Wedge
+16, Cookie
+17, Cake Slice
+18, Canned Fish
+19, 
+20, Hot Pepper
+21, Health Potion
+22, Stamina Potion
+23, Holy Water
+24, Insta Death
+25, 
+26, 
+27, 
+28, 
+29, 
+------------------------------------------
+2|Equipable; 
+------------------------------------------
+30, Archmages Robes
+31, Iron Helmet
+32, Iron Boots
+33, Heavy Armor
+34, Iron Gauntlets
+35, Ring of the Moon
+36, Ring of the Beast
+37, Amulet of the Wild
+38, Amulet of the Treasurer
+39, 
+40, 
