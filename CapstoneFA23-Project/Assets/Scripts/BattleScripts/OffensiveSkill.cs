@@ -107,8 +107,6 @@ public class OffensiveSkill : Skill
 
             int finalDamage = (int)damage;
 
-            target.TakeDamage(finalDamage, battle);
-
             bool[] displayFlags = ApplyEffects(user, target, battle);
             List<GameObject> effectNotificationQueue = new List<GameObject>();
             List<string> effectSoundEffectQueue = new List<string>();
@@ -143,18 +141,25 @@ public class OffensiveSkill : Skill
                         skillCooldowns[key] -= 1;
             }
             skillCooldowns[this] = this.cooldown;
-            battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations));
+            battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations, soundEffectHitDelay));
         }  
         else 
         {
-            battle.StartCoroutine(battle.FinishEnemyTurn(maxAdditionalAnimations));
+            battle.StartCoroutine(battle.FinishEnemyTurn(maxAdditionalAnimations, soundEffectHitDelay));
         } 
     }
 
     IEnumerator DisplayAnimations(int damage, Battler target, BattleSystem battle, AttackResult result, List<GameObject> effectNotificationQueue, List<string> effectSoundEffectQueue)
     {
-        DisplayDamageText(damage, target, battle, result);
+        SEManager.instance.PlaySE(soundEffect);
+        yield return new WaitForSeconds(soundEffectHitDelay);
 
+        target.TakeDamage(damage, battle);
+        
+        if(hitSoundEffect != null)
+            SEManager.instance.PlaySE(hitSoundEffect);
+            
+        DisplayDamageText(damage, target, battle, result);
         yield return new WaitForSeconds(1.7f);
 
         for(int i = 0; i< effectNotificationQueue.Count; i++)
