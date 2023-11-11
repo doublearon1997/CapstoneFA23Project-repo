@@ -30,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Islands/sceneTowerIsland.unity
     guid: 38cd06ba572d8304784f820f7e19ada4
   - enabled: 1
-    path: Assets/Scenes/Islands/sceneCoveIsland.unity
+    path: Assets/Scenes/Islands/sceneCoveInside.unity
     guid: efaecb890c788df44baf222bbdf5cea1
   m_configObjects: {}

@@ -251,7 +251,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -268,13 +268,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -385,6 +385,114 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &200517949746375753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6106698273929753126}
+  - component: {fileID: 8722143572173469329}
+  m_Layer: 0
+  m_Name: InventoryController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6106698273929753126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200517949746375753}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960, y: -540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1749305198063342320}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8722143572173469329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200517949746375753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2729330edcb80cd4bb798eacd76ae05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedPanel: 0
+  targetPanel: 0
+  activeDrag: 0
+  swappable: 0
+  panelArray:
+  - {fileID: 6842647635094555315}
+  - {fileID: 1990403267957044618}
+  - {fileID: 8530950406449471681}
+  - {fileID: 2237492325447660280}
+  - {fileID: 5510972163394954841}
+  - {fileID: 1347514034540817618}
+  - {fileID: 1643437806825489336}
+  - {fileID: 8599013618922982262}
+  - {fileID: 212786627351791182}
+  - {fileID: 7391411562369701958}
+  - {fileID: 8823625663205150952}
+  - {fileID: 5221798671540943296}
+  - {fileID: 1272053949748187628}
+  - {fileID: 3038330463378058031}
+  - {fileID: 2499790553850072819}
+  - {fileID: 368499863730120938}
+  - {fileID: 871027558135230814}
+  - {fileID: 7045965912491593670}
+  - {fileID: 7764489866677770566}
+  - {fileID: 3848143141556948705}
+  - {fileID: 437063465286014821}
+  - {fileID: 8464488104670187618}
+  - {fileID: 3228155396504432373}
+  - {fileID: 3796082603735847973}
+  - {fileID: 7397382380848310574}
+  - {fileID: 3233475264122381023}
+  - {fileID: 8657697917854505014}
+  - {fileID: 7622770293982073642}
+  - {fileID: 6378915709238379166}
+  - {fileID: 5197818489745606936}
+  listItems:
+  - {fileID: 11400000, guid: 26a2a4fac5d825a438d2090bdd452578, type: 2}
+  - {fileID: 11400000, guid: 87eb69d32ecdc8d4f858e98dc828f445, type: 2}
+  - {fileID: 11400000, guid: 104c1afadca791a42ba9269df54c41b2, type: 2}
+  - {fileID: 11400000, guid: 3bd517aeb4d8adb40b449c1bce362de3, type: 2}
+  - {fileID: 11400000, guid: fb9bc5b026c76f640b02059c112f1394, type: 2}
+  - {fileID: 11400000, guid: ce9d6062fb66d2f4988e20bc941f9ad4, type: 2}
+  - {fileID: 11400000, guid: b8c8276ea8db55c47bc8e2bc81db7019, type: 2}
+  - {fileID: 11400000, guid: 10b6cd284dc74a04da9b10234da357cf, type: 2}
+  - {fileID: 11400000, guid: 5c2e137562cb2f44db75baa5957dfa7c, type: 2}
+  - {fileID: 11400000, guid: 32457bdec8e2c9b4c8bb727b06f028c3, type: 2}
+  - {fileID: 11400000, guid: 322469fa020547e429b9d2c05408b2b5, type: 2}
+  - {fileID: 11400000, guid: 9eeb75c265d55114d95d0ee583902432, type: 2}
+  - {fileID: 11400000, guid: 2f272e3a9507a5e4c974c0378b4db5aa, type: 2}
+  - {fileID: 11400000, guid: 1ac9110c9faef79468da3fd72fc47352, type: 2}
+  - {fileID: 11400000, guid: 8e0e877a78a4ff3478bc12401d0f773e, type: 2}
+  - {fileID: 11400000, guid: e0de003fc48f56245b822e41fd8a1ed1, type: 2}
+  - {fileID: 11400000, guid: 5781b8eff6633954d9c8ab4da735d769, type: 2}
+  - {fileID: 11400000, guid: 6eaddb341ddc2eb478a5eb5dabd527e6, type: 2}
+  - {fileID: 11400000, guid: d825bb1808008394a99d153a3deda014, type: 2}
+  - {fileID: 11400000, guid: 469378249cdbf334089f66f58c36f10a, type: 2}
+  - {fileID: 11400000, guid: 2808d5a1879554246b69370afe9bf70f, type: 2}
+  - {fileID: 11400000, guid: 264e115f5852b9d42bf31131ba53b02d, type: 2}
+  - {fileID: 11400000, guid: ae966832032a132439d24a506cc0c008, type: 2}
+  - {fileID: 11400000, guid: 38ae055c91989b749a753e0eb1cb0aff, type: 2}
+  - {fileID: 11400000, guid: afd127dd40f0d9b40999d19b7e73d46d, type: 2}
+  - {fileID: 11400000, guid: abc1fc915c37a9c47a508715035f564d, type: 2}
+  - {fileID: 11400000, guid: 2f3edf34d4329b748b8dfbdbfdb258d7, type: 2}
+  dragObject: {fileID: 6168523935830086738}
 --- !u!1 &212786627351791182
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +587,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -495,7 +603,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -511,7 +619,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -617,7 +725,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -633,7 +741,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -649,7 +757,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -755,7 +863,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -771,7 +879,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -787,7 +895,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -874,7 +982,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -891,13 +999,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1027,7 +1135,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -1043,7 +1151,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -1059,7 +1167,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -1219,7 +1327,7 @@ GameObject:
   - component: {fileID: 2745405249274044772}
   - component: {fileID: 6449652348535204763}
   m_Layer: 5
-  m_Name: buttonTeam
+  m_Name: buttonParty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1543,7 +1651,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -1559,7 +1667,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -1575,7 +1683,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -1600,7 +1708,7 @@ GameObject:
   - component: {fileID: 7519864014660605207}
   - component: {fileID: 6441339247125453942}
   m_Layer: 5
-  m_Name: TeamInvMenu
+  m_Name: PartyInvMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1775,7 +1883,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -1791,7 +1899,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -1807,7 +1915,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -2003,7 +2111,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -2019,7 +2127,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -2035,7 +2143,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -2122,7 +2230,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2139,13 +2247,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2682,7 +2790,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -2698,7 +2806,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -2714,7 +2822,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -2820,7 +2928,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -2836,7 +2944,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -2852,7 +2960,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -2939,7 +3047,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2956,13 +3064,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3288,7 +3396,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -3304,7 +3412,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -3320,7 +3428,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -3407,7 +3515,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3424,13 +3532,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3641,7 +3749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Team
+  m_text: Party
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3850,19 +3958,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: writeInventoryData
           m_Mode: 1
@@ -3875,8 +3971,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: LoadingScene, Assembly-CSharp
-          m_MethodName: LoadScene
+          m_TargetAssemblyTypeName: LoadingSceneManagerInstance, Assembly-CSharp
+          m_MethodName: loadScene
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4005,7 +4101,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4022,13 +4118,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4158,7 +4254,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -4174,7 +4270,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -4190,7 +4286,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -4295,7 +4391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7840584918580152901
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4310,6 +4406,7 @@ RectTransform:
   m_Children:
   - {fileID: 9149233699851539710}
   - {fileID: 4407195797301579740}
+  - {fileID: 4951081528607046536}
   m_Father: {fileID: 5730866599617403022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4443,7 +4540,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4460,13 +4557,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4596,7 +4693,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -4612,7 +4709,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -4628,7 +4725,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -4715,7 +4812,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4732,13 +4829,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4774,6 +4871,143 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2364315842248238505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4951081528607046536}
+  - component: {fileID: 5434076206558422765}
+  - component: {fileID: 4376694898798021238}
+  - component: {fileID: 6579059519307165708}
+  m_Layer: 5
+  m_Name: PanelTrashCan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4951081528607046536
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364315842248238505}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7840584918580152901}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -583.61, y: -353.9}
+  m_SizeDelta: {x: -1281.1895, y: -471.2349}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5434076206558422765
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364315842248238505}
+  m_CullTransparentMesh: 1
+--- !u!114 &4376694898798021238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364315842248238505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 50d9411bebdf5b34987b1d4bbd42eaa0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6579059519307165708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364315842248238505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4376694898798021238}
+          m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_MethodName: set_sprite
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 21300000, guid: de1d8684547b4f246a653e9e57f933c5, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4376694898798021238}
+          m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_MethodName: set_sprite
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 21300000, guid: 50d9411bebdf5b34987b1d4bbd42eaa0, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 6
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8722143572173469329}
+          m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
+          m_MethodName: removeItemSelectedAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2499790553850072819
 GameObject:
   m_ObjectHideFlags: 0
@@ -4868,7 +5102,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -4884,7 +5118,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -4900,7 +5134,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -4987,7 +5221,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5004,13 +5238,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5437,7 +5671,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -5453,7 +5687,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -5469,7 +5703,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -5556,7 +5790,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5573,13 +5807,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5709,7 +5943,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -5725,7 +5959,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -5741,7 +5975,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -5847,7 +6081,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -5863,7 +6097,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -5879,7 +6113,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -6071,7 +6305,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
           m_MethodName: updateInventory
           m_Mode: 1
@@ -6083,7 +6317,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: updatePartyUI
           m_Mode: 1
@@ -6162,7 +6396,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.00013638, y: -29.757}
-  m_SizeDelta: {x: 119.1, y: 59.513}
+  m_SizeDelta: {x: 119.1, y: 59.514}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6807457089500890861
 CanvasRenderer:
@@ -6202,7 +6436,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6219,13 +6453,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -6336,7 +6570,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6353,13 +6587,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -6470,7 +6704,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6487,13 +6721,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -6623,7 +6857,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -6639,7 +6873,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -6655,7 +6889,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -6761,7 +6995,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -6777,7 +7011,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -6793,7 +7027,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -7014,7 +7248,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7031,13 +7265,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7148,7 +7382,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7165,13 +7399,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7282,7 +7516,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7299,13 +7533,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7416,7 +7650,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7433,13 +7667,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7550,7 +7784,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7567,13 +7801,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7818,7 +8052,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7835,13 +8069,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8115,7 +8349,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8132,13 +8366,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8249,7 +8483,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8266,13 +8500,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8383,7 +8617,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8400,13 +8634,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8536,7 +8770,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -8552,7 +8786,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -8568,7 +8802,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -8674,7 +8908,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -8690,7 +8924,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -8706,7 +8940,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -8812,7 +9046,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -8828,7 +9062,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -8844,7 +9078,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -9055,7 +9289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Team
+  m_text: Party
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9333,7 +9567,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9350,13 +9584,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -9541,7 +9775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1749305198063342320
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9554,6 +9788,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6106698273929753126}
+  - {fileID: 277248199913333954}
   - {fileID: 1730656025369939806}
   - {fileID: 118941580826297086}
   - {fileID: 5730866599617403022}
@@ -9578,7 +9814,7 @@ GameObject:
   - component: {fileID: 988292064062596311}
   - component: {fileID: 6736714147009705252}
   m_Layer: 5
-  m_Name: TeamMenu
+  m_Name: PartyMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9656,6 +9892,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+--- !u!1 &5899397230286849862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 277248199913333954}
+  - component: {fileID: 8214207710707405546}
+  m_Layer: 0
+  m_Name: PartyController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &277248199913333954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899397230286849862}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -76.627075, y: 13.799744, z: 3.0923414}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1749305198063342320}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8214207710707405546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899397230286849862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5ba2a8292093445b46415bbe2fc18c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedPanel: 0
+  targetPanel: 0
+  activeDrag: 0
+  swappable: 0
+  panelArray:
+  - {fileID: 8051764908314273291}
+  - {fileID: 906694868810951592}
+  - {fileID: 782843674430034422}
+  - {fileID: 6930940740984793721}
+  - {fileID: 601200486640567427}
+  - {fileID: 8459044990748585222}
+  listCharacters:
+  - {fileID: 11400000, guid: fc3e3f0750b4c5f429ba104d4be4bdba, type: 2}
+  - {fileID: 11400000, guid: 898644621b049d844b647785eff1a200, type: 2}
+  - {fileID: 11400000, guid: 91e3a4e2ea7ceb24baadedacd8480f83, type: 2}
+  - {fileID: 11400000, guid: 9e6c91f59f8fce045b23acc181e0ab78, type: 2}
+  - {fileID: 11400000, guid: 268938f019fc55243a2c43d60c0b8054, type: 2}
+  dragObject: {fileID: 8539240078514347538}
 --- !u!1 &6160416737147523328
 GameObject:
   m_ObjectHideFlags: 0
@@ -9731,7 +10029,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9748,13 +10046,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10093,7 +10391,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -10109,7 +10407,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -10125,7 +10423,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -10346,7 +10644,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10363,13 +10661,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10499,7 +10797,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -10515,7 +10813,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -10531,7 +10829,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -10618,7 +10916,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10635,13 +10933,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10771,7 +11069,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -10787,7 +11085,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -10803,7 +11101,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -10984,7 +11282,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -11000,7 +11298,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -11016,7 +11314,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -11524,7 +11822,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -11540,7 +11838,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -11556,7 +11854,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -11662,7 +11960,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -11678,7 +11976,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -11694,7 +11992,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -12020,7 +12318,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -12036,7 +12334,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -12052,7 +12350,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -12078,7 +12376,7 @@ GameObject:
   - component: {fileID: 7390621458361579955}
   - component: {fileID: 8711913739710385720}
   m_Layer: 5
-  m_Name: buttonTeam
+  m_Name: buttonParty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12321,7 +12619,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -12337,7 +12635,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -12353,7 +12651,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -12440,7 +12738,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12457,13 +12755,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -12574,7 +12872,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12591,13 +12889,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -12727,7 +13025,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -12743,7 +13041,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -12759,7 +13057,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -13074,7 +13372,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -13090,7 +13388,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -13106,7 +13404,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8214207710707405546}
           m_TargetAssemblyTypeName: PartyController, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -13212,7 +13510,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -13228,7 +13526,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -13244,7 +13542,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -13350,7 +13648,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -13366,7 +13664,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -13382,7 +13680,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -13544,7 +13842,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13561,13 +13859,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -13763,7 +14061,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -13779,7 +14077,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -13795,7 +14093,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -13901,7 +14199,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -13917,7 +14215,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -13933,7 +14231,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
@@ -14020,7 +14318,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14037,13 +14335,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -14264,7 +14562,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setSelectedPanel
           m_Mode: 3
@@ -14280,7 +14578,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: stopDrag
           m_Mode: 1
@@ -14296,7 +14594,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 8722143572173469329}
           m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
           m_MethodName: setTargetPanel
           m_Mode: 3
