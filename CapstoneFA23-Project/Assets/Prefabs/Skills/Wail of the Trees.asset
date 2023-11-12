@@ -24,4 +24,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 890534a48e1e794478ca650a1c71286b, type: 2}
   - {fileID: 11400000, guid: 810effc7f1b1f6a40855925f50b40fdf, type: 2}
+  soundEffect: {fileID: 8300000, guid: cab51c7bd2a3873449439fc6d399953f, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 256c0aab68f543c4fae2dd817c59a36a, type: 3}
+  soundEffectHitDelay: 2.5
   dmgMod: 0.8

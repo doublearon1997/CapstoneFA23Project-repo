@@ -12,7 +12,7 @@ public class HealEffect : Effect
     public double healPower = 0;
     public PowerType powerType = PowerType.Will;
 
-    public override bool ApplyEffect(Battler user, Battler target, BattleSystem battle)
+    public override bool ApplyEffect(Battler user, Battler target, Skill skill, BattleSystem battle)
     {
         double hpHealed = 0;
         if(healPercentage > 0)
@@ -27,17 +27,14 @@ public class HealEffect : Effect
                 hpHealed += healPower * (double)user.GetCurrStr();
         }
 
-        target.HealBattler((int)hpHealed, battle);
-        DisplayHealText((int)hpHealed, target, battle);
+        battle.StartCoroutine(DisplayHealText((int)hpHealed, target, skill, battle));
 
         return true;
     }
 
     public override string GetEffectStatsString()
     {
-        string powerString = "";
-        string percentString = "";
-        string amountString = "";
+        string powerString = "", percentString = "", amountString = "";
         string returnString = "Heal (";
 
         if(healPower > 0)
@@ -62,9 +59,13 @@ public class HealEffect : Effect
         
     }
 
-    public void DisplayHealText(int hpHealed, Battler target, BattleSystem battle)
+    public IEnumerator DisplayHealText(int hpHealed, Battler target, Skill skill, BattleSystem battle)
     {
         string displayString = "" + hpHealed;
+
+        yield return new WaitForSeconds(skill.soundEffectHitDelay);
+
+        target.HealBattler((int)hpHealed, battle);
 
         GameObject damageTextContainer = Instantiate(battle.healTextPopup, target.gameObject.transform);
         damageTextContainer.transform.GetChild(0).GetComponent<TMP_Text>().text = displayString;

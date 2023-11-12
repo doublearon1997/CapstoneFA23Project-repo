@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Islands/sceneCoveInside.unity
     guid: efaecb890c788df44baf222bbdf5cea1
+  - enabled: 1
+    path: Assets/Scenes/sceneDefeat.unity
+    guid: 488b162c1a64c534e8b529243143b568
   m_configObjects: {}

@@ -17,7 +17,7 @@ public class Debuff : BuffEffect
         return returnString;
     }
 
-    public override bool ApplyEffect(Battler user, Battler target, BattleSystem battle)
+    public override bool ApplyEffect(Battler user, Battler target, Skill skill, BattleSystem battle)
     {
         if (!target.buffEffects.ContainsKey(this)) //don't reapply buff. change later.
         {

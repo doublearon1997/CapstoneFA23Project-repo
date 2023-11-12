@@ -8,7 +8,7 @@ using TMPro;
 public class Fleeffect : Effect
 {
     
-    public override bool ApplyEffect(Battler user, Battler target, BattleSystem battle)
+    public override bool ApplyEffect(Battler user, Battler target, Skill skill, BattleSystem battle)
     {
         user.Flee(battle);
         
