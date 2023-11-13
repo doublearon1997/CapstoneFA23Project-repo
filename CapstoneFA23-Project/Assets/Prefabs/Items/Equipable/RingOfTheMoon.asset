@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RingOfTheMoon
   m_EditorClassIdentifier: 
   itemID: 35
-  category: 2
   value: 160
+  category: 1
   itemImage: {fileID: 21300000, guid: 02640a3b928ce0e4499dc78e6c0d9faf, type: 3}
   itemName: RingOfTheMoon
   description: 

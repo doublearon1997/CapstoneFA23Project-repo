@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class Item : ScriptableObject
 {
-    public int itemID, category, value;
+    public enum ItemCategory {Consumable, Equippable, Other };
+
+    public int itemID, value;
+    public ItemCategory category;
     public Sprite itemImage;
     public string itemName, description;
     
