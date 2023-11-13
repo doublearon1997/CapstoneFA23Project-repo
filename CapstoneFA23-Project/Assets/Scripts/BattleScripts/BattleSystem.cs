@@ -1,4 +1,5 @@
 using System.CodeDom;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
-    public List<GameObject> startingPlayerBattlerGOs;
+    public GameObject playerBattler;
     public List<PlayerBattler> startingPlayerBattlers;
     public List<EnemyBattler> startingEnemyBattlers;
 
@@ -33,10 +34,11 @@ public class BattleSystem : MonoBehaviour
 
     private bool inPinch = false;
 
+    public InventoryController inventory;
+    public PartyController party;
+
     //Current Encounter: Set when battle is loaded in.
     public static Encounter currentEncounter = null;
-
-    //public static Party currentParty = null;
 
     //Player Overview Panel Objects
     public GameObject[] playerContainers, playerOverviewPortraits;
@@ -67,7 +69,7 @@ public class BattleSystem : MonoBehaviour
 
     public Dictionary<Battler, GameObject> battlerTurnOrderObjects = new Dictionary<Battler, GameObject>();
 
-    SortedSet<Battler> currentlyActingBattlers;
+    SortedSet<Battler> currentlyActingBattlers = new SortedSet<Battler>(new BattlerAPComparator());
     public Battler currentlyActingBattler;
 
     //Player Action Buttons
@@ -82,6 +84,9 @@ public class BattleSystem : MonoBehaviour
     //Tactic Selection Panel
     public GameObject panelTacticSelection;
     public SupportSkill fleeSkill;
+
+    //Item Selection Panel
+    public GameObject panelItemSelection;
 
     public GameObject imageSkillCooldown;
 
@@ -120,8 +125,6 @@ public class BattleSystem : MonoBehaviour
 
     public void Start()
     {
-        currentlyActingBattlers = new SortedSet<Battler>(new BattlerAPComparator());
-
         StartCoroutine(SetupBattle());
     }
 
@@ -133,14 +136,18 @@ public class BattleSystem : MonoBehaviour
         this.startingPlayerBattlers = new List<PlayerBattler>();
         this.startingEnemyBattlers = new List<EnemyBattler>();
 
-        for (int i = 0; i < startingPlayerBattlerGOs.Count; i++)
+        for (int i = 0; i < party.GetPartyList().Count; i++) //Make PlayerBattler GameObjects and fill them in with stats from the Characters in the Party.
         {
-            GameObject playerGO = Instantiate(startingPlayerBattlerGOs[i], playerSpawns[i]);
-            startingPlayerBattlers.Add(playerGO.GetComponent<PlayerBattler>());
-            playerBattlers.Add(playerGO.GetComponent<PlayerBattler>());
+            GameObject playerGO = Instantiate(playerBattler, playerSpawns[i]);
+            PlayerBattler battler = playerGO.GetComponent<PlayerBattler>();
+           
+            battler.LoadStatsFromCharacter(party.GetPartyList()[i]);
+            battler.SetPartyPosition(i);
 
-            playerGO.GetComponent<PlayerBattler>().ap = UnityEngine.Random.Range(0, 20000);
+            startingPlayerBattlers.Add(battler);
+            playerBattlers.Add(battler);
 
+            battler.ap = UnityEngine.Random.Range(0, 20000);
         }
 
         if(currentEncounter == null)
@@ -171,11 +178,10 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < playerBattlers.Count; i++)
         {
             PlayerBattler battler = playerBattlers[i];
-            battler.SetPartyPosition(i);
-            battler.Initialize();
-
+            string playerClassString = battler.playerClass.ToString().Split('(')[0];
+            
             playerNameTexts[i].text = battler.battlerName;
-            playerClassLevelTexts[i].text = " Lvl " + battler.level + " " + battler.playerClass;
+            playerClassLevelTexts[i].text = " Lvl " + battler.level + " " + playerClassString.Substring(0, playerClassString.Length-1);
             playerHPTexts[i].text = "" + battler.hp + "/" + battler.mhp;
 
             playerHPSliders[i].maxValue = battler.mhp;
@@ -187,7 +193,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    //This method profilerates the overview panel with information about the party's battlers. 
+    //This method profilerates the overview panel with information about the enemy battlers. 
     public void SetupEnemyOverviewPanel()
     {
         for (int i = 0; i < enemyBattlers.Count; i++)
@@ -208,7 +214,7 @@ public class BattleSystem : MonoBehaviour
     // Displays the current turn order on the turn order panel.
     private void SetTurnOrderPanel()
     {
-        clearTurnOrderPanel();
+        ClearTurnOrderPanel();
         battlerTurnOrderObjects.Clear();
 
         List<Battler> turnOrder = DetermineCurrentTurnOrder();
@@ -251,7 +257,7 @@ public class BattleSystem : MonoBehaviour
     // Displays the temporary turn order on the turn order panel, when a player has a skill selected or a battler is using a skill, but not before the end of the turn.
     public void SetTemporaryTurnOrderPanel(Skill skill)
     {
-        clearTurnOrderPanel();
+        ClearTurnOrderPanel();
         battlerTurnOrderObjects.Clear();
 
         List<Battler> turnOrder = DetermineCurrentTurnOrder(skill);
@@ -291,13 +297,11 @@ public class BattleSystem : MonoBehaviour
     }
 
     //Clears the turn order panel of turn order portraits.
-    private void clearTurnOrderPanel()
+    private void ClearTurnOrderPanel()
     {
         while (panelTurnOrder.transform.childCount > 0)
-        {
             DestroyImmediate(panelTurnOrder.transform.GetChild(0).gameObject);
-        }
-
+        
         tempTurnOrder = false;
     }
 
@@ -620,6 +624,79 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public void ItemsButtonPress()
+    {
+        buttonItems.interactable = false;
+        ReturnAnyPlayerActionHandlers();
+
+        SetItemSelectionPanel();
+        buttonItemsPressed = true;
+        hotkeyManager.AddComponent<ItemsButtonSelectedHotkeys>().Initialize(this);
+        panelItemSelection.SetActive(true);
+
+        DisplayMessage("Select an item.");
+    }
+
+    public void ItemsButtonReturn()
+    {
+        buttonItems.interactable = true;
+        buttonItemsPressed = false;
+        Destroy(hotkeyManager.GetComponent<ItemsButtonSelectedHotkeys>());
+
+        panelItemSelection.SetActive(false);
+        ClearItemSelectionPanel();
+    }
+
+    public void SetItemSelectionPanel()
+    {
+        //Filter out any items that are not consumable or have none in the inventory.
+        Dictionary<Item, int> items = inventory.GetItemList().Where(item => item.Key.category == Item.ItemCategory.Consumable && item.Value > 0).ToDictionary(item => item.Key, item => item.Value);
+
+        int itemRows = (int)(Math.Ceiling((double)items.Count / 3.0));
+
+        GameObject panelImage = panelItemSelection.transform.GetChild(0).gameObject;
+        panelImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, 59.0f * (itemRows -1));
+        panelImage.GetComponent<RectTransform>().sizeDelta = new Vector2(400, itemRows * 119);
+
+        float xPos = 80.0f, yPos = -60.0f + (119 * (itemRows-1));
+        int currItemCount = 0;
+
+        foreach (Item item in items.Keys)
+        {
+            currItemCount += 1;
+            CreateItemButton((ConsumableItem)item, items[item], (PlayerBattler)currentlyActingBattler, xPos, yPos);
+
+            if (currItemCount % 3 == 0)
+            {
+                xPos = 80.0f;
+                yPos -= 119.0f;
+            }
+            else
+                xPos += 119.0f;
+        }
+    }
+
+    public void ClearItemSelectionPanel()
+    {
+        while(panelItemSelection.transform.childCount > 2)
+            DestroyImmediate(panelItemSelection.transform.GetChild(2).gameObject);
+    }
+
+    private void CreateItemButton(ConsumableItem item, int quantity, PlayerBattler battler, float xPos, float yPos)
+    {
+        GameObject itemButton = Instantiate(buttonSkill, panelItemSelection.transform) as GameObject;
+
+        SupportItemSkill itemSkill = null;
+
+        if(item.isSupportItem)
+        {
+            itemSkill = (SupportItemSkill)(SupportItemSkill.CreateInstance("SupportItemSkill"));
+            itemSkill.Initialize(item, quantity);
+        }
+            
+        itemButton.GetComponent<SkillButton>().Initialize(itemSkill, battler, this);
+        itemButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
+    }
 
     private void CreateSkillButton(Skill skill, PlayerBattler battler, float xPos, float yPos)
     {
@@ -660,6 +737,8 @@ public class BattleSystem : MonoBehaviour
             SkillsButtonReturn();
         else if(buttonTacticsPressed)
             TacticsButtonReturn();
+        else if(buttonItemsPressed)
+            ItemsButtonReturn();
     }
 
     IEnumerator PlayerTurn()
@@ -691,6 +770,7 @@ public class BattleSystem : MonoBehaviour
         panelPlayerActions.SetActive(false);
         panelSkillSelection.SetActive(false);
         panelTacticSelection.SetActive(false);
+        panelItemSelection.SetActive(false);
 
         RemoveInfoHovers();
 
@@ -876,6 +956,7 @@ public class BattleSystem : MonoBehaviour
         Destroy(hotkeyManager.GetComponent<SkillsButtonSelectedHotkeys>());
         Destroy(hotkeyManager.GetComponent<AttackButtonSelectedHotkeys>());
         Destroy(hotkeyManager.GetComponent<TacticsButtonSelectedHotkeys>());
+        Destroy(hotkeyManager.GetComponent<ItemsButtonSelectedHotkeys>());
     }
 
     public void DisplayMessage(string message)
