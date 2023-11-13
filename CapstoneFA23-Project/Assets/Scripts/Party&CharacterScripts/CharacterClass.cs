@@ -8,4 +8,8 @@ public class CharacterClass : ScriptableObject
     public string className;
     public int sMhp, sStr, sWil, sIni;
     public double sDef, sRes, sCrt;
+
+    public OffensiveSkill standardAttack;
+
+    public List<Skill> startingSkills;
 }

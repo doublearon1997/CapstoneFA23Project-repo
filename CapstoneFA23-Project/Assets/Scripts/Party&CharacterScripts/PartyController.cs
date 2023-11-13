@@ -21,9 +21,12 @@ public class PartyController : MonoBehaviour
     string partyDataFilePath = Application.dataPath + "/Data/" + "partyData" + ".txt";
 
     // Start is called before the first frame update
-    public void Start()
+    void Start()
     {
         loadPartyData();
+
+        foreach(Character c in listCharacters)
+            c.InitializeCharacter();
     }
 
     // Update is called once per frame
@@ -104,10 +107,9 @@ public class PartyController : MonoBehaviour
         updatePartyUI();
     }
 
-    public List<Character> getPartyList()
+    public List<Character> GetPartyList()
     {
         List<Character> tempListCharacters = new List<Character>();
-        //
         for (int i = 0; i<partyArray.GetLength(0); i++)
         {
             if (partyArray[i, 1] != 0)
@@ -115,7 +117,7 @@ public class PartyController : MonoBehaviour
                 foreach(Character tCharacter in listCharacters)
                 {
                     if(tCharacter.characterID==partyArray[i,1])
-                        tempListCharacters.Add(tCharacter);
+                        tempListCharacters.Add(tCharacter); 
                 }
             }
         }

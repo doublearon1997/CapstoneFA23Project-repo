@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 30
   value: 250
-  category: 0
+  category: 1
   itemImage: {fileID: 21300000, guid: aa847fb9fadaba3468493b10437be111, type: 3}
   itemName: Archmage's Robes
   description: 

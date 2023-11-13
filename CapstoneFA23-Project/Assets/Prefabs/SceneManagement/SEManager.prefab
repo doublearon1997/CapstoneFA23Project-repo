@@ -66,6 +66,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aba48eae6f9a9764f92d8b0e06ffe288, type: 3}
   - {fileID: 8300000, guid: 64683743a4207e248b77d4ffcc9bf29d, type: 3}
   - {fileID: 8300000, guid: 39af0e665d7c20044913e2516c3ea908, type: 3}
+  - {fileID: 8300000, guid: df19c0d40df8e3c4d945e5426ecedf9e, type: 3}
+  - {fileID: 8300000, guid: 54445e9e24f22a7418627c50933a53aa, type: 3}
+  - {fileID: 8300000, guid: 3f30c7beb4f4f2d49b2adad49aaf0e15, type: 3}
+  - {fileID: 8300000, guid: 8c74f13248e40814faa2caa009be3122, type: 3}
   defaultVolumeList:
   - 0.75
   - 0.75
@@ -84,6 +88,10 @@ MonoBehaviour:
   - 0.9
   - 0.9
   - 0.9
+  - 1
+  - 0.9
+  - 0.9
+  - 1
   - 1
   - 0.9
   - 0.9
