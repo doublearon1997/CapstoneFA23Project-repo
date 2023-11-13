@@ -17,14 +17,16 @@ MonoBehaviour:
   characterName: JC Twiddler
   description: 
   charClass: {fileID: 11400000, guid: c3075c313996de8a29fbaf739e7b0c9f, type: 2}
-  level: 0
+  level: 1
   exp: 0
-  hp: 0
-  mhp: 0
-  str: 0
-  wil: 0
-  ini: 0
-  def: 0
-  res: 0
-  crt: 0
-  skills: []
+  hp: 365
+  mhp: 365
+  str: 80
+  wil: 111
+  ini: 93
+  def: 0.15
+  res: 0.22
+  crt: 0.04
+  skills:
+  - {fileID: 11400000, guid: 2b80773c2a2c7f140b1d2179951444ef, type: 2}
+  standardAttack: {fileID: 0}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e2aad5ced971a42a9e3c4fdb7659ca, type: 3}
   m_Name: RingOfTheMoon 1
   m_EditorClassIdentifier: 
-  itemID: 0
-  value: 0
-  category: 0
-  itemImage: {fileID: 0}
-  itemName: 
+  itemID: 35
+  value: 160
+  category: 1
+  itemImage: {fileID: 21300000, guid: 02640a3b928ce0e4499dc78e6c0d9faf, type: 3}
+  itemName: Ring Of The Moon
   description: 
   hpMod: 1
   strMod: 1

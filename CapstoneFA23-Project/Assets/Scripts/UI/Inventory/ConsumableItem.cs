@@ -6,5 +6,7 @@ using UnityEngine;
 public class ConsumableItem : Item
 {
     public List<Effect> effects;
+
+    public bool isSupportItem = true;
     
 }
