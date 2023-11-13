@@ -24,11 +24,10 @@ public class Character : ScriptableObject
 
     //Skills
     public List<Skill> skills;
+    public OffensiveSkill standardAttack;
 
-    public void Awake()
+    public void InitializeCharacter()
     {
-        //Load exp and maybe other data from savefile here. 
-
         mhp = (int)(charClass.sMhp * Math.Pow(1.1, level-1));
         hp = mhp;
         str = (int)(charClass.sStr * Math.Pow(1.1, level-1));
@@ -38,8 +37,56 @@ public class Character : ScriptableObject
         res = charClass.sRes;
         crt = charClass.sCrt;
 
-        level = LevelingData.DetermineLevel(exp);
+        standardAttack = charClass.standardAttack;
+        skills = charClass.startingSkills;
 
     }
+
+    public int GetCurrMHP()
+    {
+        return (int)(mhp * mhpMod);
+    }
+
+    public int GetCurrHP()
+    {
+        return hp;
+    }
+
+    public int GetCurrStr()
+    {
+        return (int)(str * strMod);
+    }
+
+    public int GetCurrWil()
+    {
+        return (int)(wil * wilMod);
+    }
+
+    public double GetCurrDef()
+    {
+        if (def + defMod < 0)
+            return 0;
+        else 
+            return def + defMod;
+    }
+
+    public double GetCurrRes()
+    {
+        if (res + resMod < 0)
+            return 0;
+        else
+            return res + resMod;
+    }
+
+    public int GetCurrIni()
+    {
+        return (int)(ini * iniMod);
+    }
+
+    public int GetCurrCrt()
+    {
+        return (int)(crt * crtMod);
+    }
+
 }
 

@@ -17,14 +17,15 @@ MonoBehaviour:
   characterName: Mike Hawk
   description: 
   charClass: {fileID: 11400000, guid: 7c0d2c8096e94de7e8a182d2896f430c, type: 2}
-  level: 0
+  level: 1
   exp: 0
-  hp: 0
-  mhp: 0
-  str: 0
-  wil: 0
-  ini: 0
-  def: 0
-  res: 0
-  crt: 0
+  hp: 495
+  mhp: 495
+  str: 110
+  wil: 78
+  ini: 102
+  def: 0.22
+  res: 0.14
+  crt: 0.05
   skills: []
+  standardAttack: {fileID: 0}

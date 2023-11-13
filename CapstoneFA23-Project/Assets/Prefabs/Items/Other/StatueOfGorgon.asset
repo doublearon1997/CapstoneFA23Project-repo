@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StatueOfGorgon
   m_EditorClassIdentifier: 
   itemID: 3
-  category: 0
   value: 300
+  category: 2
   itemImage: {fileID: 21300000, guid: 92d32bc50b88b3f478c8448aaad1b630, type: 3}
   itemName: StatueOfGorgon
   description: 

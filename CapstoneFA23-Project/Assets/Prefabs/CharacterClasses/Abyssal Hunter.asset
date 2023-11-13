@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b4fc446ccde0a4d8344543bdfc2df8, type: 3}
   m_Name: Abyssal Hunter
   m_EditorClassIdentifier: 
-  className: 
+  className: Abyssal Hunter
   sMhp: 390
   sStr: 93
   sWil: 121
@@ -20,3 +20,5 @@ MonoBehaviour:
   sDef: 0.12
   sRes: 0.19
   sCrt: 0.07
+  standardAttack: {fileID: 11400000, guid: a7f32e451920e7c45b02129f59ba73ff, type: 2}
+  startingSkills: []

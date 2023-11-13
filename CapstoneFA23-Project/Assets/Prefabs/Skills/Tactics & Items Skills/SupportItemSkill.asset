@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fb5866425cedf45a684cfa0283a6a7, type: 3}
+  m_Name: SupportItemSkill
+  m_EditorClassIdentifier: 
+  skillName: 
+  targetType: 0
+  powerType: 0
+  apMod: 1.15
+  cooldown: 0
+  portrait65: {fileID: 0}
+  portrait50: {fileID: 0}
+  portrait100: {fileID: 0}
+  isOffensive: 0
+  effects: []
+  soundEffect: {fileID: 8300000, guid: 3f30c7beb4f4f2d49b2adad49aaf0e15, type: 3}
+  hitSoundEffect: {fileID: 0}
+  soundEffectHitDelay: 0
+  itemCount: 0
+  item: {fileID: 0}

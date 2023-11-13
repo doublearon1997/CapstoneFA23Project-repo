@@ -20,3 +20,6 @@ MonoBehaviour:
   sDef: 0.15
   sRes: 0.22
   sCrt: 0.04
+  standardAttack: {fileID: 11400000, guid: 1590950551078ac478543c7206a3c70a, type: 2}
+  startingSkills:
+  - {fileID: 11400000, guid: 2b80773c2a2c7f140b1d2179951444ef, type: 2}

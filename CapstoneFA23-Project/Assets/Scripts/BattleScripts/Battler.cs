@@ -46,7 +46,6 @@ public class Battler: MonoBehaviour
 
     private HashSet<Effect> currentTurnAppliedEffects = new HashSet<Effect>();
 
-
     // This method deals damage to a battler and checks if the damage is enough to kill them.
     public void TakeDamage(int damage, BattleSystem battle)
     {

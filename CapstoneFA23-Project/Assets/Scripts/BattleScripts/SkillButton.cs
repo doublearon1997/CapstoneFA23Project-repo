@@ -18,6 +18,9 @@ public class SkillButton : MonoBehaviour
         this.battle = battle;
 
         gameObject.transform.GetChild(0).GetComponent<Image>().sprite = skill.portrait100;
+
+        if(skill is SupportItemSkill)
+            gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "" + ((SupportItemSkill)skill).quantity;
     }
 
     // When button is pressed, go into choose target mode for the button's skill.
@@ -32,6 +35,7 @@ public class SkillButton : MonoBehaviour
         battle.hotkeyManager.AddComponent<SkillTargetHotkeys>().Initialize(battle);
         Destroy(battle.hotkeyManager.GetComponent<SkillsButtonSelectedHotkeys>());
         Destroy(battle.hotkeyManager.GetComponent<TacticsButtonSelectedHotkeys>());
+        Destroy(battle.hotkeyManager.GetComponent<ItemsButtonSelectedHotkeys>());
 
         battle.SetTemporaryTurnOrderPanel(this.skill);
 
@@ -93,7 +97,10 @@ public class SkillButton : MonoBehaviour
             effectsStatString += effect.GetEffectStatsString() + ", ";
         }
 
-        (statBox.transform.GetChild(12).gameObject.GetComponent<TMP_Text>()).text = effectsStatString.Substring(0, effectsStatString.Length - 2);
+        if(effectsStatString.Length > 10)
+            effectsStatString.Substring(0, effectsStatString.Length -2);
+
+        (statBox.transform.GetChild(12).gameObject.GetComponent<TMP_Text>()).text = effectsStatString;
 
     }
 
@@ -125,7 +132,10 @@ public class SkillButton : MonoBehaviour
             effectsStatString += effect.GetEffectStatsString() + ", ";
         }
 
-        (statBox.transform.GetChild(11).gameObject.GetComponent<TMP_Text>()).text = effectsStatString.Substring(0, effectsStatString.Length-2);
+        if(effectsStatString.Length > 10)
+            effectsStatString.Substring(0, effectsStatString.Length -2);
+
+        (statBox.transform.GetChild(11).gameObject.GetComponent<TMP_Text>()).text = effectsStatString;
 
     }
 
