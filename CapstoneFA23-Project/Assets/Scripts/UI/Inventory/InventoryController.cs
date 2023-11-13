@@ -13,7 +13,7 @@ public class InventoryController : MonoBehaviour
     public int targetPanel;
     public int activeDrag = 0;
     public int swappable = 0;
-    public int[,] inventoryArray  = new int[30, 3];
+    public int[,] inventoryArray = new int[30, 3];
     bool inventoryFull = false;
     public GameObject[] panelArray = new GameObject[30];
     public List<Item> listItems = new List<Item>();
@@ -29,6 +29,7 @@ public class InventoryController : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        //drag items with mouse when selected
         if (activeDrag == 1)
         {
             Vector3 mousePosition = Input.mousePosition;

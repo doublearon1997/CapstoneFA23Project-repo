@@ -35,8 +35,12 @@ public class MenuController : MonoBehaviour
     public TMP_Dropdown resolutionDropdown;
     private List<Resolution> resolutions;
 
+    [Header("Instance Managers")]
     public SEManager seManager;
     public BGMManager bgmManager;
+    public PartyController myPartyController;
+    public InventoryController myInventoryController;
+    public GameObject MenuObject, SubMenuObject, PartyInvMenuObject, SettingsMenuObject;
 
     public void Start()
     {
@@ -77,7 +81,30 @@ public class MenuController : MonoBehaviour
         SetBrightness(brightnessSlider.value);
 
         BGMManager.instance.PlayBGM("thePirateShip");
+    }
 
+    public void Update()
+    {
+        //if escape is pressed close open UI panels
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (SubMenuObject.activeSelf || PartyInvMenuObject.activeSelf || SettingsMenuObject.activeSelf)
+            {
+                SubMenuObject.SetActive(false);
+                PartyInvMenuObject.SetActive(false);
+                SettingsMenuObject.SetActive(false);
+                MenuObject.SetActive(true);
+            }
+            else
+            {
+                SubMenuObject.gameObject.SetActive(!SubMenuObject.gameObject.activeSelf);
+                if (SubMenuObject.activeSelf)
+                {
+                    myInventoryController.updateInventory();
+                    myPartyController.updatePartyUI();
+                }
+            }
+        }
     }
 
     public void SetResolution(int resolutionIndex, FullScreenMode fullScreenMode)
@@ -108,7 +135,7 @@ public class MenuController : MonoBehaviour
         SEVolumeTextValue.text = volume.ToString("0.00");
     }
 
-    public void ExitVolumeWithoutSaving()
+    public void ExitAudioWithoutSaving()
     {
         if(BGMVolumeSlider.value != PlayerPrefs.GetFloat("BGMVolume"))
         {
@@ -123,6 +150,20 @@ public class MenuController : MonoBehaviour
             SEVolumeSlider.value = PlayerPrefs.GetFloat("SEVolume");
             SEVolumeTextValue.text = PlayerPrefs.GetFloat("SEVolume").ToString("0.00");
         }
+    }
+
+    public void ExitGraphicsWithoutSaving()
+    {
+        if(brightnessSlider.value != PlayerPrefs.GetFloat("masterBrightness")){
+            brightnessLevel = PlayerPrefs.GetFloat("masterBrightness");
+            brightnessSlider.value = PlayerPrefs.GetFloat("masterBrightness");
+            brightnessTextValue.text = PlayerPrefs.GetFloat("masterBrightness").ToString();
+        }
+    }
+
+    public void ExitGamePlayWithoutSaving()
+    {
+        //do stuff
     }
 
     public void ResetButton(string MenuType)
@@ -153,6 +194,10 @@ public class MenuController : MonoBehaviour
             resolutionDropdown.value = resolutions.Count;
 
             ApplyGraphicsSettings();
+        }
+        else if (MenuType == "Gameplay")
+        {
+            ApplyGameplaySettings();
         }
     }
 
@@ -200,5 +245,8 @@ public class MenuController : MonoBehaviour
 
     }
 
-
+    public void ApplyGameplaySettings()
+    {
+        //do stuff
+    }
 }
