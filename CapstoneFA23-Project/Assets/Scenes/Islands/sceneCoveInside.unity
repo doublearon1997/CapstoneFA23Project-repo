@@ -1624,6 +1624,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5586968867964131679, guid: 6b9d84856d750cd48a7d64c0823a886f, type: 3}
+      propertyPath: seManager
+      value: 
+      objectReference: {fileID: 582883543}
+    - target: {fileID: 5586968867964131679, guid: 6b9d84856d750cd48a7d64c0823a886f, type: 3}
+      propertyPath: bgmManager
+      value: 
+      objectReference: {fileID: 1345051337}
     - target: {fileID: 5852728094975871545, guid: 6b9d84856d750cd48a7d64c0823a886f, type: 3}
       propertyPath: m_Name
       value: UIPanel
