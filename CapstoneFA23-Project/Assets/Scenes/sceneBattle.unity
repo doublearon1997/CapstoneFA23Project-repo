@@ -4938,6 +4938,7 @@ MonoBehaviour:
   healTextPopup: {fileID: 516322223363286725, guid: cd77983d181f2ad4bbdcfc591b0b5097, type: 3}
   buffPopup: {fileID: 7834622618306877915, guid: e4cf2183599d73945943df296ac318d2, type: 3}
   debuffPopup: {fileID: 7834622618306877915, guid: abb3244c15698ae43b77b40c7cac2a67, type: 3}
+  cooldownClearPopup: {fileID: 7834622618306877915, guid: cab3cf2a22bdd314aa45f96a8d9571c9, type: 3}
   inventory: {fileID: 754133413}
   party: {fileID: 754133412}
   playerContainers:

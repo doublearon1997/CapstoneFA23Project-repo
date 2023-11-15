@@ -106,6 +106,11 @@ public class SupportSkill : Skill
                 effectNotificationQueue.Add(battle.debuffPopup);
                 effectSoundEffectQueue.Add("debuff");
             }
+            if(displayFlags[2])
+            {
+                effectNotificationQueue.Add(battle.cooldownClearPopup);
+                effectSoundEffectQueue.Add("powerUp_1");
+            }
 
             if(effectNotificationQueue.Count > maxAdditionalAnimations)
                 maxAdditionalAnimations = effectNotificationQueue.Count;
@@ -126,6 +131,10 @@ public class SupportSkill : Skill
                     skillCooldowns[key] -= 1;
             }
             skillCooldowns[this] = this.cooldown;
+
+            if(this is SupportItemSkill)
+                battle.inventory.removeItem(((SupportItemSkill)this).item.itemID, 1);
+            
             battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations, soundEffectHitDelay));
         }
         else 

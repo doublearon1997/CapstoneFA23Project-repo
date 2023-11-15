@@ -121,6 +121,11 @@ public class OffensiveSkill : Skill
                 effectNotificationQueue.Add(battle.debuffPopup);
                 effectSoundEffectQueue.Add("debuff");
             }
+            if(displayFlags[2])
+            {
+                effectNotificationQueue.Add(battle.cooldownClearPopup);
+                effectSoundEffectQueue.Add("powerUp_1");
+            }
                 
             if(effectNotificationQueue.Count > maxAdditionalAnimations)
                 maxAdditionalAnimations = effectNotificationQueue.Count;
@@ -141,6 +146,10 @@ public class OffensiveSkill : Skill
                         skillCooldowns[key] -= 1;
             }
             skillCooldowns[this] = this.cooldown;
+
+            if(this is OffensiveItemSkill)
+                battle.inventory.removeItem(((OffensiveItemSkill)this).item.itemID, 1);
+
             battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations, soundEffectHitDelay));
         }  
         else 
@@ -154,12 +163,15 @@ public class OffensiveSkill : Skill
         SEManager.instance.PlaySE(soundEffect);
         yield return new WaitForSeconds(soundEffectHitDelay);
 
-        target.TakeDamage(damage, battle);
-        
+        if(damage > 0)
+        {
+            target.TakeDamage(damage, battle);
+            DisplayDamageText(damage, target, battle, result);
+        }
+
         if(hitSoundEffect != null)
             SEManager.instance.PlaySE(hitSoundEffect);
             
-        DisplayDamageText(damage, target, battle, result);
         yield return new WaitForSeconds(1.7f);
 
         for(int i = 0; i< effectNotificationQueue.Count; i++)

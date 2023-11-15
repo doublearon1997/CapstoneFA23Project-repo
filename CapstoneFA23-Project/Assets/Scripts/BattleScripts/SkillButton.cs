@@ -21,6 +21,8 @@ public class SkillButton : MonoBehaviour
 
         if(skill is SupportItemSkill)
             gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "" + ((SupportItemSkill)skill).quantity;
+        else if(skill is OffensiveItemSkill)
+            gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "" + ((OffensiveItemSkill)skill).quantity;
     }
 
     // When button is pressed, go into choose target mode for the button's skill.
@@ -93,12 +95,11 @@ public class SkillButton : MonoBehaviour
 
         string effectsStatString = "Effects: ";
         foreach (Effect effect in skill.effects)
-        {
             effectsStatString += effect.GetEffectStatsString() + ", ";
-        }
+        
 
         if(effectsStatString.Length > 10)
-            effectsStatString.Substring(0, effectsStatString.Length -2);
+            effectsStatString = effectsStatString.Substring(0, effectsStatString.Length -2);
 
         (statBox.transform.GetChild(12).gameObject.GetComponent<TMP_Text>()).text = effectsStatString;
 
@@ -128,12 +129,11 @@ public class SkillButton : MonoBehaviour
 
         string effectsStatString = "Effects: ";
         foreach(Effect effect in skill.effects)
-        {
             effectsStatString += effect.GetEffectStatsString() + ", ";
-        }
+        
 
         if(effectsStatString.Length > 10)
-            effectsStatString.Substring(0, effectsStatString.Length -2);
+            effectsStatString = effectsStatString.Substring(0, effectsStatString.Length -2);
 
         (statBox.transform.GetChild(11).gameObject.GetComponent<TMP_Text>()).text = effectsStatString;
 

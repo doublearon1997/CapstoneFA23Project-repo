@@ -35,7 +35,7 @@ public abstract class Skill: ScriptableObject
     //Applies all of the effects on the skill to the target battler. Returns a list of flags to determine if a Buff or Debuff animation should be displayed.
     public bool[] ApplyEffects(Battler user, Battler target, BattleSystem battle)
     {
-        bool[] displayFlags = {false, false};
+        bool[] displayFlags = {false, false, false};
 
         foreach(Effect effect in effects)
         {
@@ -45,6 +45,8 @@ public abstract class Skill: ScriptableObject
                     displayFlags[0] = true;
                 else if(effect is Debuff)
                     displayFlags[1] = true;
+                else if(effect is ClearCooldownsEffect)
+                    displayFlags[2] = true;
             }
         }
         return displayFlags;

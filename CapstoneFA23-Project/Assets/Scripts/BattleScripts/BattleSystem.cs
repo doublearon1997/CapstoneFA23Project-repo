@@ -30,7 +30,7 @@ public class BattleSystem : MonoBehaviour
 
     //Skill Popups
     public GameObject damageTextPopup, healTextPopup;
-    public GameObject buffPopup, debuffPopup;
+    public GameObject buffPopup, debuffPopup, cooldownClearPopup;
 
     private bool inPinch = false;
 
@@ -126,6 +126,7 @@ public class BattleSystem : MonoBehaviour
     public void Start()
     {
         StartCoroutine(SetupBattle());
+        inventory.addItem(24, 7);
     }
 
     IEnumerator SetupBattle()
@@ -686,15 +687,20 @@ public class BattleSystem : MonoBehaviour
     {
         GameObject itemButton = Instantiate(buttonSkill, panelItemSelection.transform) as GameObject;
 
-        SupportItemSkill itemSkill = null;
-
         if(item.isSupportItem)
         {
-            itemSkill = (SupportItemSkill)(SupportItemSkill.CreateInstance("SupportItemSkill"));
+            SupportItemSkill itemSkill = (SupportItemSkill)(SupportItemSkill.CreateInstance("SupportItemSkill"));
             itemSkill.Initialize(item, quantity);
+            itemButton.GetComponent<SkillButton>().Initialize(itemSkill, battler, this);
+            
+        }
+        else 
+        {
+            OffensiveItemSkill itemSkill = (OffensiveItemSkill)(OffensiveItemSkill.CreateInstance("OffensiveItemSkill"));
+            itemSkill.Initialize(item, quantity);
+            itemButton.GetComponent<SkillButton>().Initialize(itemSkill, battler, this);
         }
             
-        itemButton.GetComponent<SkillButton>().Initialize(itemSkill, battler, this);
         itemButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
     }
 
