@@ -183,7 +183,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         //REMOVEME
-        //StartCoroutine(PlayerVictory());
+        StartCoroutine(PlayerVictory());
 
         StartCoroutine(DetermineNextBattler());
         SetTurnOrderPanel();

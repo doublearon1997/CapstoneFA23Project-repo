@@ -26,4 +26,5 @@ MonoBehaviour:
   standardAttack: {fileID: 11400000, guid: a7f32e451920e7c45b02129f59ba73ff, type: 2}
   startingSkills:
   - {fileID: 11400000, guid: 2fd33f1e3c16ca5459331bda2c1881a9, type: 2}
-  skillUnlocks: []
+  skillUnlocks:
+  - {fileID: 11400000, guid: 2355c42098f3cbcdeb2858ad83f95378, type: 2}
