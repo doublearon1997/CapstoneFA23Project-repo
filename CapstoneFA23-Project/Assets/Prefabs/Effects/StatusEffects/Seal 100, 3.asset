@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfa4b66e6607a69049dc2b6a0223ff5b, type: 3}
-  m_Name: BasicHeal
+  m_Script: {fileID: 11500000, guid: 6e5b754a199edfd4ebb020cb62a05f5f, type: 3}
+  m_Name: Seal 100, 3
   m_EditorClassIdentifier: 
-  effectName: Basic Heal
-  healPercentage: 0
-  healAmount: 15
-  healPower: 1.2
-  powerType: 1
+  effectName: Seal 100, 3
+  chance: 1
+  duration: 3
+  portrait_65: {fileID: 21300000, guid: 2dca61d83737e2b40aea0088402deea1, type: 3}
+  statusEffectType: 2

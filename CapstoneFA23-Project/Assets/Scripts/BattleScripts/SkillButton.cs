@@ -11,6 +11,8 @@ public class SkillButton : MonoBehaviour
     private PlayerBattler user;
     private BattleSystem battle;
 
+    private bool isLevelUpButton = false;
+
     public void Initialize(Skill skill, PlayerBattler user, BattleSystem battle)
     {
         this.skill = skill;
@@ -23,6 +25,15 @@ public class SkillButton : MonoBehaviour
             gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "" + ((SupportItemSkill)skill).quantity;
         else if(skill is OffensiveItemSkill)
             gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "" + ((OffensiveItemSkill)skill).quantity;
+    }
+
+    public void InitializeLevelupButton(Skill skill, BattleSystem battle)
+    {
+        this.skill = skill;
+        this.battle = battle;
+        this.isLevelUpButton = true;
+
+        gameObject.GetComponent<Image>().sprite = skill.portrait100;
     }
 
     // When button is pressed, go into choose target mode for the button's skill.
@@ -54,12 +65,33 @@ public class SkillButton : MonoBehaviour
             ((SupportSkill)skill).ChooseTarget(user, battle);
     }
 
+    public void LevelupSkillButtonPress()
+    {
+        if(battle.selectedLevelupSkill == null || skill != battle.selectedLevelupSkill)
+        {
+            gameObject.transform.parent.GetChild(0).gameObject.SetActive(true);
+            battle.selectedLevelupSkill = skill;
+
+            if(gameObject.transform.parent.parent == battle.levelUpPanel.transform.GetChild(21) && battle.levelUpPanel.transform.GetChild(22).childCount > 0)
+                battle.levelUpPanel.transform.GetChild(22).GetChild(0).GetChild(0).gameObject.SetActive(false);
+            
+            else if(gameObject.transform.parent.parent == battle.levelUpPanel.transform.GetChild(22))
+                battle.levelUpPanel.transform.GetChild(21).GetChild(0).GetChild(0).gameObject.SetActive(false);
+            
+
+            //Popup Continue Button when skill is selected
+            battle.levelUpPanel.transform.GetChild(23).gameObject.SetActive(true);
+
+            SEManager.instance.PlaySE("coolBeans");
+        }
+    }
+
     // When button is hovered, display a skill stat box for the button's skill.
     public void SkillButtonHover()
     {
         SEManager.instance.PlaySE("buttonHover", 1);
 
-        if (skill.isOffensive)
+        if(skill.isOffensive)
             CreateOffensiveSkillStatBox();
         else
             CreateSupportSkillStatBox();
@@ -141,6 +173,9 @@ public class SkillButton : MonoBehaviour
 
     private void RemoveSkillStatBox()
     {
-        DestroyImmediate(gameObject.transform.GetChild(1).gameObject);
+        if(!isLevelUpButton)
+            DestroyImmediate(gameObject.transform.GetChild(2).gameObject);
+        else 
+            DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
     }
 }

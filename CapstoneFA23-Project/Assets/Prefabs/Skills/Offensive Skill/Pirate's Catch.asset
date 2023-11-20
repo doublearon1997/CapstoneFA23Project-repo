@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
-  m_Name: Fire Bolt
+  m_Name: Pirate's Catch
   m_EditorClassIdentifier: 
-  skillName: Fire Bolt
-  targetType: 0
-  powerType: 1
-  apMod: 0.95
-  cooldown: 1
-  portrait65: {fileID: 0}
-  portrait50: {fileID: 0}
-  portrait100: {fileID: 0}
+  skillName: Pirate's Catch
+  targetType: 1
+  powerType: 0
+  apMod: 1.1
+  cooldown: 4
+  portrait65: {fileID: 21300000, guid: b2155df39d7cd4e488fa051ebfd44ab6, type: 3}
+  portrait50: {fileID: 21300000, guid: 7815114f1819f0b4686cd9dd189b8cab, type: 3}
+  portrait100: {fileID: 21300000, guid: 6144ec5250391c64da2ba7d561e944cf, type: 3}
   isOffensive: 1
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 0696e954f2ae8544fa6624330d19e4dc, type: 2}
   soundEffect: {fileID: 0}
   hitSoundEffect: {fileID: 0}
   soundEffectHitDelay: 0
-  dmgMod: 1.05
+  dmgMod: 0.05

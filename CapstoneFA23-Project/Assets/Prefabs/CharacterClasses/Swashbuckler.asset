@@ -20,5 +20,9 @@ MonoBehaviour:
   sDef: 0.22
   sRes: 0.14
   sCrt: 0.05
+  sCurseRes: 0.17
+  sSealRes: 0.02
+  sStaggerRes: 0.1
   standardAttack: {fileID: 11400000, guid: a7f32e451920e7c45b02129f59ba73ff, type: 2}
   startingSkills: []
+  skillUnlocks: []

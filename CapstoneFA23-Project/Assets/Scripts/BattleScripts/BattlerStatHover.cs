@@ -89,13 +89,46 @@ public class BattlerStatHover : MonoBehaviour
         else if (battler.GetCurrCrt() < battler.crt)
             (infoPanel.transform.GetChild(12).gameObject.GetComponent<TMP_Text>()).color = new Color32(60, 125, 255, 255);
 
+        (infoPanel.transform.GetChild(17).gameObject.GetComponent<TMP_Text>()).text = ": " + battler.GetCurrCurseResistance() * 100 + "%";
+        if (battler.GetCurrCurseResistance() > battler.curseResist)
+            (infoPanel.transform.GetChild(17).gameObject.GetComponent<TMP_Text>()).color = new Color32(255, 145, 0, 255);
+        else if (battler.GetCurrCurseResistance() < battler.curseResist)
+            (infoPanel.transform.GetChild(17).gameObject.GetComponent<TMP_Text>()).color = new Color32(60, 125, 255, 255);
+
+        (infoPanel.transform.GetChild(18).gameObject.GetComponent<TMP_Text>()).text = ": " + battler.GetCurrSealResistance() * 100 + "%";
+        if (battler.GetCurrSealResistance() > battler.sealResist)
+            (infoPanel.transform.GetChild(18).gameObject.GetComponent<TMP_Text>()).color = new Color32(255, 145, 0, 255);
+        else if (battler.GetCurrSealResistance() < battler.sealResist)
+            (infoPanel.transform.GetChild(18).gameObject.GetComponent<TMP_Text>()).color = new Color32(60, 125, 255, 255);
+
+        (infoPanel.transform.GetChild(19).gameObject.GetComponent<TMP_Text>()).text = ": " + battler.GetCurrStaggerResistance() * 100 + "%";
+        if (battler.GetCurrStaggerResistance() > battler.staggerResist)
+            (infoPanel.transform.GetChild(19).gameObject.GetComponent<TMP_Text>()).color = new Color32(255, 145, 0, 255);
+        else if (battler.GetCurrStaggerResistance() < battler.staggerResist)
+            (infoPanel.transform.GetChild(19).gameObject.GetComponent<TMP_Text>()).color = new Color32(60, 125, 255, 255);
+
         int currX = 0, currY = 0, i = 0;
+
+        foreach(StatusEffect effect in battler.statusEffects.Keys)
+        {
+            GameObject portraitStatusEffect = Instantiate(battle.portraitStatusEffect, infoPanel.transform.GetChild(29).gameObject.transform) as GameObject;
+            portraitStatusEffect.GetComponent<Image>().sprite = effect.portrait_65;
+
+            Debug.Log(battler.statusEffects[effect]);
+
+            if(battler.statusEffects[effect] >= 0)
+            {
+                Debug.Log("here");
+                portraitStatusEffect.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "" + battler.statusEffects[effect];
+            }
+                
+        }
 
         foreach (BuffEffect effect in battler.buffEffects.Keys)
         {
             if (battler.buffEffects[effect] < 0)
             {
-                GameObject portraitBuffEffect = Instantiate(battle.portraitBuffEffect, infoPanel.transform.GetChild(13).gameObject.transform) as GameObject;
+                GameObject portraitBuffEffect = Instantiate(battle.portraitStatusEffect, infoPanel.transform.GetChild(29).gameObject.transform) as GameObject;
 
                 portraitBuffEffect.GetComponent<Image>().sprite = effect.portrait_65;
 

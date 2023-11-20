@@ -99,11 +99,20 @@ public class OffensiveSkill : Skill
                 damage = (user.GetCurrWil() * this.dmgMod) * (1 - target.GetCurrRes()) * UnityEngine.Random.Range(0.9f, 1.1f);
 
             //Critical Hit
-            if (UnityEngine.Random.Range(0.0f, 1.0f) < user.GetCurrCrt())
+            if(target.nextHitCrit)
+            {
+                damage *= 1.5;
+                result = AttackResult.Crit;
+
+                
+
+            }
+            else if (UnityEngine.Random.Range(0.0f, 1.0f) < user.GetCurrCrt())
             {
                 damage *= 1.5;
                 result = AttackResult.Crit;
             }
+            
 
             int finalDamage = (int)damage;
 
@@ -111,21 +120,7 @@ public class OffensiveSkill : Skill
             List<GameObject> effectNotificationQueue = new List<GameObject>();
             List<string> effectSoundEffectQueue = new List<string>();
 
-            if(displayFlags[0])
-            {
-                effectNotificationQueue.Add(battle.buffPopup);
-                effectSoundEffectQueue.Add("buff");
-            }
-            if(displayFlags[1])
-            {
-                effectNotificationQueue.Add(battle.debuffPopup);
-                effectSoundEffectQueue.Add("debuff");
-            }
-            if(displayFlags[2])
-            {
-                effectNotificationQueue.Add(battle.cooldownClearPopup);
-                effectSoundEffectQueue.Add("powerUp_1");
-            }
+            FillNotificationQueues(effectNotificationQueue, effectSoundEffectQueue, displayFlags, battle);
                 
             if(effectNotificationQueue.Count > maxAdditionalAnimations)
                 maxAdditionalAnimations = effectNotificationQueue.Count;

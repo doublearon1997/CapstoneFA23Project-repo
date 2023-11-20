@@ -143,6 +143,10 @@ MonoBehaviour:
   res: 0.15
   ini: 85
   crt: 0.03
+  debuffResist: 0
+  curseResist: 0.1
+  sealResist: 0.02
+  staggerResist: 0
   battlerName: Log
   ap: 0
   apMod: 1
@@ -150,6 +154,9 @@ MonoBehaviour:
   isPlayer: 0
   portrait70: {fileID: 21300000, guid: 2c7438033a1705142977642ee70a382d, type: 3}
   portrait60: {fileID: 21300000, guid: 4035668c3d327b2448826985e1aea883, type: 3}
+  physicalEnabled: 1
+  willEnabled: 1
+  nextHitCrit: 0
   skillList:
   - {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
   - {fileID: 11400000, guid: 9914015d9bd01c244b6bd06ed575cae0, type: 2}
@@ -158,6 +165,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae999acf49f5a750bae54743eb8facaa, type: 2}
   - {fileID: 11400000, guid: b326a020acb81a84f8c610176383b4d4, type: 2}
   - {fileID: 11400000, guid: b0c69868be79d254a9a64205e8af09ef, type: 2}
+  dropList:
+  - {fileID: 11400000, guid: 469378249cdbf334089f66f58c36f10a, type: 2}
+  dropListChances:
+  - 1
+  dropListQuantities: 01000000
+  exp: 4
 --- !u!61 &-933485833814597257
 BoxCollider2D:
   m_ObjectHideFlags: 0

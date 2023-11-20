@@ -30,7 +30,7 @@ public class BattleSystem : MonoBehaviour
 
     //Skill Popups
     public GameObject damageTextPopup, healTextPopup;
-    public GameObject buffPopup, debuffPopup, cooldownClearPopup;
+    public GameObject buffPopup, debuffPopup, cooldownClearPopup, cursePopup, sealPopup, staggerPopup;
 
     private bool inPinch = false;
 
@@ -96,7 +96,7 @@ public class BattleSystem : MonoBehaviour
 
     //Battler Info Hover Stuff
     public GameObject infoHoverObject;
-    public GameObject portraitBuffEffect;
+    public GameObject portraitBuffEffect, portraitStatusEffect;
     private List<GameObject> currentInfoHoverObjects = new List<GameObject>();
 
     //Skill Targeting Objects
@@ -123,10 +123,23 @@ public class BattleSystem : MonoBehaviour
 
     public Encounter defaultEncounter; //Just used for testing.
 
+    //Victory Objects
+    public GameObject victoryPanel;
+    public GameObject levelUpPanel;
+
+    public GameObject playerSlotVictoryPanel;
+    public GameObject itemVictoryIcon;
+    public GameObject LevelupSkillUnlockButton;
+
+    public Skill selectedLevelupSkill = null;
+
+    private List<Character> levelUps = new List<Character>();
+    private List<int> levelUpNewLevels = new List<int>();
+    private int levelUpsLoc = 0;
+
     public void Start()
     {
         StartCoroutine(SetupBattle());
-        inventory.addItem(24, 7);
     }
 
     IEnumerator SetupBattle()
@@ -168,6 +181,9 @@ public class BattleSystem : MonoBehaviour
         SetupEnemyOverviewPanel();
 
         yield return new WaitForSeconds(1.5f);
+
+        //REMOVEME
+        //StartCoroutine(PlayerVictory());
 
         StartCoroutine(DetermineNextBattler());
         SetTurnOrderPanel();
@@ -716,6 +732,14 @@ public class BattleSystem : MonoBehaviour
             GameObject cooldownImage = Instantiate(imageSkillCooldown, skillButton.transform) as GameObject;
             cooldownImage.transform.GetChild(0).GetComponent<TMP_Text>().text = "" + battler.skillCooldownDict[skill];
         }
+        else if(!battler.willEnabled && skill.powerType == PowerType.Will)
+        {
+            skillButton.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else if(!battler.physicalEnabled && skill.powerType == PowerType.Physical)
+        {
+            skillButton.transform.GetChild(1).gameObject.SetActive(true);
+        }
     }
 
     public void SkillTargetReturn()
@@ -813,7 +837,7 @@ public class BattleSystem : MonoBehaviour
         ClearMessageBox();
 
         if (IsPlayerVictory())
-            PlayerVictory();
+            StartCoroutine(PlayerVictory());
         else if (IsPlayerPartyFled())
             PlayerFlee();
         else if (IsPlayerDefeat())
@@ -911,7 +935,7 @@ public class BattleSystem : MonoBehaviour
         ClearMessageBox();
 
         if(IsPlayerVictory())
-            PlayerVictory();
+            StartCoroutine(PlayerVictory());
         else if(IsPlayerPartyFled())
             PlayerFlee();
         else if(IsPlayerDefeat())
@@ -1002,6 +1026,12 @@ public class BattleSystem : MonoBehaviour
 
     private bool IsPlayerDefeat()
     {
+        foreach(PlayerBattler battler in startingPlayerBattlers)
+        {
+            if(battler.HasFled())
+                return false;
+        }
+            
         return playerBattlers.Count <= 0;
     }
 
@@ -1036,9 +1066,239 @@ public class BattleSystem : MonoBehaviour
         return fled;
     }
 
-    private void PlayerVictory()
+    private IEnumerator PlayerVictory()
     {
-        SceneManager.LoadScene("sceneTutorialLevel");
+        StartCoroutine(BGMManager.instance.FadeOutBGM(1.0f));
+        AdjustCharactersAfterBattle();
+        Dictionary<Item , int> itemDrops = DetermineItemDrops();
+
+        foreach(Item item in itemDrops.Keys)
+            inventory.addItem(item.itemID, itemDrops[item]);
+        
+        SetupVictoryPanel(itemDrops);
+
+        yield return new WaitForSeconds(1.1f);
+
+        BGMManager.instance.PlayBGM("openingThePathWithTheseHands");
+        victoryPanel.SetActive(true);
+
+        yield return new WaitForSeconds(1.2f);
+        AnimateEXP();
+
+        yield return new WaitForSeconds(5f);
+
+        victoryPanel.transform.GetChild(8).gameObject.SetActive(true);
+
+        //SceneManager.LoadScene("sceneTutorialLevel");
+    }
+
+    private Dictionary<Item, int> DetermineItemDrops()
+    {
+        Dictionary<Item, int> itemDrops = new Dictionary<Item, int>();
+
+        foreach(EnemyBattler battler in startingEnemyBattlers)
+        {
+            if(!battler.HasFled())
+            {
+                Dictionary<Item, int> items = battler.DropItems();
+
+                foreach(Item item in items.Keys)
+                {
+                    if(itemDrops.ContainsKey(item))
+                        itemDrops[item] = itemDrops[item]+ items[item];
+                    else 
+                        itemDrops.Add(item, 1);
+                }
+            }
+        }
+
+        return itemDrops;
+    }
+
+    private void SetupVictoryPanel(Dictionary<Item, int> itemDrops)
+    {
+        int xPos = 250;
+        int yPos = -75;
+
+        foreach(PlayerBattler battler in startingPlayerBattlers)
+        {
+            Character c = battler.character;
+
+            GameObject slot = Instantiate(playerSlotVictoryPanel, victoryPanel.transform.GetChild(5)) as GameObject;
+            slot.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
+
+            string playerClassString = battler.playerClass.ToString().Split('(')[0];
+
+            slot.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = c.characterImage;
+            slot.transform.GetChild(3).gameObject.GetComponent<TMP_Text>().text = battler.battlerName;
+            slot.transform.GetChild(4).gameObject.GetComponent<TMP_Text>().text = "Lvl " + c.preBattleLevel + " " + playerClassString;
+            slot.transform.GetChild(6).GetChild(3).gameObject.GetComponent<TMP_Text>().text = "" + c.hp + "/" + c.mhp;
+
+            slot.transform.GetChild(6).gameObject.GetComponent<Slider>().maxValue = c.mhp;
+            slot.transform.GetChild(6).gameObject.GetComponent<Slider>().minValue = 0;
+
+            const int sliderWidth = 330;
+            double hpSliderPosition = sliderWidth - ((double)c.hp / (double)c.mhp) * sliderWidth;
+            
+            slot.transform.GetChild(6).GetChild(2).gameObject.GetComponent<RectTransform>().offsetMin = new Vector2((float)hpSliderPosition, 0.0f);
+
+            slot.transform.GetChild(9).gameObject.GetComponent<TMP_Text>().text = "" + c.preBattleExp + " (+" + (c.exp - c.preBattleExp) + ")"; 
+            slot.transform.GetChild(10).gameObject.GetComponent<TMP_Text>().text = "" + LevelingData.expLevelRequirements[c.preBattleLevel];
+
+            if(xPos == 250)
+                xPos += 550;
+            else 
+            {
+                xPos = 250;
+                yPos = -325;
+            }
+        }
+
+        xPos= 0;
+
+        foreach(Item item in itemDrops.Keys)
+        {
+            GameObject itemIcon = Instantiate(itemVictoryIcon, victoryPanel.transform.GetChild(7)) as GameObject;
+            itemIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, 0);
+
+            itemIcon.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = item.itemImage;
+            itemIcon.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TMP_Text>().text = "" + itemDrops[item];
+
+            xPos += 110;
+        }
+    }
+
+    private void AnimateEXP()
+    {
+        for(int i = 0; i< startingPlayerBattlers.Count; i++)
+            StartCoroutine(AnimateEXPText(victoryPanel.transform.GetChild(5).GetChild(i).gameObject, startingPlayerBattlers[i].character));
+    }
+
+    private IEnumerator AnimateEXPText(GameObject playerPanel, Character character)
+    {
+        float t = 0.0f;
+        int currentLevel = character.preBattleLevel;
+
+        while (t < 2.51f)
+        {
+            int exp = (int)(Mathf.Lerp(character.preBattleExp, character.exp, t/2.5f));
+            int expGain = (int)Math.Ceiling((Mathf.Lerp(character.exp-character.preBattleExp, 0, t/2.5f)));
+            
+            playerPanel.transform.GetChild(9).gameObject.GetComponent<TMP_Text>().text = "" + exp + " (+" + expGain + ")"; 
+            
+            if(exp >= LevelingData.expLevelRequirements[currentLevel])//Level Up!
+            {
+                currentLevel++;
+                string playerClassString = character.charClass.ToString().Split('(')[0];
+                playerPanel.transform.GetChild(4).gameObject.GetComponent<TMP_Text>().text = "Lvl " + currentLevel + " " + playerClassString;
+                playerPanel.transform.GetChild(10).gameObject.GetComponent<TMP_Text>().text = "" + LevelingData.expLevelRequirements[currentLevel];
+
+                playerPanel.transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
+            }
+
+            t+=Time.deltaTime;
+            yield return null;
+        }
+
+    }
+
+    private void AdjustCharactersAfterBattle()
+    {
+        int expGain = 0;
+        foreach(EnemyBattler battler in startingEnemyBattlers)
+            expGain += battler.exp;
+
+        foreach(PlayerBattler battler in startingPlayerBattlers)
+        {
+            Character c = battler.character;
+
+            c.preBattleExp = battler.character.exp;
+            c.preBattleLevel = battler.character.level;
+            c.exp += expGain;
+
+            if(battler.hp > c.mhp)
+                c.hp = c.mhp;
+            else 
+                c.hp = battler.hp;
+
+            while(LevelingData.DetermineLevel(c.exp) > c.level)
+            {
+                levelUps.Add(c);
+                levelUpNewLevels.Add(c.level+1);
+                c.LevelUp();
+            }
+                
+        }
+    }
+
+    private void SetupLevelUpPanel(Character c, int newLevel)
+    {
+        levelUpPanel.transform.GetChild(23).gameObject.SetActive(false);
+
+        levelUpPanel.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = c.characterImage;
+        levelUpPanel.transform.GetChild(5).gameObject.GetComponent<TMP_Text>().text = "" + c.characterName + " has leveled up to Level " + newLevel + "!";
+
+        levelUpPanel.transform.GetChild(7).gameObject.GetComponent<TMP_Text>().text = "" + (int)(c.mhp/1.1) + " -> " + (int)c.mhp;
+        levelUpPanel.transform.GetChild(9).gameObject.GetComponent<TMP_Text>().text = "" + (int)(c.str/1.1) + " -> " + (int)c.str;
+        levelUpPanel.transform.GetChild(11).gameObject.GetComponent<TMP_Text>().text = "" + (int)(c.wil/1.1) + " -> " + (int)c.wil;
+        levelUpPanel.transform.GetChild(13).gameObject.GetComponent<TMP_Text>().text = "" + c.def * 100 + "%";
+        levelUpPanel.transform.GetChild(15).gameObject.GetComponent<TMP_Text>().text = "" + c.res * 100 + "%";
+        levelUpPanel.transform.GetChild(17).gameObject.GetComponent<TMP_Text>().text = "" + (int)(c.ini/1.1) + " -> " + (int)c.ini;
+        levelUpPanel.transform.GetChild(19).gameObject.GetComponent<TMP_Text>().text = "" + (c.crt-0.01)* 100 + "% -> " + c.crt*100 + "%";
+
+        List<Skill> availSkills = c.GetNextUnlockableSkills();
+
+        if(availSkills.Count == 2)
+        {
+            GameObject skillButton = Instantiate(LevelupSkillUnlockButton, levelUpPanel.transform.GetChild(21)) as GameObject;
+            skillButton.transform.GetChild(1).gameObject.GetComponent<SkillButton>().InitializeLevelupButton(availSkills[0], this);
+
+            GameObject skillButton2 = Instantiate(LevelupSkillUnlockButton, levelUpPanel.transform.GetChild(22)) as GameObject;
+            skillButton2.transform.GetChild(1).gameObject.GetComponent<SkillButton>().InitializeLevelupButton(availSkills[1], this);     
+        }
+        else if(availSkills.Count == 1)
+        {
+            GameObject skillButton = Instantiate(LevelupSkillUnlockButton, levelUpPanel.transform.GetChild(21)) as GameObject;
+            skillButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(150f, 0.0f);
+            skillButton.transform.GetChild(1).gameObject.GetComponent<SkillButton>().InitializeLevelupButton(availSkills[0], this);
+        }
+        else 
+        {
+            levelUpPanel.transform.GetChild(23).gameObject.SetActive(true);
+        }
+    }
+
+    public void VictoryContinueButtonPress()
+    {
+        if(selectedLevelupSkill != null)
+            levelUps[levelUpsLoc-1].skills.Add(selectedLevelupSkill);
+        selectedLevelupSkill = null;
+
+        if(levelUpsLoc < levelUps.Count)
+        {
+            SetupLevelUpPanel(levelUps[levelUpsLoc], levelUpNewLevels[levelUpsLoc]);
+
+            victoryPanel.SetActive(false);
+            levelUpPanel.SetActive(true);
+
+            SEManager.instance.PlaySE("levelup");
+
+            levelUpsLoc++;
+        }
+        else 
+        {
+            SEManager.instance.PlaySE("buttonClick");
+            StartCoroutine(ExitBattle());
+        }
+    }
+
+    private IEnumerator ExitBattle()
+    {
+        StartCoroutine(BGMManager.instance.FadeOutBGM(2f));
+        fadeOutToBlack.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(4);
     }
 
     private IEnumerator PlayerDefeat()

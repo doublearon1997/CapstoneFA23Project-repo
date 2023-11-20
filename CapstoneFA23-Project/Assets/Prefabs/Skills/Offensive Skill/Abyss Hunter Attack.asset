@@ -22,7 +22,7 @@ MonoBehaviour:
   portrait100: {fileID: 21300000, guid: f581ff4d116f6c14ca431129f95b7ed8, type: 3}
   isOffensive: 1
   effects: []
-  soundEffect: {fileID: 8300000, guid: 8c74f13248e40814faa2caa009be3122, type: 3}
+  soundEffect: {fileID: 8300000, guid: 12be475d91df2b84da1b0f3ab9f4c0f1, type: 3}
   hitSoundEffect: {fileID: 8300000, guid: 256c0aab68f543c4fae2dd817c59a36a, type: 3}
-  soundEffectHitDelay: 0.85
+  soundEffectHitDelay: 0.6
   dmgMod: 1

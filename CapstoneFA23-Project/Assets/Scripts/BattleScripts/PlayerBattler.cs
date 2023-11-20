@@ -14,8 +14,12 @@ public class PlayerBattler : Battler
 
     public OffensiveSkill standardAttack;
 
+    public Character character;
+
     public void LoadStatsFromCharacter(Character c)
     {
+        character = c;
+
         mhp = c.GetCurrMHP();
         hp = c.GetCurrHP();
 
@@ -26,6 +30,13 @@ public class PlayerBattler : Battler
 
         ini = c.GetCurrIni();
         crt = c.GetCurrCrt();
+
+        curseResist = c.GetCurrCurseRes();
+        sealResist = c.GetCurrSealRes();
+        staggerResist = c.GetCurrStaggerRes();
+
+        portrait60 = c.characterImage;
+        portrait70 = c.characterImage;
 
         skills = c.skills;
 
