@@ -16,6 +16,8 @@ public class PlayerBattler : Battler
 
     public Character character;
 
+    public bool isKO = false;
+
     public void LoadStatsFromCharacter(Character c)
     {
         character = c;

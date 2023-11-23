@@ -135,10 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c927745c628b4698905129e5fad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 235
-  mhp: 235
-  str: 81
-  wil: 82
+  hp: 600
+  mhp: 600
+  str: 400
+  wil: 400
   def: 0.15
   res: 0.15
   ini: 85

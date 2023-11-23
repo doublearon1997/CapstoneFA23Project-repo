@@ -34,6 +34,8 @@ public class BattleSystem : MonoBehaviour
 
     private bool inPinch = false;
 
+    public KOEffect kOEffect;
+
     public InventoryController inventory;
     public PartyController party;
 
@@ -183,7 +185,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         //REMOVEME
-        StartCoroutine(PlayerVictory());
+        //StartCoroutine(PlayerVictory());
 
         StartCoroutine(DetermineNextBattler());
         SetTurnOrderPanel();
@@ -334,10 +336,13 @@ public class BattleSystem : MonoBehaviour
         //Add battlers to calculate to a dictionary to prevent actually adding ap to the real battlers.
         foreach (PlayerBattler battler in playerBattlers)
         {
-            if (!currentlyActingBattlers.Contains(battler))
-                needToCalculate.Add(battler, battler.ap);
-            else if (currentBattlerSkill != null && currentlyActingBattler == battler)
-                needToCalculate.Add(battler, battler.ap - 100000);
+            if(!battler.isKO)
+            {
+                if (!currentlyActingBattlers.Contains(battler))
+                    needToCalculate.Add(battler, battler.ap);
+                else if (currentBattlerSkill != null && currentlyActingBattler == battler)
+                    needToCalculate.Add(battler, battler.ap - 100000);
+            }
         }
 
         foreach (EnemyBattler battler in enemyBattlers)
@@ -352,7 +357,10 @@ public class BattleSystem : MonoBehaviour
         foreach (Battler battler in currentlyActingBattlers)
         {
             if (currentBattlerSkill == null || battler != currentlyActingBattler)
-                battlerTurnOrder.Add(battler);
+            {
+                if(!battler.isPlayer || (battler.isPlayer && ! ((PlayerBattler)battler).isKO))
+                    battlerTurnOrder.Add(battler);
+            }   
         }
 
         while (doneCalculated.Count != needToCalculate.Count)
@@ -453,24 +461,34 @@ public class BattleSystem : MonoBehaviour
     //This coroutine is played when determining which battler acts next.
     public IEnumerator DetermineNextBattler()
     {
+        List<Battler> removeBattlers = new List<Battler>();
+        foreach(Battler battler in currentlyActingBattlers)
+        {
+            if(battler.isPlayer && ((PlayerBattler)battler).isKO)
+                removeBattlers.Add(battler);
+        }
+        foreach(Battler battler in removeBattlers)
+            currentlyActingBattlers.Remove(battler);
+
         while (currentlyActingBattlers.Count < 1) //runs this loop until a battler has atleast 100000 AP
         {
             foreach (PlayerBattler battler in playerBattlers)
             {
-                battler.ap += (int)(battler.ini * battler.apMod);
-                if (battler.ap >= 100000)
+                if(!battler.isKO)
                 {
-                    currentlyActingBattlers.Add(battler);
+                    battler.ap += (int)(battler.ini * battler.apMod);
+                    if (battler.ap >= 100000)
+                        currentlyActingBattlers.Add(battler); 
                 }
+                
             }
 
             foreach (EnemyBattler battler in enemyBattlers)
             {
                 battler.ap += (int)(battler.ini * battler.apMod);
                 if (battler.ap >= 100000)
-                {
                     currentlyActingBattlers.Add(battler);
-                }
+                
             }
         }
 
@@ -963,8 +981,11 @@ public class BattleSystem : MonoBehaviour
 
     public bool IsInPinch()
     {
-        if (playerBattlers.Count < startingPlayerBattlers.Count)
-            return true;
+        foreach(PlayerBattler battler in startingPlayerBattlers)
+        {
+            if(battler.isKO)
+                return true;
+        }
 
         double partyMaxHP = 0, partyHP = 0;
 
@@ -1088,8 +1109,6 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         victoryPanel.transform.GetChild(8).gameObject.SetActive(true);
-
-        //SceneManager.LoadScene("sceneTutorialLevel");
     }
 
     private Dictionary<Item, int> DetermineItemDrops()
@@ -1199,6 +1218,8 @@ public class BattleSystem : MonoBehaviour
             t+=Time.deltaTime;
             yield return null;
         }
+        
+        playerPanel.transform.GetChild(9).gameObject.GetComponent<TMP_Text>().text = "" + character.exp;
 
     }
 
@@ -1233,6 +1254,11 @@ public class BattleSystem : MonoBehaviour
 
     private void SetupLevelUpPanel(Character c, int newLevel)
     {
+        if(levelUpPanel.transform.GetChild(21).childCount > 0)
+            DestroyImmediate(levelUpPanel.transform.GetChild(21).GetChild(0).gameObject);
+        if(levelUpPanel.transform.GetChild(22).childCount > 0)
+            DestroyImmediate(levelUpPanel.transform.GetChild(22).GetChild(0).gameObject);
+
         levelUpPanel.transform.GetChild(23).gameObject.SetActive(false);
 
         levelUpPanel.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = c.characterImage;
@@ -1305,8 +1331,9 @@ public class BattleSystem : MonoBehaviour
     {
         StartCoroutine(BGMManager.instance.FadeOutBGM(2f));
         fadeOutToBlack.SetActive(true);
-
+        
         yield return new WaitForSeconds(2f);
+
         SceneManager.LoadScene("sceneDefeat");
     }
 

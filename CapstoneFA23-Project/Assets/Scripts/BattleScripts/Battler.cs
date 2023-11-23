@@ -67,12 +67,19 @@ public class Battler: MonoBehaviour
         this.hp = currHp;
 
         if (this.isPlayer)
+        {
             battle.SetPlayerHPSliderValue((PlayerBattler)this);
+            if(this.hp == 0)
+                this.TryApplyStatusEffect(battle.kOEffect, battle);
+        }  
         else
+        {
             battle.SetEnemyHPSliderValue((EnemyBattler)this);
+            if (this.hp == 0)
+                KillBattler(battle);
 
-        if (this.hp == 0)
-            KillBattler(battle);
+        }
+            
     }
 
     // This method removes a battler from the battle.
@@ -92,18 +99,21 @@ public class Battler: MonoBehaviour
 
     public void HealBattler(int hpHealed, BattleSystem battle)
     {
-        int currHp = this.hp;
-        currHp = currHp+hpHealed;
+        if(!this.isPlayer || (this.isPlayer && !((PlayerBattler)this).isKO))
+        {
+            int currHp = this.hp;
+            currHp = currHp+hpHealed;
 
-        if(currHp > this.mhp)
-            currHp = this.mhp;
+            if(currHp > this.mhp)
+                currHp = this.mhp;
 
-        this.hp = currHp;
+            this.hp = currHp;
 
-        if (this.isPlayer)
-            battle.SetPlayerHPSliderValue((PlayerBattler)this);
-        else
-            battle.SetEnemyHPSliderValue((EnemyBattler)this);
+            if (this.isPlayer)
+                battle.SetPlayerHPSliderValue((PlayerBattler)this);
+            else
+                battle.SetEnemyHPSliderValue((EnemyBattler)this);
+        }
     }
 
     private void RemoveOverviewContainer(BattleSystem battle)
@@ -506,6 +516,7 @@ public class Battler: MonoBehaviour
         this.currentTurnAppliedEffects.Add(effect);
     }
 
+    
     public bool TryApplyStatusEffect(StatusEffect effect)
     {
         bool applied = true;
@@ -530,9 +541,74 @@ public class Battler: MonoBehaviour
             statusEffects.Remove(removeEffect);
 
         if(applied)
+        {
             statusEffects.Add(effect, effect.duration);
+            
+        }
+            
 
         return applied;
+    }
+
+    //Applies a status effect to the battler. This method is for adding effects that are not connected to a skill, instead use Skill.ApplyEffects() for that. 
+    //Any effects that must have a user or skill attached cannot be used.
+    public bool TryApplyStatusEffect(StatusEffect effect, BattleSystem battle)
+    {
+        bool applied = true;
+        StatusEffect removeEffect = null;
+
+        foreach(StatusEffect currentEffect in statusEffects.Keys)
+        {
+            if(currentEffect.statusEffectType == effect.statusEffectType)
+            {
+                if(statusEffects[currentEffect] >= effect.duration)
+                {
+                    applied = false;
+                    break;
+                }
+                else 
+                    removeEffect = currentEffect;
+                
+            }
+        }
+
+        if(removeEffect != null)
+            statusEffects.Remove(removeEffect);
+
+        if(applied)
+        {
+            statusEffects.Add(effect, effect.duration);
+            effect.ApplyEffect(null, this, null, battle);
+        }
+
+        effect.ApplyEffect(null, this, null, battle);
+
+        return applied;
+    }
+
+    public bool TryRemoveStatusEffectType(StatusEffect.StatusEffectType type, BattleSystem battle)
+    {
+        bool removed = false;
+        StatusEffect removeEffect = null;
+
+        foreach(StatusEffect effect in statusEffects.Keys)
+        {
+            if(effect.statusEffectType == type)
+            {
+                removeEffect = effect;
+                break;
+            }
+        }
+
+        if(removeEffect != null)
+        {
+            statusEffects.Remove(removeEffect);
+            removeEffect.RemoveStatusEffect(this, battle);
+            removed = true;
+        }
+
+        return removed;
+            
 
     }
 

@@ -6682,6 +6682,7 @@ MonoBehaviour:
   cursePopup: {fileID: 7834622618306877915, guid: d6c0b934f0fcf0a419ffbbbf72a82f5a, type: 3}
   sealPopup: {fileID: 7834622618306877915, guid: f38a767072a3ca446b8c6346055ab736, type: 3}
   staggerPopup: {fileID: 7834622618306877915, guid: 785d67979fe111341a851056fae7aaad, type: 3}
+  kOEffect: {fileID: 11400000, guid: 36ecc6129e5c32046807a264d7e18d76, type: 2}
   inventory: {fileID: 8722143571842965298}
   party: {fileID: 8214207710356208457}
   playerContainers:

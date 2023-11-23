@@ -18,7 +18,6 @@ public class BattlerStatHover : MonoBehaviour
     {
         this.battler = battler;
         this.battle = battle;
-
     }
 
     public void InfoObjectHover()
@@ -29,6 +28,10 @@ public class BattlerStatHover : MonoBehaviour
         SetupInfoObjectHover();
         if(battler == battle.currentlyActingBattler && !battle.tempTurnOrder)
             highlightAnimation = Instantiate(battle.turnOrderCurrentHighlightAnimation, battle.battlerTurnOrderObjects[battler].transform) as GameObject;
+        else if(battler.isPlayer && ((PlayerBattler)battler).isKO)
+        {
+
+        }
         else
             highlightAnimation = Instantiate(battle.turnOrderHighlightAnimation, battle.battlerTurnOrderObjects[battler].transform) as GameObject;
     }
@@ -42,7 +45,10 @@ public class BattlerStatHover : MonoBehaviour
     private void SetupInfoObjectHover()
     {
         if (battler.isPlayer)
+        {
             infoPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(280, -115);
+        }
+            
         else
             infoPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-170, -115);
 
@@ -114,13 +120,11 @@ public class BattlerStatHover : MonoBehaviour
             GameObject portraitStatusEffect = Instantiate(battle.portraitStatusEffect, infoPanel.transform.GetChild(29).gameObject.transform) as GameObject;
             portraitStatusEffect.GetComponent<Image>().sprite = effect.portrait_65;
 
-            Debug.Log(battler.statusEffects[effect]);
-
             if(battler.statusEffects[effect] >= 0)
-            {
-                Debug.Log("here");
                 portraitStatusEffect.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "" + battler.statusEffects[effect];
-            }
+            else 
+                portraitStatusEffect.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "";
+            
                 
         }
 
@@ -128,7 +132,7 @@ public class BattlerStatHover : MonoBehaviour
         {
             if (battler.buffEffects[effect] < 0)
             {
-                GameObject portraitBuffEffect = Instantiate(battle.portraitStatusEffect, infoPanel.transform.GetChild(29).gameObject.transform) as GameObject;
+                GameObject portraitBuffEffect = Instantiate(battle.portraitBuffEffect, infoPanel.transform.GetChild(29).gameObject.transform) as GameObject;
 
                 portraitBuffEffect.GetComponent<Image>().sprite = effect.portrait_65;
 
@@ -138,7 +142,6 @@ public class BattlerStatHover : MonoBehaviour
                     (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "+" + battler.GetBuffValue(effect.buffStat) * 100 + "%";
 
                 portraitBuffEffect.GetComponent<RectTransform>().anchoredPosition = new Vector2(currX, currY);
-
             }
             else
                 break;

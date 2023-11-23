@@ -46,7 +46,14 @@ public class OffensiveSkill : Skill
     // TODO: For AOE, need to change the return to a list of playerbattler targets.
     public List<PlayerBattler> ChooseTarget(EnemyBattler user, BattleSystem battle)
     {
+        List<PlayerBattler> availableTargets = new List<PlayerBattler>();
         List<PlayerBattler> targets = new List<PlayerBattler>();
+
+        foreach(PlayerBattler battler in battle.playerBattlers)
+        {
+            if(!battler.isKO)
+                availableTargets.Add(battler);
+        }
 
         if (this.targetType == TargetType.Single)
         {
@@ -54,7 +61,7 @@ public class OffensiveSkill : Skill
             PlayerBattler target = null;
             List<double> chances = new List<double>();
 
-            foreach (PlayerBattler battler in battle.playerBattlers)
+            foreach (PlayerBattler battler in availableTargets)
             {
                 cumulativeChance += battler.targetRatio;
                 chances.Add(cumulativeChance);
@@ -62,20 +69,20 @@ public class OffensiveSkill : Skill
 
             double roll = (double)UnityEngine.Random.Range(0.0f, (float)cumulativeChance);
 
-            for (int i = 0; i < battle.playerBattlers.Count && target == null; i++)
+            for (int i = 0; i < availableTargets.Count && target == null; i++)
             {
                 if (chances[i] > roll)
-                    target = battle.playerBattlers[i];
+                    target = availableTargets[i];
             }
 
             if (target == null)
-                target = battle.playerBattlers[0];
+                target = availableTargets[0];
 
             targets.Add(target);
         }
         else if(targetType == TargetType.All)
         {
-            foreach(PlayerBattler battler in battle.playerBattlers)
+            foreach(PlayerBattler battler in availableTargets)
                 targets.Add(battler);
         }
 
