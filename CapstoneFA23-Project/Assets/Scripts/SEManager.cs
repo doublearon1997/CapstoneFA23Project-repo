@@ -117,4 +117,12 @@ public class SEManager : MonoBehaviour
 
     }
 
+    public AudioClip GetAudioClip(string fileName)
+    {
+        if (soundEffects.ContainsKey(fileName))
+            return soundEffects[fileName];
+        else 
+            return null;
+    }
+
 }

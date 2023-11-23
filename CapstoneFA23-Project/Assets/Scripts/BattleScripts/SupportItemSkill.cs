@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Support Item Skill", menuName = "SupportItemSkill")]
 public class SupportItemSkill : SupportSkill
 {
     public int quantity;
@@ -24,5 +23,9 @@ public class SupportItemSkill : SupportSkill
 
         this.targetType = TargetType.Single;
         this.powerType = PowerType.Physical;
+
+        this.soundEffect = SEManager.instance.GetAudioClip("useItem");
+        this.hitSoundEffect = item.hitSoundEffect;
+        this.soundEffectHitDelay = item.soundEffectHitDelay;
     }
 }

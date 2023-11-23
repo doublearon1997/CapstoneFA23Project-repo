@@ -23,14 +23,20 @@ public class Battler: MonoBehaviour
 
     public double crt; //battler's critical chance
 
+    public double debuffResist, curseResist, sealResist, staggerResist;
+
     private double strBuff = 1.0, wilBuff = 1.0, defBuff = 0, resBuff = 0, iniBuff = 1.0, crtBuff = 0;
     private double strDebuff = 1.0, wilDebuff = 1.0, defDebuff = 0, resDebuff = 0, iniDebuff = 1.0, crtDebuff = 0;
+
+    private double debuffResistBuff = 0, curseResistBuff = 0, sealResistBuff = 0, staggerResistBuff = 0;
+    private double debuffResistDebuff = 0, curseResistDebuff = 0, sealResistDebuff = 0, staggerResistDebuff = 0;
 
     private bool fled = false;
 
     public string battlerName;
 
     public Dictionary<BuffEffect, int> buffEffects = new Dictionary<BuffEffect, int>(); // effects and their current duration.
+    public Dictionary<StatusEffect, int> statusEffects = new Dictionary<StatusEffect, int>(); 
 
     public int ap;
     public double apMod = 1;
@@ -46,6 +52,9 @@ public class Battler: MonoBehaviour
 
     private HashSet<Effect> currentTurnAppliedEffects = new HashSet<Effect>();
 
+    // Battler Status
+    public bool physicalEnabled = true, willEnabled = true, nextHitCrit = false;
+
     // This method deals damage to a battler and checks if the damage is enough to kill them.
     public void TakeDamage(int damage, BattleSystem battle)
     {
@@ -58,12 +67,19 @@ public class Battler: MonoBehaviour
         this.hp = currHp;
 
         if (this.isPlayer)
+        {
             battle.SetPlayerHPSliderValue((PlayerBattler)this);
+            if(this.hp == 0)
+                this.TryApplyStatusEffect(battle.kOEffect, battle);
+        }  
         else
+        {
             battle.SetEnemyHPSliderValue((EnemyBattler)this);
+            if (this.hp == 0)
+                KillBattler(battle);
 
-        if (this.hp == 0)
-            KillBattler(battle);
+        }
+            
     }
 
     // This method removes a battler from the battle.
@@ -83,18 +99,21 @@ public class Battler: MonoBehaviour
 
     public void HealBattler(int hpHealed, BattleSystem battle)
     {
-        int currHp = this.hp;
-        currHp = currHp+hpHealed;
+        if(!this.isPlayer || (this.isPlayer && !((PlayerBattler)this).isKO))
+        {
+            int currHp = this.hp;
+            currHp = currHp+hpHealed;
 
-        if(currHp > this.mhp)
-            currHp = this.mhp;
+            if(currHp > this.mhp)
+                currHp = this.mhp;
 
-        this.hp = currHp;
+            this.hp = currHp;
 
-        if (this.isPlayer)
-            battle.SetPlayerHPSliderValue((PlayerBattler)this);
-        else
-            battle.SetEnemyHPSliderValue((EnemyBattler)this);
+            if (this.isPlayer)
+                battle.SetPlayerHPSliderValue((PlayerBattler)this);
+            else
+                battle.SetEnemyHPSliderValue((EnemyBattler)this);
+        }
     }
 
     private void RemoveOverviewContainer(BattleSystem battle)
@@ -121,12 +140,21 @@ public class Battler: MonoBehaviour
     public double GetResBuff(){return this.resBuff;}
     public double GetIniBuff(){return this.iniBuff;}
     public double GetCrtBuff(){return this.crtBuff;}
+    public double GetDebuffResistBuff(){return this.debuffResistBuff;}
+    public double GetCurseResistBuff(){return this.curseResistBuff;}
+    public double GetSealResistBuff(){return this.sealResistBuff;}
+    public double GetStaggerResistBuff(){return this.staggerResistBuff;}
+
     public double GetStrDebuff(){return this.strDebuff;}
     public double GetWilDebuff(){return this.wilDebuff;}
     public double GetDefDebuff(){return this.defDebuff;}
     public double GetResDebuff(){return this.resDebuff;}
     public double GetIniDebuff(){return this.iniDebuff;}
     public double GetCrtDebuff(){return this.crtDebuff;}
+    public double GetDebuffResistDebuff(){return this.debuffResistDebuff;}
+    public double GetCurseResistDebuff(){return this.curseResistDebuff;}
+    public double GetSealResistDebuff(){return this.sealResistDebuff;}
+    public double GetStaggerResistDebuff(){return this.staggerResistDebuff;}
 
     //These methods get the corresponding with its current modifier 
     public int GetCurrStr()
@@ -159,6 +187,31 @@ public class Battler: MonoBehaviour
     {
         return this.crt + this.crtBuff + this.crtDebuff;
     }
+    public double GetCurrDebuffResistance()
+    {
+        if (debuffResist + debuffResistBuff + debuffResistDebuff < 0)
+            return 0;
+        return debuffResist + debuffResistBuff + debuffResistDebuff;
+    }
+    public double GetCurrCurseResistance()
+    {
+        if (curseResist + curseResistBuff + curseResistDebuff < 0)
+            return 0;
+        return curseResist + curseResistBuff + curseResistDebuff;
+    }
+    public double GetCurrSealResistance()
+    {
+        if (sealResist + sealResistBuff + sealResistDebuff < 0)
+            return 0;
+        return sealResist + sealResistBuff + sealResistDebuff;
+    }
+    public double GetCurrStaggerResistance()
+    {
+        if (staggerResist + staggerResistBuff + staggerResistDebuff < 0)
+            return 0;
+        return staggerResist + staggerResistBuff + staggerResistDebuff;
+    }
+
 
     public double GetBuffValue(BuffEffect.BuffStat buffStat)
     {
@@ -184,6 +237,18 @@ public class Battler: MonoBehaviour
             case (BuffEffect.BuffStat.CrtBuff):
                 returnValue = crtBuff;
                 break;
+            case (BuffEffect.BuffStat.DebuffResistBuff):
+                returnValue = debuffResistBuff;
+                break;
+            case (BuffEffect.BuffStat.CurseResistBuff):
+                returnValue = curseResistBuff;
+                break;
+            case (BuffEffect.BuffStat.SealResistBuff):
+                returnValue = sealResistBuff;
+                break;
+            case (BuffEffect.BuffStat.StaggerResistBuff):
+                returnValue = staggerResistBuff;
+                break;
             case (BuffEffect.BuffStat.StrDebuff):
                 returnValue = strDebuff - 1.0;
                 break;
@@ -201,6 +266,18 @@ public class Battler: MonoBehaviour
                 break;
             case (BuffEffect.BuffStat.CrtDebuff):
                 returnValue = crtDebuff;
+                break;
+            case (BuffEffect.BuffStat.DebuffResistDebuff):
+                returnValue = debuffResistDebuff;
+                break;
+            case (BuffEffect.BuffStat.CurseResistDebuff):
+                returnValue = curseResistDebuff;
+                break;
+            case (BuffEffect.BuffStat.SealResistDebuff):
+                returnValue = sealResistDebuff;
+                break;
+            case (BuffEffect.BuffStat.StaggerResistDebuff):
+                returnValue = staggerResistDebuff;
                 break;
         }
         return returnValue;
@@ -358,6 +435,13 @@ public class Battler: MonoBehaviour
     // Counts down the durations and decays the values of effects.
     public void CountDownEffects()
     {
+        CountDownBuffEffects();
+        CountDownStatusEffects();
+            
+    }
+
+    private void CountDownBuffEffects()
+    {
         List<BuffEffect> effectKeys = new List<BuffEffect>(this.buffEffects.Keys);
         List<BuffEffect> removeEffects = new List<BuffEffect>();
 
@@ -386,6 +470,30 @@ public class Battler: MonoBehaviour
             this.buffEffects.Remove(effect);
     }
 
+    private void CountDownStatusEffects()
+    {
+        List<StatusEffect> effectKeys = new List<StatusEffect>(this.statusEffects.Keys);
+        List<StatusEffect> removeEffects = new List<StatusEffect>();
+
+        foreach(StatusEffect effect in effectKeys)
+        {
+            if(!currentTurnAppliedEffects.Contains(effect))
+            {
+                statusEffects[effect] -= 1;
+
+                if(statusEffects[effect] == 0)
+                    removeEffects.Add(effect);
+            }
+            else
+                currentTurnAppliedEffects.Remove(effect);
+        }
+
+        foreach(StatusEffect effect in removeEffects)
+            this.statusEffects.Remove(effect);
+
+
+    }
+
     public void Flee(BattleSystem battle)
     {
         this.fled = true;
@@ -406,6 +514,102 @@ public class Battler: MonoBehaviour
     public void AddCurrentTurnEffect(Effect effect)
     {
         this.currentTurnAppliedEffects.Add(effect);
+    }
+
+    
+    public bool TryApplyStatusEffect(StatusEffect effect)
+    {
+        bool applied = true;
+        StatusEffect removeEffect = null;
+
+        foreach(StatusEffect currentEffect in statusEffects.Keys)
+        {
+            if(currentEffect.statusEffectType == effect.statusEffectType)
+            {
+                if(statusEffects[currentEffect] >= effect.duration)
+                {
+                    applied = false;
+                    break;
+                }
+                else 
+                    removeEffect = currentEffect;
+                
+            }
+        }
+
+        if(removeEffect != null)
+            statusEffects.Remove(removeEffect);
+
+        if(applied)
+        {
+            statusEffects.Add(effect, effect.duration);
+            
+        }
+            
+
+        return applied;
+    }
+
+    //Applies a status effect to the battler. This method is for adding effects that are not connected to a skill, instead use Skill.ApplyEffects() for that. 
+    //Any effects that must have a user or skill attached cannot be used.
+    public bool TryApplyStatusEffect(StatusEffect effect, BattleSystem battle)
+    {
+        bool applied = true;
+        StatusEffect removeEffect = null;
+
+        foreach(StatusEffect currentEffect in statusEffects.Keys)
+        {
+            if(currentEffect.statusEffectType == effect.statusEffectType)
+            {
+                if(statusEffects[currentEffect] >= effect.duration)
+                {
+                    applied = false;
+                    break;
+                }
+                else 
+                    removeEffect = currentEffect;
+                
+            }
+        }
+
+        if(removeEffect != null)
+            statusEffects.Remove(removeEffect);
+
+        if(applied)
+        {
+            statusEffects.Add(effect, effect.duration);
+            effect.ApplyEffect(null, this, null, battle);
+        }
+
+        effect.ApplyEffect(null, this, null, battle);
+
+        return applied;
+    }
+
+    public bool TryRemoveStatusEffectType(StatusEffect.StatusEffectType type, BattleSystem battle)
+    {
+        bool removed = false;
+        StatusEffect removeEffect = null;
+
+        foreach(StatusEffect effect in statusEffects.Keys)
+        {
+            if(effect.statusEffectType == type)
+            {
+                removeEffect = effect;
+                break;
+            }
+        }
+
+        if(removeEffect != null)
+        {
+            statusEffects.Remove(removeEffect);
+            removeEffect.RemoveStatusEffect(this, battle);
+            removed = true;
+        }
+
+        return removed;
+            
+
     }
 
 }

@@ -18,4 +18,9 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: 96e29dfd14a0aec45b389a5e78932863, type: 3}
   itemName: Cookie
   description: 
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 6306e5266d3009e4eb0d4001c87d23e1, type: 2}
+  - {fileID: 11400000, guid: 96b5bfb48390b0242820f191dc9f3ae9, type: 2}
+  isSupportItem: 1
+  hitSoundEffect: {fileID: 8300000, guid: 55d5fb02f04a6d746a78f3d2839b4757, type: 3}
+  soundEffectHitDelay: 1
