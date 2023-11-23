@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); 
-        animator = GetComponent<Animator>();   
+        animator = GetComponent<Animator>();
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
