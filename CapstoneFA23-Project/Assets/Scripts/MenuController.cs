@@ -80,7 +80,7 @@ public class MenuController : MonoBehaviour
 
         SetBrightness(brightnessSlider.value);
 
-        BGMManager.instance.PlayBGM("atTheEnd");
+        BGMManager.instance.PlayBGM("thePirateShip");
     }
 
     public void Update()
