@@ -30,6 +30,11 @@ public class SkillTargetHotkeys : MonoBehaviour
                 battle.DisplayMessage("Select a tactic.");
                 battle.hotkeyManager.AddComponent<TacticsButtonSelectedHotkeys>().Initialize(battle);
             }
+            else if (battle.IsButtonItemsPressed())
+            {
+                battle.DisplayMessage("Select an item.");
+                battle.hotkeyManager.AddComponent<ItemsButtonSelectedHotkeys>().Initialize(battle);
+            }
 
             stop = true;
         }

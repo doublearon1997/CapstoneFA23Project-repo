@@ -9,6 +9,13 @@ public class EnemyBattler : Battler
     public Skill[] skillList;
     public SkillUsageAI[] skillUsageAIList;
 
+    public List<Item> dropList = null;
+    public List<double> dropListChances =  null;
+
+    public List<int> dropListQuantities = null;
+
+    public int exp;
+
     private void Awake()
     {
         for(int i = 0; i<skillList.Length; i++)
@@ -66,6 +73,25 @@ public class EnemyBattler : Battler
         }
 
         return false;
+    }
+
+    public Dictionary<Item, int> DropItems()
+    {
+        Dictionary<Item, int> drops = new Dictionary<Item, int>();
+
+        for(int i = 0; i< dropList.Count; i++)
+        {
+            if(UnityEngine.Random.Range(0, 1.0f) < dropListChances[i])
+            {
+                if(drops.ContainsKey(dropList[i]))
+                    drops.Add(dropList[i], drops[dropList[i]] + dropListQuantities[i]);
+                else 
+                    drops.Add(dropList[i], dropListQuantities[i]);
+            }
+                
+        }
+
+        return drops;
     }
     
 }

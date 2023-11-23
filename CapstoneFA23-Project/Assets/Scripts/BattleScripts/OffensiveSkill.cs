@@ -46,7 +46,14 @@ public class OffensiveSkill : Skill
     // TODO: For AOE, need to change the return to a list of playerbattler targets.
     public List<PlayerBattler> ChooseTarget(EnemyBattler user, BattleSystem battle)
     {
+        List<PlayerBattler> availableTargets = new List<PlayerBattler>();
         List<PlayerBattler> targets = new List<PlayerBattler>();
+
+        foreach(PlayerBattler battler in battle.playerBattlers)
+        {
+            if(!battler.isKO)
+                availableTargets.Add(battler);
+        }
 
         if (this.targetType == TargetType.Single)
         {
@@ -54,7 +61,7 @@ public class OffensiveSkill : Skill
             PlayerBattler target = null;
             List<double> chances = new List<double>();
 
-            foreach (PlayerBattler battler in battle.playerBattlers)
+            foreach (PlayerBattler battler in availableTargets)
             {
                 cumulativeChance += battler.targetRatio;
                 chances.Add(cumulativeChance);
@@ -62,20 +69,20 @@ public class OffensiveSkill : Skill
 
             double roll = (double)UnityEngine.Random.Range(0.0f, (float)cumulativeChance);
 
-            for (int i = 0; i < battle.playerBattlers.Count && target == null; i++)
+            for (int i = 0; i < availableTargets.Count && target == null; i++)
             {
                 if (chances[i] > roll)
-                    target = battle.playerBattlers[i];
+                    target = availableTargets[i];
             }
 
             if (target == null)
-                target = battle.playerBattlers[0];
+                target = availableTargets[0];
 
             targets.Add(target);
         }
         else if(targetType == TargetType.All)
         {
-            foreach(PlayerBattler battler in battle.playerBattlers)
+            foreach(PlayerBattler battler in availableTargets)
                 targets.Add(battler);
         }
 
@@ -99,11 +106,20 @@ public class OffensiveSkill : Skill
                 damage = (user.GetCurrWil() * this.dmgMod) * (1 - target.GetCurrRes()) * UnityEngine.Random.Range(0.9f, 1.1f);
 
             //Critical Hit
-            if (UnityEngine.Random.Range(0.0f, 1.0f) < user.GetCurrCrt())
+            if(target.nextHitCrit)
+            {
+                damage *= 1.5;
+                result = AttackResult.Crit;
+
+                
+
+            }
+            else if (UnityEngine.Random.Range(0.0f, 1.0f) < user.GetCurrCrt())
             {
                 damage *= 1.5;
                 result = AttackResult.Crit;
             }
+            
 
             int finalDamage = (int)damage;
 
@@ -111,16 +127,7 @@ public class OffensiveSkill : Skill
             List<GameObject> effectNotificationQueue = new List<GameObject>();
             List<string> effectSoundEffectQueue = new List<string>();
 
-            if(displayFlags[0])
-            {
-                effectNotificationQueue.Add(battle.buffPopup);
-                effectSoundEffectQueue.Add("buff");
-            }
-            if(displayFlags[1])
-            {
-                effectNotificationQueue.Add(battle.debuffPopup);
-                effectSoundEffectQueue.Add("debuff");
-            }
+            FillNotificationQueues(effectNotificationQueue, effectSoundEffectQueue, displayFlags, battle);
                 
             if(effectNotificationQueue.Count > maxAdditionalAnimations)
                 maxAdditionalAnimations = effectNotificationQueue.Count;
@@ -141,6 +148,10 @@ public class OffensiveSkill : Skill
                         skillCooldowns[key] -= 1;
             }
             skillCooldowns[this] = this.cooldown;
+
+            if(this is OffensiveItemSkill)
+                battle.inventory.removeItem(((OffensiveItemSkill)this).item.itemID, 1);
+
             battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations, soundEffectHitDelay));
         }  
         else 
@@ -154,12 +165,15 @@ public class OffensiveSkill : Skill
         SEManager.instance.PlaySE(soundEffect);
         yield return new WaitForSeconds(soundEffectHitDelay);
 
-        target.TakeDamage(damage, battle);
-        
+        if(damage > 0)
+        {
+            target.TakeDamage(damage, battle);
+            DisplayDamageText(damage, target, battle, result);
+        }
+
         if(hitSoundEffect != null)
             SEManager.instance.PlaySE(hitSoundEffect);
             
-        DisplayDamageText(damage, target, battle, result);
         yield return new WaitForSeconds(1.7f);
 
         for(int i = 0; i< effectNotificationQueue.Count; i++)

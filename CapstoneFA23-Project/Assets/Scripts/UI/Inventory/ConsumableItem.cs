@@ -9,4 +9,7 @@ public class ConsumableItem : Item
 
     public bool isSupportItem = true;
     
+    public AudioClip hitSoundEffect;
+
+    public float soundEffectHitDelay;
 }

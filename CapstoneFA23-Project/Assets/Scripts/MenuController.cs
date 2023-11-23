@@ -79,8 +79,6 @@ public class MenuController : MonoBehaviour
             SetFullscreen(false);
 
         SetBrightness(brightnessSlider.value);
-
-        BGMManager.instance.PlayBGM("thePirateShip");
     }
 
     public void Update()

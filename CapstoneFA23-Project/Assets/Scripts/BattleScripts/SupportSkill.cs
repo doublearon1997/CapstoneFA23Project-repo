@@ -96,16 +96,7 @@ public class SupportSkill : Skill
             List<GameObject> effectNotificationQueue = new List<GameObject>();
             List<string> effectSoundEffectQueue = new List<string>();
 
-            if(displayFlags[0])
-            {
-                effectNotificationQueue.Add(battle.buffPopup);
-                effectSoundEffectQueue.Add("buff");
-            }
-            if(displayFlags[1])
-            {
-                effectNotificationQueue.Add(battle.debuffPopup);
-                effectSoundEffectQueue.Add("debuff");
-            }
+            FillNotificationQueues(effectNotificationQueue, effectSoundEffectQueue, displayFlags, battle);
 
             if(effectNotificationQueue.Count > maxAdditionalAnimations)
                 maxAdditionalAnimations = effectNotificationQueue.Count;
@@ -126,6 +117,10 @@ public class SupportSkill : Skill
                     skillCooldowns[key] -= 1;
             }
             skillCooldowns[this] = this.cooldown;
+
+            if(this is SupportItemSkill)
+                battle.inventory.removeItem(((SupportItemSkill)this).item.itemID, 1);
+            
             battle.StartCoroutine(battle.FinishPlayerTurn(maxAdditionalAnimations, soundEffectHitDelay));
         }
         else 

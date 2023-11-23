@@ -13,4 +13,14 @@ public class DestroyOnAnimationEnd : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void DeactivateSelf()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void DeactivateParent()
+    {
+        gameObject.transform.parent.gameObject.SetActive(false);
+    }
 }
