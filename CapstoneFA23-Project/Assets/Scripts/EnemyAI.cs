@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
     public float attackRadius;
 
     public bool shouldRotate;
+    public bool IsDefeated;
 
     public LayerMask whatIsPlayer;
 
@@ -57,6 +58,7 @@ public class EnemyAI : MonoBehaviour
         {
             //rb.velocity = Vector2.zero;
             BattleSystem.currentEncounter = encounter;
+            LevelManager.SetEnemy(this.gameObject);
             SceneManager.LoadScene("sceneBattle");
         }
     }
