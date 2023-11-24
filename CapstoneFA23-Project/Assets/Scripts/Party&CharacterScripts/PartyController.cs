@@ -117,7 +117,10 @@ public class PartyController : MonoBehaviour
                 foreach(Character tCharacter in listCharacters)
                 {
                     if(tCharacter.characterID==partyArray[i,1])
+                    {
                         tempListCharacters.Add(tCharacter); 
+                    }
+                        
                 }
             }
         }

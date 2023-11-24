@@ -18,4 +18,8 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: 995158a1ade8ae04cb1f5860a38681ab, type: 3}
   itemName: Potato
   description: 
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: e623be489466c5447807ac7fe396b7e2, type: 2}
+  isSupportItem: 1
+  hitSoundEffect: {fileID: 8300000, guid: 55d5fb02f04a6d746a78f3d2839b4757, type: 3}
+  soundEffectHitDelay: 1

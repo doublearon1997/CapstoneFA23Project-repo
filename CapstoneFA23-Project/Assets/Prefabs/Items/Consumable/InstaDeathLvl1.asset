@@ -16,6 +16,10 @@ MonoBehaviour:
   value: 100
   category: 0
   itemImage: {fileID: 21300000, guid: 85c84f60840bc5a46b45ed89b50ee85a, type: 3}
-  itemName: Insta-Death (Level 1)
+  itemName: Insta-Death (Lvl 1)
   description: 
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: e0e5126f63b560a469ec3e9eb22c5961, type: 2}
+  isSupportItem: 0
+  hitSoundEffect: {fileID: 8300000, guid: ba355d5f29074d24482cbe6fa5042841, type: 3}
+  soundEffectHitDelay: 1

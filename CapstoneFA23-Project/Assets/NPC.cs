@@ -16,22 +16,21 @@ public class NPC : MonoBehaviour
     public GameObject contButton;
     public float wordSpeed;
     public bool playerIsClose;
- 
 
+    public Coroutine currentTyper = null;
+ 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && playerIsClose)
+        if((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)) && playerIsClose)
         {
             if (dialoguePanel.activeInHierarchy) 
-            {
-                zeroText();
-            }
+                NextLine();
             else
             {
                 dialoguePanel.SetActive(true);
                 npcNameText.text = npcName;
-                StartCoroutine(Typing());
+                currentTyper = StartCoroutine(Typing());
             }
         }
         if(dialogueText.text == dialogue[index]) 
@@ -42,12 +41,9 @@ public class NPC : MonoBehaviour
 
 
     void Start()
-
     {
-
         dialogueText.text = "";
         npcNameText.text = npcName;
-
     }
 
     public void zeroText()
@@ -55,37 +51,34 @@ public class NPC : MonoBehaviour
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
+
+        if(currentTyper != null)
+            StopCoroutine(currentTyper);
     }
 
-
     IEnumerator Typing()
-
     {
         foreach(char letter in dialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
         }
-
-
     }
 
 
     public void NextLine()
     {
-
+        StopCoroutine(currentTyper);
         contButton.SetActive(false);
 
         if(index < dialogue.Length -1)
         {
             index++;
             dialogueText.text = "";
-            StartCoroutine(Typing());
+            currentTyper = StartCoroutine(Typing());
         }
         else
-        {
             zeroText();
-        }
     }
 
 
@@ -94,9 +87,7 @@ public class NPC : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
-        {
             playerIsClose = true;
-        }
     }
 
 

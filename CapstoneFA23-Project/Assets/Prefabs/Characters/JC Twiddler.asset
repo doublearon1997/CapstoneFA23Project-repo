@@ -19,14 +19,20 @@ MonoBehaviour:
   charClass: {fileID: 11400000, guid: c3075c313996de8a29fbaf739e7b0c9f, type: 2}
   level: 1
   exp: 0
-  hp: 365
-  mhp: 365
-  str: 80
-  wil: 111
-  ini: 93
+  hp: 401
+  mhp: 401
+  str: 88
+  wil: 122
+  ini: 102
   def: 0.15
   res: 0.22
   crt: 0.04
+  curseRes: 0.12
+  sealRes: 0.12
+  staggerRes: 0.05
+  preBattleExp: 0
+  preBattleLevel: 1
   skills:
+  - {fileID: 11400000, guid: 9153c435c7db50143b35434fa0be7cbd, type: 2}
   - {fileID: 11400000, guid: 2b80773c2a2c7f140b1d2179951444ef, type: 2}
-  standardAttack: {fileID: 0}
+  standardAttack: {fileID: 11400000, guid: 1590950551078ac478543c7206a3c70a, type: 2}
