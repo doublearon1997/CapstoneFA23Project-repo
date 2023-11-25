@@ -77917,7 +77917,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248935686}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b95310a5ca1df974cbadeeff1d27a838, type: 2}
   m_CullingMode: 0
@@ -77947,12 +77947,12 @@ MonoBehaviour:
   npcNameText: {fileID: 1805942526}
   npcName: First Mate
   dialogue:
-  - Hey, Listen here...
-  - There is Danger Ahead!
-  - But in order to get to your boat, you need through..
-  - You can try to avoid them, but..
-  - Most likely you'll need to battle.
-  - Good luck out there!
+  - Cap'n you're back!
+  - What do you mean, my outfit?
+  - You're the one who gave it to me!
+  - Come on. The ghost queen is dead, right?
+  - Nothing here? Then lets move on to the next Island.
+  - Just go to the wheel. Hurry!
   contButton: {fileID: 1190100682}
   wordSpeed: 0.06
   playerIsClose: 0
@@ -78356,14 +78356,14 @@ MonoBehaviour:
   dialoguePanel: {fileID: 609486418}
   dialogueText: {fileID: 1311017410}
   npcNameText: {fileID: 1805942526}
-  npcName: Some Guy
+  npcName: Potential Love Interest
   dialogue:
-  - Hey, Listen here...
-  - There is Danger Ahead!
-  - But in order to get to your boat, you need through..
-  - You can try to avoid them, but..
-  - Most likely you'll need to battle.
-  - Good luck out there!
+  - Thank Goodness! I'm Saved!
+  - Huh? What a silly question.
+  - The only queen here...
+  - is the one in front of you!
+  - Hey...
+  - You'll still save me, right?
   contButton: {fileID: 1190100682}
   wordSpeed: 0.06
   playerIsClose: 0
@@ -82581,7 +82581,7 @@ MonoBehaviour:
   npcName: Sign
   dialogue:
   - Welcome to "Lone Isle"
-  - Have a wonderful stay!
+  - Beware Ghost Queen!
   contButton: {fileID: 1221466229}
   wordSpeed: 0.06
   playerIsClose: 0
