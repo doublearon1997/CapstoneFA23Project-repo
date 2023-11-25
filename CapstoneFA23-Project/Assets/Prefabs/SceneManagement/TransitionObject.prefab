@@ -145,5 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingSceneManagerInstance: {fileID: 0}
   TravelDialogPanel: {fileID: 0}
+  levelManager: {fileID: 0}
   SpecifiedSceneToLoad: 0
   IsOverWorldTransitionObject: 1
+  SavePosition: 0

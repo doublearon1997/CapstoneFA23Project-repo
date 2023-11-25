@@ -35,4 +35,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/sceneDefeat.unity
     guid: 488b162c1a64c534e8b529243143b568
+  - enabled: 1
+    path: Assets/Scenes/Islands/sceneGhostShip.unity
+    guid: 401d46f5f43bcb247a2606717d7ba876
+  - enabled: 1
+    path: Assets/Scenes/Islands/sceneTowerInside.unity
+    guid: 6219f6e7a9d5e3c45b4360d8e2c7acc6
   m_configObjects: {}
