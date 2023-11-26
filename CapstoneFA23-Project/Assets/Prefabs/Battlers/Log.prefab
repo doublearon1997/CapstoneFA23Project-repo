@@ -135,16 +135,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c927745c628b4698905129e5fad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 600
-  mhp: 600
-  str: 400
-  wil: 400
-  def: 0.15
-  res: 0.15
+  hp: 245
+  mhp: 245
+  str: 100
+  wil: 100
+  def: 0.13
+  res: 0.2
   ini: 85
   crt: 0.03
   debuffResist: 0
-  curseResist: 0.1
+  curseResist: 0.12
   sealResist: 0.02
   staggerResist: 0
   battlerName: Log

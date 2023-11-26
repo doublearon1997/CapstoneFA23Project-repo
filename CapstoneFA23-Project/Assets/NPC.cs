@@ -58,9 +58,18 @@ public class NPC : MonoBehaviour
 
     IEnumerator Typing()
     {
+        float currentWaitTime = 0.12f;
         foreach(char letter in dialogue[index].ToCharArray())
         {
+            if(currentWaitTime >= 0.12f)
+            {
+                SEManager.instance.PlaySE("type");
+                currentWaitTime = 0.0f;
+            }
+                
+
             dialogueText.text += letter;
+            currentWaitTime += wordSpeed;
             yield return new WaitForSeconds(wordSpeed);
         }
     }

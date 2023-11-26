@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
+  m_Name: Spectral Shot
+  m_EditorClassIdentifier: 
+  skillName: Spectral Shot
+  targetType: 0
+  powerType: 1
+  apMod: 0.9
+  cooldown: 1
+  portrait65: {fileID: 21300000, guid: 8a099f0a50314ad45ba2bf33c3c048eb, type: 3}
+  portrait50: {fileID: 21300000, guid: 7b38fc98be4e8904ab90bda8489d07aa, type: 3}
+  portrait100: {fileID: 21300000, guid: a66c60ef5cef1ba41a609e284bfafbd7, type: 3}
+  isOffensive: 1
+  effects:
+  - {fileID: 11400000, guid: dbed0bb43d8493c41bec17c0a52814f9, type: 2}
+  soundEffect: {fileID: 8300000, guid: e98dd99b8ad9a144f8785c3d743e1ea8, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 61400415d18eb8847bf54421357b8da5, type: 3}
+  soundEffectHitDelay: 0
+  dmgMod: 1.1

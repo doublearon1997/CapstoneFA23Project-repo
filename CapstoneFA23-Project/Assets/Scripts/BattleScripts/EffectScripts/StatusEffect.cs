@@ -11,7 +11,7 @@ public abstract class StatusEffect : DurationEffect
     //Must update this when adding a new Status Effect Type!
     public enum StatusEffectType 
     { 
-        StaggerEffect, CurseEffect, SealEffect, KOEffect
+        StaggerEffect, CurseEffect, SealEffect, KOEffect, MarkEffect
     }
 
 }

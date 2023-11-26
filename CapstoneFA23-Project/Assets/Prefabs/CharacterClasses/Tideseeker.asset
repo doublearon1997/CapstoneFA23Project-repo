@@ -27,4 +27,5 @@ MonoBehaviour:
   startingSkills:
   - {fileID: 11400000, guid: 9153c435c7db50143b35434fa0be7cbd, type: 2}
   - {fileID: 11400000, guid: 2b80773c2a2c7f140b1d2179951444ef, type: 2}
-  skillUnlocks: []
+  skillUnlocks:
+  - {fileID: 11400000, guid: 7491ff1e61a0d414da8b4ed9f2e59824, type: 2}
