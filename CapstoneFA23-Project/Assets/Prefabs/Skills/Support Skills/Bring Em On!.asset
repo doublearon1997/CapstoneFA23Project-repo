@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1e56c970b12754e839e8ce6732c0bc, type: 3}
+  m_Name: Bring Em On!
+  m_EditorClassIdentifier: 
+  skillName: Bring Em On!
+  targetType: 2
+  powerType: 0
+  apMod: 1
+  cooldown: 4
+  portrait65: {fileID: 21300000, guid: 78b59ba369b90464b9a845a249605658, type: 3}
+  portrait50: {fileID: 21300000, guid: 197ea69428eaed445a39b6ac1aac40c6, type: 3}
+  portrait100: {fileID: 21300000, guid: 394dc0b18e56c0c428bc95e377acc252, type: 3}
+  isOffensive: 0
+  effects:
+  - {fileID: 11400000, guid: 85d848b263654cd4eafc0b056f260761, type: 2}
+  - {fileID: 11400000, guid: e46c95406ebea654485320f484a1cf97, type: 2}
+  - {fileID: 11400000, guid: 39fadcd277bb56741b47ea0d85f723d1, type: 2}
+  soundEffect: {fileID: 8300000, guid: dc2c5d5328a44f14b8d4ffcb46a16b43, type: 3}
+  hitSoundEffect: {fileID: 0}
+  soundEffectHitDelay: 1.5

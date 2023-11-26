@@ -30,7 +30,7 @@ public class BattleSystem : MonoBehaviour
 
     //Skill Popups
     public GameObject damageTextPopup, healTextPopup;
-    public GameObject buffPopup, debuffPopup, cooldownClearPopup, cursePopup, sealPopup, staggerPopup;
+    public GameObject buffPopup, debuffPopup, cooldownClearPopup, cursePopup, sealPopup, staggerPopup, buffsClearPopup, debuffsClearPopup, markPopup;
 
     private bool inPinch = false;
 
@@ -85,7 +85,7 @@ public class BattleSystem : MonoBehaviour
 
     //Tactic Selection Panel
     public GameObject panelTacticSelection;
-    public SupportSkill fleeSkill;
+    public SupportSkill fleeSkill, defendSkill, waitSkill;
 
     //Item Selection Panel
     public GameObject panelItemSelection;
@@ -638,6 +638,12 @@ public class BattleSystem : MonoBehaviour
         float xPos = 80.0f;
         float yPos = -60.0f;
 
+        CreateTacticButton((Skill)defendSkill, battler, xPos, yPos);
+        xPos += 119.0f;
+
+        CreateTacticButton((Skill)waitSkill, battler, xPos, yPos);
+        xPos += 119.0f;
+
         CreateTacticButton((Skill)fleeSkill, battler, xPos, yPos);
         xPos += 119.0f;
 
@@ -654,9 +660,7 @@ public class BattleSystem : MonoBehaviour
     private void ClearTacticSelectionPanel()
     {
         while (panelTacticSelection.transform.childCount > 1)
-        {
             DestroyImmediate(panelTacticSelection.transform.GetChild(1).gameObject);
-        }
     }
 
     public void ItemsButtonPress()
@@ -857,7 +861,7 @@ public class BattleSystem : MonoBehaviour
         if (IsPlayerVictory())
             StartCoroutine(PlayerVictory());
         else if (IsPlayerPartyFled())
-            PlayerFlee();
+            StartCoroutine(PlayerFlee());
         else if (IsPlayerDefeat())
             StartCoroutine(PlayerDefeat());
         else
@@ -955,7 +959,7 @@ public class BattleSystem : MonoBehaviour
         if(IsPlayerVictory())
             StartCoroutine(PlayerVictory());
         else if(IsPlayerPartyFled())
-            PlayerFlee();
+            StartCoroutine(PlayerFlee());
         else if(IsPlayerDefeat())
             StartCoroutine(PlayerDefeat());
         else
@@ -1051,9 +1055,11 @@ public class BattleSystem : MonoBehaviour
         {
             if(battler.HasFled())
                 return false;
-        }
-            
-        return playerBattlers.Count <= 0;
+            else if(!battler.isKO)
+                return false;
+                
+        }  
+        return true;
     }
 
     private bool IsPlayerPartyFled()
@@ -1062,12 +1068,12 @@ public class BattleSystem : MonoBehaviour
 
         foreach(PlayerBattler battler in startingPlayerBattlers)
         {
-            if(!battler.HasFled())
+            if(!battler.HasFled() && !battler.isKO)
             {
                 fled = false;
                 break;
             }
-           
+
         }
         return fled;
     }
@@ -1223,11 +1229,15 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    private void AdjustCharactersAfterBattle()
+    private void AdjustCharactersAfterBattle(bool fled = false)
     {
         int expGain = 0;
-        foreach(EnemyBattler battler in startingEnemyBattlers)
+
+        if(!fled)
+        {
+            foreach(EnemyBattler battler in startingEnemyBattlers)
             expGain += battler.exp;
+        }
 
         foreach(PlayerBattler battler in startingPlayerBattlers)
         {
@@ -1237,7 +1247,9 @@ public class BattleSystem : MonoBehaviour
             c.preBattleLevel = battler.character.level;
             c.exp += expGain;
 
-            if(battler.hp > c.mhp)
+            if(battler.isKO)
+                c.hp = 1;
+            else if(battler.hp > c.mhp)
                 c.hp = c.mhp;
             else 
                 c.hp = battler.hp;
@@ -1337,8 +1349,15 @@ public class BattleSystem : MonoBehaviour
         SceneManager.LoadScene("sceneDefeat");
     }
 
-    private void PlayerFlee()
+    private IEnumerator PlayerFlee()
     {
+        StartCoroutine(BGMManager.instance.FadeOutBGM(2f));
+        fadeOutToBlack.SetActive(true);
+
+        AdjustCharactersAfterBattle(true);
+        
+        yield return new WaitForSeconds(2f);
+
         SceneManager.LoadScene("sceneTutorialLevel");
     }
 
