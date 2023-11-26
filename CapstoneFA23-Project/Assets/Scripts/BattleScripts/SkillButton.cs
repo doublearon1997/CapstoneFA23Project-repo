@@ -89,7 +89,7 @@ public class SkillButton : MonoBehaviour
     // When button is hovered, display a skill stat box for the button's skill.
     public void SkillButtonHover()
     {
-        SEManager.instance.PlaySE("buttonHover", 1);
+        SEManager.instance.PlaySE("buttonHover");
 
         if(skill.isOffensive)
             CreateOffensiveSkillStatBox();

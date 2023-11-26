@@ -9,7 +9,7 @@ public abstract class BuffEffect : DurationEffect
     public enum BuffStat 
     { 
         StrBuff, StrDebuff, WilBuff, WilDebuff, DefBuff, DefDebuff, ResBuff, ResDebuff, IniBuff, IniDebuff, CrtBuff, CrtDebuff, 
-        DebuffResistBuff, DebuffResistDebuff, CurseResistBuff, CurseResistDebuff, SealResistBuff, SealResistDebuff, StaggerResistBuff, StaggerResistDebuff
+        DbfRstBuff, DbfRstDebuff, CurRstBuff, CurRstDebuff, SelRstBuff, SelRstDebuff, StaRstBuff, StaRstDebuff
     }
 
     public readonly int DURATION_UNTIL_DECAYED = -1;

@@ -15,6 +15,7 @@ public class HealEffect : Effect
     public override bool ApplyEffect(Battler user, Battler target, Skill skill, BattleSystem battle)
     {
         double hpHealed = 0;
+
         if(healPercentage > 0)
             hpHealed += healPercentage * (double)target.mhp;
         if(healAmount > 0)
@@ -26,6 +27,9 @@ public class HealEffect : Effect
             else 
                 hpHealed += healPower * (double)user.GetCurrStr();
         }
+
+        if(target.isPlayer && ((PlayerBattler)target).isKO)
+            hpHealed = 0;
 
         battle.StartCoroutine(DisplayHealText((int)hpHealed, target, skill, battle));
 

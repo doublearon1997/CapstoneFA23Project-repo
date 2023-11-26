@@ -16,5 +16,5 @@ MonoBehaviour:
   chance: 1
   healPercentage: 0
   healAmount: 15
-  healPower: 1.2
+  healPower: 1.3
   powerType: 1

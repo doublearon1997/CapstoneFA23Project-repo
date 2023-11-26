@@ -212,7 +212,7 @@ public class Battler: MonoBehaviour
         return staggerResist + staggerResistBuff + staggerResistDebuff;
     }
 
-
+    //Gets a battler's stat value given the buffstat type.
     public double GetBuffValue(BuffEffect.BuffStat buffStat)
     {
         double returnValue = -1;
@@ -237,16 +237,16 @@ public class Battler: MonoBehaviour
             case (BuffEffect.BuffStat.CrtBuff):
                 returnValue = crtBuff;
                 break;
-            case (BuffEffect.BuffStat.DebuffResistBuff):
+            case (BuffEffect.BuffStat.DbfRstBuff):
                 returnValue = debuffResistBuff;
                 break;
-            case (BuffEffect.BuffStat.CurseResistBuff):
+            case (BuffEffect.BuffStat.CurRstBuff):
                 returnValue = curseResistBuff;
                 break;
-            case (BuffEffect.BuffStat.SealResistBuff):
+            case (BuffEffect.BuffStat.SelRstBuff):
                 returnValue = sealResistBuff;
                 break;
-            case (BuffEffect.BuffStat.StaggerResistBuff):
+            case (BuffEffect.BuffStat.StaRstBuff):
                 returnValue = staggerResistBuff;
                 break;
             case (BuffEffect.BuffStat.StrDebuff):
@@ -267,16 +267,16 @@ public class Battler: MonoBehaviour
             case (BuffEffect.BuffStat.CrtDebuff):
                 returnValue = crtDebuff;
                 break;
-            case (BuffEffect.BuffStat.DebuffResistDebuff):
+            case (BuffEffect.BuffStat.DbfRstDebuff):
                 returnValue = debuffResistDebuff;
                 break;
-            case (BuffEffect.BuffStat.CurseResistDebuff):
+            case (BuffEffect.BuffStat.CurRstDebuff):
                 returnValue = curseResistDebuff;
                 break;
-            case (BuffEffect.BuffStat.SealResistDebuff):
+            case (BuffEffect.BuffStat.SelRstDebuff):
                 returnValue = sealResistDebuff;
                 break;
-            case (BuffEffect.BuffStat.StaggerResistDebuff):
+            case (BuffEffect.BuffStat.StaRstDebuff):
                 returnValue = staggerResistDebuff;
                 break;
         }
