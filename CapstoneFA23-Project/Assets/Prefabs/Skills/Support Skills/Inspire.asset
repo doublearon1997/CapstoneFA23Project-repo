@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1e56c970b12754e839e8ce6732c0bc, type: 3}
+  m_Name: Inspire
+  m_EditorClassIdentifier: 
+  skillName: Inspire
+  targetType: 0
+  powerType: 0
+  apMod: 1
+  cooldown: 3
+  portrait65: {fileID: 21300000, guid: 23463bc7bca9d1b44aa9632056078686, type: 3}
+  portrait50: {fileID: 21300000, guid: aa2f995a45ae866438cfb8323ce326ad, type: 3}
+  portrait100: {fileID: 21300000, guid: 40d13af348cf9824bbec4265afa1ab94, type: 3}
+  isOffensive: 0
+  effects:
+  - {fileID: 11400000, guid: d1fc10ce12696204eb0bd3e393b1711b, type: 2}
+  soundEffect: {fileID: 8300000, guid: d39964809389fe342a2148b700d00853, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 04874ad0bc4431c49b3bc46fbb2589c6, type: 3}
+  soundEffectHitDelay: 2.2

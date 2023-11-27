@@ -5,7 +5,6 @@ using UnityEngine;
 /// <summary>
 /// This Class defines Skills, which are actions that Battlers can perform in Battle when it is their turn.
 /// </summary>
-/// 
 
 public enum TargetType { Single, All, Self }
 public enum PowerType { Physical, Will }
@@ -35,7 +34,7 @@ public abstract class Skill: ScriptableObject
     //Applies all of the effects on the skill to the target battler. Returns a list of flags to determine if a Buff or Debuff animation should be displayed.
     public bool[] ApplyEffects(Battler user, Battler target, BattleSystem battle)
     {
-        bool[] displayFlags = {false, false, false, false, false, false};
+        bool[] displayFlags = {false, false, false, false, false, false, false, false, false};
 
         foreach(Effect effect in effects)
         {
@@ -53,6 +52,12 @@ public abstract class Skill: ScriptableObject
                     displayFlags[4] = true;
                 else if(effect is StaggerEffect)
                     displayFlags[5] = true;
+                else if(effect is ClearBuffsEffect)
+                    displayFlags[6] = true;
+                else if(effect is ClearDebuffsEffect)
+                    displayFlags[7] = true;
+                else if(effect is MarkEffect)
+                    displayFlags[8] = true;
             }
         }
         return displayFlags;
@@ -78,7 +83,7 @@ public abstract class Skill: ScriptableObject
         if(displayFlags[3])
         {
             effectNotificationQueue.Add(battle.cursePopup);
-            effectSoundEffectQueue.Add("stagger");
+            effectSoundEffectQueue.Add("curse");
         }
         if(displayFlags[4])
         {
@@ -89,6 +94,21 @@ public abstract class Skill: ScriptableObject
         {
             effectNotificationQueue.Add(battle.staggerPopup);
             effectSoundEffectQueue.Add("stagger");
+        }
+        if(displayFlags[6])
+        {
+            effectNotificationQueue.Add(battle.buffsClearPopup);
+            effectSoundEffectQueue.Add("clearBuffs");
+        }
+        if(displayFlags[7])
+        {
+            effectNotificationQueue.Add(battle.debuffsClearPopup);
+            effectSoundEffectQueue.Add("powerUp_1");
+        }
+        if(displayFlags[8])
+        {
+            effectNotificationQueue.Add(battle.markPopup);
+            effectSoundEffectQueue.Add("marked");
         }
     }
  

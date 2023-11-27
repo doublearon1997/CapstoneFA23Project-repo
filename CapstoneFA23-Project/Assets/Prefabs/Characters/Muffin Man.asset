@@ -17,8 +17,8 @@ MonoBehaviour:
   characterName: Muffin Man
   description: 
   charClass: {fileID: 11400000, guid: b6f1dfce09d98d6bb8c93f31b51a914d, type: 2}
-  level: 1
-  exp: 0
+  level: 2
+  exp: 12
   hp: 429
   mhp: 429
   str: 102
@@ -34,4 +34,5 @@ MonoBehaviour:
   preBattleLevel: 1
   skills:
   - {fileID: 11400000, guid: 2fd33f1e3c16ca5459331bda2c1881a9, type: 2}
-  standardAttack: {fileID: 11400000, guid: a7f32e451920e7c45b02129f59ba73ff, type: 2}
+  - {fileID: 11400000, guid: 2bf3679b66329db4094d276bec0207f5, type: 2}
+  standardAttack: {fileID: 11400000, guid: a7cfe105a52572333b8ea2b38d74ae59, type: 2}

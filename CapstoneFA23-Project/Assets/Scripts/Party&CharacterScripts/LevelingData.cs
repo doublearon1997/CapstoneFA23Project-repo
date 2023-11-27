@@ -17,8 +17,6 @@ public class LevelingData : MonoBehaviour
 
         for (int level = 2; level <= 10; level++)
             expLevelRequirements.Add(level, expLevelRequirements[level-1] * 3);
-            
-        
     }
 
     public static int DetermineLevel(int exp)
@@ -27,7 +25,7 @@ public class LevelingData : MonoBehaviour
         {
             if (exp >= expLevelRequirements.Values.ToList()[i] && exp < expLevelRequirements.Values.ToList()[i + 1])
                 return i + 2;
-            else if(exp < expLevelRequirements.Values.ToList()[1])
+            else if(exp < expLevelRequirements.Values.ToList()[0])
                 return 1;
         }
 

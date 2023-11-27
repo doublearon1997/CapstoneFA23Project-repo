@@ -212,7 +212,7 @@ public class Battler: MonoBehaviour
         return staggerResist + staggerResistBuff + staggerResistDebuff;
     }
 
-
+    //Gets a battler's stat value given the buffstat type.
     public double GetBuffValue(BuffEffect.BuffStat buffStat)
     {
         double returnValue = -1;
@@ -237,16 +237,16 @@ public class Battler: MonoBehaviour
             case (BuffEffect.BuffStat.CrtBuff):
                 returnValue = crtBuff;
                 break;
-            case (BuffEffect.BuffStat.DebuffResistBuff):
+            case (BuffEffect.BuffStat.DbfRstBuff):
                 returnValue = debuffResistBuff;
                 break;
-            case (BuffEffect.BuffStat.CurseResistBuff):
+            case (BuffEffect.BuffStat.CurRstBuff):
                 returnValue = curseResistBuff;
                 break;
-            case (BuffEffect.BuffStat.SealResistBuff):
+            case (BuffEffect.BuffStat.SelRstBuff):
                 returnValue = sealResistBuff;
                 break;
-            case (BuffEffect.BuffStat.StaggerResistBuff):
+            case (BuffEffect.BuffStat.StaRstBuff):
                 returnValue = staggerResistBuff;
                 break;
             case (BuffEffect.BuffStat.StrDebuff):
@@ -267,16 +267,16 @@ public class Battler: MonoBehaviour
             case (BuffEffect.BuffStat.CrtDebuff):
                 returnValue = crtDebuff;
                 break;
-            case (BuffEffect.BuffStat.DebuffResistDebuff):
+            case (BuffEffect.BuffStat.DbfRstDebuff):
                 returnValue = debuffResistDebuff;
                 break;
-            case (BuffEffect.BuffStat.CurseResistDebuff):
+            case (BuffEffect.BuffStat.CurRstDebuff):
                 returnValue = curseResistDebuff;
                 break;
-            case (BuffEffect.BuffStat.SealResistDebuff):
+            case (BuffEffect.BuffStat.SelRstDebuff):
                 returnValue = sealResistDebuff;
                 break;
-            case (BuffEffect.BuffStat.StaggerResistDebuff):
+            case (BuffEffect.BuffStat.StaRstDebuff):
                 returnValue = staggerResistDebuff;
                 break;
         }
@@ -516,7 +516,7 @@ public class Battler: MonoBehaviour
         this.currentTurnAppliedEffects.Add(effect);
     }
 
-    
+    // Applies a status effect to the battler. If the battler already has the same status effect, it keeps the one that will last the longest to keep. Returns if the effect was applied or not.
     public bool TryApplyStatusEffect(StatusEffect effect)
     {
         bool applied = true;
@@ -541,12 +541,42 @@ public class Battler: MonoBehaviour
             statusEffects.Remove(removeEffect);
 
         if(applied)
-        {
             statusEffects.Add(effect, effect.duration);
             
-        }
-            
+        return applied;
+    }
 
+    // Applies a buff effect to the battler. If the battler already has the same status effect, it keeps the one with the highest value. Returns if the effect was applied or not.
+    public bool TryApplyBuffEffect(BuffEffect effect, BattleSystem battle)
+    {
+        bool applied = true;
+        BuffEffect removeEffect = null;
+
+        foreach(BuffEffect currentEffect in buffEffects.Keys)
+        {
+            if(currentEffect.buffStat == effect.buffStat)
+            {
+                if(effect.isDebuff && GetBuffValue(currentEffect.buffStat) < effect.value)
+                {
+                    applied = false;
+                    break;
+                }
+                else if(!effect.isDebuff && GetBuffValue(currentEffect.buffStat) > effect.value)
+                {
+                    applied = false;
+                    break;
+                }
+                else 
+                    removeEffect = currentEffect;
+            }
+        }
+
+        if(removeEffect != null)
+            buffEffects.Remove(removeEffect);
+
+        if(applied)
+            buffEffects.Add(effect, effect.duration);
+            
         return applied;
     }
 

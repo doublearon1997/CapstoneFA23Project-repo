@@ -40,14 +40,16 @@ public class PlayerBattler : Battler
         portrait60 = c.characterImage;
         portrait70 = c.characterImage;
 
-        skills = c.skills;
-
         battlerName = c.characterName;
         level = c.level;
         playerClass = c.charClass;
 
-        foreach(Skill skill in skills)
-            skillCooldownDict.Add(skill, 0);
+        foreach(Skill skill in c.skills)
+        {
+            this.skills.Add(skill);
+            this.skillCooldownDict.Add(skill, 0);
+        }
+            
         
         standardAttack = c.standardAttack;
         skills = c.skills;

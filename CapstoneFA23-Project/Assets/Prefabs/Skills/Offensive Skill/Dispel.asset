@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
+  m_Name: Dispel
+  m_EditorClassIdentifier: 
+  skillName: Dispel
+  targetType: 0
+  powerType: 1
+  apMod: 1.1
+  cooldown: 2
+  portrait65: {fileID: 21300000, guid: 1ee31eabbda01a74abf74e9d6eb909f9, type: 3}
+  portrait50: {fileID: 21300000, guid: d48597170dbc12f4e9e3a1fd4f0bd17f, type: 3}
+  portrait100: {fileID: 21300000, guid: 73c60868f1d1f8643a25b2c8986d7622, type: 3}
+  isOffensive: 1
+  effects:
+  - {fileID: 11400000, guid: 025d19c7430a1ee4487535326bec018c, type: 2}
+  soundEffect: {fileID: 8300000, guid: b3e337ff3ef44f94ab4053caa1a1dfed, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 4427dda7abc826e4085a6425ba797a3b, type: 3}
+  soundEffectHitDelay: 2.2
+  dmgMod: 0.2

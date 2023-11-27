@@ -110,9 +110,6 @@ public class OffensiveSkill : Skill
             {
                 damage *= 1.5;
                 result = AttackResult.Crit;
-
-                
-
             }
             else if (UnityEngine.Random.Range(0.0f, 1.0f) < user.GetCurrCrt())
             {
@@ -131,9 +128,11 @@ public class OffensiveSkill : Skill
                 
             if(effectNotificationQueue.Count > maxAdditionalAnimations)
                 maxAdditionalAnimations = effectNotificationQueue.Count;
-
+               
             battle.StartCoroutine(DisplayAnimations(finalDamage, target, battle, result, effectNotificationQueue, effectSoundEffectQueue));
         }
+
+        SEManager.instance.PlaySE(soundEffect); 
 
         user.ap -= 100000;
         user.apMod = this.apMod;
@@ -162,7 +161,7 @@ public class OffensiveSkill : Skill
 
     IEnumerator DisplayAnimations(int damage, Battler target, BattleSystem battle, AttackResult result, List<GameObject> effectNotificationQueue, List<string> effectSoundEffectQueue)
     {
-        SEManager.instance.PlaySE(soundEffect);
+        
         yield return new WaitForSeconds(soundEffectHitDelay);
 
         if(damage > 0)
@@ -172,7 +171,7 @@ public class OffensiveSkill : Skill
         }
 
         if(hitSoundEffect != null)
-            SEManager.instance.PlaySE(hitSoundEffect);
+            battle.StartCoroutine(SEManager.instance.PlaySEOnlyOnce(hitSoundEffect));
             
         yield return new WaitForSeconds(1.7f);
 

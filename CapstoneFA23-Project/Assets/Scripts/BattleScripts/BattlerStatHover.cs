@@ -124,8 +124,16 @@ public class BattlerStatHover : MonoBehaviour
                 portraitStatusEffect.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "" + battler.statusEffects[effect];
             else 
                 portraitStatusEffect.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "";
-            
-                
+
+            if (i % 5 == 0 && i != 0)
+            {
+                currY += 75;
+                currX = 0;
+            }
+            else
+                currX += 75;
+
+            i++;       
         }
 
         foreach (BuffEffect effect in battler.buffEffects.Keys)

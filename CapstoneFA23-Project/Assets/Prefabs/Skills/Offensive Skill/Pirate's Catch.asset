@@ -23,7 +23,7 @@ MonoBehaviour:
   isOffensive: 1
   effects:
   - {fileID: 11400000, guid: 0696e954f2ae8544fa6624330d19e4dc, type: 2}
-  soundEffect: {fileID: 0}
+  soundEffect: {fileID: 8300000, guid: 43f1e485601368d41b64e972e44f40c5, type: 3}
   hitSoundEffect: {fileID: 0}
-  soundEffectHitDelay: 0
+  soundEffectHitDelay: 0.5
   dmgMod: 0.05

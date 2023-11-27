@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
+  m_Name: Gate to Gehenna
+  m_EditorClassIdentifier: 
+  skillName: Gate to Gehenna
+  targetType: 1
+  powerType: 1
+  apMod: 0.9
+  cooldown: 2
+  portrait65: {fileID: 21300000, guid: 2aed8546704b9a5458ba58837b46c320, type: 3}
+  portrait50: {fileID: 21300000, guid: fce26f2eede864e429cdb63542eab576, type: 3}
+  portrait100: {fileID: 21300000, guid: 836f52683f409ad4da93ff9113bb9a9a, type: 3}
+  isOffensive: 1
+  effects:
+  - {fileID: 11400000, guid: 52d38f0d7049f2945a4038c0a6afba92, type: 2}
+  soundEffect: {fileID: 8300000, guid: a7a23a6db88c57d44bcd532513fdb6df, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 256c0aab68f543c4fae2dd817c59a36a, type: 3}
+  soundEffectHitDelay: 2.5
+  dmgMod: 0.75

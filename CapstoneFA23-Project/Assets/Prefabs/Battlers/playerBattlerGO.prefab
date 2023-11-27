@@ -58,17 +58,26 @@ MonoBehaviour:
   res: 0
   ini: 0
   crt: 0
+  debuffResist: 0
+  curseResist: 0
+  sealResist: 0
+  staggerResist: 0
   battlerName: 0
   ap: 0
   apMod: 1
   level: 1
   isPlayer: 1
-  portrait70: {fileID: 21300000, guid: c3c8e2032c4801143b3bce9999939c61, type: 3}
-  portrait60: {fileID: 21300000, guid: a42d4a96fab591d4389f17bc5afba49f, type: 3}
-  playerClass: Gunner
+  portrait70: {fileID: 0}
+  portrait60: {fileID: 0}
+  physicalEnabled: 1
+  willEnabled: 1
+  nextHitCrit: 0
+  playerClass: {fileID: 0}
   targetRatio: 1
   skills: []
   standardAttack: {fileID: 0}
+  character: {fileID: 0}
+  isKO: 0
 --- !u!61 &1645847790919177809
 BoxCollider2D:
   m_ObjectHideFlags: 0

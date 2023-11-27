@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
+  m_Name: Unload
+  m_EditorClassIdentifier: 
+  skillName: Unload
+  targetType: 0
+  powerType: 0
+  apMod: 0.6
+  cooldown: 5
+  portrait65: {fileID: 21300000, guid: e9c30dc379c4e1f4c8fe0c50aea6effa, type: 3}
+  portrait50: {fileID: 21300000, guid: f3c6d75ac253c144590e3be6fd4edeb2, type: 3}
+  portrait100: {fileID: 21300000, guid: 6cc997a9e654bd348824b85d060677f2, type: 3}
+  isOffensive: 1
+  effects: []
+  soundEffect: {fileID: 8300000, guid: 89fcb585ef7f3d44a9c09785c9c140c8, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 922f20a2e5c62a447a3d51b651f68827, type: 3}
+  soundEffectHitDelay: 4.5
+  dmgMod: 2.22

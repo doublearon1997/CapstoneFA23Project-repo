@@ -104,6 +104,8 @@ public class SupportSkill : Skill
             battle.StartCoroutine(DisplayAnimations(target, battle, effectNotificationQueue, effectSoundEffectQueue));
         }
 
+        SEManager.instance.PlaySE(soundEffect);
+
         user.ap -= 100000;
         user.apMod = this.apMod;
 
@@ -132,11 +134,10 @@ public class SupportSkill : Skill
 
     IEnumerator DisplayAnimations(Battler target, BattleSystem battle, List<GameObject> effectNotificationQueue, List<string> effectSoundEffectQueue)
     {
-        SEManager.instance.PlaySE(soundEffect);
         yield return new WaitForSeconds(soundEffectHitDelay);
 
         if(hitSoundEffect != null)
-            SEManager.instance.PlaySE(hitSoundEffect);
+            battle.StartCoroutine(SEManager.instance.PlaySEOnlyOnce(hitSoundEffect));
 
         yield return new WaitForSeconds(1.7f);
 
