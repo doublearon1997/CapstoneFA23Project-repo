@@ -266,8 +266,8 @@ public class BattleSystem : MonoBehaviour
                     portrait = Instantiate(portraitTurnOrderEnemy, panelTurnOrder.transform) as GameObject;
             }
 
-            portrait.GetComponent<Image>().sprite = battler.portrait60;
-            portrait.GetComponent<Image>().enabled = true;
+            portrait.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().sprite = battler.portrait60;
+            portrait.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().enabled = true;
             portrait.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, i * -75.0f - 46 - bigPortraitCushion);
 
             battlerTurnOrderObjects.Add(battler, portrait);
@@ -306,8 +306,8 @@ public class BattleSystem : MonoBehaviour
             else
                 portrait = Instantiate(portraitTurnOrderEnemy, panelTurnOrder.transform) as GameObject;
 
-            portrait.GetComponent<Image>().sprite = battler.portrait60;
-            portrait.GetComponent<Image>().enabled = true;
+            portrait.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().sprite = battler.portrait60;
+            portrait.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().enabled = true;
 
             if (battler == currentlyActingBattler)
                 portrait.GetComponent<RectTransform>().anchoredPosition = new Vector2(12.0f, (i + 1) * -75.0f - 53);
@@ -1343,7 +1343,8 @@ public class BattleSystem : MonoBehaviour
         fadeOutToBlack.SetActive(true);
 
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(4);
+
+        SceneManager.LoadScene(currentEncounter.sceneID);
     }
 
     private IEnumerator PlayerDefeat()
@@ -1365,7 +1366,7 @@ public class BattleSystem : MonoBehaviour
         
         yield return new WaitForSeconds(2f);
 
-        SceneManager.LoadScene("sceneTutorialLevel");
+        SceneManager.LoadScene(currentEncounter.sceneID);
     }
 
     internal class BattlerAPComparator : IComparer<Battler>

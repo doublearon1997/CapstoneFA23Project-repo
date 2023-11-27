@@ -17,13 +17,13 @@ MonoBehaviour:
   characterName: Mike N. Ikes
   description: 
   charClass: {fileID: 11400000, guid: 7c0d2c8096e94de7e8a182d2896f430c, type: 2}
-  level: 1
-  exp: 0
-  hp: 495
-  mhp: 495
-  str: 110
-  wil: 78
-  ini: 102
+  level: 2
+  exp: 12
+  hp: 544
+  mhp: 544
+  str: 121
+  wil: 85
+  ini: 112
   def: 0.22
   res: 0.14
   crt: 0.05
@@ -32,5 +32,7 @@ MonoBehaviour:
   staggerRes: 0.1
   preBattleExp: 0
   preBattleLevel: 1
-  skills: []
+  skills:
+  - {fileID: 11400000, guid: 296ea172e8c1d77439cc0c87d39a3eeb, type: 2}
+  - {fileID: 11400000, guid: 5717e940d62dc004284890e48729cbe7, type: 2}
   standardAttack: {fileID: 11400000, guid: a7f32e451920e7c45b02129f59ba73ff, type: 2}

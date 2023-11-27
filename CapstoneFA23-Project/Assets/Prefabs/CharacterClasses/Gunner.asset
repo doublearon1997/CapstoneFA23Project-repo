@@ -30,6 +30,6 @@ MonoBehaviour:
   skillUnlocks:
   - {fileID: 11400000, guid: fce9f6dbbcaf3df4f9ce1e45cbe5c0e6, type: 2}
   - {fileID: 11400000, guid: 9d762294d7ee9d1439a62292ef808729, type: 2}
-  - {fileID: 11400000, guid: 332227c0406c9774198f570948322666, type: 2}
+  - {fileID: 11400000, guid: bbaca81fc4973aa4891fe6a31bbee452, type: 2}
   - {fileID: 11400000, guid: 2a51a521af1b5694998015e5fc861eeb, type: 2}
   - {fileID: 11400000, guid: 8badd604bc9e5814783ea5d0cd0a8740, type: 2}

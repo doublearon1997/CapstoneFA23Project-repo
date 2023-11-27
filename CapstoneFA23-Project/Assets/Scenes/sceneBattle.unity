@@ -13447,6 +13447,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 843b921a2debc9d4685a114ba5dacfc1, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f53ba9fb998434428f672e79db31797, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c6631a0c7f633e4fa89d52cbc5966c2, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e39cbc07de81d44eb402b6cce9a7e85, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1ae963187a27b3341bbf17f77cc671e1, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 92908564cbc8a5e4599b0e9fb426ec50, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: b9a0ea8953f6fd54a87cf47a15ea4250, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c073f1059a5fe44caf8f717ea5f873c, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: c8c7dcdb0c7fbaf4c9e723d7ba5f15d0, type: 3}
+    - target: {fileID: 6184533516635755377, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
+      propertyPath: bgmList.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: b23c90e63009c204c87a19be10d059ab, type: 3}
     - target: {fileID: 8701221106482272490, guid: cfa995b741eb33d49ac3f116dc6163be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 952.18665

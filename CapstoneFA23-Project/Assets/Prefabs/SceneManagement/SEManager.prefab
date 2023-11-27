@@ -108,6 +108,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d39964809389fe342a2148b700d00853, type: 3}
   - {fileID: 8300000, guid: 89fcb585ef7f3d44a9c09785c9c140c8, type: 3}
   - {fileID: 8300000, guid: e98dd99b8ad9a144f8785c3d743e1ea8, type: 3}
+  - {fileID: 8300000, guid: a5df03fbb879e7d4b9b1a6bdd4ad8ecd, type: 3}
+  - {fileID: 8300000, guid: 1ad7e505cfbd7c842b3a3b1e8aad7a4a, type: 3}
+  - {fileID: 8300000, guid: 2eb7c4eab05587b41b4686d31ad011b7, type: 3}
+  - {fileID: 8300000, guid: 6847c6b1357ad03499c36d00b66afc72, type: 3}
+  - {fileID: 8300000, guid: fcd1922166b6fd6499b022e9616f8e70, type: 3}
+  - {fileID: 8300000, guid: f80a46f90eb93bf4c90a0816ec941b66, type: 3}
   defaultVolumeList:
   - 0.75
   - 0.75
@@ -171,6 +177,12 @@ MonoBehaviour:
   - 0.9
   - 0.9
   - 0.9
+  - 0.9
+  - 0.9
+  - 0.9
+  - 0.9
+  - 1
+  - 1
 --- !u!82 &7831695548467830085
 AudioSource:
   m_ObjectHideFlags: 0
