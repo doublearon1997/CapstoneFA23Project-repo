@@ -5,7 +5,6 @@ using UnityEngine;
 /// <summary>
 /// This Class defines Skills, which are actions that Battlers can perform in Battle when it is their turn.
 /// </summary>
-/// 
 
 public enum TargetType { Single, All, Self }
 public enum PowerType { Physical, Will }
@@ -84,7 +83,7 @@ public abstract class Skill: ScriptableObject
         if(displayFlags[3])
         {
             effectNotificationQueue.Add(battle.cursePopup);
-            effectSoundEffectQueue.Add("stagger");
+            effectSoundEffectQueue.Add("curse");
         }
         if(displayFlags[4])
         {
@@ -109,7 +108,7 @@ public abstract class Skill: ScriptableObject
         if(displayFlags[8])
         {
             effectNotificationQueue.Add(battle.markPopup);
-            effectSoundEffectQueue.Add("stagger");
+            effectSoundEffectQueue.Add("marked");
         }
     }
  

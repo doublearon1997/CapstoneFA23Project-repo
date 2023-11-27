@@ -516,7 +516,7 @@ public class Battler: MonoBehaviour
         this.currentTurnAppliedEffects.Add(effect);
     }
 
-    
+    // Applies a status effect to the battler. If the battler already has the same status effect, it keeps the one that will last the longest to keep. Returns if the effect was applied or not.
     public bool TryApplyStatusEffect(StatusEffect effect)
     {
         bool applied = true;
@@ -541,12 +541,42 @@ public class Battler: MonoBehaviour
             statusEffects.Remove(removeEffect);
 
         if(applied)
-        {
             statusEffects.Add(effect, effect.duration);
             
-        }
-            
+        return applied;
+    }
 
+    // Applies a buff effect to the battler. If the battler already has the same status effect, it keeps the one with the highest value. Returns if the effect was applied or not.
+    public bool TryApplyBuffEffect(BuffEffect effect, BattleSystem battle)
+    {
+        bool applied = true;
+        BuffEffect removeEffect = null;
+
+        foreach(BuffEffect currentEffect in buffEffects.Keys)
+        {
+            if(currentEffect.buffStat == effect.buffStat)
+            {
+                if(effect.isDebuff && GetBuffValue(currentEffect.buffStat) < effect.value)
+                {
+                    applied = false;
+                    break;
+                }
+                else if(!effect.isDebuff && GetBuffValue(currentEffect.buffStat) > effect.value)
+                {
+                    applied = false;
+                    break;
+                }
+                else 
+                    removeEffect = currentEffect;
+            }
+        }
+
+        if(removeEffect != null)
+            buffEffects.Remove(removeEffect);
+
+        if(applied)
+            buffEffects.Add(effect, effect.duration);
+            
         return applied;
     }
 

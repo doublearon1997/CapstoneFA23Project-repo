@@ -15,13 +15,14 @@ MonoBehaviour:
   skillName: Trusty Bandage
   targetType: 0
   powerType: 0
-  apMod: 1.1
+  apMod: 1.05
   cooldown: 2
   portrait65: {fileID: 21300000, guid: 1c462621d25100d40b181a6129e4970a, type: 3}
   portrait50: {fileID: 21300000, guid: e99c0e1e858b7b44fba9e27dd6814cae, type: 3}
   portrait100: {fileID: 21300000, guid: 968e23ef4fb5d6f438b65be394a1ebb8, type: 3}
   isOffensive: 0
-  effects: []
-  soundEffect: {fileID: 0}
-  hitSoundEffect: {fileID: 0}
-  soundEffectHitDelay: 0
+  effects:
+  - {fileID: 11400000, guid: 6a41ebf4bbeb0bc42b7f95690747d6fc, type: 2}
+  soundEffect: {fileID: 8300000, guid: f80a46f90eb93bf4c90a0816ec941b66, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 55d5fb02f04a6d746a78f3d2839b4757, type: 3}
+  soundEffectHitDelay: 1.3

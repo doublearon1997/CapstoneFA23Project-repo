@@ -19,9 +19,8 @@ public class Debuff : BuffEffect
 
     public override bool ApplyEffect(Battler user, Battler target, Skill skill, BattleSystem battle)
     {
-        if (!target.buffEffects.ContainsKey(this)) //don't reapply buff. change later.
+        if(target.TryApplyBuffEffect(this, battle)) 
         {
-            target.buffEffects.Add(this, this.duration);
             target.SetBuffStat(this.buffStat, this.value);
             return true;
         }

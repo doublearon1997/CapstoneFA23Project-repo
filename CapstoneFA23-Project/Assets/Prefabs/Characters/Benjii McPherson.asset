@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Benjii McPherson
   m_EditorClassIdentifier: 
   characterID: 1
-  characterImage: {fileID: 21300000, guid: 1d96b5f140b87394b8ce8f1665270dc5, type: 3}
+  characterImage: {fileID: 21300000, guid: 29b4d125236fe0d4c89d029e0a01797a, type: 3}
   characterName: MCname
   description: 
   charClass: {fileID: 11400000, guid: 90c354b67f0227dfba1a19d4b629d11b, type: 2}
-  level: 1
-  exp: 0
-  hp: 440
-  mhp: 440
-  str: 120
-  wil: 89
-  ini: 88
+  level: 2
+  exp: 12
+  hp: 484
+  mhp: 484
+  str: 132
+  wil: 97
+  ini: 96
   def: 0.17
   res: 0.17
   crt: 0.06

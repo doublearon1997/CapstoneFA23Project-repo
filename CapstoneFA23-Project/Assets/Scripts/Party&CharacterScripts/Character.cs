@@ -49,8 +49,12 @@ public class Character : ScriptableObject
         staggerRes = charClass.sStaggerRes;
 
         standardAttack = charClass.standardAttack;
-        skills = charClass.startingSkills;
 
+        foreach(Skill skill in charClass.startingSkills)
+        {
+            if(!skills.Contains(skill))
+                skills.Add(skill);
+        }   
     }
 
     public int GetCurrMHP()
