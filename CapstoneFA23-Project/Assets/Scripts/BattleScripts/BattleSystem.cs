@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
+    public Image backgroundImage;
     public GameObject playerBattler;
     public List<PlayerBattler> startingPlayerBattlers;
     public List<EnemyBattler> startingEnemyBattlers;
@@ -146,6 +147,12 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
+        if(currentEncounter == null)
+            currentEncounter = defaultEncounter;
+
+        if(currentEncounter.battleBackgroundImage != null)
+            backgroundImage.sprite = currentEncounter.battleBackgroundImage;
+
         this.playerBattlers = new List<PlayerBattler>();
         this.enemyBattlers = new List<EnemyBattler>();
 
@@ -166,8 +173,7 @@ public class BattleSystem : MonoBehaviour
             battler.ap = UnityEngine.Random.Range(0, 20000);
         }
 
-        if(currentEncounter == null)
-            currentEncounter = defaultEncounter;
+        
 
         for (int i = 0; i < currentEncounter.enemies.Count; i++)
         {
@@ -1229,6 +1235,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+    // Changes the characters stats, like exp and hp, after a battle has finished.
     private void AdjustCharactersAfterBattle(bool fled = false)
     {
         int expGain = 0;
