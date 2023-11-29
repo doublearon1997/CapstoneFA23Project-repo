@@ -35,6 +35,8 @@ public class Battler: MonoBehaviour
 
     public string battlerName;
 
+    public Sprite idleSprite, attackSprite;
+
     public Dictionary<BuffEffect, int> buffEffects = new Dictionary<BuffEffect, int>(); // effects and their current duration.
     public Dictionary<StatusEffect, int> statusEffects = new Dictionary<StatusEffect, int>(); 
 

@@ -6,6 +6,8 @@ public class PlayerBattler : Battler
 {
     public CharacterClass playerClass;
 
+    public Sprite kOSprite;
+
     public double targetRatio = 1.0;
 
     public List<Skill> skills;
@@ -49,6 +51,12 @@ public class PlayerBattler : Battler
             this.skills.Add(skill);
             this.skillCooldownDict.Add(skill, 0);
         }
+
+        idleSprite = c.battleIdleSprite;
+        kOSprite = c.battleKOSprite;
+        attackSprite = c.battleAttackSprite;
+
+        gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = idleSprite;
             
         
         standardAttack = c.standardAttack;

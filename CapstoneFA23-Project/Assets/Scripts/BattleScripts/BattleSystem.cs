@@ -162,10 +162,14 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < party.GetPartyList().Count; i++) //Make PlayerBattler GameObjects and fill them in with stats from the Characters in the Party.
         {
             GameObject playerGO = Instantiate(playerBattler, playerSpawns[i]);
+            playerGO.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 5 + i;
+
             PlayerBattler battler = playerGO.GetComponent<PlayerBattler>();
            
             battler.LoadStatsFromCharacter(party.GetPartyList()[i]);
             battler.SetPartyPosition(i);
+
+            
 
             startingPlayerBattlers.Add(battler);
             playerBattlers.Add(battler);
@@ -189,9 +193,6 @@ public class BattleSystem : MonoBehaviour
         SetupEnemyOverviewPanel();
 
         yield return new WaitForSeconds(1.5f);
-
-        //REMOVEME
-        //StartCoroutine(PlayerVictory());
 
         StartCoroutine(DetermineNextBattler());
         SetTurnOrderPanel();
@@ -842,7 +843,7 @@ public class BattleSystem : MonoBehaviour
         currentlyActingBattler.CountDownEffects();
 
         currentlyActingBattlers.Remove(currentlyActingBattler);
-        currentlyActingBattler = null;
+        
 
         buttonAttack.interactable = true;
 
@@ -859,10 +860,13 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(LeavePinch());
         }
 
+        currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
+
         yield return new WaitForSeconds((1.6f * additionalAnimations));
 
         DestroyImmediate(currentPointer);
         ClearMessageBox();
+        currentlyActingBattler = null;
 
         if (IsPlayerVictory())
             StartCoroutine(PlayerVictory());
@@ -880,7 +884,7 @@ public class BattleSystem : MonoBehaviour
 
         currentPointer = (Instantiate(enemyPointer, currentlyActingBattler.transform) as GameObject);
 
-        Skill chosenSkill = ((EnemyBattler)currentlyActingBattler).ChooseSkill();
+        Skill chosenSkill = ((EnemyBattler)currentlyActingBattler).ChooseSkill(this);
         List<GameObject> targetObjects = new List<GameObject>();
 
         if(chosenSkill.isOffensive)
@@ -940,10 +944,8 @@ public class BattleSystem : MonoBehaviour
     public IEnumerator FinishEnemyTurn(int maxAdditionalAnimations, float soundEffectHitDelay)
     {
         currentlyActingBattler.CountDownEffects();
-        
         currentlyActingBattlers.Remove(currentlyActingBattler);
-        currentlyActingBattler = null;
-
+      
         yield return new WaitForSeconds(1.7f + soundEffectHitDelay);
 
         if (IsInPinch() && !inPinch)
@@ -957,10 +959,13 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(LeavePinch());
         }
 
+        currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
+
         yield return new WaitForSeconds(1.6f * maxAdditionalAnimations);
 
         DestroyImmediate(currentPointer);
         ClearMessageBox();
+        currentlyActingBattler = null;
 
         if(IsPlayerVictory())
             StartCoroutine(PlayerVictory());
@@ -1230,6 +1235,17 @@ public class BattleSystem : MonoBehaviour
             t+=Time.deltaTime;
             yield return null;
         }
+
+        if(character.exp >= LevelingData.expLevelRequirements[currentLevel])//Level Up!
+        {
+            currentLevel++;
+            string playerClassString = character.charClass.ToString().Split('(')[0];
+            playerPanel.transform.GetChild(4).gameObject.GetComponent<TMP_Text>().text = "Lvl " + currentLevel + " " + playerClassString;
+            playerPanel.transform.GetChild(10).gameObject.GetComponent<TMP_Text>().text = "" + LevelingData.expLevelRequirements[currentLevel];
+            playerPanel.transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(1.0f);
         
         playerPanel.transform.GetChild(9).gameObject.GetComponent<TMP_Text>().text = "" + character.exp;
 

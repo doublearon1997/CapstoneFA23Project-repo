@@ -8,6 +8,8 @@ public class Character : ScriptableObject
 {
     public int characterID;
     public Sprite characterImage;
+
+    public Sprite battleIdleSprite, battleAttackSprite, battleKOSprite;
     public string characterName, description;
 
     public CharacterClass charClass = null;

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
+  m_Name: Tsunami
+  m_EditorClassIdentifier: 
+  skillName: Tsunami
+  targetType: 1
+  powerType: 1
+  apMod: 0.8
+  cooldown: 2
+  portrait65: {fileID: 21300000, guid: d3abfc14390f8934cb574c51d47956f8, type: 3}
+  portrait50: {fileID: 21300000, guid: 575181499ed6b2f4a8133cdac7de3d4f, type: 3}
+  portrait100: {fileID: 21300000, guid: 02dc77401876f4541b1b8883ff4b00b4, type: 3}
+  isOffensive: 1
+  effects:
+  - {fileID: 11400000, guid: af72c6770ad4cf4459f2b900dbb1a683, type: 2}
+  soundEffect: {fileID: 8300000, guid: 19a751afd3fe637499150d9432c76630, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 6ba41259dd0773b4693b4f2066ca6fee, type: 3}
+  soundEffectHitDelay: 4.5
+  dmgMod: 0.8

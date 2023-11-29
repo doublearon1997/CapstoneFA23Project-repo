@@ -25,41 +25,50 @@ public class EnemyBattler : Battler
         }
     }
 
-    public Skill ChooseSkill()
+    //This method selects an available skill for the enemy to use. If they don't have any available skills, they use the wait skill.
+    public Skill ChooseSkill(BattleSystem battle)
     {
         Skill chosenSkill;
         List<Skill> skillChoices = new List<Skill>();
 
         foreach(KeyValuePair<Skill, SkillUsageAI> skillEntry in skills)
         {
-            int maxWeight = 0;
-            bool canUse = false;
-
-            foreach (KeyValuePair<SkillUsageCondition, int> conditionEntry in skillEntry.Value.skillUsages)
+            if(skillEntry.Key.powerType == PowerType.Physical && !this.physicalEnabled){} // don't select this skill if powertype is diabled
+            else if(skillEntry.Key.powerType == PowerType.Will && !this.willEnabled){} 
+            else 
             {
-                if(canUseSkill(conditionEntry.Key))
+                int maxWeight = 0;
+                bool canUse = false;
+
+                foreach (KeyValuePair<SkillUsageCondition, int> conditionEntry in skillEntry.Value.skillUsages)
                 {
-                    canUse = true;
-                    int weight = conditionEntry.Value;
-                    if(weight > maxWeight)
-                        maxWeight = weight;
+                    if(CanUseSkill(conditionEntry.Key))
+                    {
+                        canUse = true;
+                        int weight = conditionEntry.Value;
+                        if(weight > maxWeight)
+                            maxWeight = weight;
+                    }
                 }
-            }
 
-            if(canUse)
-            {
-                for(int num = 0; num < maxWeight; num++)
-                    skillChoices.Add(skillEntry.Key);
-            } 
+                if(canUse)
+                {
+                    for(int num = 0; num < maxWeight; num++)
+                        skillChoices.Add(skillEntry.Key);
+                } 
+            }
         }
-        
-        chosenSkill = skillChoices[UnityEngine.Random.Range(0, skillChoices.Count)];
+
+        if(skillChoices.Count == 0)
+            chosenSkill = battle.waitSkill;
+        else
+            chosenSkill = skillChoices[UnityEngine.Random.Range(0, skillChoices.Count)];
 
         return chosenSkill;
     }
 
     // Checks SkillUsageConditions to see if the battler's state permits using the skill.
-    private bool canUseSkill(SkillUsageCondition condition)
+    private bool CanUseSkill(SkillUsageCondition condition)
     {
         if(condition == SkillUsageCondition.Always)
             return true;

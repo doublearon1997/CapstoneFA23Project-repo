@@ -132,6 +132,8 @@ public class OffensiveSkill : Skill
             battle.StartCoroutine(DisplayAnimations(finalDamage, target, battle, result, effectNotificationQueue, effectSoundEffectQueue));
         }
 
+        user.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = user.attackSprite;
+
         SEManager.instance.PlaySE(soundEffect); 
 
         user.ap -= 100000;

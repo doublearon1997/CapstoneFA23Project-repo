@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
+  m_Name: Acidic Spit
+  m_EditorClassIdentifier: 
+  skillName: Acidic Spit
+  targetType: 0
+  powerType: 0
+  apMod: 0.95
+  cooldown: 0
+  portrait65: {fileID: 21300000, guid: 689509020317fd54d9e4e957cede9135, type: 3}
+  portrait50: {fileID: 21300000, guid: 8e10b1ac4f9830c4a964b596b933a255, type: 3}
+  portrait100: {fileID: 21300000, guid: c5cd54fe8466cbf47887a2c162c682e7, type: 3}
+  isOffensive: 1
+  effects:
+  - {fileID: 11400000, guid: 3db9e1a61e2fb284c8f2ac8cf454069b, type: 2}
+  soundEffect: {fileID: 8300000, guid: d5204e74ca1d994479059273c1966fce, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 256c0aab68f543c4fae2dd817c59a36a, type: 3}
+  soundEffectHitDelay: 1.2
+  dmgMod: 1.05

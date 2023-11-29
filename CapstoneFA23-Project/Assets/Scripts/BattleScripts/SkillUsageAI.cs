@@ -14,11 +14,11 @@ public class SkillUsageAI : ScriptableObject
 
     public void Initialize()
     {
+        skillUsages = new Dictionary<SkillUsageCondition, int>();
+
         for(int i = 0; i < usageConditions.Length; i++)
-        {
-            skillUsages = new Dictionary<SkillUsageCondition, int>();
             skillUsages.Add(usageConditions[i], weights[i]);
-        }
+        
     }
 
     
