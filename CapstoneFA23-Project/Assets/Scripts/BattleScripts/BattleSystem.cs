@@ -856,7 +856,9 @@ public class BattleSystem : MonoBehaviour
 
         CheckForPinch();
 
-        currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
+        if(!currentlyActingBattler.HasFled())
+            currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
+
         yield return new WaitForSeconds((1.6f * additionalAnimations));
 
         DestroyImmediate(currentPointer);
@@ -940,7 +942,8 @@ public class BattleSystem : MonoBehaviour
 
         CheckForPinch();
 
-        currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
+        if(!currentlyActingBattler.HasFled())
+            currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
 
         yield return new WaitForSeconds(1.6f * maxAdditionalAnimations);
 
