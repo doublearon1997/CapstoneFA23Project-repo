@@ -5723,7 +5723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTime: 8.52
-  sceneName: TutorialLevelPostPeterFight
+  sceneName: sceneTutorialLevelPostPeterFight
 --- !u!4 &1113220591
 Transform:
   m_ObjectHideFlags: 0
