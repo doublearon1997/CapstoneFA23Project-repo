@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c927745c628b4698905129e5fad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 245
-  mhp: 245
+  hp: 270
+  mhp: 270
   str: 103
   wil: 107
   def: 0.13
@@ -159,7 +159,7 @@ MonoBehaviour:
   physicalEnabled: 1
   willEnabled: 1
   nextHitCrit: 0
-  skillList:
+  skills:
   - {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
   - {fileID: 11400000, guid: 9914015d9bd01c244b6bd06ed575cae0, type: 2}
   - {fileID: 11400000, guid: 1e2a06c7c9b443249a9e4a5b68d5bb34, type: 2}
@@ -171,9 +171,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3f9d8431df0457b428d66c51d95175f1, type: 2}
   dropList:
   - {fileID: 11400000, guid: 469378249cdbf334089f66f58c36f10a, type: 2}
+  - {fileID: 11400000, guid: fceb4df34af347041a8c3d88d2c6885f, type: 2}
   dropListChances:
   - 1
-  dropListQuantities: 01000000
+  - 0.5
+  dropListQuantities: 0600000001000000
   exp: 1
 --- !u!61 &-933485833814597257
 BoxCollider2D:

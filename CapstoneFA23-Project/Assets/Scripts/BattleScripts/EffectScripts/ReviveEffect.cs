@@ -14,7 +14,7 @@ public class ReviveEffect : Effect
 
     public override bool ApplyEffect(Battler user, Battler target, Skill skill, BattleSystem battle)
     {
-        user.TryRemoveStatusEffectType(StatusEffect.StatusEffectType.KOEffect, battle);
+        target.TryRemoveStatusEffectType(StatusEffect.StatusEffectType.KOEffect, battle);
 
         double hpHealed = 0;
         if(healPercentage > 0)
@@ -68,6 +68,7 @@ public class ReviveEffect : Effect
         yield return new WaitForSeconds(skill.soundEffectHitDelay);
 
         target.HealBattler((int)hpHealed, battle);
+        target.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = ((PlayerBattler)target).idleSprite;
 
         GameObject damageTextContainer = Instantiate(battle.healTextPopup, target.gameObject.transform);
         damageTextContainer.transform.GetChild(0).GetComponent<TMP_Text>().text = displayString;

@@ -18,7 +18,7 @@ public class PartyController : MonoBehaviour
     public GameObject[] panelArray = new GameObject[6];
     public List<Character> listCharacters = new List<Character>();
     public GameObject dragObject;
-    string partyDataFilePath = Application.dataPath + "/Data/" + "partyData" + ".txt";
+    string partyDataFilePath = System.IO.Directory.GetCurrentDirectory() + "/Data/" + "partyData" + ".txt";
 
     // Start is called before the first frame update
     void Start()

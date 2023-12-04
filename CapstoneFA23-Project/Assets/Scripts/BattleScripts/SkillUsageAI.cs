@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SkillUsageCondition {Always, HPLower50, HPLower75, HPLower25}
+public enum SkillUsageCondition {Always, HPLower50, HPLower75, HPLower25, HPBetween25And75, HPAbove75, HPAbove50, HPAbove25, IsDebuffed}
 
 [CreateAssetMenu(fileName = "NewSkillUsageAI", menuName = "SkillUsageAI")]
 public class SkillUsageAI : ScriptableObject

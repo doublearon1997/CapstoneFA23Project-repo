@@ -149,7 +149,7 @@ MonoBehaviour:
   staggerResist: 0.2
   battlerName: Log
   idleSprite: {fileID: 21300000, guid: 3ca2dae77d3b9c142b32e4658f9fd344, type: 3}
-  attackSprite: {fileID: 21300000, guid: 3ca2dae77d3b9c142b32e4658f9fd344, type: 3}
+  attackSprite: {fileID: 21300000, guid: 46b515a49a850084eaecb97766af0608, type: 3}
   ap: 0
   apMod: 1
   level: 2
@@ -159,17 +159,21 @@ MonoBehaviour:
   physicalEnabled: 1
   willEnabled: 1
   nextHitCrit: 0
-  skillList:
-  - {fileID: 11400000, guid: 361e974b3864e0f49970f4365e34b02e, type: 2}
+  skills:
   - {fileID: 11400000, guid: 9153c435c7db50143b35434fa0be7cbd, type: 2}
+  - {fileID: 11400000, guid: e55cbeae24a24e44fa66e7c778d213f7, type: 2}
+  - {fileID: 11400000, guid: c292bbd28430bbf468f05fc73c7a4b74, type: 2}
+  - {fileID: 11400000, guid: c0b498700c9d5564c92e4a9562b1e110, type: 2}
   skillUsageAIList:
-  - {fileID: 11400000, guid: ae999acf49f5a750bae54743eb8facaa, type: 2}
-  - {fileID: 11400000, guid: ae999acf49f5a750bae54743eb8facaa, type: 2}
+  - {fileID: 11400000, guid: 7b597088cb19f6a478b77f4e40b1d80c, type: 2}
+  - {fileID: 11400000, guid: 3f9d8431df0457b428d66c51d95175f1, type: 2}
+  - {fileID: 11400000, guid: 3f9d8431df0457b428d66c51d95175f1, type: 2}
+  - {fileID: 11400000, guid: 712bcd126b6d72c47b734e7e6f59ed27, type: 2}
   dropList:
   - {fileID: 11400000, guid: 469378249cdbf334089f66f58c36f10a, type: 2}
   dropListChances:
   - 1
-  dropListQuantities: 01000000
+  dropListQuantities: 07000000
   exp: 2
 --- !u!61 &-933485833814597257
 BoxCollider2D:

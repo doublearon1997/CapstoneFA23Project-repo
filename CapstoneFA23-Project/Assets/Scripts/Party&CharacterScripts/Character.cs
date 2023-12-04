@@ -102,7 +102,7 @@ public class Character : ScriptableObject
 
     public int GetCurrCrt()
     {
-        return (int)(crt * crtMod);
+        return (int)(crt + crtMod);
     }
 
     public double GetCurrCurseRes()

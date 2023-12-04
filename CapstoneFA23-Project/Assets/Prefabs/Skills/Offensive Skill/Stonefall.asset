@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
+  m_Name: Stonefall
+  m_EditorClassIdentifier: 
+  skillName: Stonefall
+  targetType: 0
+  powerType: 0
+  apMod: 1.05
+  cooldown: 0
+  portrait65: {fileID: 21300000, guid: 859919ece44c2b247b5a8e8566d1eef9, type: 3}
+  portrait50: {fileID: 21300000, guid: d3c3976e7a235f149adcf424e3fe8c22, type: 3}
+  portrait100: {fileID: 21300000, guid: 69774a9c34b312446957fd018cf0cb13, type: 3}
+  isOffensive: 1
+  effects:
+  - {fileID: 11400000, guid: e3bda95175b6f3747bcb45fecf9014c7, type: 2}
+  soundEffect: {fileID: 8300000, guid: abacbaee82182734ea7f80e92ce7ce6b, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 9e5515c1427c31e47b801328a20cee42, type: 3}
+  soundEffectHitDelay: 1.3
+  dmgMod: 0.95

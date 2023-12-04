@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System; 
 
 public class BattlerStatHover : MonoBehaviour
 {
@@ -145,9 +146,9 @@ public class BattlerStatHover : MonoBehaviour
                 portraitBuffEffect.GetComponent<Image>().sprite = effect.portrait_65;
 
                 if (effect.isDebuff)
-                    (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "" + battler.GetBuffValue(effect.buffStat) * 100 + "%";
+                    (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "" + Math.Round(battler.GetBuffValue(effect.buffStat) * 100) + "%";
                 else
-                    (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "+" + battler.GetBuffValue(effect.buffStat) * 100 + "%";
+                    (portraitBuffEffect.transform.GetChild(0).GetComponent<TMP_Text>()).text = "+" + Math.Round(battler.GetBuffValue(effect.buffStat) * 100) + "%";
 
                 portraitBuffEffect.GetComponent<RectTransform>().anchoredPosition = new Vector2(currX, currY);
             }

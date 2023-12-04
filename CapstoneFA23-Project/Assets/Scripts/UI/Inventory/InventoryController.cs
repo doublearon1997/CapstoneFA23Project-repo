@@ -13,12 +13,12 @@ public class InventoryController : MonoBehaviour
     public int targetPanel;
     public int activeDrag = 0;
     public int swappable = 0;
-    public int[,] inventoryArray = new int[30, 3];
+    public int[,] inventoryArray = new int[32, 3];
     bool inventoryFull = false;
     public GameObject[] panelArray = new GameObject[30];
     public List<Item> listItems = new List<Item>();
     public GameObject dragObject;
-    string inventoryDataFilePath = Application.dataPath + "/Data/" + "inventorydata" + ".txt";
+    string inventoryDataFilePath = System.IO.Directory.GetCurrentDirectory() + "/Data/" + "inventorydata" + ".txt";
 
     // Start is called before the first frame update
     public void Start()
@@ -63,7 +63,7 @@ public class InventoryController : MonoBehaviour
 
     public void writeInventoryData()
     {
-        string[] tempArray = new string[30];
+        string[] tempArray = new string[inventoryArray.GetLength(0)];
         for (int i = 0; i < inventoryArray.GetLength(0); i++)
         {
             string tString = "";

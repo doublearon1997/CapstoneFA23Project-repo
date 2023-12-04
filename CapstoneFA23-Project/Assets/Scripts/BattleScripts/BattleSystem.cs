@@ -136,6 +136,8 @@ public class BattleSystem : MonoBehaviour
 
     public Skill selectedLevelupSkill = null;
 
+    public GameObject helpPanel;
+
     private List<Character> levelUps = new List<Character>();
     private List<int> levelUpNewLevels = new List<int>();
     private int levelUpsLoc = 0;
@@ -162,22 +164,26 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < party.GetPartyList().Count; i++) //Make PlayerBattler GameObjects and fill them in with stats from the Characters in the Party.
         {
             GameObject playerGO = Instantiate(playerBattler, playerSpawns[i]);
-            playerGO.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 5 + i;
+
+            if(i == 0)
+                playerGO.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 6;
+            else if(i == 1)
+                playerGO.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 7;
+            else if(i == 2)
+                playerGO.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 5;
+            else
+                playerGO.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = 8;
 
             PlayerBattler battler = playerGO.GetComponent<PlayerBattler>();
            
             battler.LoadStatsFromCharacter(party.GetPartyList()[i]);
             battler.SetPartyPosition(i);
 
-            
-
             startingPlayerBattlers.Add(battler);
             playerBattlers.Add(battler);
 
             battler.ap = UnityEngine.Random.Range(0, 20000);
         }
-
-        
 
         for (int i = 0; i < currentEncounter.enemies.Count; i++)
         {
@@ -193,6 +199,8 @@ public class BattleSystem : MonoBehaviour
         SetupEnemyOverviewPanel();
 
         yield return new WaitForSeconds(1.5f);
+
+        hotkeyManager.AddComponent<GuideHotkey>().Initialize(this);
 
         StartCoroutine(DetermineNextBattler());
         SetTurnOrderPanel();
@@ -398,7 +406,6 @@ public class BattleSystem : MonoBehaviour
                 battlerTurnOrder.Add(battler);
                 doneCalculated.Add(battler);
             }
-
         }
 
         return battlerTurnOrder;
@@ -477,7 +484,8 @@ public class BattleSystem : MonoBehaviour
         foreach(Battler battler in removeBattlers)
             currentlyActingBattlers.Remove(battler);
 
-        while (currentlyActingBattlers.Count < 1) //runs this loop until a battler has atleast 100000 AP
+        //runs this loop until a battler has atleast 100000 AP
+        while (currentlyActingBattlers.Count < 1) 
         {
             foreach (PlayerBattler battler in playerBattlers)
             {
@@ -487,7 +495,6 @@ public class BattleSystem : MonoBehaviour
                     if (battler.ap >= 100000)
                         currentlyActingBattlers.Add(battler); 
                 }
-                
             }
 
             foreach (EnemyBattler battler in enemyBattlers)
@@ -495,7 +502,6 @@ public class BattleSystem : MonoBehaviour
                 battler.ap += (int)(battler.ini * battler.apMod);
                 if (battler.ap >= 100000)
                     currentlyActingBattlers.Add(battler);
-                
             }
         }
 
@@ -542,7 +548,7 @@ public class BattleSystem : MonoBehaviour
 
         buttonAttackPressed = true;
         hotkeyManager.AddComponent<AttackButtonSelectedHotkeys>().Initialize(this);
-        ((PlayerBattler)currentlyActingBattler).standardAttack.ChooseTarget((PlayerBattler)currentlyActingBattler, this);
+        ((PlayerBattler)currentlyActingBattler).standardAttack.SetupChooseTarget((PlayerBattler)currentlyActingBattler, this);
         SetTemporaryTurnOrderPanel(((PlayerBattler)currentlyActingBattler).standardAttack);
 
         DisplayMessage("Select a target.");
@@ -651,17 +657,21 @@ public class BattleSystem : MonoBehaviour
         CreateTacticButton((Skill)waitSkill, battler, xPos, yPos);
         xPos += 119.0f;
 
-        CreateTacticButton((Skill)fleeSkill, battler, xPos, yPos);
+        GameObject fleeButton = CreateTacticButton((Skill)fleeSkill, battler, xPos, yPos);
         xPos += 119.0f;
 
+        if(!currentEncounter.playerCanFlee)
+            fleeButton.transform.GetChild(1).gameObject.SetActive(true);
     }
 
-    private void CreateTacticButton(Skill skill, PlayerBattler battler, float xPos, float yPos)
+    private GameObject CreateTacticButton(Skill skill, PlayerBattler battler, float xPos, float yPos)
     {
         GameObject skillButton = Instantiate(buttonSkill, panelTacticSelection.transform) as GameObject;
 
         skillButton.GetComponent<SkillButton>().Initialize(skill, battler, this);
         skillButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
+
+        return skillButton;
     }
 
     private void ClearTacticSelectionPanel()
@@ -832,50 +842,28 @@ public class BattleSystem : MonoBehaviour
         panelItemSelection.SetActive(false);
 
         RemoveInfoHovers();
-
         ClearAllHotkeys();
-
         ClearTargetingButtons();
     }
 
     public IEnumerator FinishPlayerTurn(int additionalAnimations, float soundEffectHitDelay)
     {
-        currentlyActingBattler.CountDownEffects();
-
+        currentlyActingBattler.CountDownEffects(this);
         currentlyActingBattlers.Remove(currentlyActingBattler);
-        
-
         buttonAttack.interactable = true;
 
         yield return new WaitForSeconds(1.7f + soundEffectHitDelay);
 
-        if (IsInPinch() && !inPinch)
-        {
-            inPinch = true;
-            StartCoroutine(GoIntoPinch());
-        }
-        else if (!IsInPinch() && inPinch)
-        {
-            inPinch = false;
-            StartCoroutine(LeavePinch());
-        }
+        CheckForPinch();
 
         currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
-
         yield return new WaitForSeconds((1.6f * additionalAnimations));
 
         DestroyImmediate(currentPointer);
         ClearMessageBox();
         currentlyActingBattler = null;
 
-        if (IsPlayerVictory())
-            StartCoroutine(PlayerVictory());
-        else if (IsPlayerPartyFled())
-            StartCoroutine(PlayerFlee());
-        else if (IsPlayerDefeat())
-            StartCoroutine(PlayerDefeat());
-        else
-            StartCoroutine(DetermineNextBattler());
+        CheckBattleCondition();
     }
 
     IEnumerator EnemyTurn()
@@ -908,6 +896,8 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             
             ((OffensiveSkill)chosenSkill).UseSkill(currentlyActingBattler, targets, this);
+
+            SetTemporaryTurnOrderPanel(chosenSkill);
 
             foreach (GameObject target in targetObjects)
                 DestroyImmediate(target);
@@ -943,21 +933,12 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator FinishEnemyTurn(int maxAdditionalAnimations, float soundEffectHitDelay)
     {
-        currentlyActingBattler.CountDownEffects();
+        currentlyActingBattler.CountDownEffects(this);
         currentlyActingBattlers.Remove(currentlyActingBattler);
       
         yield return new WaitForSeconds(1.7f + soundEffectHitDelay);
 
-        if (IsInPinch() && !inPinch)
-        {
-            inPinch = true;
-            StartCoroutine(GoIntoPinch());
-        }
-        else if (!IsInPinch() && inPinch)
-        {
-            inPinch = false;
-            StartCoroutine(LeavePinch());
-        }
+        CheckForPinch();
 
         currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
 
@@ -967,14 +948,36 @@ public class BattleSystem : MonoBehaviour
         ClearMessageBox();
         currentlyActingBattler = null;
 
+        CheckBattleCondition();
+    }
+
+    private void CheckBattleCondition()
+    {
         if(IsPlayerVictory())
             StartCoroutine(PlayerVictory());
-        else if(IsPlayerPartyFled())
-            StartCoroutine(PlayerFlee());
         else if(IsPlayerDefeat())
             StartCoroutine(PlayerDefeat());
+        else if(IsPlayerPartyFled())
+            StartCoroutine(PlayerFlee());
         else
             StartCoroutine(DetermineNextBattler());
+    }
+
+    private void CheckForPinch()
+    {
+        if(currentEncounter.playPinchTheme)
+        {
+            if (IsInPinch() && !inPinch)
+            {
+                inPinch = true;
+                StartCoroutine(GoIntoPinch());
+            }
+            else if (!IsInPinch() && inPinch)
+            {
+                inPinch = false;
+                StartCoroutine(LeavePinch());
+            }
+        }
     }
 
     IEnumerator GoIntoPinch()
@@ -1067,8 +1070,7 @@ public class BattleSystem : MonoBehaviour
             if(battler.HasFled())
                 return false;
             else if(!battler.isKO)
-                return false;
-                
+                return false; 
         }  
         return true;
     }
@@ -1236,6 +1238,7 @@ public class BattleSystem : MonoBehaviour
             yield return null;
         }
 
+        //in case the last exp point is not animated
         if(character.exp >= LevelingData.expLevelRequirements[currentLevel])//Level Up!
         {
             currentLevel++;
@@ -1282,8 +1285,7 @@ public class BattleSystem : MonoBehaviour
                 levelUps.Add(c);
                 levelUpNewLevels.Add(c.level+1);
                 c.LevelUp();
-            }
-                
+            }     
         }
     }
 
@@ -1403,7 +1405,7 @@ public class BattleSystem : MonoBehaviour
         return buttonTacticsPressed;
     }
 
-       public bool IsButtonItemsPressed()
+    public bool IsButtonItemsPressed()
     {
         return buttonItemsPressed;
     }

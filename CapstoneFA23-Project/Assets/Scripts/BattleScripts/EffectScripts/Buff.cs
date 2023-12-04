@@ -19,7 +19,7 @@ public class Buff : BuffEffect
 
     public override bool ApplyEffect(Battler user, Battler target, Skill skill, BattleSystem battle)
     {
-        if(target.TryApplyBuffEffect(this, battle)) //don't reapply buff. change later.
+        if(target.TryApplyBuffEffect(this, battle))
         {
             target.SetBuffStat(this.buffStat, this.value);
 
