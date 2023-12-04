@@ -60,9 +60,9 @@ public class SkillButton : MonoBehaviour
             battle.DisplayMessage("Select yourself.");
 
         if (skill.isOffensive)
-            ((OffensiveSkill)skill).ChooseTarget(user, battle);
+            ((OffensiveSkill)skill).SetupChooseTarget(user, battle);
         else
-            ((SupportSkill)skill).ChooseTarget(user, battle);
+            ((SupportSkill)skill).SetupChooseTarget(user, battle);
     }
 
     public void LevelupSkillButtonPress()

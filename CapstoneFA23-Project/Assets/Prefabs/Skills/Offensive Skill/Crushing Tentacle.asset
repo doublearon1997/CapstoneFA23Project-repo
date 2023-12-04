@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb16610d1e2ceda4fb4c608c2782e046, type: 3}
+  m_Name: Crushing Tentacle
+  m_EditorClassIdentifier: 
+  skillName: Crushing Tentacle
+  targetType: 0
+  powerType: 0
+  apMod: 0.8
+  cooldown: 0
+  portrait65: {fileID: 21300000, guid: 9c336cd996b54e34d89d37f932d115c5, type: 3}
+  portrait50: {fileID: 21300000, guid: 315997ff22561df43adee380fc6429af, type: 3}
+  portrait100: {fileID: 21300000, guid: 3f583ae96c76e064ea962d3466d4b00d, type: 3}
+  isOffensive: 1
+  effects: []
+  soundEffect: {fileID: 8300000, guid: a17d7aa48a531e2459268b2f2588c55e, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 256c0aab68f543c4fae2dd817c59a36a, type: 3}
+  soundEffectHitDelay: 4.5
+  dmgMod: 1.65

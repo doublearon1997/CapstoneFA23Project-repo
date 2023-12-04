@@ -14,8 +14,7 @@ public class OffensiveSkill : Skill
     public enum AttackResult {Normal, Crit}
 
     // After a player has selected an offensive skill to use, this sets up the screen for the player to click on a target to use the skill.
-    // TODO: Add ability for AOE.
-    public void ChooseTarget(PlayerBattler user, BattleSystem battle)
+    public void SetupChooseTarget(PlayerBattler user, BattleSystem battle)
     {
         if (this.targetType == TargetType.Single)
         {
@@ -42,8 +41,7 @@ public class OffensiveSkill : Skill
         }
     }
 
-    // When an enemy battler has chosen an offensive skill, this method calculates which player it will attack it with. Currently this will only work with single target attacks.
-    // TODO: For AOE, need to change the return to a list of playerbattler targets.
+    // When an enemy battler has chosen an offensive skill, this method calculates which player it will attack it with.
     public List<PlayerBattler> ChooseTarget(EnemyBattler user, BattleSystem battle)
     {
         List<PlayerBattler> availableTargets = new List<PlayerBattler>();
@@ -89,7 +87,7 @@ public class OffensiveSkill : Skill
         return targets;
     }
 
-    // currently just deals damage. More may be added later, like hit or crit chance. Also need to turn the target into an array for aoe.
+    //
     public void UseSkill(Battler user, List<Battler> targets, BattleSystem battle)
     {
         int maxAdditionalAnimations = 0;
@@ -105,12 +103,16 @@ public class OffensiveSkill : Skill
             else
                 damage = (user.GetCurrWil() * this.dmgMod) * (1 - target.GetCurrRes()) * UnityEngine.Random.Range(0.9f, 1.1f);
 
-            //Critical Hit
+            //Critical Hit From Stagger
             if(target.nextHitCrit)
             {
                 damage *= 1.5;
                 result = AttackResult.Crit;
+
+                target.TryRemoveStatusEffectType(StatusEffect.StatusEffectType.StaggerEffect,  battle);
+                target.nextHitCrit = false;
             }
+            //normal Critical Hit
             else if (UnityEngine.Random.Range(0.0f, 1.0f) < user.GetCurrCrt())
             {
                 damage *= 1.5;
@@ -131,6 +133,8 @@ public class OffensiveSkill : Skill
                
             battle.StartCoroutine(DisplayAnimations(finalDamage, target, battle, result, effectNotificationQueue, effectSoundEffectQueue));
         }
+
+        user.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = user.attackSprite;
 
         SEManager.instance.PlaySE(soundEffect); 
 

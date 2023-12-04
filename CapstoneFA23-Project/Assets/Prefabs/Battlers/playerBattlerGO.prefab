@@ -63,6 +63,8 @@ MonoBehaviour:
   sealResist: 0
   staggerResist: 0
   battlerName: 0
+  idleSprite: {fileID: 0}
+  attackSprite: {fileID: 0}
   ap: 0
   apMod: 1
   level: 1
@@ -73,6 +75,7 @@ MonoBehaviour:
   willEnabled: 1
   nextHitCrit: 0
   playerClass: {fileID: 0}
+  kOSprite: {fileID: 0}
   targetRatio: 1
   skills: []
   standardAttack: {fileID: 0}
@@ -121,7 +124,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 100, y: 100}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &6361035034359425005
 GameObject:

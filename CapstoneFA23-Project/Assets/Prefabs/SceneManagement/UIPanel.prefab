@@ -762,6 +762,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73efd5bdd9a755749a6f14d6ca43fcf9, type: 2}
   - {fileID: 11400000, guid: 1d2dbaf9d86d7e9408365634e3a62667, type: 2}
   - {fileID: 11400000, guid: df24f6056c76f744bab8b30b1f6122e2, type: 2}
+  - {fileID: 11400000, guid: 4654610165bc3834a84a6003c16e25cd, type: 2}
+  - {fileID: 11400000, guid: 9c6fb531e6eb3454290976abedea50ad, type: 2}
   dragObject: {fileID: 6168523935830086738}
 --- !u!1 &212786627351791182
 GameObject:

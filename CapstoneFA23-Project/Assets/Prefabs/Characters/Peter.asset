@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674c2de3d9c1d824eb005fb543b11777, type: 3}
+  m_Name: Peter
+  m_EditorClassIdentifier: 
+  characterID: 3
+  characterImage: {fileID: 21300000, guid: 77851961612c7b748a5fe03abf4566ba, type: 3}
+  battleIdleSprite: {fileID: 21300000, guid: f4904df190101124696785a1dd40b8a5, type: 3}
+  battleAttackSprite: {fileID: 21300000, guid: 86682c2cff5811040bd085aca5b2562d, type: 3}
+  battleKOSprite: {fileID: 21300000, guid: f4904df190101124696785a1dd40b8a5, type: 3}
+  characterName: Peter
+  description: 
+  charClass: {fileID: 11400000, guid: 7c0d2c8096e94de7e8a182d2896f430c, type: 2}
+  level: 2
+  exp: 9
+  hp: 598
+  mhp: 598
+  str: 133
+  wil: 94
+  ini: 123
+  def: 0.22
+  res: 0.14
+  crt: 0.05
+  curseRes: 0.17
+  sealRes: 0.02
+  staggerRes: 0.1
+  preBattleExp: 32
+  preBattleLevel: 3
+  skills:
+  - {fileID: 11400000, guid: 296ea172e8c1d77439cc0c87d39a3eeb, type: 2}
+  - {fileID: 11400000, guid: 5717e940d62dc004284890e48729cbe7, type: 2}
+  - {fileID: 11400000, guid: 88d2f0c2ab6d26348b08110e42618952, type: 2}
+  standardAttack: {fileID: 11400000, guid: a7f32e451920e7c45b02129f59ba73ff, type: 2}

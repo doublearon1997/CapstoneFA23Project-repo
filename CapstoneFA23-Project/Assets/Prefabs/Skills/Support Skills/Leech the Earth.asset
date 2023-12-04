@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1e56c970b12754e839e8ce6732c0bc, type: 3}
+  m_Name: Leech the Earth
+  m_EditorClassIdentifier: 
+  skillName: Leech the Earth
+  targetType: 2
+  powerType: 0
+  apMod: 1.1
+  cooldown: 0
+  portrait65: {fileID: 21300000, guid: eb1d557e8c305f543952c834a2c57fbc, type: 3}
+  portrait50: {fileID: 21300000, guid: 255b0c2e44a81f9449de1f70d32a6e58, type: 3}
+  portrait100: {fileID: 21300000, guid: a0b5dc4e0e5d3644fb5c31cfc8da64f7, type: 3}
+  isOffensive: 0
+  effects:
+  - {fileID: 11400000, guid: f8c98007ddd1cd045bf6396c1cce0a7b, type: 2}
+  - {fileID: 11400000, guid: 9fefccd9bb7773e429b38bc9bae63b47, type: 2}
+  soundEffect: {fileID: 8300000, guid: b3e337ff3ef44f94ab4053caa1a1dfed, type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 55d5fb02f04a6d746a78f3d2839b4757, type: 3}
+  soundEffectHitDelay: 2.6

@@ -35,6 +35,8 @@ public class Battler: MonoBehaviour
 
     public string battlerName;
 
+    public Sprite idleSprite, attackSprite;
+
     public Dictionary<BuffEffect, int> buffEffects = new Dictionary<BuffEffect, int>(); // effects and their current duration.
     public Dictionary<StatusEffect, int> statusEffects = new Dictionary<StatusEffect, int>(); 
 
@@ -55,6 +57,8 @@ public class Battler: MonoBehaviour
     // Battler Status
     public bool physicalEnabled = true, willEnabled = true, nextHitCrit = false;
 
+    public List<Skill> skills;
+
     // This method deals damage to a battler and checks if the damage is enough to kill them.
     public void TakeDamage(int damage, BattleSystem battle)
     {
@@ -70,7 +74,11 @@ public class Battler: MonoBehaviour
         {
             battle.SetPlayerHPSliderValue((PlayerBattler)this);
             if(this.hp == 0)
+            {
                 this.TryApplyStatusEffect(battle.kOEffect, battle);
+                this.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = ((PlayerBattler)this).kOSprite;
+            }
+                
         }  
         else
         {
@@ -433,11 +441,10 @@ public class Battler: MonoBehaviour
     }
 
     // Counts down the durations and decays the values of effects.
-    public void CountDownEffects()
+    public void CountDownEffects(BattleSystem battle)
     {
         CountDownBuffEffects();
-        CountDownStatusEffects();
-            
+        CountDownStatusEffects(battle);  
     }
 
     private void CountDownBuffEffects()
@@ -470,7 +477,7 @@ public class Battler: MonoBehaviour
             this.buffEffects.Remove(effect);
     }
 
-    private void CountDownStatusEffects()
+    private void CountDownStatusEffects(BattleSystem battle)
     {
         List<StatusEffect> effectKeys = new List<StatusEffect>(this.statusEffects.Keys);
         List<StatusEffect> removeEffects = new List<StatusEffect>();
@@ -489,7 +496,11 @@ public class Battler: MonoBehaviour
         }
 
         foreach(StatusEffect effect in removeEffects)
+        {
             this.statusEffects.Remove(effect);
+            effect.RemoveStatusEffect(this, battle);
+        }
+            
 
 
     }
