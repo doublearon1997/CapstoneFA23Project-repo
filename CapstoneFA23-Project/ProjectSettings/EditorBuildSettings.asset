@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/sceneBattle.unity
     guid: e135940bbd2fa3d44ac81e478e015a2a
   - enabled: 1
-    path: Assets/Scenes/Islands/sceneTutorialLevel.unity
+    path: Assets/Scenes/Islands/TutorialIslandVersions/sceneTutorialLevel.unity
     guid: 161c1b602de5c7c4cb4a9b9f5072ba4b
   - enabled: 1
     path: Assets/Scenes/Islands/sceneCoveOutside.unity
@@ -41,4 +41,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Islands/sceneTowerInside.unity
     guid: 6219f6e7a9d5e3c45b4360d8e2c7acc6
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/OpeningCutscene.unity
+    guid: d93a2a9a6082ff94397f347bdca2b031
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/TutorialEndCutscene.unity
+    guid: 733329d0319ffab48923781f962be222
+  - enabled: 1
+    path: Assets/Scenes/Islands/TutorialIslandVersions/sceneTutorialReturn.unity
+    guid: 1b875707fdf85694784a335fe3534ffc
+  - enabled: 1
+    path: Assets/Scenes/Islands/TutorialIslandVersions/sceneTutorialLevelPart1.unity
+    guid: 895a8c378b096ef488dc33f18d8000fd
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/GetElfLady.unity
+    guid: ec4ccb997dc734e40a58d4b025067a63
   m_configObjects: {}
