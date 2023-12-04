@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Defend
   m_EditorClassIdentifier: 
   skillName: Defend
-  targetType: 0
+  targetType: 2
   powerType: 0
   apMod: 1.25
   cooldown: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 public class SupportSkill : Skill
 { 
     // After a player has selected a support skill to use, this sets up the screen for the player to click on a target to use the skill.
-    public void ChooseTarget(PlayerBattler user, BattleSystem battle)
+    public void SetupChooseTarget(PlayerBattler user, BattleSystem battle)
     {
         if (this.targetType == TargetType.Single)
         {
@@ -103,6 +103,8 @@ public class SupportSkill : Skill
 
             battle.StartCoroutine(DisplayAnimations(target, battle, effectNotificationQueue, effectSoundEffectQueue));
         }
+
+        user.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = user.attackSprite;
 
         SEManager.instance.PlaySE(soundEffect);
 

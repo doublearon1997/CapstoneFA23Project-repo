@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c456100d750744540aa2de6d9fb7bf0a, type: 3}
+  m_Name: Curse 80, 2
+  m_EditorClassIdentifier: 
+  effectName: 
+  chance: 0.8
+  duration: 2
+  portrait_65: {fileID: 21300000, guid: c4c5de117ebd4d9499570880ec775ec9, type: 3}
+  statusEffectType: 1

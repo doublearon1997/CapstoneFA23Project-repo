@@ -8,6 +8,8 @@ public class Character : ScriptableObject
 {
     public int characterID;
     public Sprite characterImage;
+
+    public Sprite battleIdleSprite, battleAttackSprite, battleKOSprite;
     public string characterName, description;
 
     public CharacterClass charClass = null;
@@ -100,7 +102,7 @@ public class Character : ScriptableObject
 
     public int GetCurrCrt()
     {
-        return (int)(crt * crtMod);
+        return (int)(crt + crtMod);
     }
 
     public double GetCurrCurseRes()

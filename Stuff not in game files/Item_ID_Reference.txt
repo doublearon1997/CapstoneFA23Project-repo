@@ -35,8 +35,8 @@ ItemID, Name
 22, Stamina Potion
 23, Holy Water
 24, Insta Death
-25, 
-26, 
+25, Medicinal Herbs
+26, Revival Potion
 27, 
 28, 
 29, 

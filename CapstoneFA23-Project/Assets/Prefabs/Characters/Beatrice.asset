@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674c2de3d9c1d824eb005fb543b11777, type: 3}
+  m_Name: Beatrice
+  m_EditorClassIdentifier: 
+  characterID: 4
+  characterImage: {fileID: 21300000, guid: b69aab035f793ad48bc6a49218e8b437, type: 3}
+  battleIdleSprite: {fileID: 21300000, guid: 2c9be339e1cd6b7498305e1d080a28d6, type: 3}
+  battleAttackSprite: {fileID: 21300000, guid: 76a10c8e37902d04fbf6eb992ec010fd, type: 3}
+  battleKOSprite: {fileID: 21300000, guid: 5f4c9cf799cf6cc43a6df137beb44218, type: 3}
+  characterName: Beatrice
+  description: 
+  charClass: {fileID: 11400000, guid: b6f1dfce09d98d6bb8c93f31b51a914d, type: 2}
+  level: 1
+  exp: 0
+  hp: 390
+  mhp: 390
+  str: 93
+  wil: 121
+  ini: 107
+  def: 0.12
+  res: 0.19
+  crt: 0.07
+  curseRes: 0.1
+  sealRes: 0.2
+  staggerRes: 0.02
+  preBattleExp: 20
+  preBattleLevel: 2
+  skills:
+  - {fileID: 11400000, guid: 2fd33f1e3c16ca5459331bda2c1881a9, type: 2}
+  - {fileID: 11400000, guid: 2bf3679b66329db4094d276bec0207f5, type: 2}
+  standardAttack: {fileID: 11400000, guid: a7cfe105a52572333b8ea2b38d74ae59, type: 2}

@@ -6,9 +6,9 @@ public class PlayerBattler : Battler
 {
     public CharacterClass playerClass;
 
-    public double targetRatio = 1.0;
+    public Sprite kOSprite;
 
-    public List<Skill> skills;
+    public double targetRatio = 1.0;
 
     public Dictionary<Skill, int> skillCooldownDict = new Dictionary<Skill, int>();
 
@@ -49,6 +49,12 @@ public class PlayerBattler : Battler
             this.skills.Add(skill);
             this.skillCooldownDict.Add(skill, 0);
         }
+
+        idleSprite = c.battleIdleSprite;
+        kOSprite = c.battleKOSprite;
+        attackSprite = c.battleAttackSprite;
+
+        gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = idleSprite;
             
         
         standardAttack = c.standardAttack;

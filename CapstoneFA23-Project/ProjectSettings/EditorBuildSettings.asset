@@ -41,4 +41,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Islands/sceneTowerInside.unity
     guid: 6219f6e7a9d5e3c45b4360d8e2c7acc6
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/OpeningCutscene.unity
+    guid: d93a2a9a6082ff94397f347bdca2b031
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/TutorialEndCutscene.unity
+    guid: 733329d0319ffab48923781f962be222
   m_configObjects: {}
