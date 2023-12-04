@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class NPC : MonoBehaviour
 {
@@ -16,6 +18,9 @@ public class NPC : MonoBehaviour
     public GameObject contButton;
     public float wordSpeed;
     public bool playerIsClose;
+    public bool destroyAtEnd;
+    public bool fightAtEnd;
+    public Encounter encounter;
 
     public Coroutine currentTyper = null;
  
@@ -87,7 +92,19 @@ public class NPC : MonoBehaviour
             currentTyper = StartCoroutine(Typing());
         }
         else
+        {
+            if (destroyAtEnd)
+            {
+                gameObject.SetActive(false);
+            }
+            if (fightAtEnd)
+            {
+                BattleSystem.currentEncounter = encounter;
+                SceneManager.LoadScene("sceneBattle");
+            }
             zeroText();
+        }
+            
     }
 
 

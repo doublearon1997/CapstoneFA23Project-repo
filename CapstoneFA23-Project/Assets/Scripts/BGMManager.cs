@@ -102,5 +102,8 @@ public class BGMManager : MonoBehaviour
         audioSource.volume = startVolume;
     }
 
-   
+   public void stopBGM()
+    {
+        audioSource.Stop();
+    }
 }

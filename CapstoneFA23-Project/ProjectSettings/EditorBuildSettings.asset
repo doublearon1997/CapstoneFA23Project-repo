@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/sceneBattle.unity
     guid: e135940bbd2fa3d44ac81e478e015a2a
   - enabled: 1
-    path: Assets/Scenes/Islands/sceneTutorialLevel.unity
+    path: Assets/Scenes/Islands/TutorialIslandVersions/sceneTutorialLevel.unity
     guid: 161c1b602de5c7c4cb4a9b9f5072ba4b
   - enabled: 1
     path: Assets/Scenes/Islands/sceneCoveOutside.unity
@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cutscenes/TutorialEndCutscene.unity
     guid: 733329d0319ffab48923781f962be222
+  - enabled: 1
+    path: Assets/Scenes/Islands/TutorialIslandVersions/sceneTutorialLevelPostPeterFight.unity
+    guid: 895a8c378b096ef488dc33f18d8000fd
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/TutorialPeterDeath.unity
+    guid: ec497533160303642bba3aa1f989f3dd
   m_configObjects: {}

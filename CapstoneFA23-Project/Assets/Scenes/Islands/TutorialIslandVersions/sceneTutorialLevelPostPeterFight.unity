@@ -78111,6 +78111,9 @@ MonoBehaviour:
   contButton: {fileID: 1190100682}
   wordSpeed: 0.06
   playerIsClose: 0
+  destroyAtEnd: 0
+  fightAtEnd: 0
+  encounter: {fileID: 0}
 --- !u!61 &248935689
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -78437,7 +78440,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424367086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -78505,7 +78508,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424367086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11c1fbab04dd6954da4862b38211feea, type: 3}
   m_Name: 
@@ -78524,6 +78527,9 @@ MonoBehaviour:
   contButton: {fileID: 1190100682}
   wordSpeed: 0.06
   playerIsClose: 0
+  destroyAtEnd: 0
+  fightAtEnd: 0
+  encounter: {fileID: 0}
 --- !u!61 &424367090
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -78531,7 +78537,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424367086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -78576,7 +78582,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424367086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -79963,6 +79969,9 @@ MonoBehaviour:
   contButton: {fileID: 1966412572}
   wordSpeed: 0.06
   playerIsClose: 0
+  destroyAtEnd: 0
+  fightAtEnd: 0
+  encounter: {fileID: 0}
 --- !u!61 &691556983
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -80251,7 +80260,7 @@ Transform:
   m_GameObject: {fileID: 836662160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28999996, y: 0.26, z: -10}
+  m_LocalPosition: {x: 26.54, y: 37.43, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83116,7 +83125,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275063771}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -83428,7 +83437,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290953544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11c1fbab04dd6954da4862b38211feea, type: 3}
   m_Name: 
@@ -83446,6 +83455,9 @@ MonoBehaviour:
   contButton: {fileID: 1190100682}
   wordSpeed: 0.06
   playerIsClose: 0
+  destroyAtEnd: 0
+  fightAtEnd: 0
+  encounter: {fileID: 0}
 --- !u!61 &1290953547
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -83533,7 +83545,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290953544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -83888,6 +83900,9 @@ MonoBehaviour:
   contButton: {fileID: 1221466229}
   wordSpeed: 0.06
   playerIsClose: 0
+  destroyAtEnd: 0
+  fightAtEnd: 0
+  encounter: {fileID: 0}
 --- !u!212 &1408710233
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -84167,7 +84182,7 @@ Transform:
   m_GameObject: {fileID: 1541634961}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28999996, y: 0.26, z: -10}
+  m_LocalPosition: {x: 26.54, y: 37.43, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -84504,6 +84519,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenSlime
       objectReference: {fileID: 0}
+    - target: {fileID: 8080649597180512549, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
+      propertyPath: encounter
+      value: 
+      objectReference: {fileID: 11400000, guid: f663852ecd937de4b915b47549bcf76c, type: 2}
     - target: {fileID: 8080649597180512549, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: checkRadius
       value: 5
@@ -87296,6 +87315,9 @@ MonoBehaviour:
   contButton: {fileID: 1221466229}
   wordSpeed: 0.06
   playerIsClose: 0
+  destroyAtEnd: 0
+  fightAtEnd: 0
+  encounter: {fileID: 0}
 --- !u!70 &1758378142
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -87708,7 +87730,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869833698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -88860,11 +88882,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 791794571183078738, guid: e97b6b3df1112f84dbd6ee23a971355c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.28999996
+      value: 26.54
       objectReference: {fileID: 0}
     - target: {fileID: 791794571183078738, guid: e97b6b3df1112f84dbd6ee23a971355c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.26
+      value: 37.43
       objectReference: {fileID: 0}
     - target: {fileID: 791794571183078738, guid: e97b6b3df1112f84dbd6ee23a971355c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -88996,6 +89018,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2182168428632105208, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2615573221021380257, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.0933683
@@ -89049,12 +89075,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4425903421058532631, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425903421058532631, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 89fd580bc9f87134cbb88bbd3b02cea6, type: 2}
+    - target: {fileID: 5067570527555114591, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6825891301994602361, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: m_Name
       value: BlueSllime
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080649597180512549, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8080649597180512549, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: checkRadius
