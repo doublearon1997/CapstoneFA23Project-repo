@@ -22,11 +22,11 @@ MonoBehaviour:
   charClass: {fileID: 11400000, guid: 7c0d2c8096e94de7e8a182d2896f430c, type: 2}
   level: 2
   exp: 9
-  hp: 598
-  mhp: 598
-  str: 133
-  wil: 94
-  ini: 123
+  hp: 544
+  mhp: 544
+  str: 121
+  wil: 85
+  ini: 112
   def: 0.22
   res: 0.14
   crt: 0.05

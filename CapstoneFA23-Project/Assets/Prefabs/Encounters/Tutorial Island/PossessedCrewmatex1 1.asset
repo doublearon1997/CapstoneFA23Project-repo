@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 4955245641497402410, guid: fe762f784925ac94ea8e1b6fd67d66eb, type: 3}
-  battleBGM: {fileID: 8300000, guid: b23c90e63009c204c87a19be10d059ab, type: 3}
+  battleBGM: {fileID: 8300000, guid: f840c8318abf0b94d8aeeed22f273403, type: 3}
   battleBackgroundImage: {fileID: 21300000, guid: d1f9b1ac7e54ff1478f43541f3d01a24, type: 3}
   sceneID: 13
   playPinchTheme: 0

@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4a15f2615debb684bbfc592cb4e0fcf3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c34dd040abc7bac478f684bf3ad9596a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -135,27 +135,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c927745c628b4698905129e5fad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1400
-  mhp: 1400
-  str: 148
+  hp: 1000
+  mhp: 1000
+  str: 142
   wil: 130
   def: 0.22
   res: 0.17
-  ini: 126
+  ini: 127
   crt: 0.05
   debuffResist: 0
   curseResist: 0.75
   sealResist: 0.05
   staggerResist: 0.05
   battlerName: Possessed Peter
-  idleSprite: {fileID: 21300000, guid: 4a15f2615debb684bbfc592cb4e0fcf3, type: 3}
-  attackSprite: {fileID: 21300000, guid: 451aac766b684be40a5f73ecc966ae8f, type: 3}
+  idleSprite: {fileID: 21300000, guid: c34dd040abc7bac478f684bf3ad9596a, type: 3}
+  attackSprite: {fileID: 21300000, guid: a28f46a51d882bc4aac0fe33d861e66b, type: 3}
   ap: 0
   apMod: 1
   level: 1
   isPlayer: 0
-  portrait70: {fileID: 21300000, guid: 38f64c727a859f34ca209a45842b9f0e, type: 3}
-  portrait60: {fileID: 21300000, guid: 38f64c727a859f34ca209a45842b9f0e, type: 3}
+  portrait70: {fileID: 21300000, guid: 5c5c3c0920fe29c46850fd5fd5cc0f45, type: 3}
+  portrait60: {fileID: 21300000, guid: 5c5c3c0920fe29c46850fd5fd5cc0f45, type: 3}
   physicalEnabled: 1
   willEnabled: 1
   nextHitCrit: 0
