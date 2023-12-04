@@ -8,6 +8,9 @@ public class MainMenuController : MonoBehaviour
     {
         BGMManager.instance.PlayBGM("thePirateShip");
     }
-
+    public void exitMainMenu()
+    {
+        BGMManager.instance.stopBGM();
+    }
     
 }
