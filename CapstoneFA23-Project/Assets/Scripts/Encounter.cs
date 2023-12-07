@@ -6,6 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewEncounter", menuName = "Encounter")]
 public class Encounter : ScriptableObject
 {
+    public enum EncounterResult {PlayerVictory, PlayerFlee, PlayerDefeat}
+
+    public EncounterResult result;
+
     public List<GameObject> enemies = new List<GameObject>();
 
     public AudioClip battleBGM;

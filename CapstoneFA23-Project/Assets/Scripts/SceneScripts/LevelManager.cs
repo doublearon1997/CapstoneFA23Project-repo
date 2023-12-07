@@ -7,71 +7,88 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance = null;
-    public GameObject Player;
-    public List<GameObject> EnemyList = new List<GameObject>();
-    public static bool InBattle = false;
+    public GameObject player;
+    public List<GameObject> enemyList;
+    public static List<bool> enemyActiveList;
+    public static bool inBattle = false;
     public static int InDungeon = -2;
-    public static GameObject TempEnemy = null;
-    public static Vector2 PlayerPosition = new Vector2(0.0f, 0.0f);
+    public static int currentEnemy;
+    public static Vector2 playerPosition = new Vector2(0.0f, 0.0f);
+    public static Encounter currentEncounter;
+    public static string currentScene;
+    public AudioClip bgm;
+
+    public static float bgmSaveTime;
+
+    public static LevelManager levelManagerInstance;
 
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-    }
+        levelManagerInstance = this;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void Awake()
-    {
-        if (instance == null)
+        if(currentScene == null || currentScene != levelManagerInstance.gameObject.scene.name)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            return;
-        }
-        if (instance == this)
-        {
-            return;
+            currentScene = gameObject.scene.name;
+            enemyActiveList = new List<bool>();
+            bgmSaveTime = -1;
+
+            for(int i = 0; i < levelManagerInstance.enemyList.Count; i++)
+                enemyActiveList.Add(true);
         }
 
-        Destroy(gameObject);
-
-        if (InBattle == true)
+        if (inBattle == true)
         {
-            if (TempEnemy != null)
+            if (currentEncounter.result == Encounter.EncounterResult.PlayerVictory)
             {
-                TempEnemy.SetActive(false);
+                enemyActiveList[currentEnemy] = false;
             }
+            else if (currentEncounter.result == Encounter.EncounterResult.PlayerFlee)
+                StartCoroutine(levelManagerInstance.enemyList[currentEnemy].GetComponent<EnemyAI>().WaitAfterFlee());
                 
-            Player.transform.position = PlayerPosition;
-            Debug.Log(PlayerPosition);
-            InBattle = false;
+            player.transform.position = playerPosition;
+            inBattle = false;
         }
 
-        if (InDungeon>=0)
+        for(int i = 0; i<enemyActiveList.Count; i++)
+        {
+            if(enemyActiveList[i] == false)
+            {
+                levelManagerInstance.enemyList[i].SetActive(false);
+            }
+        }
+
+        if(bgmSaveTime != -1)
+            BGMManager.instance.PlayBGM(bgm, bgmSaveTime);
+        else 
+            BGMManager.instance.PlayBGM(bgm);
+
+
+        /*if (InDungeon>=0)
         {
             InDungeon--;
             if (InDungeon == -1)
             {
                 InDungeon = -2;
-                Player.transform.position = PlayerPosition - new Vector2(0.0f, 2.0f); ;
+                player.transform.position = playerPosition - new Vector2(0.0f, 2.0f); ;
             }
-        }
+        }*/
+
+
     }
 
     public void UpdatePlayerPosition()
     {
-        PlayerPosition = Player.transform.position;
+        playerPosition = player.transform.position;
     }
 
-    public static void SetEnemy(GameObject InObject)
+    public static void SetEnemy(GameObject enemy)
     {
-        TempEnemy = InObject;
-        InBattle = true;
+        currentEnemy = levelManagerInstance.enemyList.IndexOf(enemy);
+        inBattle = true;
     }
+
+   
+
+
 }

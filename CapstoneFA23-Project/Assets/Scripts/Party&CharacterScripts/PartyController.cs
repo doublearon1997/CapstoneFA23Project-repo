@@ -19,11 +19,14 @@ public class PartyController : MonoBehaviour
     public List<Character> listCharacters = new List<Character>();
     public GameObject dragObject;
     string partyDataFilePath = System.IO.Directory.GetCurrentDirectory() + "/Data/" + "partyData" + ".txt";
+    public static PartyController instance;
 
     // Start is called before the first frame update
     void Start()
     {
         loadPartyData();
+
+        instance = this;
 
         foreach(Character c in listCharacters)
             c.InitializeCharacter();

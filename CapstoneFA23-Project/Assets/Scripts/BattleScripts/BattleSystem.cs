@@ -858,7 +858,10 @@ public class BattleSystem : MonoBehaviour
 
         if(!currentlyActingBattler.HasFled())
             currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         yield return new WaitForSeconds((1.6f * additionalAnimations));
 
         DestroyImmediate(currentPointer);
@@ -1111,6 +1114,8 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator PlayerVictory()
     {
+        currentEncounter.result = Encounter.EncounterResult.PlayerVictory;
+
         StartCoroutine(BGMManager.instance.FadeOutBGM(1.0f));
         AdjustCharactersAfterBattle();
         Dictionary<Item , int> itemDrops = DetermineItemDrops();
@@ -1380,6 +1385,8 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator PlayerFlee()
     {
+        currentEncounter.result = Encounter.EncounterResult.PlayerFlee;
+
         StartCoroutine(BGMManager.instance.FadeOutBGM(2f));
         fadeOutToBlack.SetActive(true);
 

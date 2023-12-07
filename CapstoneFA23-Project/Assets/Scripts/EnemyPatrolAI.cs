@@ -17,6 +17,11 @@ public class EnemyPatrolAI : MonoBehaviour
     public float speed;
     public float attackRadius;
 
+    public Encounter encounter;
+    public LevelManager levelManager;
+
+    private bool waiting = false;
+
     private bool isInAttackRange;
     // Start is called before the first frame update
     private void Start()
@@ -30,27 +35,33 @@ public class EnemyPatrolAI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Vector2 point = currentPoint.position - transform.position;
-        if (currentPoint == pointB.transform)
+        if(!waiting)
         {
-            rb.velocity = new Vector2(speed, 0);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-speed, 0);
-        }
 
-        if(Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
-        {
-            flip();
-            currentPoint = pointA.transform;
+        
+            Vector2 point = currentPoint.position - transform.position;
+            if (currentPoint == pointB.transform)
+            {
+                rb.velocity = new Vector2(speed, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(-speed, 0);
+            }
+
+            if(Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
+            {
+                flip();
+                currentPoint = pointA.transform;
+            }
+            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
+            {
+                flip();
+                currentPoint = pointB.transform;
+            }
+            isInAttackRange = Physics2D.OverlapCircle(transform.position, attackRadius, whatIsPlayer);
+
         }
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
-        {
-            flip();
-            currentPoint = pointB.transform;
-        }
-        isInAttackRange = Physics2D.OverlapCircle(transform.position, attackRadius, whatIsPlayer);
     }
     private void flip()
     {
@@ -77,8 +88,28 @@ public class EnemyPatrolAI : MonoBehaviour
     {
         if (isInAttackRange)
         {
-            //rb.velocity = Vector2.zero;
-            SceneManager.LoadScene("sceneBattle");
+            EnterBattle();
         }
+    }
+
+    private void EnterBattle()
+    {
+        BattleSystem.currentEncounter = encounter;
+        LevelManager.SetEnemy(this.gameObject);
+        levelManager.UpdatePlayerPosition();
+        LevelManager.currentEncounter = encounter;
+        LevelManager.bgmSaveTime = BGMManager.instance.GetCurrentBGMTime();
+
+        SceneManager.LoadScene("sceneBattle");
+        
+    }
+
+    public IEnumerator WaitAfterFlee()
+    {
+        waiting = true;
+
+        yield return new WaitForSeconds(3.5f);
+
+        waiting = false;
     }
 }

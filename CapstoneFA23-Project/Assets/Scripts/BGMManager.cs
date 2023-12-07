@@ -72,20 +72,26 @@ public class BGMManager : MonoBehaviour
         audioSource.Play();
     }
 
-    public void PlayBGM(AudioClip clip)
+    public void PlayBGM(AudioClip clip, float time = 0)
     {
-        audioSource.Stop();
+        if(audioSource.clip == null || clip != audioSource.clip)
+        {
+            audioSource.Stop();
 
-        audioSource.clip = clip;
-
-        if (bgmVolumes.ContainsKey(clip))
-            audioSource.volume = bgmVolumes[clip] * PlayerPrefs.GetFloat("BGMVolume");
-        else
-            audioSource.volume = PlayerPrefs.GetFloat("BGMVolume");
-
-        audioSource.Play();
+            if(time != 0)
+                StartCoroutine(FadeInBGM(clip, 1.0f, time));
+            else 
+            {
+                audioSource.clip = clip;
+                audioSource.time = 0;
+                if (bgmVolumes.ContainsKey(clip))
+                    audioSource.volume = bgmVolumes[clip] * PlayerPrefs.GetFloat("BGMVolume");
+                else
+                    audioSource.volume = PlayerPrefs.GetFloat("BGMVolume");
+                audioSource.Play();
+            }
+        }
     }
-
 
     public IEnumerator FadeOutBGM(float fadeDuration)
     {
@@ -102,8 +108,37 @@ public class BGMManager : MonoBehaviour
         audioSource.volume = startVolume;
     }
 
-   public void stopBGM()
+    public IEnumerator FadeInBGM(AudioClip clip, float fadeDuration, float startTime = 0)
     {
+        float endVolume;
+
+        if (bgmVolumes.ContainsKey(clip))
+            endVolume = bgmVolumes[clip] * PlayerPrefs.GetFloat("BGMVolume");
+        else
+            endVolume = PlayerPrefs.GetFloat("BGMVolume");
+
+        audioSource.clip = clip;
+        audioSource.time = startTime;
+
+        audioSource.Play();
+
+        audioSource.volume = 0;
+
+        while(audioSource.volume < endVolume)
+        {
+            audioSource.volume += endVolume * Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+    }
+
+    public void stopBGM()
+    {  
         audioSource.Stop();
     }
+
+    public float GetCurrentBGMTime()
+    {
+        return audioSource.time;
+    }
+
 }

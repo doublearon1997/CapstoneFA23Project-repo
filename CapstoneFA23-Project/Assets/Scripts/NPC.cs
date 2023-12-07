@@ -23,6 +23,15 @@ public class NPC : MonoBehaviour
     public Encounter encounter;
 
     public Coroutine currentTyper = null;
+
+    public GameStateData.GameStateVariable removalVariable;
+    public int removalStateValue; 
+
+
+    public GameStateData.GameStateVariable dialougeEndState;
+    public int dialougeEndStateAdd;
+
+    public NPCEndAction endActionScript;
  
     // Update is called once per frame
     void Update()
@@ -47,8 +56,13 @@ public class NPC : MonoBehaviour
 
     void Start()
     {
-        dialogueText.text = "";
-        npcNameText.text = npcName;
+        if(removalVariable != GameStateData.GameStateVariable.None && GameStateData.GetGameStateValue(removalVariable) >= removalStateValue)
+            gameObject.SetActive(false);
+        else 
+        {
+            dialogueText.text = "";
+            npcNameText.text = npcName;
+        }
     }
 
     public void zeroText()
@@ -93,6 +107,11 @@ public class NPC : MonoBehaviour
         }
         else
         {
+            if(dialougeEndState != GameStateData.GameStateVariable.None)
+                GameStateData.AddGameStateValue(dialougeEndState, dialougeEndStateAdd);
+            if(endActionScript != null)
+                endActionScript.DoAction();
+            
             if (destroyAtEnd)
             {
                 gameObject.SetActive(false);
