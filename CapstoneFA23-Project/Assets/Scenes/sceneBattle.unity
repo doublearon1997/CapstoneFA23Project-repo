@@ -7619,7 +7619,7 @@ MonoBehaviour:
   skillMessageDisplay: {fileID: 3650307415027971455, guid: 7e2f9a1110b453e42b5021742c5a666e, type: 3}
   messageBoxText: {fileID: 1118068381927284121, guid: 53c0c2b96abe8d1429bad1ce5ea01d47, type: 3}
   hotkeyManager: {fileID: 591655687}
-  defaultEncounter: {fileID: 11400000, guid: df1d9e12c6d35304b903677c923679ae, type: 2}
+  defaultEncounter: {fileID: 11400000, guid: 32c305ca6f9621448870dcda64b53da3, type: 2}
   victoryPanel: {fileID: 616402330}
   levelUpPanel: {fileID: 2053704075}
   playerSlotVictoryPanel: {fileID: 8244899356788604693, guid: e299ab0a7540503498b6c83693552877, type: 3}

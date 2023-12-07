@@ -39,7 +39,6 @@ public class EnemyAI : MonoBehaviour
     {
         if(!waiting)
         {
-
             anim.SetBool("isRunning", isInChaseRange);
 
             isInChaseRange = Physics2D.OverlapCircle(transform.position, checkRadius, whatIsPlayer);
@@ -87,9 +86,7 @@ public class EnemyAI : MonoBehaviour
     public IEnumerator WaitAfterFlee()
     {
         waiting = true;
-
         yield return new WaitForSeconds(3.5f);
-
         waiting = false;
     }
 }

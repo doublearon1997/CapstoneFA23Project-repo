@@ -135,24 +135,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3c927745c628b4698905129e5fad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 245
-  mhp: 245
-  str: 103
-  wil: 107
-  def: 0.13
-  res: 0.2
-  ini: 95
-  crt: 0.03
+  hp: 560
+  mhp: 560
+  str: 156
+  wil: 173
+  def: 0.17
+  res: 0.25
+  ini: 113
+  crt: 0.05
   debuffResist: 0
-  curseResist: 0.12
-  sealResist: 0.02
-  staggerResist: 0
-  battlerName: Log
-  idleSprite: {fileID: 21300000, guid: 4a15f2615debb684bbfc592cb4e0fcf3, type: 3}
-  attackSprite: {fileID: 21300000, guid: 451aac766b684be40a5f73ecc966ae8f, type: 3}
+  curseResist: 0.7
+  sealResist: 0.2
+  staggerResist: 0.1
+  battlerName: Forsaken Ent
+  idleSprite: {fileID: 21300000, guid: 4a9afc6c692f4444c98ff41fe78f7dfe, type: 3}
+  attackSprite: {fileID: 21300000, guid: 5e9d1cb503fe8254e8851c9a6bd5163c, type: 3}
   ap: 0
   apMod: 1
-  level: 1
+  level: 4
   isPlayer: 0
   portrait70: {fileID: 21300000, guid: 5ac0eb1693959d24487c892c6a388b7a, type: 3}
   portrait60: {fileID: 21300000, guid: 5ac0eb1693959d24487c892c6a388b7a, type: 3}
@@ -174,7 +174,7 @@ MonoBehaviour:
   dropListChances:
   - 1
   dropListQuantities: 01000000
-  exp: 1
+  exp: 20
 --- !u!61 &-933485833814597257
 BoxCollider2D:
   m_ObjectHideFlags: 0

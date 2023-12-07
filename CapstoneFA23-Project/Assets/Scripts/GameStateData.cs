@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameStateData : MonoBehaviour
 {
-    public enum GameStateVariable {None, CelineJoin}
+    public enum GameStateVariable {None, CelineJoin, PhantopusSlain}
 
     public static Dictionary<GameStateVariable, int> gameStateMap = new Dictionary<GameStateVariable, int>();
 
@@ -15,6 +15,7 @@ public class GameStateData : MonoBehaviour
         if(!setupDone)
         {
              gameStateMap.Add(GameStateVariable.CelineJoin, 0);
+             gameStateMap.Add(GameStateVariable.PhantopusSlain, 0);
 
              setupDone = true;
         }

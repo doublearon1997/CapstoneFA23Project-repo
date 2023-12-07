@@ -137,12 +137,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 1000
   mhp: 1000
-  str: 142
-  wil: 130
+  str: 140
+  wil: 110
   def: 0.22
   res: 0.17
   ini: 127
-  crt: 0.05
+  crt: 0.04
   debuffResist: 0
   curseResist: 0.75
   sealResist: 0.05

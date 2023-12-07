@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbcfee056fa70324ca5131b2581821a5, type: 3}
   m_Name: slimex2,logx1
   m_EditorClassIdentifier: 
+  result: 0
   enemies:
   - {fileID: 4955245641497402410, guid: d23545d1a36199448adbe9009d261f2b, type: 3}
   - {fileID: 4955245641497402410, guid: 0f9e5491969be624c884b91f446046c1, type: 3}
@@ -19,3 +20,5 @@ MonoBehaviour:
   battleBGM: {fileID: 8300000, guid: 843b921a2debc9d4685a114ba5dacfc1, type: 3}
   battleBackgroundImage: {fileID: 21300000, guid: 6cba1bda5a0f6e048b7051c4eb348b37, type: 3}
   sceneID: 4
+  playPinchTheme: 1
+  playerCanFlee: 1

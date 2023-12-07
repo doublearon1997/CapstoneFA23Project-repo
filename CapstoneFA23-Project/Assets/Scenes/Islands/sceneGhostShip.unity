@@ -132,7 +132,15 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: c8c7dcdb0c7fbaf4c9e723d7ba5f15d0, type: 3}
+    - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
       propertyPath: Player
+      value: 
+      objectReference: {fileID: 1202117460}
+    - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
+      propertyPath: player
       value: 
       objectReference: {fileID: 1202117460}
     - target: {fileID: 3672203529837812752, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}

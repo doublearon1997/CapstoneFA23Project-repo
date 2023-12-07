@@ -77908,7 +77908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &248935687
 Animator:
   serializedVersion: 5
@@ -77957,6 +77957,11 @@ MonoBehaviour:
   destroyAtEnd: 0
   fightAtEnd: 0
   encounter: {fileID: 0}
+  removalVariable: 0
+  removalStateValue: 0
+  dialougeEndState: 0
+  dialougeEndStateAdd: 0
+  endActionScript: {fileID: 0}
 --- !u!61 &248935689
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -78275,7 +78280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &424367087
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -78373,6 +78378,11 @@ MonoBehaviour:
   destroyAtEnd: 0
   fightAtEnd: 0
   encounter: {fileID: 0}
+  removalVariable: 0
+  removalStateValue: 0
+  dialougeEndState: 0
+  dialougeEndStateAdd: 0
+  endActionScript: {fileID: 0}
 --- !u!61 &424367090
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -79064,7 +79074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &602121352
 Transform:
   m_ObjectHideFlags: 0
@@ -79527,6 +79537,11 @@ MonoBehaviour:
   destroyAtEnd: 0
   fightAtEnd: 0
   encounter: {fileID: 0}
+  removalVariable: 0
+  removalStateValue: 0
+  dialougeEndState: 0
+  dialougeEndStateAdd: 0
+  endActionScript: {fileID: 0}
 --- !u!61 &691556983
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -81829,6 +81844,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f53ba9fb998434428f672e79db31797, type: 3}
+    - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 963070549}
@@ -81841,11 +81860,23 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
+      propertyPath: enemyList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
       propertyPath: EnemyList.Array.data[0]
       value: 
       objectReference: {fileID: 1277953932}
     - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
       propertyPath: EnemyList.Array.data[1]
+      value: 
+      objectReference: {fileID: 2104046398}
+    - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
+      propertyPath: enemyList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1277953932}
+    - target: {fileID: 1873326928008791744, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
+      propertyPath: enemyList.Array.data[1]
       value: 
       objectReference: {fileID: 2104046398}
     - target: {fileID: 3672203529837812752, guid: 5e3f294cd25412a4294ec04fae0bcf5d, type: 3}
@@ -81928,7 +81959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1179117658
 Animator:
   serializedVersion: 5
@@ -82036,6 +82067,8 @@ MonoBehaviour:
     m_Bits: 64
   speed: 2
   attackRadius: 1
+  encounter: {fileID: 0}
+  levelManager: {fileID: 0}
 --- !u!50 &1179117662
 Rigidbody2D:
   serializedVersion: 4
@@ -82616,6 +82649,7 @@ MonoBehaviour:
     m_Bits: 64
   dir: {x: 0, y: 0, z: 0}
   encounter: {fileID: 11400000, guid: 620fab7813e67224bbce823d2867b026, type: 2}
+  levelManager: {fileID: 0}
 --- !u!61 &1277953938
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -82681,7 +82715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1290953545
 Animator:
   serializedVersion: 5
@@ -82731,6 +82765,11 @@ MonoBehaviour:
   destroyAtEnd: 0
   fightAtEnd: 0
   encounter: {fileID: 0}
+  removalVariable: 0
+  removalStateValue: 0
+  dialougeEndState: 0
+  dialougeEndStateAdd: 0
+  endActionScript: {fileID: 0}
 --- !u!61 &1290953547
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -83141,6 +83180,11 @@ MonoBehaviour:
   destroyAtEnd: 0
   fightAtEnd: 0
   encounter: {fileID: 0}
+  removalVariable: 0
+  removalStateValue: 0
+  dialougeEndState: 0
+  dialougeEndStateAdd: 0
+  endActionScript: {fileID: 0}
 --- !u!212 &1408710233
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -83454,7 +83498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1544844730
 Transform:
   m_ObjectHideFlags: 0
@@ -83553,11 +83597,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2615573221021380257, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.06
+      value: 27.94
       objectReference: {fileID: 0}
     - target: {fileID: 2615573221021380257, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.06
+      value: 3.11
       objectReference: {fileID: 0}
     - target: {fileID: 2615573221021380257, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: m_LocalPosition.z
@@ -83608,50 +83652,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
---- !u!1 &1622542647
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1622542648}
-  - component: {fileID: 1622542649}
-  m_Layer: 0
-  m_Name: TutorialLevelManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1622542648
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622542647}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.656116, y: 33.12099, z: -0.5543944}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1622542649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622542647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ed61ba95c8e21b4cb3633f3adf80841, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1710516031
 GameObject:
   m_ObjectHideFlags: 0
@@ -86394,6 +86394,11 @@ MonoBehaviour:
   destroyAtEnd: 0
   fightAtEnd: 0
   encounter: {fileID: 0}
+  removalVariable: 0
+  removalStateValue: 0
+  dialougeEndState: 0
+  dialougeEndStateAdd: 0
+  endActionScript: {fileID: 0}
 --- !u!70 &1758378142
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -87223,6 +87228,7 @@ MonoBehaviour:
     m_Bits: 64
   dir: {x: 0, y: 0, z: 0}
   encounter: {fileID: 11400000, guid: 8ca98b0e77de86f4d9cfe7706ecb987c, type: 2}
+  levelManager: {fileID: 0}
 --- !u!50 &2104046401
 Rigidbody2D:
   serializedVersion: 4
@@ -87332,7 +87338,7 @@ Transform:
   m_GameObject: {fileID: 2104046398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.03, y: 24.7, z: 0}
+  m_LocalPosition: {x: 26.08, y: 22.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -87891,6 +87897,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueSllime
       objectReference: {fileID: 0}
+    - target: {fileID: 6825891301994602361, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8080649597180512549, guid: e25b6f3587fb58441b385a5a3b1f2785, type: 3}
       propertyPath: checkRadius
       value: 5
@@ -87926,7 +87936,6 @@ SceneRoots:
   - {fileID: 572463267}
   - {fileID: 714781834}
   - {fileID: 881753075}
-  - {fileID: 1622542648}
   - {fileID: 1504135359}
   - {fileID: 1154139556}
   - {fileID: 8075480013131894948}

@@ -95,6 +95,7 @@ public class PartyController : MonoBehaviour
             }
         }
         updatePartyUI();
+        writePartyData();
     }
 
     public void removeCharacter(int inID)
@@ -108,6 +109,7 @@ public class PartyController : MonoBehaviour
             }
         }
         updatePartyUI();
+        writePartyData();
     }
 
     public List<Character> GetPartyList()
