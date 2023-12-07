@@ -858,10 +858,6 @@ public class BattleSystem : MonoBehaviour
 
         if(!currentlyActingBattler.HasFled())
             currentlyActingBattler.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = currentlyActingBattler.idleSprite;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         yield return new WaitForSeconds((1.6f * additionalAnimations));
 
         DestroyImmediate(currentPointer);
