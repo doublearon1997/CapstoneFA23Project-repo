@@ -119,6 +119,7 @@ public class NPC : MonoBehaviour
             if (fightAtEnd)
             {
                 BattleSystem.currentEncounter = encounter;
+                zeroText();
                 SceneManager.LoadScene("sceneBattle");
             }
             zeroText();

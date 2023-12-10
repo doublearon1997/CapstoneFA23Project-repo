@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public static int InDungeon = -2;
     public static int currentEnemy;
     public static Vector2 playerPosition = new Vector2(0.0f, 0.0f);
+    public static Vector2 playerLoadPosition = new Vector2(-9999, -9999);
     public static Encounter currentEncounter;
     public static string currentScene;
     public AudioClip bgm;
@@ -49,7 +50,11 @@ public class LevelManager : MonoBehaviour
             player.transform.position = playerPosition;
             inBattle = false;
         }
-
+        else if(playerLoadPosition != new Vector2(-9999, -9999))
+        {
+            player.transform.position = new Vector2(playerLoadPosition.x, playerLoadPosition.y);
+            playerLoadPosition = new Vector2(-9999, -9999);
+        }
         for(int i = 0; i<enemyActiveList.Count; i++)
         {
             if(enemyActiveList[i] == false)
@@ -62,19 +67,6 @@ public class LevelManager : MonoBehaviour
             BGMManager.instance.PlayBGM(bgm, bgmSaveTime);
         else 
             BGMManager.instance.PlayBGM(bgm);
-
-
-        /*if (InDungeon>=0)
-        {
-            InDungeon--;
-            if (InDungeon == -1)
-            {
-                InDungeon = -2;
-                player.transform.position = playerPosition - new Vector2(0.0f, 2.0f); ;
-            }
-        }*/
-
-
     }
 
     public void UpdatePlayerPosition()

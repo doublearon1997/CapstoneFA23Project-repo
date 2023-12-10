@@ -9,7 +9,8 @@ public class TransitionObject : MonoBehaviour
     public GameObject LoadingSceneManagerInstance, TravelDialogPanel, DungeonDialogPanel;
     public LevelManager levelManager;
     public int SpecifiedSceneToLoad;
-    public bool IsOverWorldTransitionObject, IsDungeonTransitionObject, SavePosition;
+    public bool IsOverWorldTransitionObject, IsDungeonTransitionObject;
+    public Vector2 positionGoTo = new Vector2(-9999, -9999);
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -45,11 +46,9 @@ public class TransitionObject : MonoBehaviour
 
     public void LoadSpecifiedScene()
     {
-        if (SavePosition)
-        {
-            levelManager.UpdatePlayerPosition();
-            LevelManager.InDungeon = 1;
-        }
+        if(positionGoTo != new Vector2(-9999, -9999))
+            LevelManager.playerLoadPosition = positionGoTo;
+
         LoadingSceneManager.sceneToLoad = SpecifiedSceneToLoad;
         SceneManager.LoadScene(1);
     }
