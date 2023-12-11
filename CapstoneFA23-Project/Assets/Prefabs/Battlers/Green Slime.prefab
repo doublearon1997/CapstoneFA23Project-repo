@@ -147,7 +147,7 @@ MonoBehaviour:
   curseResist: 0.05
   sealResist: 0.05
   staggerResist: 0.15
-  battlerName: Log
+  battlerName: Green Slime
   idleSprite: {fileID: 21300000, guid: ed0bfb4b5256e2648983413a1ab6281a, type: 3}
   attackSprite: {fileID: 21300000, guid: a826d2e1f76089e4dbba6b6d7afab196, type: 3}
   ap: 0

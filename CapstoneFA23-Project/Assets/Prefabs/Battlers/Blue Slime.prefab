@@ -147,7 +147,7 @@ MonoBehaviour:
   curseResist: 0.05
   sealResist: 0.05
   staggerResist: 0.2
-  battlerName: Log
+  battlerName: Blue Slime
   idleSprite: {fileID: 21300000, guid: 3ca2dae77d3b9c142b32e4658f9fd344, type: 3}
   attackSprite: {fileID: 21300000, guid: 46b515a49a850084eaecb97766af0608, type: 3}
   ap: 0
